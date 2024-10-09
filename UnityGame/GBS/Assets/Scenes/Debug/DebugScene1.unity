@@ -361,14 +361,6 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5165320198455412615, guid: 8e82e07ae041dd74eabd50a07ae44e2c, type: 3}
-      propertyPath: forwardSpeed
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5165320198455412615, guid: 8e82e07ae041dd74eabd50a07ae44e2c, type: 3}
-      propertyPath: rotationSpeed
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 7547504269008325229, guid: 8e82e07ae041dd74eabd50a07ae44e2c, type: 3}
       propertyPath: m_Name
       value: PlayerPrefab
