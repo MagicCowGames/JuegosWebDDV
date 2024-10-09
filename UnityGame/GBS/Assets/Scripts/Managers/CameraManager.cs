@@ -4,15 +4,37 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    #region Variables
+
+    [SerializeField] private Camera activeCamera;
+    [SerializeField] private Transform activeTarget;
+    [SerializeField] private float speed;
+
+    #endregion
+
+    #region MonoBehaviour
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        UpdateCamera(Time.deltaTime);
     }
+
+    #endregion
+
+    #region PublicMethods
+    #endregion
+
+    #region PrivateMethods
+
+    private void UpdateCamera(float delta)
+    {
+        this.activeCamera.transform.position = Vector3.Lerp(this.activeCamera.transform.position, this.activeTarget.position, Mathf.Min(delta * this.speed, 1.0f));
+    }
+
+    #endregion
 }
