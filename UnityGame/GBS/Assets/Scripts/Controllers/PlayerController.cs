@@ -8,10 +8,14 @@ public class PlayerController : MonoBehaviour
 
     [Header("Component References")]
     [SerializeField] private Rigidbody rigidBody;
+    [SerializeField] private Transform shootSocket;
 
     [Header("Player Settings")]
     [SerializeField] private float forwardSpeed;
     [SerializeField] private float rotationSpeed;
+
+    [Header("Weapon Settings")]
+    [SerializeField] private GameObject bulletPrefab;
 
     private Vector2 movementVector;
 
@@ -55,6 +59,9 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D)) // Rotate left
             this.movementVector.y -= 1;
+
+        if (Input.GetKeyDown(KeyCode.Return))
+            this.Shoot();
     }
 
     private void UpdateMovement(float delta)
@@ -66,6 +73,11 @@ public class PlayerController : MonoBehaviour
 
         this.rigidBody.AddForce(forwardForce, ForceMode.Acceleration);
         this.rigidBody.AddTorque(rotationForce, ForceMode.Acceleration);
+    }
+
+    private void Shoot()
+    {
+        ObjectSpawner.Spawn(bulletPrefab, shootSocket);
     }
 
     #endregion
