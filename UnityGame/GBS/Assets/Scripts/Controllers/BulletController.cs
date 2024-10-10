@@ -16,7 +16,7 @@ public class BulletController : MonoBehaviour
 
     void Start()
     {
-        this.rigidBody.AddForce(Vector3.up * speed, ForceMode.VelocityChange);
+        this.rigidBody.AddForce(rigidBody.transform.up * speed, ForceMode.VelocityChange);
     }
 
     void Update()
