@@ -49,21 +49,18 @@ public class ConsoleUIController : UIController
     
     void Start()
     {
+        this.SetConsoleOpen(false);
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.BackQuote))
         {
-            // The 'º' character is added to the input field when closing the console.
-            // When the console is closed, the input field is flushed, thus it would run the command string "º"
-            // This is why we set the text field to an empty string before closing or opening the console.
-            this.consoleInputField.text = "";
-            this.UI_SetVisible(!this.UI_GetVisible());
+            this.SetConsoleOpen(!this.GetConsoleOpen());
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            this.UI_SetVisible(false);
+            this.SetConsoleOpen(false);
         }
     }
 
@@ -91,6 +88,20 @@ public class ConsoleUIController : UIController
     #endregion
 
     #region PrivateMethods
+
+    private void SetConsoleOpen(bool isOpen)
+    {
+        // The 'º' character is added to the input field when closing the console.
+        // When the console is closed, the input field is flushed, thus it would run the command string "º"
+        // This is why we set the text field to an empty string before closing or opening the console.
+        this.consoleInputField.text = "";
+        this.UI_SetVisible(!this.UI_GetVisible());
+    }
+
+    private bool GetConsoleOpen()
+    {
+        return this.UI_GetVisible();
+    }
 
     private void CmdRun(string str)
     {
