@@ -1,4 +1,4 @@
-public interface IGUI
+public interface IUI
 {
     public bool IsVisible();
 
