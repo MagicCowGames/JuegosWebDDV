@@ -1,24 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class DebugUIController : UIController
+public class ConsoleUIController : UIController
 {
     #region Variables
 
-    // [Header("DebugUIController Components")]
+
 
     #endregion
-    // Start is called before the first frame update
+
+    #region MonoBehaviour
+    
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
+
+    #endregion
+
+    #region PublicMethods
+    #endregion
+
+    #region PrivateMethods
+    #endregion
 }
