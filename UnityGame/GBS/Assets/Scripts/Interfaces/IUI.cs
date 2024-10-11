@@ -1,6 +1,8 @@
 public interface IUI
 {
-    public bool IsVisible();
+    public bool UI_GetVisible();
 
-    public void SetVisible(bool visible);
+    public void UI_SetVisible(bool visible);
+
+    public bool UI_IsValid();
 }
