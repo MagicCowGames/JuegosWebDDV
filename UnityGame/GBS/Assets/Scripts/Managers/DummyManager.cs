@@ -4,4 +4,11 @@ using UnityEngine;
 
 public class DummyManager : SingletonPersistent<DummyManager>
 {
+    void Start()
+    {
+    }
+
+    void Update()
+    {
+    }
 }
