@@ -54,7 +54,17 @@ public class ConsoleUIController : UIController
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.BackQuote))
+        {
+            // The 'º' character is added to the input field when closing the console.
+            // When the console is closed, the input field is flushed, thus it would run the command string "º"
+            // This is why we set the text field to an empty string before closing or opening the console.
+            this.consoleInputField.text = "";
             this.UI_SetVisible(!this.UI_GetVisible());
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            this.UI_SetVisible(false);
+        }
     }
 
     #endregion
@@ -71,8 +81,11 @@ public class ConsoleUIController : UIController
 
     public void RunCommand(string command)
     {
-        Debug.Log($"Running command : {command}");
-        this.CmdRun(command);
+        string str = command.Trim(); // Trim whitespace on the left and right sides of the input command string.
+        Debug.Log($"Running command : {str}");
+        if(str.Length > 0) // only run the command if it contains at least 1 single character.
+            this.CmdRun(str);
+        // With the trimming and length check, commands that are entirely made up of whitespace will be ignored, preventing errors from being displayed when pressing enter with no commands written on the input field.
     }
 
     #endregion
