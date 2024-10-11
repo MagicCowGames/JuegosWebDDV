@@ -53,6 +53,8 @@ public class ConsoleUIController : UIController
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.BackQuote))
+            this.UI_SetVisible(!this.UI_GetVisible());
     }
 
     #endregion
