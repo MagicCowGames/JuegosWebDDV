@@ -7,31 +7,47 @@ public class PlayerController : MonoBehaviour
     #region Variables
 
     [Header("Component References")]
-    [SerializeField] private Rigidbody rigidBody;
+    [SerializeField] private CharacterController characterController;
+    // [SerializeField] private Rigidbody rigidBody;
+
+    [Header("Transform")]
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private Transform meshTransform;
+
+    [Header("Sockets")]
+    [SerializeField] private Transform cameraSocket;
     [SerializeField] private Transform shootSocket;
 
     [Header("Player Settings")]
-    [SerializeField] private float forwardSpeed;
-    [SerializeField] private float rotationSpeed;
+    [SerializeField] private float walkSpeed; // walk speed
+    [SerializeField] private float rotationSpeed; // speed at which the rotation takes place when using beams. Otherwise, the rotation vector is set instantaneously.
 
     [Header("Weapon Settings")]
     [SerializeField] private GameObject bulletPrefab;
 
-    private Vector2 movementVector;
+    private Vector3 walkVector;
+    private Vector3 gravityVector;
 
     #endregion
 
     #region MonoBehaviour
-    
+
     void Start()
     {
-        
+        this.walkVector = Vector3.zero;
+        this.gravityVector = new Vector3(0.0f, -9.8f, 0.0f);
     }
 
     void Update()
     {
         UpdateInput();
-        UpdateMovement(Time.deltaTime);
+    }
+
+    void FixedUpdate()
+    {
+        float delta = Time.fixedDeltaTime;
+        UpdatePosition(delta);
+        UpdateRotation(delta);
     }
 
     #endregion
@@ -43,41 +59,31 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateInput()
     {
-        this.movementVector = Vector2.zero;
+        this.walkVector = Vector3.zero;
 
         if (Input.GetKeyDown(KeyCode.Escape))
             Debug.Log("show menu lol");
-
-        if (Input.GetKey(KeyCode.W)) // Forward
-            this.movementVector.x += 1;
-
-        if (Input.GetKey(KeyCode.S)) // Backward
-            this.movementVector.x -= 1;
-
-        if (Input.GetKey(KeyCode.A)) // Rotate right
-            this.movementVector.y += 1;
-
-        if (Input.GetKey(KeyCode.D)) // Rotate left
-            this.movementVector.y -= 1;
 
         if (Input.GetKeyDown(KeyCode.Return))
             this.Shoot();
     }
 
-    private void UpdateMovement(float delta)
-    {
-        // NOTE : forward and up vectors are "swapped" because they come from 3D space, but we're on a 2D top down game, so the global up vector is forward from our
-        // perspective, while the global forward is our up.
-        var forwardForce = delta * this.forwardSpeed * this.movementVector.x * this.rigidBody.transform.up;
-        var rotationForce = delta * this.rotationSpeed * this.movementVector.y * this.rigidBody.transform.forward;
-
-        this.rigidBody.AddForce(forwardForce, ForceMode.Acceleration);
-        this.rigidBody.AddTorque(rotationForce, ForceMode.Acceleration);
-    }
-
     private void Shoot()
     {
         ObjectSpawner.Spawn(bulletPrefab, shootSocket);
+    }
+
+    private void UpdatePosition(float delta)
+    {
+        Vector3 movementVector1 = delta * this.walkVector * this.walkSpeed;
+        Vector3 movementVector2 = delta * this.gravityVector;
+        this.characterController.Move(movementVector1);
+        this.characterController.Move(movementVector2); // move by the gravity vector separatedly from the other movement calculation to prevent the other one from cancelling out the gravity vector.
+    }
+
+    private void UpdateRotation(float delta)
+    {
+        // this.rigidBody.transform.rotation = Quaternion.LookRotation(-vec, Vector3.up);
     }
 
     #endregion
