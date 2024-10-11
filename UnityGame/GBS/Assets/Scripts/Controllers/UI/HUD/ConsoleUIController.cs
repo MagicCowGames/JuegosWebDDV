@@ -160,7 +160,8 @@ public class ConsoleUIController : UIController
     private static void CmdMap(string[] args, int startIndex)
     {
         string mapname = args[startIndex + 1];
-        SceneManager.LoadScene(mapname); // TODO : Add error handling by iterating over the scenes that exist in the build settings.
+        SceneManager.LoadScene(mapname, LoadSceneMode.Single); // TODO : Add error handling by iterating over the scenes that exist in the build settings.
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(mapname));
     }
 
     #endregion
