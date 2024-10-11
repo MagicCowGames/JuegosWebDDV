@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,7 +27,14 @@ public class DebugManager : Singleton<DebugManager>
 
     public void Log(string str)
     {
-        Debug.Log($"[Debug] : {str}");
+        if(this.debugEnabled)
+            Debug.Log($"[Debug] : {str}");
+    }
+
+    public void Run(Action function)
+    {
+        if(this.debugEnabled)
+            function?.Invoke();
     }
 
     public void SetDebugEnabled(bool value)
