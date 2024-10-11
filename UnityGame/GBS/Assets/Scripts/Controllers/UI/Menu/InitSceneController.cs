@@ -11,13 +11,14 @@ public class InitSceneController : UIController
 
     #region MonoBehaviour
 
-    // Start is called before the first frame update
     void Start()
     {
-        this.LoadMainMenu();
+        // NOTE : You don't have to worry about the manager instance not existing when calling this on the init scene, because we're calling it from Start(),
+        // and the manager instance is created on Awake(), which means that the order in which the object calls are done by Unity does not matter, since
+        // all of the Awake() stage calls will take place before all of the Start() calls.
+        SceneLoadingManager.Instance?.LoadSceneMainMenu();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -29,11 +30,5 @@ public class InitSceneController : UIController
     #endregion
 
     #region PrivateMethods
-
-    private void LoadMainMenu()
-    {
-        SceneManager.LoadScene("MenuScene_MainMenu", LoadSceneMode.Single);
-    }
-
     #endregion
 }
