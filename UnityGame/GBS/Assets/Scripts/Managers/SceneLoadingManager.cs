@@ -32,7 +32,7 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
     public void LoadScene(string name)
     {
         SceneManager.LoadScene(name, LoadSceneMode.Single);
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(name));
+        // SceneManager.SetActiveScene(SceneManager.GetSceneByName(name));
     }
 
     #endregion
