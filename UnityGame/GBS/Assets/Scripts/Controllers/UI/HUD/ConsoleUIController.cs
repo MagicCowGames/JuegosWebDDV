@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class ConsoleUIController : UIController
 {
@@ -127,12 +128,13 @@ public class ConsoleUIController : UIController
 
     private static void CmdHelp(string[] args, int startIndex)
     {
-
+        // TODO : Implement
     }
 
     private static void CmdMap(string[] args, int startIndex)
     {
-
+        string mapname = args[startIndex + 1];
+        SceneManager.LoadScene(mapname); // TODO : Add error handling by iterating over the scenes that exist in the build settings.
     }
 
     #endregion
