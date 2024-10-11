@@ -73,7 +73,7 @@ public class ConsoleUIController : UIController
         string cmd = this.consoleInputField.text;
         this.consoleInputField.text = "";
         this.RunCommand(cmd);
-        this.consoleInputField.ActivateInputField();
+        this.SelectConsoleInputField();
     }
 
     public void RunCommand(string command)
@@ -89,6 +89,11 @@ public class ConsoleUIController : UIController
 
     #region PrivateMethods
 
+    private void SelectConsoleInputField()
+    {
+        this.consoleInputField.ActivateInputField();
+    }
+
     private void SetConsoleOpen(bool isOpen)
     {
         // The 'º' character is added to the input field when closing the console.
@@ -96,6 +101,8 @@ public class ConsoleUIController : UIController
         // This is why we set the text field to an empty string before closing or opening the console.
         this.consoleInputField.text = "";
         this.UI_SetVisible(!this.UI_GetVisible());
+
+        this.SelectConsoleInputField(); // always select the input field when the console is opened to make it faster to type in commands.
     }
 
     private bool GetConsoleOpen()
