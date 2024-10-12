@@ -19,7 +19,7 @@ public class CameraManager : Singleton<CameraManager>, IManager
         
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         UpdateCamera(Time.deltaTime);
     }
