@@ -12,7 +12,7 @@ public class ConsoleUIController : UIController
 {
     #region Structs
 
-    public struct Cmd
+    public class Cmd
     {
         public string command;
         public string description;
@@ -37,13 +37,9 @@ public class ConsoleUIController : UIController
     [Header("Console UI Components")]
     [SerializeField] private Image consoleBackground;
     [SerializeField] private TMP_InputField consoleInputField;
+    [SerializeField] private TMP_Text consoleText;
 
-    private Cmd[] commands = {
-        new Cmd("help", "Display all commands", "", 0, CmdHelp),
-        new Cmd("map", "Load the specified map by name", "<name>", 1, CmdMap),
-        new Cmd("quit", "Return to main menu", "", 0, CmdQuit),
-        new Cmd("iamvip", "Show the credits menu", "", 0, CmdIAmVip)
-    };
+    private Cmd[] commands;
 
     #endregion
 
@@ -51,8 +47,19 @@ public class ConsoleUIController : UIController
     
     void Start()
     {
-        this.SetConsoleOpen(false);
+        // We instantiate it here rather than assigning it on the variable declaration because we want the methods to be non static so that they can reference
+        // The console instance's text for CmdPrint to work without having to go through the UI Manager to ask for permission.
+        // Basically, we're doing this shit in case we want to have infinite consoles in the future, and because we don't want to have daddy issues and rely
+        // on some global fucking manager to babysit us when we can just access to our own resources directly without blowing a fuse.
+        this.commands = new Cmd[] {
+            new Cmd("help", "Display all commands", "", 0, CmdHelp),
+            new Cmd("map", "Load the specified map by name", "<name>", 1, CmdMap),
+            new Cmd("quit", "Return to main menu", "", 0, CmdQuit),
+            new Cmd("iamvip", "Show the credits menu", "", 0, CmdIAmVip),
+            new Cmd("clear", "Clear the console", "", 0, CmdClear)
+        };
 
+        this.SetConsoleOpen(false);
         RegisterEvents();
     }
 
@@ -171,7 +178,8 @@ public class ConsoleUIController : UIController
 
     private void CmdPrint(string message)
     {
-        Debug.Log(message);
+        DebugManager.Instance?.Log(message);
+        this.consoleText.text += $"{message}\n";
     }
 
     private void CmdError(string message)
@@ -184,26 +192,31 @@ public class ConsoleUIController : UIController
         CmdPrint($"Usage : {cmd.command} {cmd.arguments}");
     }
 
-    private static void CmdHelp(string[] args, int startIndex)
+    private void CmdHelp(string[] args, int startIndex)
     {
-        // TODO : Implement
+        CmdPrint("HELP!!!");
     }
 
-    private static void CmdMap(string[] args, int startIndex)
+    private void CmdMap(string[] args, int startIndex)
     {
         string mapname = args[startIndex + 1];
         // TODO : Add error handling by iterating over the scenes that exist in the build settings to report when user attemps to load map that does not exist.
         SceneLoadingManager.Instance?.LoadScene(mapname);
     }
 
-    private static void CmdQuit(string[] args, int startIndex)
+    private void CmdQuit(string[] args, int startIndex)
     {
         SceneLoadingManager.Instance?.LoadSceneMainMenu();
     }
 
-    private static void CmdIAmVip(string[] args, int startIndex)
+    private void CmdIAmVip(string[] args, int startIndex)
     {
         SceneLoadingManager.Instance?.LoadSceneCredits();
+    }
+
+    private void CmdClear(string[] args, int startIndex)
+    {
+        this.consoleText.text = "";
     }
 
     #endregion
