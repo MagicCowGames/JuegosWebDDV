@@ -44,6 +44,16 @@ public class CameraManager : Singleton<CameraManager>, IManager
         SetActiveCamera(null);
     }
 
+    public Camera GetActiveCamera()
+    {
+        return this.activeCamera;
+    }
+
+    public Transform GetActiveTarget()
+    {
+        return this.activeTarget;
+    }
+
     #endregion
 
     #region PrivateMethods
