@@ -6,9 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     #region Variables
 
-    [Header("Component References")]
+    [Header("Components")]
     [SerializeField] private CharacterController characterController;
-    // [SerializeField] private Rigidbody rigidBody;
 
     [Header("Transform")]
     [SerializeField] private Transform playerTransform;
@@ -25,8 +24,16 @@ public class PlayerController : MonoBehaviour
     [Header("Weapon Settings")]
     [SerializeField] private GameObject bulletPrefab;
 
-    private Vector3 walkVector;
     private Vector3 gravityVector;
+
+    #endregion
+
+    #region Variables2
+
+    private float movementForward;
+    private Quaternion targetRotation;
+
+    private bool isCasting;
 
     #endregion
 
@@ -34,39 +41,61 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        this.walkVector = Vector3.zero;
+        SetPlayerReferences();
+
+        this.movementForward = 0.0f;
         this.gravityVector = new Vector3(0.0f, -9.8f, 0.0f);
+
+        RegisterEvents();
     }
 
     void Update()
     {
-        UpdateInput();
+        float delta = Time.deltaTime;
+        UpdatePosition(delta);
+        UpdateRotation(delta);
     }
 
     void FixedUpdate()
     {
+        return;
         float delta = Time.fixedDeltaTime;
         UpdatePosition(delta);
         UpdateRotation(delta);
     }
 
+    void OnDestroy()
+    {
+        UnregisterEvents();
+    }
+
     #endregion
 
-    #region PublicMethods
+    #region PublicMethods - Getters and Setters
+
+    public Transform GetPlayerTransform()
+    {
+        return this.playerTransform;
+    }
+
+    public Transform GetMeshTransform()
+    {
+        return this.meshTransform;
+    }
+
     #endregion
+
+    #region Private Methods
+
+    private void SetPlayerReferences()
+    {
+        CameraManager.Instance?.SetActiveTarget(this.cameraSocket);
+    }
+
+    #endregion
+
 
     #region PrivateMethods
-
-    private void UpdateInput()
-    {
-        this.walkVector = Vector3.zero;
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-            Debug.Log("show menu lol");
-
-        if (Input.GetKeyDown(KeyCode.Return))
-            this.Shoot();
-    }
 
     private void Shoot()
     {
@@ -75,7 +104,8 @@ public class PlayerController : MonoBehaviour
 
     private void UpdatePosition(float delta)
     {
-        Vector3 movementVector1 = delta * this.walkVector * this.walkSpeed;
+        Debug.Log($"vec = {movementForward}");
+        Vector3 movementVector1 = delta * this.movementForward * this.meshTransform.forward * this.walkSpeed;
         Vector3 movementVector2 = delta * this.gravityVector;
         this.characterController.Move(movementVector1);
         this.characterController.Move(movementVector2); // move by the gravity vector separatedly from the other movement calculation to prevent the other one from cancelling out the gravity vector.
@@ -83,8 +113,66 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateRotation(float delta)
     {
-        // this.rigidBody.transform.rotation = Quaternion.LookRotation(-vec, Vector3.up);
+        if (this.isCasting)
+            this.meshTransform.rotation = Quaternion.Lerp(this.meshTransform.rotation, targetRotation, delta * this.rotationSpeed);
+        else
+            this.meshTransform.rotation = targetRotation;
     }
+
+    #endregion
+
+    #region Private Methods
+
+    #region Register Events
+
+    // Subscribe to events
+    private void RegisterEvents()
+    {
+        if (InputManager.Instance == null)
+            return;
+
+        InputManager.Instance.OnSetForwardAxis += SetForwardAxis;
+        InputManager.Instance.OnSetScreenPoint += SetLookToPoint;
+        InputManager.Instance.OnAddElement += AddElement;
+    }
+
+    // Unsubscribe from events
+    private void UnregisterEvents()
+    {
+        if (InputManager.Instance == null)
+            return;
+
+        InputManager.Instance.OnSetForwardAxis -= SetForwardAxis;
+        InputManager.Instance.OnSetScreenPoint -= SetLookToPoint;
+        InputManager.Instance.OnAddElement -= AddElement;
+    }
+
+    #endregion
+
+    #region Input Events and Actions
+
+    private void SetForwardAxis(float value)
+    {
+        this.movementForward = value;
+    }
+
+    private void SetLookToPoint(Vector3 inputScreenLocation)
+    {
+        var screenPosPlayer = CameraManager.Instance.GetActiveCamera().WorldToViewportPoint(playerTransform.position);
+        var screenPosMouse = CameraManager.Instance.GetActiveCamera().ScreenToViewportPoint(inputScreenLocation);
+
+        Vector3 vec = screenPosMouse - screenPosPlayer;
+        Vector3 direction = vec.normalized;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90.0f;
+
+        this.targetRotation = Quaternion.Euler(new Vector3(0, -angle, 0));
+    }
+
+    private void AddElement(Element element)
+    { }
+
+    #endregion
 
     #endregion
 }
