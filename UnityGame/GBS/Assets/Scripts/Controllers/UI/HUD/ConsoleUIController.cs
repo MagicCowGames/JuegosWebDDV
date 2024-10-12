@@ -50,18 +50,17 @@ public class ConsoleUIController : UIController
     void Start()
     {
         this.SetConsoleOpen(false);
+
+        RegisterEvents();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.BackQuote))
-        {
-            this.SetConsoleOpen(!this.GetConsoleOpen());
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            this.SetConsoleOpen(false);
-        }
+    }
+
+    void OnDestroy()
+    {
+        UnregisterEvents();
     }
 
     #endregion
@@ -88,6 +87,27 @@ public class ConsoleUIController : UIController
     #endregion
 
     #region PrivateMethods
+
+    private void RegisterEvents()
+    {
+        if (InputManager.Instance == null)
+            return;
+
+        InputManager.Instance.OnSwitchConsole += SwitchConsole;
+    }
+
+    private void UnregisterEvents()
+    {
+        if (InputManager.Instance == null)
+            return;
+
+        InputManager.Instance.OnSwitchConsole -= SwitchConsole;
+    }
+
+    private void SwitchConsole()
+    {
+        SetConsoleOpen(!GetConsoleOpen());
+    }
 
     private void SelectConsoleInputField()
     {
