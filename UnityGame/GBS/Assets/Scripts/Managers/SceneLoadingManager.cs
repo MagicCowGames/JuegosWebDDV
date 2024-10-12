@@ -31,6 +31,7 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
 
     public void LoadScene(string name)
     {
+        ResetOtherManagers();
         SceneManager.LoadScene(name, LoadSceneMode.Single);
         // The call to SetActiveScene requires that the input scene we're passing is registered as loaded.
         // For that to happen, Unity requires at least 1 frame between the LoadScene() call and the SetActiveScene() call.
@@ -57,5 +58,14 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
     #endregion
 
     #region PrivateMethods
+
+    // This method is used to reset managers that reference objects from the scene that will no longer exist when a new scene is loaded.
+    // This would not be an issue if those managers were level specific like I implemented them originally, but right now I'm testing it like this to see
+    // if its a better pattern or not.
+    private void ResetOtherManagers()
+    {
+        CameraManager.Instance?.ResetManager();
+    }
+
     #endregion
 }
