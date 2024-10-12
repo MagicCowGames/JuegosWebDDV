@@ -146,6 +146,8 @@ public class ConsoleUIController : UIController
 
     private void CmdRun(string str)
     {
+        CmdPrint($"> {str}"); // Always print first the command that we just ran, doesn't matter if it works correctly or not. Even if it's just trash, print it out to the console so that the user can see what they typed before.
+
         string[] args = str.Split();
 
         string cmdName = args[0];
