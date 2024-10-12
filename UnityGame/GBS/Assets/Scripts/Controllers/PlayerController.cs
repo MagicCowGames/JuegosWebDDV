@@ -56,14 +56,6 @@ public class PlayerController : MonoBehaviour
         UpdateRotation(delta);
     }
 
-    void FixedUpdate()
-    {
-        return;
-        float delta = Time.fixedDeltaTime;
-        UpdatePosition(delta);
-        UpdateRotation(delta);
-    }
-
     void OnDestroy()
     {
         UnregisterEvents();
