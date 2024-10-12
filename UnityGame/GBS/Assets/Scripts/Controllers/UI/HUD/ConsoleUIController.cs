@@ -79,7 +79,10 @@ public class ConsoleUIController : UIController
 
     public void RunCommand(string command)
     {
-        string str = command.Trim(); // Trim whitespace on the left and right sides of the input command string.
+        string str = command;
+        str = str.Trim(); // Trim whitespace on the left and right sides of the input command string.
+        str = str.ToLower(); // Bring to lower case to allow commands to work regardless of whether they are capitalized or not.
+        // NOTE : Lowercase works even for map names because unity does not give a fuck about capitalization for that stuff lol...
         Debug.Log($"Running command : {str}");
         if(str.Length > 0) // only run the command if it contains at least 1 single character.
             this.CmdRun(str);
