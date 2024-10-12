@@ -34,17 +34,17 @@ public class InputManager : Singleton<InputManager>
 
     #region Public Methods
 
-    private void AddElement(Element element)
+    public void AddElement(Element element)
     {
         this.OnAddElement?.Invoke(element);
     }
 
-    private void SetForwardAxis(float value)
+    public void SetForwardAxis(float value)
     {
         this.OnSetForwardAxis?.Invoke(value);
     }
 
-    private void SetScreenPoint(Vector3 point)
+    public void SetScreenPoint(Vector3 point)
     {
         this.OnSetScreenPoint?.Invoke(point);
     }
