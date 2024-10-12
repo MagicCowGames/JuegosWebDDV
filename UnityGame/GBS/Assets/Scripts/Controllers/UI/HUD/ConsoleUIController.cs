@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using System;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class ConsoleUIController : UIController
 {
@@ -56,7 +57,8 @@ public class ConsoleUIController : UIController
             new Cmd("map", "Load the specified map by name", "<name>", 1, CmdMap),
             new Cmd("quit", "Return to main menu", "", 0, CmdQuit),
             new Cmd("iamvip", "Show the credits menu", "", 0, CmdIAmVip),
-            new Cmd("clear", "Clear the console", "", 0, CmdClear)
+            new Cmd("clear", "Clear the console", "", 0, CmdClear),
+            new Cmd("maplist", "Display a list of all of the available maps", "", 0, CmdMapList)
         };
 
         this.SetConsoleOpen(false);
@@ -228,6 +230,20 @@ public class ConsoleUIController : UIController
     private void CmdIAmVip(string[] args, int startIndex)
     {
         SceneLoadingManager.Instance?.LoadSceneCredits();
+    }
+
+    private void CmdMapList(string[] args, int startIndex)
+    {
+        CmdPrint("Maps:");
+        // NOTE : We avoid using the unity editor build settings API because that's for editor-level code, which can be cool to make tools, but that dll is not
+        // packaged in builds for users, so that wont work. Instead, we can use the SceneUtility thing. Also, can't use Scene.name because for some dumb reason
+        // they thought it would make more sense for all Scene structs to contain their own data and... a name field which references the currently loaded scene,
+        // rather than the scene's own name. Bruh moment indeed, but it is what it is.
+        for(int i = 0; i < SceneManager.sceneCountInBuildSettings; ++i)
+        {
+            string sceneName = Path.GetFileName(SceneUtility.GetScenePathByBuildIndex(i));
+            CmdPrint($" {sceneName}");
+        }
     }
 
     #endregion
