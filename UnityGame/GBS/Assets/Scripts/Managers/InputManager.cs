@@ -13,6 +13,9 @@ public class InputManager : Singleton<InputManager>
 
     public Action/*<CastType>*/ OnCastSpell;
 
+
+    public Action OnSwitchConsole;
+
     #endregion
 
     #region MonoBehaviour
@@ -29,10 +32,7 @@ public class InputManager : Singleton<InputManager>
 
     #endregion
 
-    #region PublicMethods
-    #endregion
-
-    #region Private Methods
+    #region Public Methods
 
     private void AddElement(Element element)
     {
@@ -47,6 +47,11 @@ public class InputManager : Singleton<InputManager>
     private void SetScreenPoint(Vector3 point)
     {
         this.OnSetScreenPoint?.Invoke(point);
+    }
+
+    public void SwitchConsole()
+    {
+        this.OnSwitchConsole?.Invoke();
     }
 
     #endregion
@@ -99,6 +104,12 @@ public class InputManager : Singleton<InputManager>
 
     private void UpdateInputKeyboard()
     {
+        UIK_Elements();
+        UIK_Console();
+    }
+
+    private void UIK_Elements()
+    {
         if (Input.GetKeyDown(KeyCode.Q))
             AddElement(Element.Water);
 
@@ -122,6 +133,12 @@ public class InputManager : Singleton<InputManager>
 
         if (Input.GetKeyDown(KeyCode.F))
             AddElement(Element.Fire);
+    }
+
+    private void UIK_Console()
+    {
+        if (Input.GetKeyDown(KeyCode.BackQuote))
+            SwitchConsole();
     }
 
     private void UpdateInputKeyboard2()
