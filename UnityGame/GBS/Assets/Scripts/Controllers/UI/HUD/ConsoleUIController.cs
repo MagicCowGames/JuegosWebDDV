@@ -40,7 +40,9 @@ public class ConsoleUIController : UIController
 
     private Cmd[] commands = {
         new Cmd("help", "Display all commands", "", 0, CmdHelp),
-        new Cmd("map", "Load the specified map by name", "<name>", 1, CmdMap)
+        new Cmd("map", "Load the specified map by name", "<name>", 1, CmdMap),
+        new Cmd("quit", "Return to main menu", "", 0, CmdQuit),
+        new Cmd("iamvip", "Show the credits menu", "", 0, CmdIAmVip)
     };
 
     #endregion
@@ -188,7 +190,17 @@ public class ConsoleUIController : UIController
     {
         string mapname = args[startIndex + 1];
         // TODO : Add error handling by iterating over the scenes that exist in the build settings to report when user attemps to load map that does not exist.
-        SceneLoadingManager.Instance.LoadScene(mapname);
+        SceneLoadingManager.Instance?.LoadScene(mapname);
+    }
+
+    private static void CmdQuit(string[] args, int startIndex)
+    {
+        SceneLoadingManager.Instance?.LoadSceneMainMenu();
+    }
+
+    private static void CmdIAmVip(string[] args, int startIndex)
+    {
+        SceneLoadingManager.Instance?.LoadSceneCredits();
     }
 
     #endregion
