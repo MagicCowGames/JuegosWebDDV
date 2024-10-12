@@ -104,7 +104,6 @@ public class PlayerController : MonoBehaviour
 
     private void UpdatePosition(float delta)
     {
-        Debug.Log($"vec = {movementForward}");
         Vector3 movementVector1 = delta * this.movementForward * this.meshTransform.forward * this.walkSpeed;
         Vector3 movementVector2 = delta * this.gravityVector;
         this.characterController.Move(movementVector1);
@@ -158,6 +157,9 @@ public class PlayerController : MonoBehaviour
 
     private void SetLookToPoint(Vector3 inputScreenLocation)
     {
+        if (CameraManager.Instance == null || CameraManager.Instance.GetActiveCamera() == null)
+            return;
+
         var screenPosPlayer = CameraManager.Instance.GetActiveCamera().WorldToViewportPoint(playerTransform.position);
         var screenPosMouse = CameraManager.Instance.GetActiveCamera().ScreenToViewportPoint(inputScreenLocation);
 
