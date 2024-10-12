@@ -174,28 +174,44 @@ public class ConsoleUIController : UIController
 
     #endregion
 
-    #region Cmd
+    #region Cmd - Print
 
+    // Print a line to the console
     private void CmdPrint(string message)
     {
         DebugManager.Instance?.Log(message);
         this.consoleText.text += $"{message}\n";
     }
 
+    // Clear the entire console text
+    private void CmdClear(string[] args, int startIndex)
+    {
+        this.consoleText.text = "";
+    }
+
+    // Print a line to the console to display an error message
     private void CmdError(string message)
     {
         CmdPrint($"ERROR : {message}");
     }
 
+    // Print a line to the console to display the usage of a command
     private void CmdUsage(Cmd cmd)
     {
         CmdPrint($"Usage : {cmd.command} {cmd.arguments}");
     }
 
+    // Print the help message to the console
     private void CmdHelp(string[] args, int startIndex)
     {
-        CmdPrint("HELP!!!");
+        CmdPrint("Commands:");
+        foreach (var cmd in this.commands)
+            CmdPrint($" {cmd.command} {cmd.arguments} : {cmd.description}");
     }
+
+    #endregion
+
+    #region Cmd - Other
 
     private void CmdMap(string[] args, int startIndex)
     {
@@ -212,11 +228,6 @@ public class ConsoleUIController : UIController
     private void CmdIAmVip(string[] args, int startIndex)
     {
         SceneLoadingManager.Instance?.LoadSceneCredits();
-    }
-
-    private void CmdClear(string[] args, int startIndex)
-    {
-        this.consoleText.text = "";
     }
 
     #endregion
