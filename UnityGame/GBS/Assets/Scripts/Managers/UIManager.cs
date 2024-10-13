@@ -27,6 +27,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private InfoUIController infoUIController;
     [SerializeField] private ConsoleUIController consoleUIController;
     [SerializeField] private PauseUIController pauseUIController;
+    [SerializeField] private PlayerUIController playerUIController;
 
     [Header("Generic UI Controllers")]
     [SerializeField] private List<UIControllerEntry> uiControllers;
@@ -62,6 +63,11 @@ public class UIManager : Singleton<UIManager>
     public PauseUIController GetPauseUIController()
     {
         return this.pauseUIController;
+    }
+
+    public PlayerUIController GetPlayerUIController()
+    {
+        return this.playerUIController;
     }
 
     #endregion
