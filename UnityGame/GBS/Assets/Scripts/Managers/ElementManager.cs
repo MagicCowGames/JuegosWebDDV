@@ -47,7 +47,7 @@ public class ElementManager : SingletonPersistent<ElementManager>
 
     #region Variables
 
-    [Header("Element Configuration")]
+    [Header("Element Combination Settings")]
     // Basically, rather than hard coding a list of combinations for opposites and another for combinations and then going through them in order, we instead
     // have a list of layers, which could potentially allow us to have multiple combination types with different precedences, which makes it far more flexible
     // for future extension, even tho we probably won't be using this shit to that extent lol.
@@ -55,8 +55,16 @@ public class ElementManager : SingletonPersistent<ElementManager>
     // - Layer[0] corresponds to the opposites, because they have to be evaluated first.
     // - Layer[1] corresponds to the elemental combinations, because they have to be evaluated afterwards to get the correct result.
     [SerializeField] private InputEelementCombinationLayer[] elementCombinationLayers;
+
+    [Header("Element Visual Settings")]
     [SerializeField] private Sprite defaultElementImage;
     [SerializeField] private InputElementImage[] elementImages;
+
+    // NOTE : Discarded idea, the element queue length is configured on the constructor, so that each wizard-like / caster class can use their own config
+    // (eg: player has len 5, some npcs len 3 or whatever, etc...)
+    // [Header("Element Queue Settings")]
+    // [SerializeField] private int elementQueueLength = 5; // number of elements configured to be in all element queues for the game.
+    // TODO : Add a section here that controls special combinations for "Magicks", or maybe have a new manager for that.
 
 
     // This actually contains the real list of dicts that will allow us to access the elemental combinations easily.
