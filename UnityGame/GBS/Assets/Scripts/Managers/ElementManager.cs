@@ -17,6 +17,14 @@ public class ElementManager : SingletonPersistent<ElementManager>
         public Element elementC;
     }
 
+    // Small wrapper class because Unity can't properly serialize a List<T[]> or a T[][] to be displayed on the inspector.
+    // Basically, the tinitest hack in the entire code, and it works pretty nicely.
+    [System.Serializable]
+    public struct InputEelementCombinationLayer
+    {
+        public InputElementTuple[] inputElements;
+    }
+
     // This struct will be used to assign an image to every single element when used in game during element queuing.
     // NOTE : The buttons in the player UI have hardcoded images, maybe I should use a slightly different image for those?
     [System.Serializable]
@@ -29,13 +37,31 @@ public class ElementManager : SingletonPersistent<ElementManager>
     #endregion
 
     #region Variables
+
+    [Header("Element Configuration")]
+    // Basically, rather than hard coding a list of combinations for opposites and another for combinations and then going through them in order, we instead
+    // have a list of layers, which could potentially allow us to have multiple combination types with different precedences, which makes it far more flexible
+    // for future extension, even tho we probably won't be using this shit to that extent lol.
+    // In this case:
+    // - Layer[0] corresponds to the opposites, because they have to be evaluated first.
+    // - Layer[1] corresponds to the elemental combinations, because they have to be evaluated afterwards to get the correct result.
+    [SerializeField] private InputEelementCombinationLayer[] elementCombinationLayers;
+    [SerializeField] private InputElementImage[] elementImages;
+
+
+    // This actually contains the real list of dicts that will allow us to access the elemental combinations easily.
+    // The other variables are there for easy inputting of data from Unity's inspector.
+    private Dictionary<ElementPair, Element>[] elementCombinations;
+    private Sprite[] images;
+
     #endregion
 
     #region MonoBehaviour
 
     void Start()
     {
-        
+        GenerateCombinationData();
+        GenerateImageData();
     }
 
     void Update()
@@ -49,5 +75,16 @@ public class ElementManager : SingletonPersistent<ElementManager>
     #endregion
 
     #region PrivateMethods
+
+    private void GenerateCombinationData()
+    {
+
+    }
+
+    private void GenerateImageData()
+    {
+
+    }
+
     #endregion
 }
