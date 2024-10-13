@@ -37,6 +37,12 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    #region Variables3
+
+    private ElementQueue elementQueue;
+
+    #endregion
+
     #region MonoBehaviour
 
     void Start()
@@ -45,6 +51,8 @@ public class PlayerController : MonoBehaviour
 
         this.movementForward = 0.0f;
         this.gravityVector = new Vector3(0.0f, -9.8f, 0.0f);
+
+        this.elementQueue = new ElementQueue(5);
 
         RegisterEvents();
     }
@@ -167,7 +175,9 @@ public class PlayerController : MonoBehaviour
     }
 
     private void AddElement(Element element)
-    { }
+    {
+        this.elementQueue.Add(element);
+    }
 
     #endregion
 
