@@ -88,7 +88,7 @@ public class ElementManager : SingletonPersistent<ElementManager>
     public Element[] GetCombinableElements(Element element, int layer)
     {
         if (layer < 0 || layer >= this.combinationData.Length)
-            return null;
+            return new Element[0];
         return this.combinationData[layer].combinableElements[(int)element].ToArray();
     }
 
@@ -112,6 +112,7 @@ public class ElementManager : SingletonPersistent<ElementManager>
         // Process each layer (eg: opposite or combinations layer)
         for(int i = 0; i < len; ++i)
         {
+            this.combinationData[i].combinableElements = new List<List<Element>>();
             for (int j = 0; j < (int)Element.COUNT; ++j)
             {
                 this.combinationData[i].combinableElements.Add(new List<Element>());
