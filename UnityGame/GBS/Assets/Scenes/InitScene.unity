@@ -904,6 +904,9 @@ MonoBehaviour:
     - elementA: 3
       elementB: 3
       elementC: 0
+    - elementA: 8
+      elementB: 4
+      elementC: 0
   - inputElements:
     - elementA: 1
       elementB: 4
