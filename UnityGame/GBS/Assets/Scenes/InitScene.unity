@@ -885,9 +885,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elementCombinationLayers:
-  - inputElements: []
-  - inputElements: []
-  elementImages: []
+  - inputElements:
+    - elementA: 5
+      elementB: 1
+      elementC: 0
+    - elementA: 5
+      elementB: 7
+      elementC: 0
+    - elementA: 2
+      elementB: 6
+      elementC: 0
+    - elementA: 9
+      elementB: 4
+      elementC: 1
+    - elementA: 10
+      elementB: 8
+      elementC: 1
+    - elementA: 3
+      elementB: 3
+      elementC: 0
+  - inputElements:
+    - elementA: 1
+      elementB: 4
+      elementC: 10
+    - elementA: 1
+      elementB: 8
+      elementC: 9
+  defaultElementImage: {fileID: 21300000, guid: 898412c9adde8b84297cfdd8baad9cea, type: 3}
+  elementImages:
+  - element: 0
+    image: {fileID: 21300000, guid: 898412c9adde8b84297cfdd8baad9cea, type: 3}
+  - element: 1
+    image: {fileID: 21300000, guid: dbf4d809536474b4c918533b5af9b132, type: 3}
+  - element: 2
+    image: {fileID: 21300000, guid: 36204ac36f9c48e4b94dccb34cf35bf2, type: 3}
+  - element: 3
+    image: {fileID: 21300000, guid: 767ce74845fa98148a2d3d66e42bf998, type: 3}
+  - element: 4
+    image: {fileID: 21300000, guid: 476ad738ebc9d0c42b9aedefb9201c15, type: 3}
+  - element: 5
+    image: {fileID: 21300000, guid: 362a25fd79f25a841965749a9c971522, type: 3}
+  - element: 6
+    image: {fileID: 21300000, guid: ee94ed095d8805849a95b8f5203996a3, type: 3}
+  - element: 7
+    image: {fileID: 21300000, guid: d049a11d267c8724ca84e787c40d0707, type: 3}
+  - element: 8
+    image: {fileID: 21300000, guid: 07e0579edab3f5a46be5dcaaf6cec29a, type: 3}
+  - element: 9
+    image: {fileID: 21300000, guid: 2d283ff7a979a27408cdee56c2f33e17, type: 3}
+  - element: 10
+    image: {fileID: 21300000, guid: bfb826a77d6cd9e4bb09190aa6e6f558, type: 3}
 --- !u!1001 &1881615478
 PrefabInstance:
   m_ObjectHideFlags: 0
