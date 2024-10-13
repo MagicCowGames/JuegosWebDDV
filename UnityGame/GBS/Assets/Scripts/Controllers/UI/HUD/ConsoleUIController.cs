@@ -71,7 +71,8 @@ public class ConsoleUIController : UIController
             new Cmd("clear", "Clear the console", "", 0, CmdClear),
             new Cmd("maplist", "Display a list of all of the available maps", "", 0, CmdMapList),
             new Cmd("delete", "Removes the specified GameObject", "<name>", 1, CmdDelete),
-            new Cmd("debug", "Enable or disable debug logging and visualization", "<enabled>", 1, CmdDebug)
+            new Cmd("debug", "Enable or disable debug logging and visualization", "<enabled>", 1, CmdDebug),
+            new Cmd("info", "Display information about a given category", "<category>", 1, CmdInfo)
         };
 
         this.SetConsoleOpen(false);
@@ -301,6 +302,23 @@ public class ConsoleUIController : UIController
         bool b = CmdParseBool(arg);
         DebugManager.Instance?.SetDebugEnabled(b);
         CmdPrint($"Debug Logging Enabled : {b}");
+    }
+
+    private void CmdInfo(string[] args, int startIndex)
+    {
+        string arg = args[startIndex + 1];
+        switch (arg.ToLower())
+        {
+            case "elements":
+                CmdPrint("No Element info yet.");
+                break;
+            case "npc":
+                CmdPrint("No NPC info yet.");
+                break;
+            default:
+                CmdError($"Unknown category \"{arg}\"");
+                break;
+        }
     }
 
     #endregion
