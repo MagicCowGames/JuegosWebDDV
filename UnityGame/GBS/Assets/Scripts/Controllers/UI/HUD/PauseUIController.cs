@@ -11,7 +11,7 @@ public class PauseUIController : UIController
 
     void Start()
     {
-        
+        GameUtility.SetPaused(false);
     }
 
     void Update()
