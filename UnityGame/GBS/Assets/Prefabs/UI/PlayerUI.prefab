@@ -630,6 +630,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasReference: {fileID: 5282760015361800400}
+  elementQueueImages:
+  - {fileID: 4558776705409667354}
+  - {fileID: 5894106389038190476}
+  - {fileID: 8386652195774210834}
+  - {fileID: 2438445251923640741}
+  - {fileID: 4027180403180498128}
 --- !u!1 &2409106127562522971
 GameObject:
   m_ObjectHideFlags: 0
