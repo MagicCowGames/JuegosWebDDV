@@ -42,7 +42,7 @@ public static class GameUtility
 
         DebugManager.Instance?.Log(str);
 
-        // UIManager.Instance?.GetPauseUI().SetVisible(isPaused);
+        UIManager.Instance?.GetPauseUIController().UI_SetVisible(isPaused);
         // UIManager.Instance?.GetPlayerUI().SetVisible(!isPaused);
 
         Time.timeScale = timeScale;
