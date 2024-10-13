@@ -47,6 +47,7 @@ public class ElementManager : SingletonPersistent<ElementManager>
     // - Layer[0] corresponds to the opposites, because they have to be evaluated first.
     // - Layer[1] corresponds to the elemental combinations, because they have to be evaluated afterwards to get the correct result.
     [SerializeField] private InputEelementCombinationLayer[] elementCombinationLayers;
+    [SerializeField] private Sprite defaultElementImage;
     [SerializeField] private InputElementImage[] elementImages;
 
 
@@ -99,11 +100,11 @@ public class ElementManager : SingletonPersistent<ElementManager>
     private void GenerateImageData()
     {
         int len = this.elementImages.Length;
-        this.images = new Sprite[len];
+        this.images = new Sprite[(int)Element.COUNT];
+        for (int i = 0; i < len; ++i)
+            this.images[i] = this.defaultElementImage;
         foreach(var img in this.elementImages)
-        {
             this.images[(int)img.element] = img.image;
-        }
     }
 
     #endregion
