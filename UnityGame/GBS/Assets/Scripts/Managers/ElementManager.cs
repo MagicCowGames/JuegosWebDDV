@@ -98,7 +98,12 @@ public class ElementManager : SingletonPersistent<ElementManager>
 
     private void GenerateImageData()
     {
-
+        int len = this.elementImages.Length;
+        this.images = new Sprite[len];
+        foreach(var img in this.elementImages)
+        {
+            this.images[(int)img.element] = img.image;
+        }
     }
 
     #endregion
