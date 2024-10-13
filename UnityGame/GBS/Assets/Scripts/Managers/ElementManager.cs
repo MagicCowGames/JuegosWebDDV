@@ -116,6 +116,11 @@ public class ElementManager : SingletonPersistent<ElementManager>
         return this.images[(int)element];
     }
 
+    public int GetLayers()
+    {
+        return this.combinationData.Length;
+    }
+
     #endregion
 
     #region PrivateMethods
