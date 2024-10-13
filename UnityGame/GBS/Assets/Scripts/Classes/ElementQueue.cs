@@ -106,7 +106,7 @@ public class ElementQueue
         this.ElementsCounts[(int)this.Elements[i]] -= 1; // Reduce the count for this specific element.
 
         // Shift elements to the left, leaving the None to the right most possible slot
-        for (int j = i; j < this.Count - 1; ++j)
+        for (int j = i; j < this.Count; ++j)
             this.Elements[j] = this.Elements[j + 1];
 
         // Set the last element to None
