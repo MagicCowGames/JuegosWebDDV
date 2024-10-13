@@ -8,6 +8,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using System.IO;
+using System.Globalization;
 
 // NOTE : Maybe the console's backend should be a static class, cause right now the entire console system is handled by the UIController class, and it doesn't feel
 // right tbh. I mean, it works, and allows for infinitely many consoles to run their own logic and stuff, but after all, the logic is just the same everywhere for most
@@ -346,13 +347,17 @@ public class ConsoleUIController : UIController
         bool ans;
         try
         {
+            // bool.Parse() can't take a CultureInfo for some reason.
+            // After running Convert.ToBoolean through a decompiler, we can see that under the hood it only implements "true" / "false",
+            // so it's not like it matters in any way tbh cause the commands should be in english anyway, which is precisely why we're using the
+            // stupid CultureInfo.InvariantCulture bullshit in the first place.
             ans = bool.Parse(str);
         }
         catch
         {
             try
             {
-                ans = int.Parse(str) > 0;
+                ans = int.Parse(str, CultureInfo.InvariantCulture) > 0;
             }
             catch
             {
@@ -367,7 +372,7 @@ public class ConsoleUIController : UIController
         float ans;
         try
         {
-            ans = float.Parse(str);
+            ans = float.Parse(str, CultureInfo.InvariantCulture);
         }
         catch
         {
