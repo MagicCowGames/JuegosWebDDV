@@ -25,7 +25,11 @@ public class InfoUIController : UIController
     void Start()
     {
         // Rough initial estimate of the FPS on the first frame of the game.
-        this.UpdateFpsDisplayText((int)(1.0f / Time.deltaTime));
+        // We could use this as the actual calculation of the FPS on every single frame, but we use a frame accumulator instead because we don't really want to
+        // suffer the consequences of updating the FPS display text every single frame.
+        // 1) It is more expensive to redraw the text every frame.
+        // 2) It is annoying as fuck to see the framerate text change every single frame. The user wants to fucking read it, so we need to give them some time at least...
+        this.UpdateFpsDisplayText((int)(1.0f / Time.unscaledDeltaTime));
     }
 
     void Update()
