@@ -30,7 +30,7 @@ public class InfoUIController : UIController
 
     void Update()
     {
-        this.UpdateFps(Time.deltaTime);
+        this.UpdateFps(Time.unscaledDeltaTime);
     }
 
     #endregion
