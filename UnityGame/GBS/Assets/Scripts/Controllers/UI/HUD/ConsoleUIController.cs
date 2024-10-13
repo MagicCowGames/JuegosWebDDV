@@ -345,7 +345,14 @@ public class ConsoleUIController : UIController
             }
             catch
             {
-                ans = false;
+                try
+                {
+                    ans = float.Parse(str, CultureInfo.InvariantCulture) > 0.0f;
+                }
+                catch
+                {
+                    ans = false;
+                }
             }
         }
         return ans;
