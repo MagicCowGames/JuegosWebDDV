@@ -23,6 +23,8 @@ public class PlayerUIController : UIController
 
     #region PublicMethods
 
+    // NOTE : These public functions are here because Unity's inspector doesn't support enums for OnClick events for buttons, so we use this workaround instead.
+
     public void Button_AddElement_Water() { Button_AddElement(Element.Water); }
     public void Button_AddElement_Heal() { Button_AddElement(Element.Heal); }
     public void Button_AddElement_Shield() { Button_AddElement(Element.Shield); }
