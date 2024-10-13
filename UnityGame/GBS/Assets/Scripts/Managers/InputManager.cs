@@ -27,6 +27,8 @@ public class InputManager : Singleton<InputManager>
 
     void Update()
     {
+        if (GameUtility.GetPaused())
+            return;
         UpdateInput();
     }
 
