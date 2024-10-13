@@ -9,6 +9,9 @@ using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using System.IO;
 
+// NOTE : Maybe the console's backend should be a static class, cause right now the entire console system is handled by the UIController class, and it doesn't feel
+// right tbh. I mean, it works, and allows for infinitely many consoles to run their own logic and stuff, but after all, the logic is just the same everywhere for most
+// operations... idk, we'll see, for now this works great and actually allows the console printing to be pretty straight forward, so it might be best to leave it as is.
 public class ConsoleUIController : UIController
 {
     #region Structs
@@ -58,7 +61,8 @@ public class ConsoleUIController : UIController
             new Cmd("quit", "Return to main menu", "", 0, CmdQuit),
             new Cmd("iamvip", "Show the credits menu", "", 0, CmdIAmVip),
             new Cmd("clear", "Clear the console", "", 0, CmdClear),
-            new Cmd("maplist", "Display a list of all of the available maps", "", 0, CmdMapList)
+            new Cmd("maplist", "Display a list of all of the available maps", "", 0, CmdMapList),
+            new Cmd("delete", "Removes the specified GameObject", "<name>", 1, CmdDelete)
         };
 
         this.SetConsoleOpen(false);
@@ -88,10 +92,7 @@ public class ConsoleUIController : UIController
 
     public void RunCommand(string command)
     {
-        string str = command;
-        str = str.Trim(); // Trim whitespace on the left and right sides of the input command string.
-        str = str.ToLower(); // Bring to lower case to allow commands to work regardless of whether they are capitalized or not.
-        // NOTE : Lowercase works even for map names because unity does not give a fuck about capitalization for that stuff lol...
+        string str = command.Trim(); // Trim whitespace on the left and right sides of the input command string.
         Debug.Log($"Running command : {str}");
         if(str.Length > 0) // only run the command if it contains at least 1 single character.
             this.CmdRun(str);
@@ -150,11 +151,17 @@ public class ConsoleUIController : UIController
 
         string[] args = str.Split();
 
-        string cmdName = args[0];
+        string cmdName = args[0].ToLower(); // Bring to lower case to allow commands to work regardless of whether they are capitalized or not.
+        // NOTE : Lowercase works for map names because Unity does not give a fuck about capitalization for that stuff...
+        // BUT, Unity DOES give a fuck about other stuff being property capitalized.
+        // That's the reason why we only pass to lower the cmd and we don't do the same for the rest of the string, because some other parts would be case sensitive.
+        // Also because that would fuck the echo command.
 
         foreach (var cmd in this.commands)
         {
-            if (cmd.command == cmdName)
+            // We pass the cmd.command string to lowercase too, even tho this should not be needed because they should be in lowercase anyways
+            // from the very moment they are stored on the commands array, but just in case a typo is made at some point...
+            if (cmd.command.ToLower() == cmdName)
             {
                 int foundArgs = args.Length - 1;
                 int expectedArgs = cmd.numArguments;
@@ -245,6 +252,22 @@ public class ConsoleUIController : UIController
         {
             string sceneName = Path.GetFileName(SceneUtility.GetScenePathByBuildIndex(i));
             CmdPrint($" {sceneName}");
+        }
+    }
+
+    private void CmdDelete(string[] args, int startIndex)
+    {
+        string name = args[startIndex + 1];
+        var obj = GameObject.Find(name);
+        
+        if (obj == null)
+        {
+            CmdError($"No GameObject named \"{name}\" could be found!");
+        }
+        else
+        {
+            CmdPrint($"Removing GameObject named \"{name}\"");
+            GameObject.Destroy(obj, 0.0f);
         }
     }
 
