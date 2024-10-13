@@ -320,4 +320,61 @@ public class ConsoleUIController : UIController
     }
 
     #endregion
+
+    #region Cmd - Parsing
+
+    // Functions for parsing values from the input strings on the commands.
+    // These are specific to the Cmd UI class because their result is not what one would expect on a programming language like C#, but something more aching to
+    // what one could expect from a console in a game like Q3 or JK2 / JK3.
+
+    private int CmdParseInt(string str)
+    {
+        int ans;
+        try
+        {
+            ans = int.Parse(str);
+        }
+        catch
+        {
+            ans = 0;
+        }
+        return ans;
+    }
+
+    private bool CmdParseBool(string str)
+    {
+        bool ans;
+        try
+        {
+            ans = bool.Parse(str);
+        }
+        catch
+        {
+            try
+            {
+                ans = int.Parse(str) > 0;
+            }
+            catch
+            {
+                ans = false;
+            }
+        }
+        return ans;
+    }
+
+    private float CmdParseFloat(string str)
+    {
+        float ans;
+        try
+        {
+            ans = float.Parse(str);
+        }
+        catch
+        {
+            ans = 0.0f;
+        }
+        return ans;
+    }
+
+    #endregion
 }
