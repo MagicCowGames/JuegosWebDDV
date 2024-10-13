@@ -51,6 +51,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (GameUtility.GetPaused())
+            return;
+
         float delta = Time.deltaTime;
         UpdatePosition(delta);
         UpdateRotation(delta);
