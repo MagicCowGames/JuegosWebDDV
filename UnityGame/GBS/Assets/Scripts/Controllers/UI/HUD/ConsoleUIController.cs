@@ -297,25 +297,8 @@ public class ConsoleUIController : UIController
 
     private void CmdDebug(string[] args, int startIndex)
     {
-        bool b = false;
         string arg = args[startIndex + 1];
-        try
-        {
-            bool value = bool.Parse(arg);
-            b = value;
-        }
-        catch
-        {
-            try
-            {
-                int value = int.Parse(arg);
-                b = value > 0;
-            }
-            catch
-            {
-                b = false;
-            }
-        }
+        bool b = CmdParseBool(arg);
         DebugManager.Instance?.SetDebugEnabled(b);
         CmdPrint($"Debug Logging Enabled : {b}");
     }
@@ -357,6 +340,7 @@ public class ConsoleUIController : UIController
         {
             try
             {
+                // Only God knows why someone would input an integer with separators, but here we are...
                 ans = int.Parse(str, CultureInfo.InvariantCulture) > 0;
             }
             catch
@@ -372,6 +356,7 @@ public class ConsoleUIController : UIController
         float ans;
         try
         {
+            // Gone are the days where floats are fucked!
             ans = float.Parse(str, CultureInfo.InvariantCulture);
         }
         catch
