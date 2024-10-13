@@ -316,7 +316,21 @@ public class ConsoleUIController : UIController
         switch (arg.ToLower())
         {
             case "elements":
-                CmdPrintln("No Element info yet.");
+                CmdPrint("Elements : [ ");
+                for (int i = 0; i < (int)Element.COUNT; ++i)
+                    CmdPrint($"{(Element)i} ");
+                CmdPrintln("]");
+
+                for (int i = 0; i < (int)Element.COUNT; ++i)
+                {
+                    var element = (Element)i;
+                    var opposites = ElementManager.Instance?.GetCombinableElements(element, 0);
+                    CmdPrint($"opp({element}) : [ ");
+                    foreach(var opp in opposites)
+                        CmdPrint($"{opp} ");
+                    CmdPrintln("]");
+                }
+
                 break;
             case "npc":
                 CmdPrintln("No NPC info yet.");
