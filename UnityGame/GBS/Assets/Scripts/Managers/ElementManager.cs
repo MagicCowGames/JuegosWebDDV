@@ -100,6 +100,14 @@ public class ElementManager : SingletonPersistent<ElementManager>
         return Element.None;
     }
 
+    public Sprite GetSprite(Element element)
+    {
+        int idx = (int)element;
+        if (idx < 0 || idx >= this.images.Length)
+            return this.defaultElementImage;
+        return this.images[(int)element];
+    }
+
     #endregion
 
     #region PrivateMethods
