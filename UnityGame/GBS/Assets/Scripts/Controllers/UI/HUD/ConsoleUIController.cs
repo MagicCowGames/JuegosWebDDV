@@ -157,7 +157,7 @@ public class ConsoleUIController : UIController
 
     private void CmdRun(string str)
     {
-        CmdPrint($"> {str}"); // Always print first the command that we just ran, doesn't matter if it works correctly or not. Even if it's just trash, print it out to the console so that the user can see what they typed before.
+        CmdPrintln($"> {str}"); // Always print first the command that we just ran, doesn't matter if it works correctly or not. Even if it's just trash, print it out to the console so that the user can see what they typed before.
 
         string[] args = str.Split();
 
@@ -197,11 +197,17 @@ public class ConsoleUIController : UIController
 
     #region Cmd - Print
 
-    // Print a line to the console
-    private void CmdPrint(string message)
+    // Print a message to the console
+    private void CmdPrint(string message = "")
     {
         DebugManager.Instance?.Log(message);
-        this.consoleText.text += $"{message}\n";
+        this.consoleText.text += $"{message}";
+    }
+
+    // Print a line to the console
+    private void CmdPrintln(string message = "")
+    {
+        CmdPrint($"{message}\n");
     }
 
     // Clear the entire console text
@@ -211,7 +217,7 @@ public class ConsoleUIController : UIController
     }
 
     // Print a line to the console to display an error message
-    private void CmdError(string message, CmdErrorType type = CmdErrorType.Default)
+    private void CmdError(string message = "", CmdErrorType type = CmdErrorType.Default)
     {
         string msgBase = "ERROR : ";
         string msgBody = "";
@@ -228,21 +234,21 @@ public class ConsoleUIController : UIController
                 msgBody = $"Unexpected argument \"{message}\"";
                 break;
         }
-        CmdPrint($"{msgBase}{msgBody}");
+        CmdPrintln($"{msgBase}{msgBody}");
     }
 
     // Print a line to the console to display the usage of a command
     private void CmdUsage(Cmd cmd)
     {
-        CmdPrint($"Usage : {cmd.command} {cmd.arguments}");
+        CmdPrintln($"Usage : {cmd.command} {cmd.arguments}");
     }
 
     // Print the help message to the console
     private void CmdHelp(string[] args, int startIndex)
     {
-        CmdPrint("Commands:");
+        CmdPrintln("Commands:");
         foreach (var cmd in this.commands)
-            CmdPrint($" {cmd.command} {cmd.arguments} : {cmd.description}");
+            CmdPrintln($" {cmd.command} {cmd.arguments} : {cmd.description}");
     }
 
     #endregion
@@ -268,7 +274,7 @@ public class ConsoleUIController : UIController
 
     private void CmdMapList(string[] args, int startIndex)
     {
-        CmdPrint("Maps:");
+        CmdPrintln("Maps:");
         // NOTE : We avoid using the unity editor build settings API because that's for editor-level code, which can be cool to make tools, but that dll is not
         // packaged in builds for users, so that wont work. Instead, we can use the SceneUtility thing. Also, can't use Scene.name because for some dumb reason
         // they thought it would make more sense for all Scene structs to contain their own data and... a name field which references the currently loaded scene,
@@ -276,7 +282,7 @@ public class ConsoleUIController : UIController
         for(int i = 0; i < SceneManager.sceneCountInBuildSettings; ++i)
         {
             string sceneName = Path.GetFileName(SceneUtility.GetScenePathByBuildIndex(i));
-            CmdPrint($" {sceneName}");
+            CmdPrintln($" {sceneName}");
         }
     }
 
@@ -291,7 +297,7 @@ public class ConsoleUIController : UIController
         }
         else
         {
-            CmdPrint($"Removing GameObject named \"{name}\"");
+            CmdPrintln($"Removing GameObject named \"{name}\"");
             GameObject.Destroy(obj, 0.0f);
         }
     }
@@ -301,7 +307,7 @@ public class ConsoleUIController : UIController
         string arg = args[startIndex + 1];
         bool b = CmdParseBool(arg);
         DebugManager.Instance?.SetDebugEnabled(b);
-        CmdPrint($"Debug Logging Enabled : {b}");
+        CmdPrintln($"Debug Logging Enabled : {b}");
     }
 
     private void CmdInfo(string[] args, int startIndex)
@@ -310,10 +316,10 @@ public class ConsoleUIController : UIController
         switch (arg.ToLower())
         {
             case "elements":
-                CmdPrint("No Element info yet.");
+                CmdPrintln("No Element info yet.");
                 break;
             case "npc":
-                CmdPrint("No NPC info yet.");
+                CmdPrintln("No NPC info yet.");
                 break;
             default:
                 CmdError($"Unknown category \"{arg}\"");
