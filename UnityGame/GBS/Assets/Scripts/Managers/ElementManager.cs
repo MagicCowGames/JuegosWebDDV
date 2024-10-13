@@ -133,6 +133,7 @@ public class ElementManager : SingletonPersistent<ElementManager>
         // Process each layer (eg: opposite or combinations layer)
         for(int i = 0; i < len; ++i)
         {
+            this.combinationData[i].combinations = new Dictionary<ElementPair, Element>();
             this.combinationData[i].combinableElements = new List<List<Element>>();
             for (int j = 0; j < (int)Element.COUNT; ++j)
             {
