@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ElementManager : SingletonPersistent<ElementManager>
@@ -51,7 +52,7 @@ public class ElementManager : SingletonPersistent<ElementManager>
 
     // This actually contains the real list of dicts that will allow us to access the elemental combinations easily.
     // The other variables are there for easy inputting of data from Unity's inspector.
-    private Dictionary<ElementPair, Element>[] elementCombinations;
+    private Dictionary<ElementPair, Element>[] combinations;
     private Sprite[] images;
 
     #endregion
@@ -78,7 +79,21 @@ public class ElementManager : SingletonPersistent<ElementManager>
 
     private void GenerateCombinationData()
     {
-
+        int len = this.elementCombinationLayers.Length;
+        combinations = new Dictionary<ElementPair, Element>[len];
+        
+        // Process each layer (eg: opposite or combinations layer)
+        for(int i = 0; i < len; ++i)
+        {
+            var layer = this.elementCombinationLayers[i];
+            // Process each elemental tuple within the current layer (eg: Q + A = None)
+            foreach (var elementTuple in layer.inputElements)
+            {
+                var inputPair = new ElementPair(elementTuple.elementA, elementTuple.elementB);
+                var outputElement = elementTuple.elementC;
+                this.combinations[i].Add(inputPair, outputElement);
+            }
+        }
     }
 
     private void GenerateImageData()
