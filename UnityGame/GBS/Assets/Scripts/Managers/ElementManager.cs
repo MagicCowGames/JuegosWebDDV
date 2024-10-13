@@ -35,6 +35,14 @@ public class ElementManager : SingletonPersistent<ElementManager>
         public Sprite image;
     }
 
+    // This struct will be used to actually store the real elemental combination data
+    // There will be a list of these, each being a layer of possible combinations
+    public struct ElementCombinationData
+    {
+        public Dictionary<ElementPair, Element> combinations;
+        public List<List<Element>> combinableElements;
+    }
+
     #endregion
 
     #region Variables
@@ -53,7 +61,7 @@ public class ElementManager : SingletonPersistent<ElementManager>
 
     // This actually contains the real list of dicts that will allow us to access the elemental combinations easily.
     // The other variables are there for easy inputting of data from Unity's inspector.
-    private Dictionary<ElementPair, Element>[] combinations;
+    private ElementCombinationData[] combinationData;
     private Sprite[] images;
 
     #endregion
@@ -81,18 +89,29 @@ public class ElementManager : SingletonPersistent<ElementManager>
     private void GenerateCombinationData()
     {
         int len = this.elementCombinationLayers.Length;
-        combinations = new Dictionary<ElementPair, Element>[len];
+        this.combinationData = new ElementCombinationData[len];
         
         // Process each layer (eg: opposite or combinations layer)
         for(int i = 0; i < len; ++i)
         {
+            for (int j = 0; j < (int)Element.COUNT; ++j)
+            {
+                this.combinationData[i].combinableElements.Add(new List<Element>());
+            }
+
             var layer = this.elementCombinationLayers[i];
             // Process each elemental tuple within the current layer (eg: Q + A = None)
             foreach (var elementTuple in layer.inputElements)
             {
-                var inputPair = new ElementPair(elementTuple.elementA, elementTuple.elementB);
-                var outputElement = elementTuple.elementC;
-                this.combinations[i].Add(inputPair, outputElement);
+                var elementA = elementTuple.elementA;
+                var elementB = elementTuple.elementB;
+                var elementC = elementTuple.elementC;
+
+                var pairAB = new ElementPair(elementA, elementB);
+                
+                this.combinationData[i].combinations.Add(pairAB, elementC);
+                this.combinationData[i].combinableElements[(int)elementA].Add(elementB);
+                this.combinationData[i].combinableElements[(int)elementB].Add(elementA);
             }
         }
     }
