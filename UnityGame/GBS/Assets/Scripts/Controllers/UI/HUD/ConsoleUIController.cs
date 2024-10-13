@@ -16,6 +16,13 @@ public class ConsoleUIController : UIController
 {
     #region Structs
 
+    public enum CmdErrorType
+    {
+        Default = 0,
+        ArgType,
+        ArgUnexpected
+    }
+
     public class Cmd
     {
         public string command;
@@ -62,7 +69,8 @@ public class ConsoleUIController : UIController
             new Cmd("iamvip", "Show the credits menu", "", 0, CmdIAmVip),
             new Cmd("clear", "Clear the console", "", 0, CmdClear),
             new Cmd("maplist", "Display a list of all of the available maps", "", 0, CmdMapList),
-            new Cmd("delete", "Removes the specified GameObject", "<name>", 1, CmdDelete)
+            new Cmd("delete", "Removes the specified GameObject", "<name>", 1, CmdDelete),
+            new Cmd("debug", "Enable or disable debug logging and visualization", "<enabled>", 1, CmdDebug)
         };
 
         this.SetConsoleOpen(false);
@@ -201,9 +209,24 @@ public class ConsoleUIController : UIController
     }
 
     // Print a line to the console to display an error message
-    private void CmdError(string message)
+    private void CmdError(string message, CmdErrorType type = CmdErrorType.Default)
     {
-        CmdPrint($"ERROR : {message}");
+        string msgBase = "ERROR : ";
+        string msgBody = "";
+        switch(type)
+        {
+            default:
+            case CmdErrorType.Default:
+                msgBody = $"{message}";
+                break;
+            case CmdErrorType.ArgType:
+                msgBody = $"Argument \"{message}\" has incorrect type";
+                break;
+            case CmdErrorType.ArgUnexpected:
+                msgBody = $"Unexpected argument \"{message}\"";
+                break;
+        }
+        CmdPrint($"{msgBase}{msgBody}");
     }
 
     // Print a line to the console to display the usage of a command
@@ -269,6 +292,31 @@ public class ConsoleUIController : UIController
             CmdPrint($"Removing GameObject named \"{name}\"");
             GameObject.Destroy(obj, 0.0f);
         }
+    }
+
+    private void CmdDebug(string[] args, int startIndex)
+    {
+        bool b = false;
+        string arg = args[startIndex + 1];
+        try
+        {
+            bool value = bool.Parse(arg);
+            b = value;
+        }
+        catch
+        {
+            try
+            {
+                int value = int.Parse(arg);
+                b = value > 0;
+            }
+            catch
+            {
+                b = false;
+            }
+        }
+        DebugManager.Instance?.SetDebugEnabled(b);
+        CmdPrint($"Debug Logging Enabled : {b}");
     }
 
     #endregion
