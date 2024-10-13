@@ -65,7 +65,6 @@ public class InputManager : Singleton<InputManager>
         UpdateInputReset();
         UpdateInputMouse();
         UpdateInputKeyboard();
-        UpdateInputKeyboard2();
         UpdateInputTouch();
     }
 
@@ -105,7 +104,7 @@ public class InputManager : Singleton<InputManager>
     private void UpdateInputKeyboard()
     {
         UIK_Elements();
-        UIK_Console();
+        UIK_Other();
     }
 
     private void UIK_Elements()
@@ -135,20 +134,15 @@ public class InputManager : Singleton<InputManager>
             AddElement(Element.Fire);
     }
 
-    private void UIK_Console()
+    private void UIK_Other()
     {
+        // Pause
+        if (Input.GetKeyDown(KeyCode.Escape))
+            GameUtility.SwitchPaused();
+
+        // Console
         if (Input.GetKeyDown(KeyCode.BackQuote))
             SwitchConsole();
-    }
-
-    private void UpdateInputKeyboard2()
-    {
-        // Other inputs:
-        if (Input.GetKeyDown(KeyCode.Escape))
-            Debug.Log("show menu lol");
-
-        if (Input.GetKeyDown(KeyCode.Return))
-            Debug.Log("lol");
     }
 
     #endregion
