@@ -177,6 +177,7 @@ public class PlayerController : MonoBehaviour
     private void AddElement(Element element)
     {
         this.elementQueue.Add(element);
+        UIManager.Instance?.GetPlayerUIController().UpdateElementDisplay(this.elementQueue);
     }
 
     #endregion
