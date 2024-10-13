@@ -29,6 +29,7 @@ public class PlayerUIController : UIController
     public void Button_AddElement_Cold() { Button_AddElement(Element.Cold); }
     public void Button_AddElement_Electricity() { Button_AddElement(Element.Electricity); }
     public void Button_AddElement_Death() { Button_AddElement(Element.Death); }
+    public void Button_AddElement_Earth() { Button_AddElement(Element.Earth); }
     public void Button_AddElement_Fire() { Button_AddElement(Element.Fire); }
 
     #endregion
