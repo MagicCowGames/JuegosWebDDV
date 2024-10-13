@@ -82,6 +82,24 @@ public class ElementManager : SingletonPersistent<ElementManager>
     #endregion
 
     #region PublicMethods
+
+    // NOTE : Layer 0 corresponds to opposites, layer 1 corresponds to combinations
+
+    public Element[] GetCombinableElements(Element element, int layer)
+    {
+        if (layer < 0 || layer >= this.combinationData.Length)
+            return null;
+        return this.combinationData[layer].combinableElements[(int)element].ToArray();
+    }
+
+    public Element GetCombination(Element elementA, Element elementB, int layer)
+    {
+        var pair = new ElementPair(elementA, elementB);
+        if (this.combinationData[layer].combinations.ContainsKey(pair))
+            return this.combinationData[layer].combinations[pair];
+        return Element.None;
+    }
+
     #endregion
 
     #region PrivateMethods
