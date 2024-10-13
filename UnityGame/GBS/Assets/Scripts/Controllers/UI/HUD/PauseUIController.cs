@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PauseUIController : MonoBehaviour
+public class PauseUIController : UIController
 {
     #region Variables
     #endregion
