@@ -89,6 +89,14 @@ public class ElementQueue
         this.Count += 1;
     }
 
+    public int GetElementCount(Element element)
+    {
+        int idx = (int)element;
+        if (idx < 0 || idx >= this.ElementsCounts.Length)
+            return 0;
+        return this.ElementsCounts[idx];
+    }
+
     #endregion
 
     #region PrivateMethods
