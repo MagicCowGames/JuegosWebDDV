@@ -39,6 +39,7 @@ public class ElementQueue
     public ElementQueue(ElementQueue other)
     {
         Initialize(other.Slots);
+        this.Count = other.Count;
         for (int i = 0; i < other.Elements.Length; ++i)
             this.Elements[i] = other.Elements[i];
         for (int i = 0; i < other.ElementsCounts.Length; ++i)
