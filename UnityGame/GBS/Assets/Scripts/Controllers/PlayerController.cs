@@ -108,10 +108,23 @@ public class PlayerController : MonoBehaviour
 
     private void UpdatePosition(float delta)
     {
-        Vector3 movementVector1 = delta * this.movementForward * this.meshTransform.forward * this.walkSpeed;
-        Vector3 movementVector2 = delta * this.gravityVector;
-        this.characterController.Move(movementVector1);
-        this.characterController.Move(movementVector2); // move by the gravity vector separatedly from the other movement calculation to prevent the other one from cancelling out the gravity vector.
+        UpdatePositionWalk(delta);
+        UpdatePositionGravity(delta);
+    }
+
+    private void UpdatePositionWalk(float delta)
+    {
+        // Can't walk while we're casting!
+        if (this.isCasting)
+            return;
+        Vector3 movementVector = delta * this.movementForward * this.meshTransform.forward * this.walkSpeed;
+        this.characterController.Move(movementVector);
+    }
+
+    private void UpdatePositionGravity(float delta)
+    {
+        Vector3 movementVector = delta * this.gravityVector;
+        this.characterController.Move(movementVector); // move by the gravity vector separatedly from the other movement calculation to prevent the other one from cancelling out the gravity vector.
     }
 
     private void UpdateRotation(float delta)
@@ -137,7 +150,8 @@ public class PlayerController : MonoBehaviour
         InputManager.Instance.OnSetForwardAxis += SetForwardAxis;
         InputManager.Instance.OnSetScreenPoint += SetLookToPoint;
         InputManager.Instance.OnAddElement += AddElement;
-        InputManager.Instance.OnCastSpell += CastSpell;
+        InputManager.Instance.OnRightClickDown += RightClickDown;
+        InputManager.Instance.OnRightClickUp += RightClickUp;
     }
 
     // Unsubscribe from events
@@ -149,7 +163,8 @@ public class PlayerController : MonoBehaviour
         InputManager.Instance.OnSetForwardAxis -= SetForwardAxis;
         InputManager.Instance.OnSetScreenPoint -= SetLookToPoint;
         InputManager.Instance.OnAddElement -= AddElement;
-        InputManager.Instance.OnCastSpell -= CastSpell;
+        InputManager.Instance.OnRightClickDown -= RightClickDown;
+        InputManager.Instance.OnRightClickUp -= RightClickUp;
     }
 
     #endregion
@@ -183,11 +198,25 @@ public class PlayerController : MonoBehaviour
         UIManager.Instance?.GetPlayerUIController().UpdateElementDisplay(this.elementQueue);
     }
 
-    private void CastSpell()
+    private void RightClickDown()
     {
-        this.spellCasterController.Cast(this.elementQueue);
+        // Early return if the queue is empty. I mean, we can't really cast nothing... can we? (flashbacks to air bending in Magicka)
+        if (this.elementQueue.Count <= 0)
+        {
+            this.isCasting = false;
+            return;
+        }
+
+        this.isCasting = true;
+        this.spellCasterController.SetElementQueue(this.elementQueue);
+        this.spellCasterController.Cast();
         this.elementQueue.Clear();
         UIManager.Instance?.GetPlayerUIController().UpdateElementDisplay(this.elementQueue);
+    }
+
+    private void RightClickUp()
+    {
+        this.isCasting = false;
     }
 
     #endregion
