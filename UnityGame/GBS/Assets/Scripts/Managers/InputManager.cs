@@ -11,7 +11,8 @@ public class InputManager : Singleton<InputManager>
     public Action<Vector3> OnSetScreenPoint;
     public Action<Element> OnAddElement;
 
-    public Action/*<CastType>*/ OnCastSpell;
+    public Action OnRightClickDown;
+    public Action OnRightClickUp;
 
 
     public Action OnSwitchConsole;
@@ -56,9 +57,14 @@ public class InputManager : Singleton<InputManager>
         this.OnSwitchConsole?.Invoke();
     }
 
-    public void CastSpell()
+    public void RightClickDown()
     {
-        this.OnCastSpell?.Invoke();
+        this.OnRightClickDown?.Invoke();
+    }
+
+    public void RightClickUp()
+    {
+        this.OnRightClickUp?.Invoke();
     }
 
     #endregion
@@ -92,9 +98,14 @@ public class InputManager : Singleton<InputManager>
             SetForwardAxis(1);
         }
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButtonDown(1))
         {
-            CastSpell();
+            RightClickDown();
+        }
+
+        if (Input.GetMouseButtonUp(1))
+        {
+            RightClickUp();
         }
     }
 
