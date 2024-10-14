@@ -169,3 +169,4 @@ public class ElementManager : SingletonPersistent<ElementManager>
 
     #endregion
 }
+// TODO : Add some element colors array for spell combination stuff.
