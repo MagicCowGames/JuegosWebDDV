@@ -18,7 +18,7 @@ public class ElementQueue
 
     #region Constructor
 
-    public ElementQueue(int numSlots = 5)
+    private void Initialize(int numSlots)
     {
         this.Slots = numSlots;
         this.Elements = new Element[this.Slots];
@@ -29,6 +29,20 @@ public class ElementQueue
         this.ElementsCounts = new int[(int)Element.COUNT];
         for (int i = 0; i < this.ElementsCounts.Length; ++i)
             this.ElementsCounts[i] = 0;
+    }
+
+    public ElementQueue(int numSlots = 5)
+    {
+        Initialize(5);
+    }
+
+    public ElementQueue(ElementQueue other)
+    {
+        Initialize(other.Slots);
+        for (int i = 0; i < other.Elements.Length; ++i)
+            this.Elements[i] = other.Elements[i];
+        for (int i = 0; i < other.ElementsCounts.Length; ++i)
+            this.ElementsCounts[i] = other.ElementsCounts[i];
     }
 
     #endregion
