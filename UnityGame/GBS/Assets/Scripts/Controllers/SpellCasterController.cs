@@ -16,6 +16,11 @@ public class SpellCasterController : MonoBehaviour
 
     private ElementQueue eq;
 
+    // NOTE : This idea may get scrapped, so we're leaving it here for now...
+    private float accumulatedTime = 0.0f; // seconds that the cast button has been held down (used for projectile spells to increase strength)
+    private float accumulatedTimeMax = 3.0f; // 3 seconds max
+    private float forcePerSecond = 1.5f; // force value added to the projectile based on the accumulatedTime value. The resulting force is forcePerSecond * accumulatedTime.
+
     #endregion
 
     #region MonoBehaviour
