@@ -137,6 +137,7 @@ public class PlayerController : MonoBehaviour
         InputManager.Instance.OnSetForwardAxis += SetForwardAxis;
         InputManager.Instance.OnSetScreenPoint += SetLookToPoint;
         InputManager.Instance.OnAddElement += AddElement;
+        InputManager.Instance.OnCastSpell += CastSpell;
     }
 
     // Unsubscribe from events
@@ -148,6 +149,7 @@ public class PlayerController : MonoBehaviour
         InputManager.Instance.OnSetForwardAxis -= SetForwardAxis;
         InputManager.Instance.OnSetScreenPoint -= SetLookToPoint;
         InputManager.Instance.OnAddElement -= AddElement;
+        InputManager.Instance.OnCastSpell -= CastSpell;
     }
 
     #endregion
@@ -178,6 +180,13 @@ public class PlayerController : MonoBehaviour
     private void AddElement(Element element)
     {
         this.elementQueue.Add(element);
+        UIManager.Instance?.GetPlayerUIController().UpdateElementDisplay(this.elementQueue);
+    }
+
+    private void CastSpell()
+    {
+        this.spellCasterController.Cast(this.elementQueue);
+        this.elementQueue.Clear();
         UIManager.Instance?.GetPlayerUIController().UpdateElementDisplay(this.elementQueue);
     }
 

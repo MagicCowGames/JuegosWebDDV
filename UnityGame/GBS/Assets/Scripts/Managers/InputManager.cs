@@ -27,7 +27,7 @@ public class InputManager : Singleton<InputManager>
 
     void Update()
     {
-        if (GameUtility.GetPaused())
+        if (GameUtility.GetPaused()) // TODO : Fix this fucking hack, it breaks the inputs during pause screen, wtf was I thinking?
             return;
         UpdateInput();
     }
@@ -54,6 +54,11 @@ public class InputManager : Singleton<InputManager>
     public void SwitchConsole()
     {
         this.OnSwitchConsole?.Invoke();
+    }
+
+    public void CastSpell()
+    {
+        this.OnCastSpell?.Invoke();
     }
 
     #endregion
@@ -85,6 +90,11 @@ public class InputManager : Singleton<InputManager>
         if (Input.GetMouseButton(0))
         {
             SetForwardAxis(1);
+        }
+
+        if (Input.GetMouseButton(1))
+        {
+            CastSpell();
         }
     }
 
