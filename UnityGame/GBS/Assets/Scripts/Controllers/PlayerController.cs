@@ -67,7 +67,8 @@ public class PlayerController : MonoBehaviour
         UpdatePosition(delta);
         UpdateRotation(delta);
 
-        DebugManager.Instance?.DrawLine(Color.red, this.playerTransform.position, this.meshTransform.position + this.meshTransform.forward * 100);
+        // DebugManager.Instance?.DrawLine(Color.red, this.playerTransform.position, this.meshTransform.position + this.meshTransform.forward * 100);
+        DebugManager.Instance?.DrawSphere(Color.blue, this.playerTransform.position, 2);
     }
 
     void OnDestroy()
