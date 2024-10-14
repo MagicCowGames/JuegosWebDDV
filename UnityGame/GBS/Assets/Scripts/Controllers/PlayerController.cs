@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Weapon Settings")]
     [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private SpellCasterController spellCasterController;
 
     private Vector3 gravityVector;
 
