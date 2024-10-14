@@ -21,6 +21,8 @@ public class SpellCasterController : MonoBehaviour
     private float accumulatedTimeMax = 3.0f; // 3 seconds max
     private float forcePerSecond = 1.5f; // force value added to the projectile based on the accumulatedTime value. The resulting force is forcePerSecond * accumulatedTime.
 
+    private BasicSpellController spellController;
+
     #endregion
 
     #region MonoBehaviour
@@ -102,12 +104,29 @@ public class SpellCasterController : MonoBehaviour
         }
 
         DebugManager.Instance?.Log("Spray-like spell");
-        ObjectSpawner.Spawn(this.fireSpell, this.spawnTransform);
+        SpawnSpraySpell();
         return;
     }
 
     #endregion
 
     #region PrivateMethods
+
+    private BasicSpellController SpawnSpell(GameObject prefab)
+    {
+        var obj = ObjectSpawner.Spawn(prefab, this.spawnTransform);
+        var controller = obj.GetComponent<BasicSpellController>();
+        return controller;
+    }
+
+    private void SpawnSpraySpell()
+    {
+        var spell = SpawnSpell(this.fireSpell);
+        spell.owner = null;
+        spell.isProjectile = false;
+        spell.transform.SetParent(this.spawnTransform);
+        this.spellController = spell;
+    }
+
     #endregion
 }
