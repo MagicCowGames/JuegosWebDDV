@@ -19,7 +19,10 @@ public class BasicSpellController : MonoBehaviour
     [Header("Spell Stats")]
     [SerializeField] private float damage = 10.0f;
     [SerializeField] private float speed = 100.0f;
-    [SerializeField] private float life = 12.0f; // number of seconds the bullet gets to live before being despawned by itself.
+
+    [Header("Spell Lifetime")]
+    [SerializeField] private float duration = 10.0f; // Amount of time until the spell's effects are disabled and it's visual appearance is hidden.
+    [SerializeField] private float life = 12.0f; // Amount of time until the spell's entity is actually killed / returned to the pool. This value should be higher than duration.
 
     private float elapsed;
 
@@ -45,8 +48,12 @@ public class BasicSpellController : MonoBehaviour
     void Update()
     {
         this.elapsed += Time.deltaTime;
+
+        if (this.elapsed >= this.duration)
+            DisableSpell();
+        
         if (this.elapsed >= this.life)
-            Kill();
+            KillSpell();
     }
 
     #endregion
@@ -56,10 +63,15 @@ public class BasicSpellController : MonoBehaviour
 
     #region PrivateMethods
 
-    private void Kill()
+    private void KillSpell()
     {
         this.gameObject.SetActive(false);
         Destroy(this.gameObject, 0.0f);
+    }
+
+    private void DisableSpell()
+    {
+
     }
 
     #endregion
