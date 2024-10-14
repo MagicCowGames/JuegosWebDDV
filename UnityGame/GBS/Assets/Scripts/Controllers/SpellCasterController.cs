@@ -42,8 +42,17 @@ public class SpellCasterController : MonoBehaviour
     public void Cast()
     {
         // If the queue is null or the queue has no elements queued up, then we return because there is nothing else to be done.
-        if (this.eq == null || this.eq.Count == 0)
+        if (this.eq == null)
+        {
+            DebugManager.Instance?.Log("The ElementQueue is null!");
             return;
+        }
+
+        if (this.eq.Count <= 0)
+        {
+            DebugManager.Instance?.Log("The ElementQueue is empty!");
+            return;
+        }
         
         if (this.eq.GetElementCount(Element.Shield) > 0)
         {
