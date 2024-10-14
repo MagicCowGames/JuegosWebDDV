@@ -73,7 +73,7 @@ public class DebugManager : Singleton<DebugManager>
     // NOTE : The only reason this fucking mess exists is literally to allow debug drawing on the final release build to be enabled through the console.
     // That's all there is to it.
 
-    public void DrawLine(Color color, Vector3 start, Vector3 end)
+    public void DrawLine(Vector3 start, Vector3 end, Color color, float width = 0.1f)
     {
         if (!this.debugEnabled)
             return;
@@ -87,11 +87,11 @@ public class DebugManager : Singleton<DebugManager>
         lineRenderer.lineRenderer.endColor = color;
         lineRenderer.lineRenderer.loop = false;
 
-        lineRenderer.lineRenderer.startWidth = 0.1f;
-        lineRenderer.lineRenderer.endWidth = 0.1f;
+        lineRenderer.lineRenderer.startWidth = width;
+        lineRenderer.lineRenderer.endWidth = width;
     }
 
-    public void DrawSegment(Color color, Vector3[] points, bool loop = false)
+    public void DrawSegment(Vector3[] points, bool loop, Color color, float width = 0.1f)
     {
         if (!this.debugEnabled)
             return;
@@ -104,11 +104,11 @@ public class DebugManager : Singleton<DebugManager>
         lineRenderer.lineRenderer.endColor = color;
         lineRenderer.lineRenderer.loop = loop;
 
-        lineRenderer.lineRenderer.startWidth = 0.1f;
-        lineRenderer.lineRenderer.endWidth = 0.1f;
+        lineRenderer.lineRenderer.startWidth = width;
+        lineRenderer.lineRenderer.endWidth = width;
     }
 
-    public void DrawSphere(Color color, Vector3 origin, float radius = 5.0f)
+    public void DrawSphere(Vector3 origin, float radius, Color color, float width = 0.1f)
     {
         if (!this.debugEnabled)
             return;
@@ -156,9 +156,9 @@ public class DebugManager : Singleton<DebugManager>
         for (int i = 0; i < points3.Length; ++i)
             points3[i] = origin + points3[i] * radius;
 
-        DrawSegment(color, points1, true);
-        DrawSegment(color, points2, true);
-        DrawSegment(color, points3, true);
+        DrawSegment(points1, true, color, width);
+        DrawSegment(points2, true, color, width);
+        DrawSegment(points3, true, color, width);
     }
 
     #endregion
