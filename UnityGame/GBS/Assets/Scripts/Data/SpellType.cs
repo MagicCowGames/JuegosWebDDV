@@ -1,4 +1,4 @@
-public enum SpellType : int
+public enum SpellType
 {
     None = 0,
     Spray,

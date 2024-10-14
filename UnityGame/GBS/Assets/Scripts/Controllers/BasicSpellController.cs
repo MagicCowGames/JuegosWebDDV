@@ -13,9 +13,8 @@ public class BasicSpellController : MonoBehaviour
     [SerializeField] private GameObject spellMesh;
     [SerializeField] private GameObject spellParticle;
 
-    [Header("Spell Info")]
-    [SerializeField] public bool isProjectile;
-    [SerializeField] public Color color;
+    [Header("Spell Config")]
+    [SerializeField] private SpellType spellType;
 
     [Header("Spell Stats")]
     [SerializeField] private float damage = 10.0f;
@@ -32,7 +31,7 @@ public class BasicSpellController : MonoBehaviour
     {
         this.elapsed = 0.0f;
 
-        if (this.isProjectile)
+        if (this.spellType == SpellType.Projectile)
         {
             this.rigidBody.AddForce(rigidBody.transform.up * speed, ForceMode.VelocityChange);
         }
