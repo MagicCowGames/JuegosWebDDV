@@ -1,14 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DebugManager : Singleton<DebugManager>
 {
     #region Variables
-    
+
     [SerializeField] private bool debugEnabled = false;
-    [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private GameObject debugLineObject;
+    
+    
+    private List<DebugLineRendererController> lineRenderers;
+    private int lineRenderersUsed;
 
     #endregion
 
@@ -16,12 +21,22 @@ public class DebugManager : Singleton<DebugManager>
 
     void Start()
     {
-        this.UpdateDebugComponents(); // Update all debug components on start
+        // Init the list of line renderers and set the counters to 0
+        this.lineRenderers = new List<DebugLineRendererController>();
+        this.lineRenderersUsed = 0;
     }
 
     void Update()
     {
 
+    }
+
+    void LateUpdate()
+    {
+        if (!this.debugEnabled)
+            return;
+
+        DisableLineRenderers();
     }
 
     #endregion
@@ -43,7 +58,7 @@ public class DebugManager : Singleton<DebugManager>
     public void SetDebugEnabled(bool value)
     {
         this.debugEnabled = value;
-        this.UpdateDebugComponents();
+        this.DisableLineRenderers();
     }
 
     public bool GetDebugEnabled()
@@ -51,24 +66,61 @@ public class DebugManager : Singleton<DebugManager>
         return this.debugEnabled;
     }
 
+    #endregion
+
+    #region PublicMethods - Drawing
+
     public void DrawLine(Color color, Vector3 start, Vector3 end)
     {
-        if (this.debugEnabled && this.lineRenderer != null)
-        {
-            Vector3[] positions = { start, end };
-            this.lineRenderer.SetPositions(positions);
-            this.lineRenderer.startColor = color;
-            this.lineRenderer.endColor = color;
-        }
+        if (!this.debugEnabled)
+            return;
+
+        var lineRenderer = this.GetLineRenderer();
+
+        Vector3[] positions = { start, end };
+        lineRenderer.lineRenderer.SetPositions(positions);
+        lineRenderer.lineRenderer.startColor = color;
+        lineRenderer.lineRenderer.endColor = color;
+
+        Debug.Log("WTF");
     }
 
     #endregion
 
     #region PrivateMethods
 
-    private void UpdateDebugComponents()
+    private void DisableLineRenderers()
     {
-        this.lineRenderer.gameObject.SetActive(this.debugEnabled);
+        foreach (var lineRenderer in this.lineRenderers)
+            if (!lineRenderer.usedLastFrame)
+                lineRenderer.gameObject.SetActive(false);
+
+        foreach (var lineRenderer in this.lineRenderers)
+            lineRenderer.usedLastFrame = false;
+
+        this.lineRenderersUsed = 0;
+    }
+
+    public void AddLineRenderer()
+    {
+        var obj = ObjectSpawner.Spawn(this.debugLineObject);
+        obj.transform.parent = this.transform;
+        var lineRenderer = obj.GetComponent<DebugLineRendererController>();
+        this.lineRenderers.Add(lineRenderer);
+    }
+
+    private DebugLineRendererController GetLineRenderer()
+    {
+        if (this.lineRenderersUsed >= this.lineRenderers.Count)
+            AddLineRenderer();
+
+        var ans = this.lineRenderers[this.lineRenderersUsed];
+        ans.usedLastFrame = true;
+        ++this.lineRenderersUsed;
+
+        ans.gameObject.SetActive(true);
+
+        return ans;
     }
 
     #endregion
