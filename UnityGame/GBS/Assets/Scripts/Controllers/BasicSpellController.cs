@@ -6,7 +6,7 @@ public class BasicSpellController : MonoBehaviour
 {
     #region Variables
 
-    public GameObject owner;
+    private GameObject owner; // The entity that casted this spell.
 
     [Header("Spell Components")]
     [SerializeField] private Rigidbody rigidBody;
@@ -43,6 +43,8 @@ public class BasicSpellController : MonoBehaviour
         this.elapsed = 0.0f;
         this.elementCounts = new int[(int)Element.COUNT];
 
+        SpawnSpell();
+
         if (this.spellType == SpellType.Projectile)
         {
             this.rigidBody.AddForce(rigidBody.transform.up * speed, ForceMode.VelocityChange);
@@ -68,6 +70,22 @@ public class BasicSpellController : MonoBehaviour
     #endregion
 
     #region PublicMethods
+
+    public void SetOwner(GameObject owner)
+    {
+        this.owner = owner;
+    }
+
+    public void SetSpellType(SpellType spellType)
+    {
+        this.spellType = spellType;
+    }
+
+    public void Terminate()
+    {
+        this.elapsed = this.lifeTime; // dirty hacky way to get things to finish early.
+    }
+
     #endregion
 
     #region PrivateMethods

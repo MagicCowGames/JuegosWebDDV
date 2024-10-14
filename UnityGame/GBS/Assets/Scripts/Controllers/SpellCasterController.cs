@@ -122,8 +122,8 @@ public class SpellCasterController : MonoBehaviour
     private void SpawnSpraySpell()
     {
         var spell = SpawnSpell(this.fireSpell);
-        spell.owner = null;
-        spell.isProjectile = false;
+        spell.SetOwner(null);
+        spell.SetSpellType(SpellType.Spray);
         spell.transform.SetParent(this.spawnTransform);
         this.spellController = spell;
     }
