@@ -87,6 +87,7 @@ public class ElementQueue
         // If we haven't returned yet, then we just add the element and call it a day
         this.Elements[this.Count] = element;
         this.Count += 1;
+        this.ElementsCounts[(int)element] += 1;
     }
 
     public int GetElementCount(Element element)
