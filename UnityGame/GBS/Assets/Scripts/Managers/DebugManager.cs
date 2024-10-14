@@ -78,17 +78,8 @@ public class DebugManager : Singleton<DebugManager>
         if (!this.debugEnabled)
             return;
 
-        var lineRenderer = this.GetLineRenderer();
-
-        Vector3[] positions = { start, end };
-        lineRenderer.lineRenderer.positionCount = 2;
-        lineRenderer.lineRenderer.SetPositions(positions);
-        lineRenderer.lineRenderer.startColor = color;
-        lineRenderer.lineRenderer.endColor = color;
-        lineRenderer.lineRenderer.loop = false;
-
-        lineRenderer.lineRenderer.startWidth = width;
-        lineRenderer.lineRenderer.endWidth = width;
+        Vector3[] points = {start, end};
+        DrawSegment(points, false, color, width);
     }
 
     public void DrawSegment(Vector3[] points, bool loop, Color color, float width = 0.1f)
