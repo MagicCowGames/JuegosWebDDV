@@ -149,5 +149,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff54de1802084c46a71ae0098ccfec0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineRenderer: {fileID: 0}
-  lastFrame: 0
+  lineRenderer: {fileID: 5538290230026333509}
+  usedLastFrame: 0
