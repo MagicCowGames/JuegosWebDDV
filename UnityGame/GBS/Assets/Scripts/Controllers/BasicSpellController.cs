@@ -11,7 +11,8 @@ public class BasicSpellController : MonoBehaviour
     [Header("Spell Components")]
     [SerializeField] private Rigidbody rigidBody;
     [SerializeField] private GameObject spellMesh;
-    [SerializeField] private GameObject spellParticle;
+    [SerializeField] private ParticleSystem sprayParticle;
+    [SerializeField] private ParticleSystem beamParticle;
 
     [Header("Spell Config")]
     [SerializeField] private SpellType spellType;
@@ -21,10 +22,14 @@ public class BasicSpellController : MonoBehaviour
     [SerializeField] private float speed = 100.0f;
 
     [Header("Spell Lifetime")]
-    [SerializeField] private float duration = 10.0f; // Amount of time until the spell's effects are disabled and it's visual appearance is hidden.
-    [SerializeField] private float life = 12.0f; // Amount of time until the spell's entity is actually killed / returned to the pool. This value should be higher than duration.
+    [SerializeField] private float duration1 = 10.0f; // Amount of time until the spell's effects are disabled and it's visual appearance is hidden.
+    [SerializeField] private float duration2 = 3.0f; // Amount of time after disabled until the spell is actually removed.
+
+    private float lifeTime;// Amount of time until the spell's entity is actually killed / returned to the pool.
+    private float durationTime;
 
     private float elapsed;
+    private int[] elementCounts;
 
     #endregion
 
@@ -32,7 +37,11 @@ public class BasicSpellController : MonoBehaviour
 
     void Start()
     {
+        this.durationTime = this.duration1;
+        this.lifeTime = this.duration1 + this.duration2;
+
         this.elapsed = 0.0f;
+        this.elementCounts = new int[(int)Element.COUNT];
 
         if (this.spellType == SpellType.Projectile)
         {
@@ -49,10 +58,10 @@ public class BasicSpellController : MonoBehaviour
     {
         this.elapsed += Time.deltaTime;
 
-        if (this.elapsed >= this.duration)
+        if (this.elapsed >= this.durationTime)
             DisableSpell();
         
-        if (this.elapsed >= this.life)
+        if (this.elapsed >= this.lifeTime)
             KillSpell();
     }
 
@@ -63,6 +72,11 @@ public class BasicSpellController : MonoBehaviour
 
     #region PrivateMethods
 
+    private void SpawnSpell()
+    {
+        this.sprayParticle.Play();
+    }
+
     private void KillSpell()
     {
         this.gameObject.SetActive(false);
@@ -71,7 +85,12 @@ public class BasicSpellController : MonoBehaviour
 
     private void DisableSpell()
     {
+        this.sprayParticle.Stop();
+    }
 
+    private void UpdateParticle()
+    {
+        
     }
 
     #endregion
