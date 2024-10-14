@@ -7,14 +7,17 @@ public class SpellCasterController : MonoBehaviour
     #region Variables
 
     [SerializeField] private Transform spawnTransform;
-    
+
     // TODO : Implement this system in a somewhat clean way...?
     // [SerializeField] private GameObject parentTarget; // The target entity that owns this spell caster. This is the entity to which the self-cast spells must be applied to.
+
+    [SerializeField] private GameObject rockSpell;
+    [SerializeField] private GameObject fireSpell;
 
     #endregion
 
     #region MonoBehaviour
-    
+
     void Start()
     {
         
@@ -55,6 +58,7 @@ public class SpellCasterController : MonoBehaviour
         if (queue.GetElementCount(Element.Earth) > 0)
         {
             DebugManager.Instance?.Log("Projectile-like spell");
+            ObjectSpawner.Spawn(this.rockSpell, this.spawnTransform);
             return;
         }
 
@@ -77,6 +81,7 @@ public class SpellCasterController : MonoBehaviour
         }
 
         DebugManager.Instance?.Log("Spray-like spell");
+        ObjectSpawner.Spawn(this.fireSpell, this.spawnTransform);
         return;
     }
 
