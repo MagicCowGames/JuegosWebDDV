@@ -14,6 +14,8 @@ public class SpellCasterController : MonoBehaviour
     [SerializeField] private GameObject rockSpell;
     [SerializeField] private GameObject fireSpell;
 
+    private ElementQueue eq;
+
     #endregion
 
     #region MonoBehaviour
@@ -32,22 +34,27 @@ public class SpellCasterController : MonoBehaviour
 
     #region PublicMethods
 
-    public void Cast(ElementQueue queue)
+    public void SetElementQueue(ElementQueue queue)
+    {
+        this.eq = new ElementQueue(queue);
+    }
+
+    public void Cast()
     {
         // If the queue is null or the queue has no elements queued up, then we return because there is nothing else to be done.
-        if (queue == null || queue.Count == 0)
+        if (this.eq == null || this.eq.Count == 0)
             return;
         
-        if (queue.GetElementCount(Element.Shield) > 0)
+        if (this.eq.GetElementCount(Element.Shield) > 0)
         {
             DebugManager.Instance?.Log("Shield-like spell");
             
-            if (queue.GetElementCount(Element.Earth) > 0)
+            if (this.eq.GetElementCount(Element.Earth) > 0)
             {
                 DebugManager.Instance?.Log("Shield-like spell with rock wall");
             }
 
-            if (queue.GetElementCount(Element.Ice) > 0)
+            if (this.eq.GetElementCount(Element.Ice) > 0)
             {
                 DebugManager.Instance?.Log("Shield-like spell with ice wall");
             }
@@ -55,26 +62,26 @@ public class SpellCasterController : MonoBehaviour
             return;
         }
 
-        if (queue.GetElementCount(Element.Earth) > 0)
+        if (this.eq.GetElementCount(Element.Earth) > 0)
         {
             DebugManager.Instance?.Log("Projectile-like spell");
             ObjectSpawner.Spawn(this.rockSpell, this.spawnTransform);
             return;
         }
 
-        if (queue.GetElementCount(Element.Ice) > 0)
+        if (this.eq.GetElementCount(Element.Ice) > 0)
         {
             DebugManager.Instance?.Log("Shard-like spell");
             return;
         }
 
-        if (queue.GetElementCount(Element.Heal) > 0 || queue.GetElementCount(Element.Death) > 0)
+        if (this.eq.GetElementCount(Element.Heal) > 0 || this.eq.GetElementCount(Element.Death) > 0)
         {
             DebugManager.Instance?.Log("Beam-like spell");
             return;
         }
 
-        if (queue.GetElementCount(Element.Electricity) > 0)
+        if (this.eq.GetElementCount(Element.Electricity) > 0)
         {
             DebugManager.Instance?.Log("Electric-like spell");
             return;
