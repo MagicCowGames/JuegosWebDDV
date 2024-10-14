@@ -201,15 +201,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbb9c2cac377c34cab7f46db7c9bf50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 0}
   rigidBody: {fileID: 4652551435853325900}
   spellMesh: {fileID: 1404789011193084387}
-  spellParticle: {fileID: 2913645404049480529}
-  isProjectile: 0
-  color: {r: 0, g: 0, b: 0, a: 0}
+  sprayParticle: {fileID: 2351966110113903767}
+  beamParticle: {fileID: 2351966110113903767}
+  spellType: 0
   damage: 10
   speed: 100
-  life: 12
+  duration1: 10
+  duration2: 3
 --- !u!1001 &6022850390753180866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -267,9 +267,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44e2ce5f878e7dc46a63f8de853095e2, type: 3}
---- !u!1 &2913645404049480529 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8933505088412706707, guid: 44e2ce5f878e7dc46a63f8de853095e2, type: 3}
+--- !u!198 &2351966110113903767 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8302010096325675093, guid: 44e2ce5f878e7dc46a63f8de853095e2, type: 3}
   m_PrefabInstance: {fileID: 6022850390753180866}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5939014917623605956 stripped
