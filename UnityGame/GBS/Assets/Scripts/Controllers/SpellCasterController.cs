@@ -38,6 +38,17 @@ public class SpellCasterController : MonoBehaviour
         if (queue.GetElementCount(Element.Shield) > 0)
         {
             DebugManager.Instance?.Log("Shield-like spell");
+            
+            if (queue.GetElementCount(Element.Earth) > 0)
+            {
+                DebugManager.Instance?.Log("Shield-like spell with rock wall");
+            }
+
+            if (queue.GetElementCount(Element.Ice) > 0)
+            {
+                DebugManager.Instance?.Log("Shield-like spell with ice wall");
+            }
+
             return;
         }
 
