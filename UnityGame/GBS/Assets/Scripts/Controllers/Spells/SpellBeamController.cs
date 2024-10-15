@@ -45,6 +45,13 @@ public class SpellBeamController : MonoBehaviour
     #endregion
 
     #region PublicMethods
+
+    public void SetSpellColor(Color color)
+    {
+        this.lineRenderer.startColor = color;
+        this.lineRenderer.endColor = color * 0.5f;
+    }
+
     #endregion
 
     #region PrivateMethods
