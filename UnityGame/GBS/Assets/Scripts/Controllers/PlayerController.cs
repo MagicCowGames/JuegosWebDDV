@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour
 
     private void SetPlayerReferences()
     {
+        PlayerDataManager.Instance?.SetPlayerReference(this);
         CameraManager.Instance?.SetActiveTarget(this.cameraSocket);
     }
 
