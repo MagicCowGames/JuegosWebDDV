@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SpellCasterController : MonoBehaviour
 {
@@ -11,8 +12,9 @@ public class SpellCasterController : MonoBehaviour
     // TODO : Implement this system in a somewhat clean way...?
     // [SerializeField] private GameObject parentTarget; // The target entity that owns this spell caster. This is the entity to which the self-cast spells must be applied to.
 
-    [SerializeField] private GameObject rockSpell;
-    [SerializeField] private GameObject fireSpell;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private GameObject beamPrefab;
+    [SerializeField] private GameObject shieldPrefab;
 
     private ElementQueue eq;
 
@@ -20,8 +22,6 @@ public class SpellCasterController : MonoBehaviour
     private float accumulatedTime = 0.0f; // seconds that the cast button has been held down (used for projectile spells to increase strength)
     private float accumulatedTimeMax = 3.0f; // 3 seconds max
     private float forcePerSecond = 1.5f; // force value added to the projectile based on the accumulatedTime value. The resulting force is forcePerSecond * accumulatedTime.
-
-    private BasicSpellController spellController;
 
     #endregion
 
@@ -46,6 +46,29 @@ public class SpellCasterController : MonoBehaviour
         this.eq = new ElementQueue(queue);
     }
 
+    public void Cast()
+    {
+        if (this.eq == null || this.eq.Count <= 0)
+            return;
+
+        if (this.eq.GetElementCount(Element.Shield) > 0)
+        {
+            ObjectSpawner.Spawn(shieldPrefab, this.spawnTransform);
+        }
+        else
+        if (this.eq.GetElementCount(Element.Projectile) > 0)
+        {
+            ObjectSpawner.Spawn(projectilePrefab, this.spawnTransform);
+        }
+        else
+        if(this.eq.GetElementCount(Element.Beam) > 0)
+        {
+            var obj = ObjectSpawner.Spawn(beamPrefab, this.spawnTransform);
+            obj.transform.parent = this.spawnTransform;
+        }
+    }
+
+    /*
     public void Cast()
     {
         // If the queue is null or the queue has no elements queued up, then we return because there is nothing else to be done.
@@ -107,11 +130,13 @@ public class SpellCasterController : MonoBehaviour
         SpawnSpraySpell();
         return;
     }
+    */
 
     #endregion
 
     #region PrivateMethods
 
+    /*
     private BasicSpellController SpawnSpell(GameObject prefab)
     {
         var obj = ObjectSpawner.Spawn(prefab, this.spawnTransform);
@@ -127,6 +152,7 @@ public class SpellCasterController : MonoBehaviour
         spell.transform.SetParent(this.spawnTransform);
         this.spellController = spell;
     }
+    */
 
     #endregion
 }

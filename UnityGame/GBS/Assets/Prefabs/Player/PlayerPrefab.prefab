@@ -109,13 +109,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3492403525392544954}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6353251101555756008}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8772199267205948739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,8 +129,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnTransform: {fileID: 7000159501205338112}
-  rockSpell: {fileID: 7946712689336364576, guid: 3bb5144e3ee0e5a449ef01cabc96bd82, type: 3}
-  fireSpell: {fileID: 7946712689336364576, guid: 2d0d12fba068ceb49bca377b069ace0d, type: 3}
+  projectilePrefab: {fileID: 8898792701997654404, guid: 301f277af263bd1448bcbdcec50dd5f4, type: 3}
+  beamPrefab: {fileID: 4110217941577811738, guid: 545c4e357857fd141b836ba27a0df2a8, type: 3}
+  shieldPrefab: {fileID: 7258614691735134581, guid: ed13d01f99b9574418eb5e34f985bedf, type: 3}
 --- !u!1 &3590304268353284083
 GameObject:
   m_ObjectHideFlags: 0
