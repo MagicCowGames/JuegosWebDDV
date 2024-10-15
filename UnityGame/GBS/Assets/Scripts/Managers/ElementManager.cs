@@ -29,10 +29,11 @@ public class ElementManager : SingletonPersistent<ElementManager>
     // This struct will be used to assign an image to every single element when used in game during element queuing.
     // NOTE : The buttons in the player UI have hardcoded images, maybe I should use a slightly different image for those?
     [System.Serializable]
-    public struct InputElementImage
+    public struct InputElementVisualData
     {
         public Element element;
         public Sprite image;
+        public Color color;
     }
 
     // This struct will be used to actually store the real elemental combination data
@@ -57,8 +58,8 @@ public class ElementManager : SingletonPersistent<ElementManager>
     [SerializeField] private InputEelementCombinationLayer[] elementCombinationLayers;
 
     [Header("Element Visual Settings")]
-    [SerializeField] private Sprite defaultElementImage;
-    [SerializeField] private InputElementImage[] elementImages;
+    [SerializeField] private InputElementVisualData defaultElementVisualData;
+    [SerializeField] private InputElementVisualData[] elementVisualData;
 
     // NOTE : Discarded idea, the element queue length is configured on the constructor, so that each wizard-like / caster class can use their own config
     // (eg: player has len 5, some npcs len 3 or whatever, etc...)
@@ -71,6 +72,7 @@ public class ElementManager : SingletonPersistent<ElementManager>
     // The other variables are there for easy inputting of data from Unity's inspector.
     private ElementCombinationData[] combinationData;
     private Sprite[] images;
+    private Color[] colors;
 
     #endregion
 
@@ -79,7 +81,7 @@ public class ElementManager : SingletonPersistent<ElementManager>
     void Start()
     {
         GenerateCombinationData();
-        GenerateImageData();
+        GenerateVisualData();
     }
 
     void Update()
@@ -112,8 +114,16 @@ public class ElementManager : SingletonPersistent<ElementManager>
     {
         int idx = (int)element;
         if (idx < 0 || idx >= this.images.Length)
-            return this.defaultElementImage;
+            return this.defaultElementVisualData.image;
         return this.images[(int)element];
+    }
+
+    public Color GetColor(Element element)
+    {
+        int idx = (int)element;
+        if (idx < 0 || idx >= this.images.Length)
+            return this.defaultElementVisualData.color;
+        return this.colors[(int)element];
     }
 
     public int GetLayers()
@@ -157,16 +167,22 @@ public class ElementManager : SingletonPersistent<ElementManager>
         }
     }
 
-    private void GenerateImageData()
+    private void GenerateVisualData()
     {
-        int len = this.elementImages.Length;
+        int len = this.elementVisualData.Length;
         this.images = new Sprite[(int)Element.COUNT];
+        this.colors = new Color[(int)Element.COUNT];
         for (int i = 0; i < len; ++i)
-            this.images[i] = this.defaultElementImage;
-        foreach(var img in this.elementImages)
+        {
+            this.images[i] = this.defaultElementVisualData.image;
+            this.colors[i] = this.defaultElementVisualData.color;
+        }
+        foreach (var img in this.elementVisualData)
+        {
             this.images[(int)img.element] = img.image;
+            this.colors[(int)img.element] = img.color;
+        }
     }
 
     #endregion
 }
-// TODO : Add some element colors array for spell combination stuff.
