@@ -18,6 +18,7 @@ public class SpellShieldController : MonoBehaviour
 
     #region Variables
 
+    // TODO : Replace this with an actual health component so that walls can be damaged and broken down faster with counter spells such as projectiles and whatnot.
     [SerializeField] private float lifeTime = 5.0f;
 
     [SerializeField] private Transform shieldTransform;
