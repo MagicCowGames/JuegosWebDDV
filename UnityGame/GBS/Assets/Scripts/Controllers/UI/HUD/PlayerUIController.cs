@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerUIController : UIController
+public class PlayerUIController : UIController, IComponentValidator
 {
     #region Variables
 
@@ -22,6 +22,10 @@ public class PlayerUIController : UIController
 
     void Update()
     {
+        // Can't update anything if the components are not valid. Just preventing the universe from exploding, don't thank me! All in a day's work...
+        if (!AllComponentsAreValid())
+            return;
+
         UpdateHealthBar(Time.deltaTime);
     }
 
@@ -67,8 +71,22 @@ public class PlayerUIController : UIController
 
     private void UpdateHealthBar(float delta)
     {
-        float healthPercentage = 0.48f;
+        float healthPercentage = PlayerDataManager.Instance.GetPlayerHealth().GetPercentage();
         this.healthBar.fillAmount = Mathf.Clamp01(Mathf.Lerp(this.healthBar.fillAmount, healthPercentage, delta * 10));
+    }
+
+    #endregion
+
+    #region IComponentValidator
+
+    public bool AllComponentsAreValid()
+    {
+        return
+            this.healthBar != null &&
+            this.elementQueueImages != null &&
+            PlayerDataManager.Instance != null &&
+            PlayerDataManager.Instance.GetPlayerHealth() != null
+            ;
     }
 
     #endregion
