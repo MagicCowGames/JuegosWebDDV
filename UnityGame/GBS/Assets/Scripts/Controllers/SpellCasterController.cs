@@ -72,6 +72,29 @@ public class SpellCasterController : MonoBehaviour
             var obj = ObjectSpawner.Spawn(beamPrefab, this.spawnTransform);
             obj.transform.parent = this.spawnTransform;
             this.activeSpell = obj;
+
+            // TODO : This code is shit, please fix
+            Color color = Color.white;
+            float r = 0.0f;
+            float g = 0.0f;
+            float b = 0.0f;
+            foreach (var element in this.eq.Elements)
+                if (element != Element.Beam)
+                {
+                    var c = ElementManager.Instance.GetColor(element);
+                    r += c.r;
+                    g += c.g;
+                    b += c.b;
+                }
+
+            r /= this.eq.Count;
+            g /= this.eq.Count;
+            b /= this.eq.Count;
+
+            color = new Color(r, g, b, 255);
+
+            var beam = obj.GetComponent<SpellBeamController>();
+            beam.SetSpellColor(color);
         }
     }
 
