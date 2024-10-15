@@ -127,6 +127,7 @@ public class InputManager : Singleton<InputManager>
     private void UpdateInputKeyboard()
     {
         UIK_Elements();
+        UIK_Forms();
         UIK_Other();
     }
 
@@ -138,6 +139,8 @@ public class InputManager : Singleton<InputManager>
         if (Input.GetKeyDown(KeyCode.W))
             AddElement(Element.Heal);
 
+        // NOTE : Legacy input
+        // TODO : Remove in the future?
         if (Input.GetKeyDown(KeyCode.E))
             AddElement(Element.Shield);
 
@@ -155,6 +158,19 @@ public class InputManager : Singleton<InputManager>
 
         if (Input.GetKeyDown(KeyCode.F))
             AddElement(Element.Fire);
+    }
+
+    private void UIK_Forms()
+    {
+        // NOTE : These are internally elements for the opposites system, but they count as forms from the gameplay standpoint.
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            AddElement(Element.Projectile);
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            AddElement(Element.Beam);
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            AddElement(Element.Shield);
     }
 
     private void UIK_Other()
