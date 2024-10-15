@@ -72,7 +72,9 @@ public class ConsoleUIController : UIController
             new Cmd("maplist", "Display a list of all of the available maps", "", 0, CmdMapList),
             new Cmd("delete", "Removes the specified GameObject", "<name>", 1, CmdDelete),
             new Cmd("debug", "Enable or disable debug logging and visualization", "<enabled>", 1, CmdDebug),
-            new Cmd("info", "Display information about a given category", "<category>", 1, CmdInfo)
+            new Cmd("info", "Display information about a given category", "<category>", 1, CmdInfo),
+            new Cmd("sethealth", "Set the health of the player to the specified value", "<value>", 1, CmdSetHealth),
+            new Cmd("heal", "Set the health of the player to the max value", "", 0, CmdHeal)
         };
 
         this.SetConsoleOpen(false);
@@ -339,6 +341,18 @@ public class ConsoleUIController : UIController
                 CmdError($"Unknown category \"{arg}\"");
                 break;
         }
+    }
+
+    private void CmdSetHealth(string[] args, int startIndex)
+    {
+        string arg = args[startIndex + 1];
+        float hp = CmdParseFloat(arg);
+        PlayerDataManager.Instance?.GetPlayerHealth()?.ForceSetHealth(hp);
+    }
+
+    private void CmdHeal(string[] args, int startIndex)
+    {
+        PlayerDataManager.Instance?.GetPlayerHealth()?.Heal();
     }
 
     #endregion
