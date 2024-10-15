@@ -16,6 +16,9 @@ public class SpellCasterController : MonoBehaviour
     [SerializeField] private GameObject beamPrefab;
     [SerializeField] private GameObject shieldPrefab;
 
+
+    [SerializeField] private Transform[] wallTransforms;
+
     private ElementQueue eq;
 
     // NOTE : This idea may get scrapped, so we're leaving it here for now...
@@ -53,7 +56,8 @@ public class SpellCasterController : MonoBehaviour
 
         if (this.eq.GetElementCount(Element.Shield) > 0)
         {
-            ObjectSpawner.Spawn(shieldPrefab, this.spawnTransform);
+            foreach(var transform in this.wallTransforms)
+                ObjectSpawner.Spawn(shieldPrefab, transform);
         }
         else
         if (this.eq.GetElementCount(Element.Projectile) > 0)
