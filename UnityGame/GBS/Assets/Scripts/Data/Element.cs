@@ -11,5 +11,7 @@ public enum Element
     Fire,
     Steam,
     Ice,
+    Projectile,
+    Beam,
     COUNT
 }
