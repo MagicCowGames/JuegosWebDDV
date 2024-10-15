@@ -931,34 +931,50 @@ MonoBehaviour:
     - elementA: 1
       elementB: 8
       elementC: 9
-  defaultElementImage: {fileID: 21300000, guid: 898412c9adde8b84297cfdd8baad9cea, type: 3}
-  elementImages:
+  defaultElementVisualData:
+    element: 0
+    image: {fileID: 21300000, guid: 898412c9adde8b84297cfdd8baad9cea, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+  elementVisualData:
   - element: 0
     image: {fileID: 21300000, guid: 898412c9adde8b84297cfdd8baad9cea, type: 3}
+    color: {r: 0, g: 0, b: 0, a: 1}
   - element: 1
     image: {fileID: 21300000, guid: dbf4d809536474b4c918533b5af9b132, type: 3}
+    color: {r: 0, g: 0.58532715, b: 1, a: 1}
   - element: 2
     image: {fileID: 21300000, guid: 36204ac36f9c48e4b94dccb34cf35bf2, type: 3}
-  - element: 3
-    image: {fileID: 21300000, guid: 767ce74845fa98148a2d3d66e42bf998, type: 3}
+    color: {r: 0.12172365, g: 1, b: 0, a: 1}
   - element: 4
     image: {fileID: 21300000, guid: 476ad738ebc9d0c42b9aedefb9201c15, type: 3}
+    color: {r: 0.740566, g: 1, b: 0.9985867, a: 1}
   - element: 5
     image: {fileID: 21300000, guid: 362a25fd79f25a841965749a9c971522, type: 3}
+    color: {r: 0.92223746, g: 0.5801887, b: 1, a: 1}
   - element: 6
     image: {fileID: 21300000, guid: ee94ed095d8805849a95b8f5203996a3, type: 3}
+    color: {r: 1, g: 0, b: 0, a: 1}
   - element: 7
     image: {fileID: 21300000, guid: d049a11d267c8724ca84e787c40d0707, type: 3}
+    color: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
   - element: 8
     image: {fileID: 21300000, guid: 07e0579edab3f5a46be5dcaaf6cec29a, type: 3}
+    color: {r: 1, g: 0.53452736, b: 0, a: 1}
   - element: 9
     image: {fileID: 21300000, guid: 2d283ff7a979a27408cdee56c2f33e17, type: 3}
+    color: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
   - element: 10
     image: {fileID: 21300000, guid: bfb826a77d6cd9e4bb09190aa6e6f558, type: 3}
+    color: {r: 0.5896226, g: 1, b: 0.991145, a: 1}
+  - element: 3
+    image: {fileID: 21300000, guid: 767ce74845fa98148a2d3d66e42bf998, type: 3}
+    color: {r: 0, g: 0, b: 0, a: 1}
   - element: 11
     image: {fileID: 21300000, guid: 0c67d96d21a593146872b0da8f51473e, type: 3}
+    color: {r: 0, g: 0, b: 0, a: 1}
   - element: 12
     image: {fileID: 21300000, guid: 3348a5d079cff8842b3c5c61634cce54, type: 3}
+    color: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &1820937352
 MonoBehaviour:
   m_ObjectHideFlags: 0
