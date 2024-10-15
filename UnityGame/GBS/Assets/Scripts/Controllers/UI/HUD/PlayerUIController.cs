@@ -9,6 +9,7 @@ public class PlayerUIController : UIController
 
     [Header("Player UI Controller Components")]
     [SerializeField] private Image[] elementQueueImages;
+    [SerializeField] private Image healthBar;
 
     #endregion
 
@@ -21,7 +22,7 @@ public class PlayerUIController : UIController
 
     void Update()
     {
-        
+        UpdateHealthBar(Time.deltaTime);
     }
 
     #endregion
@@ -62,6 +63,12 @@ public class PlayerUIController : UIController
     private void Button_AddElement(Element element)
     {
         InputManager.Instance?.AddElement(element);
+    }
+
+    private void UpdateHealthBar(float delta)
+    {
+        float healthPercentage = 0.48f;
+        this.healthBar.fillAmount = Mathf.Clamp01(Mathf.Lerp(this.healthBar.fillAmount, healthPercentage, delta * 10));
     }
 
     #endregion
