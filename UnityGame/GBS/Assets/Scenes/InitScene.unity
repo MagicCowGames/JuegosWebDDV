@@ -955,6 +955,10 @@ MonoBehaviour:
     image: {fileID: 21300000, guid: 2d283ff7a979a27408cdee56c2f33e17, type: 3}
   - element: 10
     image: {fileID: 21300000, guid: bfb826a77d6cd9e4bb09190aa6e6f558, type: 3}
+  - element: 11
+    image: {fileID: 21300000, guid: 0c67d96d21a593146872b0da8f51473e, type: 3}
+  - element: 12
+    image: {fileID: 21300000, guid: 3348a5d079cff8842b3c5c61634cce54, type: 3}
 --- !u!114 &1820937352
 MonoBehaviour:
   m_ObjectHideFlags: 0
