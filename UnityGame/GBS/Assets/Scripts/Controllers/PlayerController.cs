@@ -221,6 +221,7 @@ public class PlayerController : MonoBehaviour
     private void RightClickUp()
     {
         this.isCasting = false;
+        this.spellCasterController.StopCast();
     }
 
     #endregion

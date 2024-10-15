@@ -26,6 +26,8 @@ public class SpellCasterController : MonoBehaviour
     private float accumulatedTimeMax = 3.0f; // 3 seconds max
     private float forcePerSecond = 1.5f; // force value added to the projectile based on the accumulatedTime value. The resulting force is forcePerSecond * accumulatedTime.
 
+    GameObject activeSpell;
+
     #endregion
 
     #region MonoBehaviour
@@ -69,7 +71,15 @@ public class SpellCasterController : MonoBehaviour
         {
             var obj = ObjectSpawner.Spawn(beamPrefab, this.spawnTransform);
             obj.transform.parent = this.spawnTransform;
+            this.activeSpell = obj;
         }
+    }
+
+    public void StopCast()
+    {
+        DebugManager.Instance?.Log("stop!");
+        if (this.activeSpell != null)
+            Destroy(this.activeSpell.gameObject);
     }
 
     /*
