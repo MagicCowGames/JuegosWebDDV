@@ -975,6 +975,16 @@ MonoBehaviour:
   - element: 12
     image: {fileID: 21300000, guid: 3348a5d079cff8842b3c5c61634cce54, type: 3}
     color: {r: 0, g: 0, b: 0, a: 1}
+  defaultFormVisualData:
+    form: 0
+    image: {fileID: 21300000, guid: 76c4e04c74fe8034eb4ca1e25882171e, type: 3}
+  formVisualData:
+  - form: 2
+    image: {fileID: 21300000, guid: 3348a5d079cff8842b3c5c61634cce54, type: 3}
+  - form: 3
+    image: {fileID: 21300000, guid: 0c67d96d21a593146872b0da8f51473e, type: 3}
+  - form: 4
+    image: {fileID: 21300000, guid: 767ce74845fa98148a2d3d66e42bf998, type: 3}
 --- !u!114 &1820937352
 MonoBehaviour:
   m_ObjectHideFlags: 0
