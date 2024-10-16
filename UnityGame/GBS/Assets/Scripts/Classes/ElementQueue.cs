@@ -70,7 +70,7 @@ public class ElementQueue
         }
 
         // Get the number of layers to be processed for combinations
-        int numLayers = MagicManager.Instance.GetLayers();
+        int numLayers = MagicManager.Instance.GetCombinationLayers();
 
         // Process each layer to cancel out opposites / merge elements with combinations
         for (int layer = 0; layer < numLayers; ++layer)
@@ -84,7 +84,7 @@ public class ElementQueue
                     // If the current element in the queue can be combined with the input element, then process it
                     if (opposite == this.Elements[i])
                     {
-                        var byproduct = MagicManager.Instance.GetCombination(element, this.Elements[i], layer);
+                        var byproduct = MagicManager.Instance.GetElementCombination(element, this.Elements[i], layer);
                         Remove(i);
                         if (byproduct != Element.None) // if the byproduct is not None, then we can add the element.
                             Add(byproduct);

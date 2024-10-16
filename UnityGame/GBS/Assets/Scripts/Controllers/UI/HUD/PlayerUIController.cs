@@ -65,14 +65,14 @@ public class PlayerUIController : UIController, IComponentValidator
     {
         // Reset the entire queue to the default sprite / Element.None sprite
         for (int i = 0; i < this.elementQueueImages.Length; ++i)
-            this.elementQueueImages[i].sprite = MagicManager.Instance.GetSprite(Element.None);
+            this.elementQueueImages[i].sprite = MagicManager.Instance.GetElementSprite(Element.None);
     }
 
     private void ElementDisplaySet(Element[] elements, int count)
     {
         // Replace the sprites for those of the elements within the queue
         for (int i = 0; i < count; ++i)
-            this.elementQueueImages[i].sprite = MagicManager.Instance.GetSprite(elements[i]);
+            this.elementQueueImages[i].sprite = MagicManager.Instance.GetElementSprite(elements[i]);
     }
 
 
