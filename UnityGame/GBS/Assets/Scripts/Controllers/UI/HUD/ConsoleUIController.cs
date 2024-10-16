@@ -70,6 +70,7 @@ public class ConsoleUIController : UIController
             new Cmd("quit", "Return to main menu", "", 0, CmdQuit),
             new Cmd("iamvip", "Show the credits menu", "", 0, CmdIAmVip),
             new Cmd("clear", "Clear the console", "", 0, CmdClear),
+            new Cmd("cls", "Clear the console", "", 0, CmdClear),
             new Cmd("maplist", "Display a list of all of the available maps", "", 0, CmdMapList),
             new Cmd("delete", "Removes the specified GameObject", "<name>", 1, CmdDelete),
             new Cmd("debug", "Enable or disable debug logging and visualization", "<enabled>", 1, CmdDebug),
@@ -77,6 +78,8 @@ public class ConsoleUIController : UIController
             new Cmd("sethealth", "Set the health of the player to the specified value", "<value>", 1, CmdSetHealth),
             new Cmd("heal", "Set the health of the player to the max value", "", 0, CmdHeal)
         };
+        // TODO : Make an alias system of sorts, or maybe make it so that we can have a dict / list system to have multiple overloads for the same command
+        // with different parameters (eg: tp <pos>, tp <name> <pos>, tp <name> <target>, etc...) or different cmd names for the same underlying cmd (eg: clear and cls)
 
         this.SetConsoleOpen(false);
         RegisterEvents();
@@ -101,7 +104,7 @@ public class ConsoleUIController : UIController
         this.consoleInputField.text = "";
         this.RunCommand(cmd);
         this.SelectConsoleInputField();
-        this.ScrollConsoleToBottom();
+        this.ScrollConsoleToBottom(); // NOTE : Even just pressing enter with an empty string will scroll to the bottom of the console's text, which is the intended behaviour and is just the way I want it to work.
     }
 
     public void RunCommand(string command)
