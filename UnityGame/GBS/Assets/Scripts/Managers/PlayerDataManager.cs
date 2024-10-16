@@ -13,6 +13,7 @@ public class PlayerDataManager : SingletonPersistent<PlayerDataManager>
 
     private PlayerController playerController;
     private HealthController healthController;
+    private ElementQueue elementQueue;
 
     #endregion
 
@@ -37,6 +38,7 @@ public class PlayerDataManager : SingletonPersistent<PlayerDataManager>
         // Gets the player reference and a reference to all of its relevant components.
         this.playerController = reference;
         this.healthController = reference.GetComponent<HealthController>();
+        this.elementQueue = reference.GetElementQueue(); // TODO : Modify the element queue to be a MonoBehaviour component in the future... it'll make things less shitty.
     }
 
     public PlayerController GetPlayer()
@@ -47,6 +49,11 @@ public class PlayerDataManager : SingletonPersistent<PlayerDataManager>
     public HealthController GetPlayerHealth()
     {
         return this.healthController;
+    }
+
+    public ElementQueue GetPlayerElementQueue()
+    {
+        return this.elementQueue;
     }
 
     #endregion
