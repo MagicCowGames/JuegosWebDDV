@@ -55,22 +55,8 @@ public class PlayerUIController : UIController, IComponentValidator
 
     private void UpdateElementDisplay()
     {
-        // This should never happen, but if it does, we're fucked, so just return early to prevent any issues.
-        if (ElementManager.Instance == null || PlayerDataManager.Instance == null || PlayerDataManager.Instance.GetPlayerElementQueue() == null)
-            return;
-
-        // Get the player's element queue.
         var queue = PlayerDataManager.Instance.GetPlayerElementQueue();
-
-        // Reset the display to use empty slots
         ElementDisplayReset();
-
-        // Early return if the input queue is null.
-        // Since we reset the display first, at least we get a nice visually clean and empty queue.
-        if (queue == null)
-            return;
-
-        // Set the slots to display the elements within the queue
         ElementDisplaySet(queue.Elements, queue.Count);
     }
 
@@ -104,12 +90,18 @@ public class PlayerUIController : UIController, IComponentValidator
 
     #region IComponentValidator
 
+    // NOTE : It's better to check for null for all required components once every frame rather than multiple times, which is why
+    // the null checking code from each update function has been removed.
+    // For example, keeping each update method's own null checking would lead to needing to check for PlayerDataManager's instance to be null
+    // more than once every frame, and that's just dumb.
+    // In short : we just check for all of the needs of all update methods in this function right here and call it a day. If any of them fails, we bail.
+    // The only downside is that now we can't partially update UI by allowing some parts to update while bailing on others. Now we either update all or fuck off.
     public bool AllComponentsAreValid()
     {
         return
             this.healthBar != null &&
             this.elementQueueImages != null &&
-            ElementManager.Instance != null &&
+            ElementManager.Instance != null && // This should never happen, but if it does, we're fucked, so we should just return early to prevent any issues.
             PlayerDataManager.Instance != null &&
             PlayerDataManager.Instance.GetPlayerHealth() != null &&
             PlayerDataManager.Instance.GetPlayerElementQueue() != null
