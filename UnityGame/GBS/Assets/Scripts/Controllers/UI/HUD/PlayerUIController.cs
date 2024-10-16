@@ -91,7 +91,9 @@ public class PlayerUIController : UIController, IComponentValidator
 
     private void UpdateFormDisplay()
     {
-        // var form = PlayerDataManager.Instance.GetPlayerForm();
+        var form = PlayerDataManager.Instance.GetPlayerSpellCaster().GetForm();
+        var img = MagicManager.Instance.GetFormSprite(form);
+        this.formImage.sprite = img;
     }
 
     #endregion
