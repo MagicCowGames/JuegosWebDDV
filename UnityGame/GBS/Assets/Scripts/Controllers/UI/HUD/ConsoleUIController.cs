@@ -9,6 +9,7 @@ using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using System.IO;
 using System.Globalization;
+using Unity.VisualScripting.Antlr3.Runtime;
 
 // NOTE : Maybe the console's backend should be a static class, cause right now the entire console system is handled by the UIController class, and it doesn't feel
 // right tbh. I mean, it works, and allows for infinitely many consoles to run their own logic and stuff, but after all, the logic is just the same everywhere for most
@@ -231,7 +232,7 @@ public class ConsoleUIController : UIController
     // Print a line to the console to display an error message
     private void CmdError(string message = "", CmdErrorType type = CmdErrorType.Default)
     {
-        string msgBase = "ERROR : ";
+        string msgBase = CmdGetColorString("ERROR", Color.red) + " : ";
         string msgBody = "";
         switch(type)
         {
@@ -433,6 +434,49 @@ public class ConsoleUIController : UIController
             ans = 0.0f;
         }
         return ans;
+    }
+
+    #endregion
+
+    #region Cmd - Color
+
+    // NOTE : The color tags <color=#FF0000>Text</color> work through tag scopes, which means that the following example will look as follows:
+    // DEFAULT COLOR <color=#FF0000> RED TEXT <color=#00FF00> GREEN TEXT </color> RED TEXT </color> DEFAULT COLOR
+    // This is great for us cause it makes implementing colored text a hell of a lot easier, since we dont need to do any weird patchwork...
+    
+    // NOTE : BTW, the color tags also work when displaying debug logs in unity, which is wild and fucking awesome tbh.
+
+    private string CmdGetColorHexString(float r, float g, float b)
+    {
+        r = Mathf.Clamp01(r);
+        g = Mathf.Clamp01(g);
+        b = Mathf.Clamp01(b);
+
+        int ri = (int)(255 * r);
+        int gi = (int)(255 * g);
+        int bi = (int)(255 * b);
+
+        string rstr = $"{ri:X2}";
+        string gstr = $"{gi:X2}";
+        string bstr = $"{bi:X2}";
+
+        string ans = $"#{rstr}{gstr}{bstr}";
+        return ans;
+    }
+
+    private string CmdGetColorHexString(Color color)
+    {
+        return CmdGetColorHexString(color.r, color.g, color.b);
+    }
+
+    private string CmdGetColorString(string message, float r, float g, float b)
+    {
+        return $"<color={CmdGetColorHexString(r, g, b)}>{message}</color>";
+    }
+
+    private string CmdGetColorString(string message, Color color)
+    {
+        return $"<color={CmdGetColorHexString(color)}>{message}</color>";
     }
 
     #endregion
