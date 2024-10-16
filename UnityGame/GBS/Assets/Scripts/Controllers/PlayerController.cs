@@ -140,6 +140,7 @@ public class PlayerController : MonoBehaviour
         InputManager.Instance.OnAddElement += AddElement;
         InputManager.Instance.OnRightClickDown += RightClickDown;
         InputManager.Instance.OnRightClickUp += RightClickUp;
+        InputManager.Instance.OnSetForm += SetForm;
     }
 
     // Unsubscribe from events
@@ -153,6 +154,7 @@ public class PlayerController : MonoBehaviour
         InputManager.Instance.OnAddElement -= AddElement;
         InputManager.Instance.OnRightClickDown -= RightClickDown;
         InputManager.Instance.OnRightClickUp -= RightClickUp;
+        InputManager.Instance.OnSetForm -= SetForm;
     }
 
     #endregion
@@ -193,6 +195,11 @@ public class PlayerController : MonoBehaviour
     private void RightClickUp()
     {
         this.spellCasterController.StopCast();
+    }
+
+    private void SetForm(Form form)
+    {
+        this.spellCasterController.SetForm(form);
     }
 
     #endregion
