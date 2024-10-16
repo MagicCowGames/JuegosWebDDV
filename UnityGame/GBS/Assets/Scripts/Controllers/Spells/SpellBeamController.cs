@@ -26,6 +26,8 @@ public class SpellBeamController : MonoBehaviour
 
     void Update()
     {
+        // Calculate the current max distance.
+        // Prevents the beam from growing to full distance instantly, so that it is both more visually appealing and does not become an insta-killing sniper laser.
         this.currentMaxDistance = Mathf.Clamp(this.currentMaxDistance + this.distanceGrowthRate * Time.deltaTime, 0.0f, this.maxDistance);
 
         this.OriginPoint = this.transform.position;
@@ -36,6 +38,7 @@ public class SpellBeamController : MonoBehaviour
         if (hasHit)
         {
             this.TargetPoint = hit.point;
+            this.currentMaxDistance = hit.distance; // Reset the current max distance to the distance between the origin point and the hit point so that the beam wont grow instantly when moving between surfaces at different distances.
         }
         else
         {
