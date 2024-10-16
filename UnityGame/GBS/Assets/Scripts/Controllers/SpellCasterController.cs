@@ -106,6 +106,7 @@ public class SpellCasterController : MonoBehaviour
                         {
                             var obj = ObjectSpawner.Spawn(this.shieldPrefab, transform);
                             var wall = obj.GetComponent<SpellShieldController>();
+                            wall.SetSpellData(this.eq);
                             // wallSpawned = true;
                         }
 
@@ -125,6 +126,7 @@ public class SpellCasterController : MonoBehaviour
                         {
                             var obj = ObjectSpawner.Spawn(this.sprayPrefab, transform);
                             var wall = obj.GetComponent<SpellSprayController>();
+                            wall.SetSpellData(this.eq);
                             continue;
                         }
 
