@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellBeamController : MonoBehaviour
+public class SpellBeamController : SpellBaseController
 {
     #region Variables
 
@@ -53,15 +53,18 @@ public class SpellBeamController : MonoBehaviour
     #endregion
 
     #region PublicMethods
-
-    public void SetSpellColor(Color color)
-    {
-        this.lineRenderer.startColor = color;
-        this.lineRenderer.endColor = color * 0.5f;
-    }
-
     #endregion
 
     #region PrivateMethods
+    #endregion
+
+    #region ISpell
+
+    public override void UpdateSpellColor()
+    {
+        this.lineRenderer.startColor = GetSpellColor();
+        this.lineRenderer.endColor = GetSpellColor();
+    }
+
     #endregion
 }
