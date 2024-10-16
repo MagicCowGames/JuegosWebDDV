@@ -4,5 +4,6 @@ public enum Form
     Spray,
     Beam,
     Projectile,
-    Shield
+    Shield,
+    COUNT
 }
