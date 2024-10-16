@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 4033490562151514944}
   - component: {fileID: 3414086340890156547}
   m_Layer: 0
-  m_Name: SpellCaster
+  m_Name: SpellCasterPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
