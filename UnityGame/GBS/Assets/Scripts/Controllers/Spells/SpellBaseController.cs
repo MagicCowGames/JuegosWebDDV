@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // TODO : Implement
-public class SpellBaseController : MonoBehaviour
+public class SpellBaseController : MonoBehaviour, ISpell
 {
     #region Variables
 
-    [SerializeField] private int[] ElementsCounts; // Array that holds the count of each element type.
-
-    public Color SpellColor { get; private set; }
+    [SerializeField] protected int[] ElementsCounts; // Array that holds the count of each element type.
+    [SerializeField] protected Color spellColor;
 
     #endregion
 
@@ -17,7 +16,6 @@ public class SpellBaseController : MonoBehaviour
 
     void Awake()
     {
-        CalculateSpellColor();
     }
 
     #endregion
@@ -26,11 +24,50 @@ public class SpellBaseController : MonoBehaviour
     #endregion
 
     #region PrivateMethods
+    #endregion
 
-    private void CalculateSpellColor()
+    #region ISpell
+
+    public virtual void UpdateSpellColor()
     {
-        this.SpellColor = Color.white;
-        // TODO : Implement color calculation, maybe with something like average color of the mix of all the elements used for the spell?
+
+    }
+
+    public Color GetSpellColor()
+    {
+        return this.spellColor;
+    }
+
+    public void SetSpellColor(Color color)
+    {
+        this.spellColor = color;
+        UpdateSpellColor();
+    }
+
+    // This is the one that should be used by the public interface when spawning spells from code.
+    public void SetSpellData(ElementQueue queue)
+    {
+        Color color = Color.white;
+        float r = 0.0f;
+        float g = 0.0f;
+        float b = 0.0f;
+
+        this.ElementsCounts = new int[(int)Element.COUNT];
+        for(int i = 0; i < queue.ElementsCounts.Length; ++i)
+        {
+            this.ElementsCounts[i] = queue.ElementsCounts[i];
+            Element currentElement = (Element)i;
+            Color currentColor = MagicManager.Instance.GetElementColor(currentElement);
+            var cr = (currentColor.r / queue.Count) * queue.ElementsCounts[i];
+            var cg = (currentColor.g / queue.Count) * queue.ElementsCounts[i];
+            var cb = (currentColor.b / queue.Count) * queue.ElementsCounts[i];
+            r += cr;
+            g += cg;
+            b += cb;
+        }
+
+        Color colorAns = new Color(r, g, b, 1.0f);
+        SetSpellColor(colorAns);
     }
 
     #endregion
