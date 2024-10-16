@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : Singleton<UIManager>
+public class UIManager : Singleton<UIManager>, IManager
 {
     #region Structs
 
@@ -90,5 +90,14 @@ public class UIManager : Singleton<UIManager>
     #endregion
 
     #region PrivateMethods
+    #endregion
+
+    #region IManager
+
+    public void ResetManager()
+    {
+        this.playerUIController?.UpdateElementDisplay(null); // This is a fucking hack... look at the code within the PlayerUIController and you'll understand why...
+    }
+
     #endregion
 }

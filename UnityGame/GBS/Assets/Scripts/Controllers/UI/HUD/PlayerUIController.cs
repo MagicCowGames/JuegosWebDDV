@@ -44,25 +44,43 @@ public class PlayerUIController : UIController, IComponentValidator
     public void Button_AddElement_Earth() { Button_AddElement(Element.Earth); }
     public void Button_AddElement_Fire() { Button_AddElement(Element.Fire); }
 
+    // TODO : Maybe rename to ElementDisplayUpdate() or something so that it's more consistent with the other function names?
     public void UpdateElementDisplay(ElementQueue queue)
     {
         // This should never happen, but if it does, we're fucked, so just return early to prevent any issues.
         if (ElementManager.Instance == null)
             return;
 
-        // Reset the entire queue to the default sprite / Element.None sprite
-        for (int i = 0; i < this.elementQueueImages.Length; ++i)
-            this.elementQueueImages[i].sprite = ElementManager.Instance.GetSprite(Element.None);
+        // Reset the display to use empty slots
+        ElementDisplayReset();
 
-        // Replace the sprites for those of the elements within the queue
-        var elements = queue.Elements;
-        for (int i = 0; i < queue.Count; ++i)
-            this.elementQueueImages[i].sprite = ElementManager.Instance.GetSprite(elements[i]);
+        // Early return if the input queue is null.
+        // Since we reset the display first, at least we get a nice visually clean and empty queue.
+        if (queue == null)
+            return;
+
+        // Set the slots to display the elements within the queue
+        ElementDisplaySet(queue.Elements, queue.Count);
     }
 
     #endregion
 
     #region PrivateMethods
+
+    private void ElementDisplayReset()
+    {
+        // Reset the entire queue to the default sprite / Element.None sprite
+        for (int i = 0; i < this.elementQueueImages.Length; ++i)
+            this.elementQueueImages[i].sprite = ElementManager.Instance.GetSprite(Element.None);
+    }
+
+    private void ElementDisplaySet(Element[] elements, int count)
+    {
+        // Replace the sprites for those of the elements within the queue
+        for (int i = 0; i < count; ++i)
+            this.elementQueueImages[i].sprite = ElementManager.Instance.GetSprite(elements[i]);
+    }
+
 
     private void Button_AddElement(Element element)
     {

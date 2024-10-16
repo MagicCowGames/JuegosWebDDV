@@ -65,6 +65,7 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
     private void ResetOtherManagers()
     {
         CameraManager.Instance?.ResetManager();
+        UIManager.Instance?.ResetManager();
     }
 
     #endregion
