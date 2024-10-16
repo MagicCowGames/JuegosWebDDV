@@ -805,6 +805,7 @@ MonoBehaviour:
   consoleBackground: {fileID: 2828165498183931638}
   consoleInputField: {fileID: 1708109456403000251}
   consoleText: {fileID: 204706839898643069}
+  consoleScrollRect: {fileID: 3382218689560057352}
 --- !u!1 &6018207375545100627
 GameObject:
   m_ObjectHideFlags: 0

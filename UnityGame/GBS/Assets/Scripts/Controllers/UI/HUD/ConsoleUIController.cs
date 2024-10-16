@@ -50,6 +50,7 @@ public class ConsoleUIController : UIController
     [SerializeField] private Image consoleBackground;
     [SerializeField] private TMP_InputField consoleInputField;
     [SerializeField] private TMP_Text consoleText;
+    [SerializeField] private ScrollRect consoleScrollRect;
 
     private Cmd[] commands;
 
@@ -100,6 +101,7 @@ public class ConsoleUIController : UIController
         this.consoleInputField.text = "";
         this.RunCommand(cmd);
         this.SelectConsoleInputField();
+        this.ScrollConsoleToBottom();
     }
 
     public void RunCommand(string command)
@@ -139,6 +141,11 @@ public class ConsoleUIController : UIController
     private void SelectConsoleInputField()
     {
         this.consoleInputField.ActivateInputField();
+    }
+
+    private void ScrollConsoleToBottom()
+    {
+        this.consoleScrollRect.verticalNormalizedPosition = 0;
     }
 
     private void SetConsoleOpen(bool isOpen)
