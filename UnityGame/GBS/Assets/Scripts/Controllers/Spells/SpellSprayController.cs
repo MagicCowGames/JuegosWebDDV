@@ -37,7 +37,8 @@ public class SpellSprayController : SpellBaseController
 
     public override void UpdateSpellColor()
     {
-
+        // TODO : Find some way of doing this that is not deprecated and that doesn't require me to shoot myself in the dick.
+        sprayParticleSystem.startColor = GetSpellColor();
     }
 
     #endregion
