@@ -48,13 +48,12 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        SetPlayerReferences();
-
         this.movementForward = 0.0f;
         this.gravityVector = new Vector3(0.0f, -9.8f, 0.0f);
 
         this.elementQueue = new ElementQueue(5);
 
+        SetPlayerReferences(); // We set it at the end to make sure that everything has been constructed first.
         RegisterEvents();
     }
 
@@ -88,6 +87,11 @@ public class PlayerController : MonoBehaviour
     public Transform GetMeshTransform()
     {
         return this.meshTransform;
+    }
+
+    public ElementQueue GetElementQueue()
+    {
+        return this.elementQueue;
     }
 
     #endregion
@@ -199,7 +203,6 @@ public class PlayerController : MonoBehaviour
     private void AddElement(Element element)
     {
         this.elementQueue.Add(element);
-        UIManager.Instance?.GetPlayerUIController().UpdateElementDisplay(this.elementQueue);
     }
 
     private void RightClickDown()
@@ -215,7 +218,6 @@ public class PlayerController : MonoBehaviour
         this.spellCasterController.SetElementQueue(this.elementQueue);
         this.spellCasterController.Cast();
         this.elementQueue.Clear();
-        UIManager.Instance?.GetPlayerUIController().UpdateElementDisplay(this.elementQueue);
     }
 
     private void RightClickUp()
