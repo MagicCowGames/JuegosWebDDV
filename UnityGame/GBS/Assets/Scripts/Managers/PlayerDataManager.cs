@@ -13,7 +13,7 @@ public class PlayerDataManager : SingletonPersistent<PlayerDataManager>
 
     private PlayerController playerController;
     private HealthController healthController;
-    private ElementQueue elementQueue;
+    private SpellCasterController spellCasterController;
 
     #endregion
 
@@ -38,7 +38,7 @@ public class PlayerDataManager : SingletonPersistent<PlayerDataManager>
         // Gets the player reference and a reference to all of its relevant components.
         this.playerController = reference;
         this.healthController = reference.GetComponent<HealthController>();
-        this.elementQueue = reference.GetElementQueue(); // TODO : Modify the element queue to be a MonoBehaviour component in the future... it'll make things less shitty.
+        this.spellCasterController = reference.GetComponent<SpellCasterController>();
     }
 
     public PlayerController GetPlayer()
@@ -51,9 +51,9 @@ public class PlayerDataManager : SingletonPersistent<PlayerDataManager>
         return this.healthController;
     }
 
-    public ElementQueue GetPlayerElementQueue()
+    public SpellCasterController GetPlayerSpellCaster()
     {
-        return this.elementQueue;
+        return this.spellCasterController;
     }
 
     #endregion
