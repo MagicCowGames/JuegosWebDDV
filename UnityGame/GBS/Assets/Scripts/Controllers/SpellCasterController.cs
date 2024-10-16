@@ -22,14 +22,18 @@ public class SpellCasterController : MonoBehaviour
     private ElementQueue eq;
     private bool isCasting;
 
+    /*
     // NOTE : This idea may get scrapped, so we're leaving it here for now...
     private float accumulatedTime = 0.0f; // seconds that the cast button has been held down (used for projectile spells to increase strength)
     private float accumulatedTimeMax = 3.0f; // 3 seconds max
     private float forcePerSecond = 1.5f; // force value added to the projectile based on the accumulatedTime value. The resulting force is forcePerSecond * accumulatedTime.
+    */
 
     private GameObject activeSpell;
 
     private float autoStopCastingTime;
+
+    [SerializeField] private Form form = Form.Projectile;
 
     #endregion
 
@@ -37,6 +41,7 @@ public class SpellCasterController : MonoBehaviour
 
     void Start()
     {
+        this.form = Form.Projectile; // Default form is projectile.
         this.activeSpell = null;
         this.isCasting = false;
         this.autoStopCastingTime = 0.0f;
@@ -63,6 +68,11 @@ public class SpellCasterController : MonoBehaviour
         return this.isCasting;
     }
 
+    public Form GetForm()
+    {
+        return this.form;
+    }
+
     #endregion
 
     #region PublicMethods - Spell Casting
@@ -76,86 +86,94 @@ public class SpellCasterController : MonoBehaviour
         // Update casting status
         this.isCasting = true;
 
-        if (this.eq.GetElementCount(Element.Shield) > 0)
+        // Select the type of spell to cast based on the selected form
+        switch (this.form)
         {
-            foreach (var transform in this.wallTransforms)
-            {
-                // TODO : Remove some of the early return cases so that we can mix different elements.
-
-                // Spawn walls if earth or ice are involved
-                if (this.eq.GetElementCount(Element.Earth) > 0 || this.eq.GetElementCount(Element.Ice) > 0)
+            default:
+                DebugManager.Instance?.Log("The form should never be an invalid value!!!");
+                break;
+            case Form.Shield:
                 {
-                    var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
-                    var wall = obj.GetComponent<SpellShieldController>();
-                    return;
-                }
+                    foreach (var transform in this.wallTransforms)
+                    {
+                        // TODO : Remove some of the early return cases so that we can mix different elements.
 
-                // Spawn mines if death or heal elements are involved
-                if (this.eq.GetElementCount(Element.Earth) > 0 || this.eq.GetElementCount(Element.Ice) > 0)
+                        // Spawn walls if earth or ice are involved
+                        if (this.eq.GetElementCount(Element.Earth) > 0 || this.eq.GetElementCount(Element.Ice) > 0)
+                        {
+                            var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
+                            var wall = obj.GetComponent<SpellShieldController>();
+                            return;
+                        }
+
+                        // Spawn mines if death or heal elements are involved
+                        if (this.eq.GetElementCount(Element.Earth) > 0 || this.eq.GetElementCount(Element.Ice) > 0)
+                        {
+                            // var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
+                            // var wall = obj.GetComponent<SpellShieldController>();
+                            return;
+                        }
+
+                        // Spawn elemental barrier if any other element is involved
+                        if (this.eq.GetElementCount(Element.Earth) > 0 || this.eq.GetElementCount(Element.Ice) > 0)
+                        {
+                            // var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
+                            // var wall = obj.GetComponent<SpellShieldController>();
+                            return;
+                        }
+
+                        // Spawn regular shield otherwise
+                        var shieldObj = ObjectSpawner.Spawn(shieldPrefab, transform);
+                        var shield = shieldObj.GetComponent<SpellShieldController>();
+                    }
+
+                    // Stop casting since walls don't require constant casting.
+                    SetCastTime(0.5f);
+                }
+                break;
+            case Form.Projectile:
                 {
-                    // var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
-                    // var wall = obj.GetComponent<SpellShieldController>();
-                    return;
-                }
+                    ObjectSpawner.Spawn(projectilePrefab, this.spawnTransform);
 
-                // Spawn elemental barrier if any other element is involved
-                if (this.eq.GetElementCount(Element.Earth) > 0 || this.eq.GetElementCount(Element.Ice) > 0)
+                    // Stop casting since projectiles don't require constant casting.
+                    SetCastTime(0.5f);
+                }
+                break;
+            case Form.Beam:
                 {
-                    // var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
-                    // var wall = obj.GetComponent<SpellShieldController>();
-                    return;
+                    var obj = ObjectSpawner.Spawn(beamPrefab, this.spawnTransform);
+                    obj.transform.parent = this.spawnTransform;
+                    this.activeSpell = obj;
+
+                    // TODO : This code is shit, please fix
+                    Color color = Color.white;
+                    float r = 0.0f;
+                    float g = 0.0f;
+                    float b = 0.0f;
+                    foreach (var element in this.eq.Elements)
+                        if (element != Element.Beam)
+                        {
+                            var c = MagicManager.Instance.GetElementColor(element);
+                            r += c.r;
+                            g += c.g;
+                            b += c.b;
+                        }
+
+                    r /= this.eq.Count;
+                    g /= this.eq.Count;
+                    b /= this.eq.Count;
+
+                    color = new Color(r, g, b, 255);
+
+                    var beam = obj.GetComponent<SpellBeamController>();
+                    beam.SetSpellColor(color);
+
+                    // Auto stop casting after 5 seconds of sustained beam firing.
+                    // The user can manually stop casting on their own if they release the cast button, but if they keep holding it, to prevent them from being too OP,
+                    // we force them to stop casting after a set amount of time.
+                    SetCastTime(5.0f);
                 }
-
-                // Spawn regular shield otherwise
-                var shieldObj = ObjectSpawner.Spawn(shieldPrefab, transform);
-                var shield = shieldObj.GetComponent<SpellShieldController>();
-            }
-
-            // Stop casting since walls don't require constant casting.
-            SetCastTime(0.5f);
-        }
-        else
-        if (this.eq.GetElementCount(Element.Projectile) > 0)
-        {
-            ObjectSpawner.Spawn(projectilePrefab, this.spawnTransform);
-
-            // Stop casting since projectiles don't require constant casting.
-            SetCastTime(0.5f);
-        }
-        else
-        if(this.eq.GetElementCount(Element.Beam) > 0)
-        {
-            var obj = ObjectSpawner.Spawn(beamPrefab, this.spawnTransform);
-            obj.transform.parent = this.spawnTransform;
-            this.activeSpell = obj;
-
-            // TODO : This code is shit, please fix
-            Color color = Color.white;
-            float r = 0.0f;
-            float g = 0.0f;
-            float b = 0.0f;
-            foreach (var element in this.eq.Elements)
-                if (element != Element.Beam)
-                {
-                    var c = MagicManager.Instance.GetElementColor(element);
-                    r += c.r;
-                    g += c.g;
-                    b += c.b;
-                }
-
-            r /= this.eq.Count;
-            g /= this.eq.Count;
-            b /= this.eq.Count;
-
-            color = new Color(r, g, b, 255);
-
-            var beam = obj.GetComponent<SpellBeamController>();
-            beam.SetSpellColor(color);
-
-            // Auto stop casting after 5 seconds of sustained beam firing.
-            // The user can manually stop casting on their own if they release the cast button, but if they keep holding it, to prevent them from being too OP,
-            // we force them to stop casting after a set amount of time.
-            SetCastTime(5.0f);
+                break;
         }
 
         // After finishing casting, clear the element queue
@@ -179,6 +197,11 @@ public class SpellCasterController : MonoBehaviour
     public void AddElement(Element element)
     {
         this.eq.Add(element);
+    }
+
+    public void SetForm(Form form)
+    {
+        this.form = form;
     }
 
     #endregion
