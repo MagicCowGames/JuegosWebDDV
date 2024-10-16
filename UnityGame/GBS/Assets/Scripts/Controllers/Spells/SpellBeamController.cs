@@ -8,6 +8,9 @@ public class SpellBeamController : MonoBehaviour
 
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private float maxDistance;
+
+    private float currentMaxDistance;
+    private float distanceGrowthRate = 80.0f;
     
     public Vector3 OriginPoint { get; private set; }
     public Vector3 TargetPoint { get; private set; }
@@ -18,15 +21,17 @@ public class SpellBeamController : MonoBehaviour
 
     void Start()
     {
-        
+        this.currentMaxDistance = 0.0f;
     }
 
     void Update()
     {
+        this.currentMaxDistance = Mathf.Clamp(this.currentMaxDistance + this.distanceGrowthRate * Time.deltaTime, 0.0f, this.maxDistance);
+
         this.OriginPoint = this.transform.position;
 
         RaycastHit hit;
-        bool hasHit = Physics.Raycast(this.transform.position, this.transform.forward, out hit, this.maxDistance);
+        bool hasHit = Physics.Raycast(this.transform.position, this.transform.forward, out hit, this.currentMaxDistance);
 
         if (hasHit)
         {
@@ -34,7 +39,7 @@ public class SpellBeamController : MonoBehaviour
         }
         else
         {
-            this.TargetPoint = this.OriginPoint + this.transform.forward * this.maxDistance;
+            this.TargetPoint = this.OriginPoint + this.transform.forward * this.currentMaxDistance;
         }
 
         Vector3[] points = { this.OriginPoint, this.TargetPoint };
