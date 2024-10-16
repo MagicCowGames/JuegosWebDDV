@@ -58,8 +58,38 @@ public class SpellCasterController : MonoBehaviour
 
         if (this.eq.GetElementCount(Element.Shield) > 0)
         {
-            foreach(var transform in this.wallTransforms)
-                ObjectSpawner.Spawn(shieldPrefab, transform);
+            foreach (var transform in this.wallTransforms)
+            {
+                // TODO : Remove some of the early return cases so that we can mix different elements.
+
+                // Spawn walls if earth or ice are involved
+                if (this.eq.GetElementCount(Element.Earth) > 0 || this.eq.GetElementCount(Element.Ice) > 0)
+                {
+                    var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
+                    var wall = obj.GetComponent<SpellShieldController>();
+                    return;
+                }
+
+                // Spawn mines if death or heal elements are involved
+                if (this.eq.GetElementCount(Element.Earth) > 0 || this.eq.GetElementCount(Element.Ice) > 0)
+                {
+                    // var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
+                    // var wall = obj.GetComponent<SpellShieldController>();
+                    return;
+                }
+
+                // Spawn elemental barrier if any other element is involved
+                if (this.eq.GetElementCount(Element.Earth) > 0 || this.eq.GetElementCount(Element.Ice) > 0)
+                {
+                    // var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
+                    // var wall = obj.GetComponent<SpellShieldController>();
+                    return;
+                }
+
+                // Spawn regular shield otherwise
+                var shieldObj = ObjectSpawner.Spawn(shieldPrefab, transform);
+                var shield = shieldObj.GetComponent<SpellShieldController>();
+            }
         }
         else
         if (this.eq.GetElementCount(Element.Projectile) > 0)
