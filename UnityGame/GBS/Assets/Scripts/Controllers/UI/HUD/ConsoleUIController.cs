@@ -515,3 +515,6 @@ public class ConsoleUIController : UIController
 }
 
 // TODO : Find a way to allow the user to put a custom sprite as the console background.Taking ricing to a whole new level...
+
+// TODO : Fix issue where deselecting the input field makes the code send a OnEditEnd call, which is coded to also re-select the field...
+// This is an issue because it forces the screen to scroll to the bottom of the console each time you try to scroll upward by using more than a single swipe lol.
