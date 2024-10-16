@@ -2,15 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
-using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using System.IO;
 using System.Globalization;
-using Unity.VisualScripting.Antlr3.Runtime;
-using UnityEngine.UIElements;
 
 // NOTE : Maybe the console's backend should be a static class, cause right now the entire console system is handled by the UIController class, and it doesn't feel
 // right tbh. I mean, it works, and allows for infinitely many consoles to run their own logic and stuff, but after all, the logic is just the same everywhere for most
