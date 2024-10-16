@@ -65,14 +65,14 @@ public class PlayerUIController : UIController, IComponentValidator
     {
         // Reset the entire queue to the default sprite / Element.None sprite
         for (int i = 0; i < this.elementQueueImages.Length; ++i)
-            this.elementQueueImages[i].sprite = ElementManager.Instance.GetSprite(Element.None);
+            this.elementQueueImages[i].sprite = MagicManager.Instance.GetSprite(Element.None);
     }
 
     private void ElementDisplaySet(Element[] elements, int count)
     {
         // Replace the sprites for those of the elements within the queue
         for (int i = 0; i < count; ++i)
-            this.elementQueueImages[i].sprite = ElementManager.Instance.GetSprite(elements[i]);
+            this.elementQueueImages[i].sprite = MagicManager.Instance.GetSprite(elements[i]);
     }
 
 
@@ -109,7 +109,7 @@ public class PlayerUIController : UIController, IComponentValidator
         return
             this.healthBar != null &&
             this.elementQueueImages != null &&
-            ElementManager.Instance != null && // This should never happen, but if it does, we're fucked, so we should just return early to prevent any issues.
+            MagicManager.Instance != null && // This should never happen, but if it does, we're fucked, so we should just return early to prevent any issues.
             PlayerDataManager.Instance != null &&
             PlayerDataManager.Instance.GetPlayerHealth() != null &&
             PlayerDataManager.Instance.GetPlayerElementQueue() != null

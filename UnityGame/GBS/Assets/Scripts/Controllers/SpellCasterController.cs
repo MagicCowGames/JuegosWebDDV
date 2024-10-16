@@ -111,7 +111,7 @@ public class SpellCasterController : MonoBehaviour
             foreach (var element in this.eq.Elements)
                 if (element != Element.Beam)
                 {
-                    var c = ElementManager.Instance.GetColor(element);
+                    var c = MagicManager.Instance.GetColor(element);
                     r += c.r;
                     g += c.g;
                     b += c.b;

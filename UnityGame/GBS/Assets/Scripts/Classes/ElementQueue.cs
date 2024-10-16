@@ -63,20 +63,20 @@ public class ElementQueue
     public void Add(Element element)
     {
         // Safety check in case something fucked up
-        if (ElementManager.Instance == null)
+        if (MagicManager.Instance == null)
         {
             DebugManager.Instance?.Log("The fucking ElementManager instance has not been instantiated! This is fucking bad! FIXME!!!");
             return;
         }
 
         // Get the number of layers to be processed for combinations
-        int numLayers = ElementManager.Instance.GetLayers();
+        int numLayers = MagicManager.Instance.GetLayers();
 
         // Process each layer to cancel out opposites / merge elements with combinations
         for (int layer = 0; layer < numLayers; ++layer)
         {
             // Get the combinable / opposite elements within this current layer for the input element we're trying to add to the queue
-            var opposites = ElementManager.Instance.GetCombinableElements(element, layer);
+            var opposites = MagicManager.Instance.GetCombinableElements(element, layer);
             for (int i = 0; i < this.Count; ++i)
             {
                 foreach (var opposite in opposites) // NOTE : Is it just me, or could we just run with the dictionary from GetCombination() and ignore the combinables list?
@@ -84,7 +84,7 @@ public class ElementQueue
                     // If the current element in the queue can be combined with the input element, then process it
                     if (opposite == this.Elements[i])
                     {
-                        var byproduct = ElementManager.Instance.GetCombination(element, this.Elements[i], layer);
+                        var byproduct = MagicManager.Instance.GetCombination(element, this.Elements[i], layer);
                         Remove(i);
                         if (byproduct != Element.None) // if the byproduct is not None, then we can add the element.
                             Add(byproduct);

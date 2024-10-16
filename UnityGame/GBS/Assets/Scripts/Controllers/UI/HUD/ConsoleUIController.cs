@@ -352,7 +352,7 @@ public class ConsoleUIController : UIController
                 for (int i = 0; i < (int)Element.COUNT; ++i)
                 {
                     var element = (Element)i;
-                    var opposites = ElementManager.Instance?.GetCombinableElements(element, 0);
+                    var opposites = MagicManager.Instance?.GetCombinableElements(element, 0);
                     CmdPrint($"opp({element}) : [ ");
                     foreach(var opp in opposites)
                         CmdPrint($"{opp} ");
