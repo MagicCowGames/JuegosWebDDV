@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MagicManager : SingletonPersistent<MagicManager>
 {
-    #region Structs
+    #region Structs - Elements
 
     // This struct will be used to determine the elemental combinations
     // A + B = C
@@ -46,15 +46,26 @@ public class MagicManager : SingletonPersistent<MagicManager>
 
     #endregion
 
-    #region Variables
+    #region Structs - Forms
 
-    [Header("Element Combination Settings")]
+    [System.Serializable]
+    public struct InputFormVisualData
+    {
+        public Form form;
+        public Sprite image;
+    }
+
+    #endregion
+
+    #region Variables - Elements
+
     // Basically, rather than hard coding a list of combinations for opposites and another for combinations and then going through them in order, we instead
     // have a list of layers, which could potentially allow us to have multiple combination types with different precedences, which makes it far more flexible
     // for future extension, even tho we probably won't be using this shit to that extent lol.
     // In this case:
     // - Layer[0] corresponds to the opposites, because they have to be evaluated first.
     // - Layer[1] corresponds to the elemental combinations, because they have to be evaluated afterwards to get the correct result.
+    [Header("Element Combination Settings")]
     [SerializeField] private InputEelementCombinationLayer[] elementCombinationLayers;
 
     [Header("Element Visual Settings")]
@@ -76,12 +87,22 @@ public class MagicManager : SingletonPersistent<MagicManager>
 
     #endregion
 
+    #region Variables - Forms
+
+    [Header("Form Visual Settings")]
+    [SerializeField] private InputFormVisualData defaultFormVisualData;
+    [SerializeField] private InputFormVisualData[] formVisualData;
+
+    private Sprite[] formSprites;
+
+    #endregion
+
     #region MonoBehaviour
 
     void Start()
     {
-        GenerateCombinationData();
-        GenerateVisualData();
+        GenerateElementData();
+        GenerateFormData();
     }
 
     void Update()
@@ -91,7 +112,7 @@ public class MagicManager : SingletonPersistent<MagicManager>
 
     #endregion
 
-    #region PublicMethods
+    #region PublicMethods - Elements
 
     // NOTE : Layer 0 corresponds to opposites, layer 1 corresponds to combinations
 
@@ -102,7 +123,7 @@ public class MagicManager : SingletonPersistent<MagicManager>
         return this.combinationData[layer].combinableElements[(int)element].ToArray();
     }
 
-    public Element GetCombination(Element elementA, Element elementB, int layer)
+    public Element GetElementCombination(Element elementA, Element elementB, int layer)
     {
         var pair = new ElementPair(elementA, elementB);
         if (this.combinationData[layer].combinations.ContainsKey(pair))
@@ -110,7 +131,7 @@ public class MagicManager : SingletonPersistent<MagicManager>
         return Element.None;
     }
 
-    public Sprite GetSprite(Element element)
+    public Sprite GetElementSprite(Element element)
     {
         int idx = (int)element;
         if (idx < 0 || idx >= this.images.Length)
@@ -118,7 +139,7 @@ public class MagicManager : SingletonPersistent<MagicManager>
         return this.images[(int)element];
     }
 
-    public Color GetColor(Element element)
+    public Color GetElementColor(Element element)
     {
         int idx = (int)element;
         if (idx < 0 || idx >= this.images.Length)
@@ -126,16 +147,31 @@ public class MagicManager : SingletonPersistent<MagicManager>
         return this.colors[(int)element];
     }
 
-    public int GetLayers()
+    public int GetCombinationLayers()
     {
         return this.combinationData.Length;
     }
 
     #endregion
 
-    #region PrivateMethods
+    #region PublicMethods - Forms
 
-    private void GenerateCombinationData()
+    public Sprite GetFormSprite(Form form)
+    {
+        return this.formSprites[(int)form];
+    }
+
+    #endregion
+
+    #region PrivateMethods - Elements
+
+    private void GenerateElementData()
+    {
+        GenerateElementCombinationData();
+        GenerateElementVisualData();
+    }
+
+    private void GenerateElementCombinationData()
     {
         int len = this.elementCombinationLayers.Length;
         this.combinationData = new ElementCombinationData[len];
@@ -167,7 +203,7 @@ public class MagicManager : SingletonPersistent<MagicManager>
         }
     }
 
-    private void GenerateVisualData()
+    private void GenerateElementVisualData()
     {
         int len = this.elementVisualData.Length;
         this.images = new Sprite[(int)Element.COUNT];
@@ -182,6 +218,27 @@ public class MagicManager : SingletonPersistent<MagicManager>
             this.images[(int)img.element] = img.image;
             this.colors[(int)img.element] = img.color;
         }
+    }
+
+    #endregion
+
+    #region PrivateMethods - Forms
+
+    private void GenerateFormData()
+    {
+        GenerateFormVisualData();
+    }
+
+    private void GenerateFormVisualData()
+    {
+        int len = this.formVisualData.Length;
+        this.formSprites = new Sprite[(int)Form.COUNT];
+        
+        for (int i = 0; i < len; ++i)
+            this.formSprites[i] = this.defaultFormVisualData.image;
+
+        foreach (var form in this.formVisualData)
+            this.formSprites[(int)form.form] = form.image;
     }
 
     #endregion
