@@ -8,6 +8,8 @@ public class SpellBeamController : SpellBaseController
 
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private float maxDistance;
+    [SerializeField] private ParticleSystem particleStart;
+    [SerializeField] private ParticleSystem particleEnd;
 
     private float currentMaxDistance;
     private float distanceGrowthRate = 80.0f;
@@ -45,9 +47,13 @@ public class SpellBeamController : SpellBaseController
             this.TargetPoint = this.OriginPoint + this.transform.forward * this.currentMaxDistance;
         }
 
+        // Update the positions for the beam's line renderer
         Vector3[] points = { this.OriginPoint, this.TargetPoint };
         this.lineRenderer.SetPositions(points);
 
+        // Update the positions for the beam's particles
+        this.particleStart.transform.position = this.OriginPoint;
+        this.particleEnd.transform.position = this.TargetPoint;
     }
 
     #endregion
@@ -64,6 +70,10 @@ public class SpellBeamController : SpellBaseController
     {
         this.lineRenderer.startColor = GetSpellColor();
         this.lineRenderer.endColor = GetSpellColor();
+
+        // TODO : Find something that is not deprecated...
+        this.particleStart.startColor = GetSpellColor();
+        this.particleEnd.startColor = GetSpellColor();
     }
 
     #endregion
