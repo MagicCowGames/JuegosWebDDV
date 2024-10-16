@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellSprayController : MonoBehaviour
+public class SpellSprayController : SpellBaseController
 {
     #region Variables
 
@@ -31,5 +31,14 @@ public class SpellSprayController : MonoBehaviour
     #endregion
 
     #region PrivateMethods
+    #endregion
+
+    #region ISpell
+
+    public override void UpdateSpellColor()
+    {
+
+    }
+
     #endregion
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellShieldController : MonoBehaviour
+public class SpellShieldController : SpellBaseController
 {
     #region Enums
 
@@ -85,6 +85,15 @@ public class SpellShieldController : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    #endregion
+
+    #region ISpell
+
+    public override void UpdateSpellColor()
+    {
+
     }
 
     #endregion
