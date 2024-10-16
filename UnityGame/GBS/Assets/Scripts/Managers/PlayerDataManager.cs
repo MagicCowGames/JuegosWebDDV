@@ -38,7 +38,7 @@ public class PlayerDataManager : SingletonPersistent<PlayerDataManager>
         // Gets the player reference and a reference to all of its relevant components.
         this.playerController = reference;
         this.healthController = reference.GetComponent<HealthController>();
-        this.spellCasterController = reference.GetComponent<SpellCasterController>();
+        this.spellCasterController = reference.GetComponentInChildren<SpellCasterController>(); // Shitty, should just add a getter on the player controller...
     }
 
     public PlayerController GetPlayer()
