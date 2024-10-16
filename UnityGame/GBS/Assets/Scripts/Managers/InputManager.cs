@@ -10,6 +10,7 @@ public class InputManager : Singleton<InputManager>
     public Action<float> OnSetForwardAxis;
     public Action<Vector3> OnSetScreenPoint;
     public Action<Element> OnAddElement;
+    public Action<Form> OnSetForm;
 
     public Action OnRightClickDown;
     public Action OnRightClickUp;
@@ -40,6 +41,11 @@ public class InputManager : Singleton<InputManager>
     public void AddElement(Element element)
     {
         this.OnAddElement?.Invoke(element);
+    }
+
+    public void SetForm(Form form)
+    {
+        this.OnSetForm?.Invoke(form);
     }
 
     public void SetForwardAxis(float value)
@@ -139,11 +145,6 @@ public class InputManager : Singleton<InputManager>
         if (Input.GetKeyDown(KeyCode.W))
             AddElement(Element.Heal);
 
-        // NOTE : Legacy input
-        // TODO : Remove in the future?
-        if (Input.GetKeyDown(KeyCode.E))
-            AddElement(Element.Shield);
-
         if (Input.GetKeyDown(KeyCode.R))
             AddElement(Element.Cold);
 
@@ -162,15 +163,19 @@ public class InputManager : Singleton<InputManager>
 
     private void UIK_Forms()
     {
-        // NOTE : These are internally elements for the opposites system, but they count as forms from the gameplay standpoint.
         if (Input.GetKeyDown(KeyCode.Alpha1))
-            AddElement(Element.Projectile);
+            SetForm(Form.Projectile);
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
-            AddElement(Element.Beam);
+            SetForm(Form.Beam);
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
-            AddElement(Element.Shield);
+            SetForm(Form.Shield);
+
+        // NOTE : Legacy input
+        // TODO : Remove in the future?
+        if (Input.GetKeyDown(KeyCode.E))
+            SetForm(Form.Shield);
     }
 
     private void UIK_Other()
