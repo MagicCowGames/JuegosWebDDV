@@ -96,6 +96,8 @@ public class SpellCasterController : MonoBehaviour
                 {
                     foreach (var transform in this.wallTransforms)
                     {
+                        // bool wallSpawned = false;
+
                         // TODO : Remove some of the early return cases so that we can mix different elements.
 
                         // Spawn walls if earth or ice are involved
@@ -103,16 +105,18 @@ public class SpellCasterController : MonoBehaviour
                         {
                             var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
                             var wall = obj.GetComponent<SpellShieldController>();
-                            continue;
+                            // wallSpawned = true;
                         }
 
                         // Spawn mines if death or heal elements are involved
-                        if (this.eq.GetElementCount(Element.Earth) > 0 || this.eq.GetElementCount(Element.Ice) > 0)
+                        /*
+                        if (this.eq.GetElementCount(Element.Death) > 0 || this.eq.GetElementCount(Element.Heal) > 0)
                         {
                             // var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
                             // var wall = obj.GetComponent<SpellShieldController>();
                             continue;
                         }
+                        */
 
                         // Spawn elemental barrier if any other element is involved
                         if (this.eq.GetElementCount(Element.Earth) > 0 || this.eq.GetElementCount(Element.Ice) > 0)
@@ -122,9 +126,21 @@ public class SpellCasterController : MonoBehaviour
                             continue;
                         }
 
-                        // Spawn regular shield otherwise
-                        var shieldObj = ObjectSpawner.Spawn(shieldPrefab, transform);
-                        var shield = shieldObj.GetComponent<SpellShieldController>();
+                        // Spawn regular shield if no other type of wall was spawned.
+                        /*
+                        if (!wallSpawned)
+                        {
+                            var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
+                            var shield = obj.GetComponent<SpellShieldController>();
+                        }
+                        */
+
+
+
+                        // NOTE : Currently mines and regular shield are disabled cause this is a Magicka thing and
+                        // I'm thinking that I don't want to fully copy it even tho it's a cool feature.
+
+                        // TODO : Figure out whether I want this in the final game or not.
                     }
 
                     // Stop casting since walls don't require constant casting.
