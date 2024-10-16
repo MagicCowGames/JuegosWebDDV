@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 using System.IO;
 using System.Globalization;
 using Unity.VisualScripting.Antlr3.Runtime;
+using UnityEngine.UIElements;
 
 // NOTE : Maybe the console's backend should be a static class, cause right now the entire console system is handled by the UIController class, and it doesn't feel
 // right tbh. I mean, it works, and allows for infinitely many consoles to run their own logic and stuff, but after all, the logic is just the same everywhere for most
@@ -77,7 +78,9 @@ public class ConsoleUIController : UIController
             new Cmd("debug", "Enable or disable debug logging and visualization", "<enabled>", 1, CmdDebug),
             new Cmd("info", "Display information about a given category", "<category>", 1, CmdInfo),
             new Cmd("sethealth", "Set the health of the player to the specified value", "<value>", 1, CmdSetHealth),
-            new Cmd("heal", "Set the health of the player to the max value", "", 0, CmdHeal)
+            new Cmd("heal", "Set the health of the player to the max value", "", 0, CmdHeal),
+            new Cmd("color_fg", "Set the color of the foreground", "<red> <green> <blue>", 3, CmdColorFG),
+            new Cmd("color_bg", "Set the color of the background", "<red> <green> <blue>", 3, CmdColorBG),
         };
         // TODO : Make an alias system of sorts, or maybe make it so that we can have a dict / list system to have multiple overloads for the same command
         // with different parameters (eg: tp <pos>, tp <name> <pos>, tp <name> <target>, etc...) or different cmd names for the same underlying cmd (eg: clear and cls)
@@ -366,6 +369,34 @@ public class ConsoleUIController : UIController
         PlayerDataManager.Instance?.GetPlayerHealth()?.Heal();
     }
 
+    private void CmdColorFG(string[] args, int startIndex)
+    {
+        var rstr = args[startIndex + 1];
+        var gstr = args[startIndex + 2];
+        var bstr = args[startIndex + 3];
+
+        float r = CmdParseFloat(rstr);
+        float g = CmdParseFloat(gstr);
+        float b = CmdParseFloat(bstr);
+        float a = 1.0f;
+
+        this.consoleText.color = new Color(r, g, b, a);
+    }
+
+    private void CmdColorBG(string[] args, int startIndex)
+    {
+        var rstr = args[startIndex + 1];
+        var gstr = args[startIndex + 2];
+        var bstr = args[startIndex + 3];
+
+        float r = CmdParseFloat(rstr);
+        float g = CmdParseFloat(gstr);
+        float b = CmdParseFloat(bstr);
+        float a = this.consoleBackground.color.a;
+
+        this.consoleBackground.color = new Color(r, g, b, a);
+    }
+
     #endregion
 
     #region Cmd - Parsing
@@ -443,6 +474,7 @@ public class ConsoleUIController : UIController
     // NOTE : The color tags <color=#FF0000>Text</color> work through tag scopes, which means that the following example will look as follows:
     // DEFAULT COLOR <color=#FF0000> RED TEXT <color=#00FF00> GREEN TEXT </color> RED TEXT </color> DEFAULT COLOR
     // This is great for us cause it makes implementing colored text a hell of a lot easier, since we dont need to do any weird patchwork...
+    // Also note that the "default color" is whatever color has been chosen on the inspector for the vertex color of the TMP Text.
     
     // NOTE : BTW, the color tags also work when displaying debug logs in unity, which is wild and fucking awesome tbh.
 
@@ -481,3 +513,5 @@ public class ConsoleUIController : UIController
 
     #endregion
 }
+
+// TODO : Find a way to allow the user to put a custom sprite as the console background.Taking ricing to a whole new level...
