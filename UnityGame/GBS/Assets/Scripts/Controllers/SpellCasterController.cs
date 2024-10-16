@@ -103,7 +103,7 @@ public class SpellCasterController : MonoBehaviour
                         {
                             var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
                             var wall = obj.GetComponent<SpellShieldController>();
-                            return;
+                            continue;
                         }
 
                         // Spawn mines if death or heal elements are involved
@@ -111,7 +111,7 @@ public class SpellCasterController : MonoBehaviour
                         {
                             // var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
                             // var wall = obj.GetComponent<SpellShieldController>();
-                            return;
+                            continue;
                         }
 
                         // Spawn elemental barrier if any other element is involved
@@ -119,7 +119,7 @@ public class SpellCasterController : MonoBehaviour
                         {
                             // var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
                             // var wall = obj.GetComponent<SpellShieldController>();
-                            return;
+                            continue;
                         }
 
                         // Spawn regular shield otherwise
