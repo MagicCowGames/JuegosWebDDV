@@ -96,7 +96,6 @@ public class UIManager : Singleton<UIManager>, IManager
 
     public void ResetManager()
     {
-        this.playerUIController?.UpdateElementDisplay(null); // This is a fucking hack... look at the code within the PlayerUIController and you'll understand why...
     }
 
     #endregion
