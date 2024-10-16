@@ -58,7 +58,7 @@ public class PlayerUIController : UIController, IComponentValidator
 
     private void UpdateElementDisplay()
     {
-        var queue = PlayerDataManager.Instance.GetPlayerElementQueue();
+        var queue = PlayerDataManager.Instance.GetPlayerSpellCaster().GetElementQueue();
         ElementDisplayReset();
         ElementDisplaySet(queue.Elements, queue.Count);
     }
@@ -119,7 +119,7 @@ public class PlayerUIController : UIController, IComponentValidator
             MagicManager.Instance != null && // This should never happen, but if it does, we're fucked, so we should just return early to prevent any issues.
             PlayerDataManager.Instance != null &&
             PlayerDataManager.Instance.GetPlayerHealth() != null &&
-            PlayerDataManager.Instance.GetPlayerElementQueue() != null
+            PlayerDataManager.Instance.GetPlayerSpellCaster() != null
             ;
     }
 
