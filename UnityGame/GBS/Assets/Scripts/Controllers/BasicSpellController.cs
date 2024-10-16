@@ -15,7 +15,7 @@ public class BasicSpellController : MonoBehaviour
     [SerializeField] private ParticleSystem beamParticle;
 
     [Header("Spell Config")]
-    [SerializeField] private SpellType spellType;
+    [SerializeField] private Form spellType;
 
     [Header("Spell Stats")]
     [SerializeField] private float damage = 10.0f;
@@ -45,7 +45,7 @@ public class BasicSpellController : MonoBehaviour
 
         SpawnSpell();
 
-        if (this.spellType == SpellType.Projectile)
+        if (this.spellType == Form.Projectile)
         {
             this.rigidBody.AddForce(rigidBody.transform.up * speed, ForceMode.VelocityChange);
         }
@@ -76,7 +76,7 @@ public class BasicSpellController : MonoBehaviour
         this.owner = owner;
     }
 
-    public void SetSpellType(SpellType spellType)
+    public void SetSpellType(Form spellType)
     {
         this.spellType = spellType;
     }

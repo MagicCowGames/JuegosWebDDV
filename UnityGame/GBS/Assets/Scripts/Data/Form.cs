@@ -1,4 +1,4 @@
-public enum SpellType
+public enum Form
 {
     None = 0,
     Spray,
