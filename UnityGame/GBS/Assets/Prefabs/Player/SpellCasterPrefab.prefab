@@ -146,10 +146,12 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8898792701997654404, guid: 301f277af263bd1448bcbdcec50dd5f4, type: 3}
   beamPrefab: {fileID: 4110217941577811738, guid: 545c4e357857fd141b836ba27a0df2a8, type: 3}
   shieldPrefab: {fileID: 7258614691735134581, guid: ed13d01f99b9574418eb5e34f985bedf, type: 3}
+  sprayPrefab: {fileID: 7258614691735134581, guid: 5b1f2c7b32ad5bb4fac7d2bd84694a40, type: 3}
   wallTransforms:
   - {fileID: 4513287472735643004}
   - {fileID: 3864805257391592178}
   - {fileID: 5283064782315113233}
+  form: 3
 --- !u!1 &7992218122015918569
 GameObject:
   m_ObjectHideFlags: 0
