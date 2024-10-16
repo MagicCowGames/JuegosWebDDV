@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements.Experimental;
 
 public class PlayerUIController : UIController, IComponentValidator
 {
@@ -92,10 +93,17 @@ public class PlayerUIController : UIController, IComponentValidator
 
     // NOTE : It's better to check for null for all required components once every frame rather than multiple times, which is why
     // the null checking code from each update function has been removed.
+    
     // For example, keeping each update method's own null checking would lead to needing to check for PlayerDataManager's instance to be null
     // more than once every frame, and that's just dumb.
+    
     // In short : we just check for all of the needs of all update methods in this function right here and call it a day. If any of them fails, we bail.
+    
     // The only downside is that now we can't partially update UI by allowing some parts to update while bailing on others. Now we either update all or fuck off.
+    
+    // Yes, it looks like a dumb micro optimization, but the point is not just the performance(an extra null check is basically free), the point is deduplicating
+    // code and reduing points of failure, as well as making maintanance easier.
+    
     public bool AllComponentsAreValid()
     {
         return
