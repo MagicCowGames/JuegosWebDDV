@@ -9,6 +9,7 @@ public class PlayerUIController : UIController, IComponentValidator
     #region Variables
 
     [Header("Player UI Controller Components")]
+    [SerializeField] private Image formImage;
     [SerializeField] private Image[] elementQueueImages;
     [SerializeField] private Image healthBar;
 
@@ -33,6 +34,7 @@ public class PlayerUIController : UIController, IComponentValidator
         // Also, fuck coroutines.
         UpdateHealthBar(Time.deltaTime);
         UpdateElementDisplay();
+        UpdateFormDisplay();
     }
 
     #endregion
@@ -85,6 +87,11 @@ public class PlayerUIController : UIController, IComponentValidator
     {
         float healthPercentage = PlayerDataManager.Instance.GetPlayerHealth().GetPercentage();
         this.healthBar.fillAmount = Mathf.Clamp01(Mathf.Lerp(this.healthBar.fillAmount, healthPercentage, delta * 10));
+    }
+
+    private void UpdateFormDisplay()
+    {
+        // var form = PlayerDataManager.Instance.GetPlayerForm();
     }
 
     #endregion
