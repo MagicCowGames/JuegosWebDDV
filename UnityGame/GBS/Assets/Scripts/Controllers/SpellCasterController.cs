@@ -15,6 +15,7 @@ public class SpellCasterController : MonoBehaviour
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private GameObject beamPrefab;
     [SerializeField] private GameObject shieldPrefab;
+    [SerializeField] private GameObject sprayPrefab;
 
 
     [SerializeField] private Transform[] wallTransforms;
@@ -103,7 +104,7 @@ public class SpellCasterController : MonoBehaviour
                         // Spawn walls if earth or ice are involved
                         if (this.eq.GetElementCount(Element.Earth) > 0 || this.eq.GetElementCount(Element.Ice) > 0)
                         {
-                            var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
+                            var obj = ObjectSpawner.Spawn(this.shieldPrefab, transform);
                             var wall = obj.GetComponent<SpellShieldController>();
                             // wallSpawned = true;
                         }
@@ -119,10 +120,11 @@ public class SpellCasterController : MonoBehaviour
                         */
 
                         // Spawn elemental barrier if any other element is involved
-                        if (this.eq.GetElementCount(Element.Earth) > 0 || this.eq.GetElementCount(Element.Ice) > 0)
+                        int otherElements = this.eq.Count - (this.eq.GetElementCount(Element.Earth) + this.eq.GetElementCount(Element.Ice));
+                        if (otherElements > 0)
                         {
-                            // var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
-                            // var wall = obj.GetComponent<SpellShieldController>();
+                            var obj = ObjectSpawner.Spawn(this.sprayPrefab, transform);
+                            var wall = obj.GetComponent<SpellSprayController>();
                             continue;
                         }
 
@@ -149,7 +151,7 @@ public class SpellCasterController : MonoBehaviour
                 break;
             case Form.Projectile:
                 {
-                    ObjectSpawner.Spawn(projectilePrefab, this.spawnTransform);
+                    ObjectSpawner.Spawn(this.projectilePrefab, this.spawnTransform);
 
                     // Stop casting since projectiles don't require constant casting.
                     SetCastTime(0.5f);
@@ -157,32 +159,12 @@ public class SpellCasterController : MonoBehaviour
                 break;
             case Form.Beam:
                 {
-                    var obj = ObjectSpawner.Spawn(beamPrefab, this.spawnTransform);
+                    var obj = ObjectSpawner.Spawn(this.beamPrefab, this.spawnTransform);
                     obj.transform.parent = this.spawnTransform;
                     this.activeSpell = obj;
 
-                    // TODO : This code is shit, please fix
-                    Color color = Color.white;
-                    float r = 0.0f;
-                    float g = 0.0f;
-                    float b = 0.0f;
-                    foreach (var element in this.eq.Elements)
-                        if (element != Element.Beam)
-                        {
-                            var c = MagicManager.Instance.GetElementColor(element);
-                            r += c.r;
-                            g += c.g;
-                            b += c.b;
-                        }
-
-                    r /= this.eq.Count;
-                    g /= this.eq.Count;
-                    b /= this.eq.Count;
-
-                    color = new Color(r, g, b, 255);
-
                     var beam = obj.GetComponent<SpellBeamController>();
-                    beam.SetSpellColor(color);
+                    beam.SetSpellData(this.eq);
 
                     // Auto stop casting after 5 seconds of sustained beam firing.
                     // The user can manually stop casting on their own if they release the cast button, but if they keep holding it, to prevent them from being too OP,
