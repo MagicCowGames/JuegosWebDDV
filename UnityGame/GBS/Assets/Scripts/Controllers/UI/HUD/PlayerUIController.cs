@@ -26,7 +26,12 @@ public class PlayerUIController : UIController, IComponentValidator
         if (!AllComponentsAreValid())
             return;
 
+        // Updating this stuff every single frame is not ideal, and some of this used to be updated through events, but this is much less of a hassle,
+        // It doesn't even have a performance impact and at least we make sure that there are no stupid edge cases caused by late night brain-fart coding.
+        // Yes, sad, I know, but it is what it is.
+        // Also, fuck coroutines.
         UpdateHealthBar(Time.deltaTime);
+        UpdateElementDisplay();
     }
 
     #endregion
@@ -44,12 +49,18 @@ public class PlayerUIController : UIController, IComponentValidator
     public void Button_AddElement_Earth() { Button_AddElement(Element.Earth); }
     public void Button_AddElement_Fire() { Button_AddElement(Element.Fire); }
 
-    // TODO : Maybe rename to ElementDisplayUpdate() or something so that it's more consistent with the other function names?
-    public void UpdateElementDisplay(ElementQueue queue)
+    #endregion
+
+    #region PrivateMethods
+
+    private void UpdateElementDisplay()
     {
         // This should never happen, but if it does, we're fucked, so just return early to prevent any issues.
-        if (ElementManager.Instance == null)
+        if (ElementManager.Instance == null || PlayerDataManager.Instance == null || PlayerDataManager.Instance.GetPlayerElementQueue() == null)
             return;
+
+        // Get the player's element queue.
+        var queue = PlayerDataManager.Instance.GetPlayerElementQueue();
 
         // Reset the display to use empty slots
         ElementDisplayReset();
@@ -62,10 +73,6 @@ public class PlayerUIController : UIController, IComponentValidator
         // Set the slots to display the elements within the queue
         ElementDisplaySet(queue.Elements, queue.Count);
     }
-
-    #endregion
-
-    #region PrivateMethods
 
     private void ElementDisplayReset()
     {
@@ -102,8 +109,10 @@ public class PlayerUIController : UIController, IComponentValidator
         return
             this.healthBar != null &&
             this.elementQueueImages != null &&
+            ElementManager.Instance != null &&
             PlayerDataManager.Instance != null &&
-            PlayerDataManager.Instance.GetPlayerHealth() != null
+            PlayerDataManager.Instance.GetPlayerHealth() != null &&
+            PlayerDataManager.Instance.GetPlayerElementQueue() != null
             ;
     }
 
