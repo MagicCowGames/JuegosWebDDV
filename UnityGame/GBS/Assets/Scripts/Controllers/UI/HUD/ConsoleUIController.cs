@@ -29,14 +29,16 @@ public class ConsoleUIController : UIController
         public string arguments;
         public int numArguments;
         public Action<string[], int> function;
+        public bool isCheat;
 
-        public Cmd(string cmd, string desc, string arg, int num, Action<string[], int> fn)
+        public Cmd(string cmd, string desc, string arg, int num, Action<string[], int> fn, bool cheat = false)
         {
             this.command = cmd;
             this.description = desc;
             this.arguments = arg;
             this.numArguments = num;
             this.function = fn;
+            this.isCheat = cheat;
         }
     }
 
@@ -51,6 +53,8 @@ public class ConsoleUIController : UIController
     [SerializeField] private ScrollRect consoleScrollRect;
 
     private Cmd[] commands;
+
+    private bool cheatsEnabled = false; // TODO : Move this to a game data manager so that it can be globally accessed. Maybe also move the stuff in GameUtility for pausing to said manager. Obviously make its name clearly different enough from the GameManager, which should be the one in charge of managing matches, or at least that's the plan for now. Also, having a single CheatManager just for this purpose sounds too far fetched, but maybe makes sense once you factor in all the code required to make sure that cheats have not been enabled when passing data to the scoreboard server, etc...
 
     #endregion
 
@@ -70,13 +74,14 @@ public class ConsoleUIController : UIController
             new Cmd("clear", "Clear the console", "", 0, CmdClear),
             new Cmd("cls", "Clear the console", "", 0, CmdClear),
             new Cmd("maplist", "Display a list of all of the available maps", "", 0, CmdMapList),
-            new Cmd("delete", "Removes the specified GameObject", "<name>", 1, CmdDelete),
+            new Cmd("delete", "Removes the specified GameObject", "<name>", 1, CmdDelete, true),
             new Cmd("debug", "Enable or disable debug logging and visualization", "<enabled>", 1, CmdDebug),
             new Cmd("info", "Display information about a given category", "<category>", 1, CmdInfo),
-            new Cmd("sethealth", "Set the health of the player to the specified value", "<value>", 1, CmdSetHealth),
-            new Cmd("heal", "Set the health of the player to the max value", "", 0, CmdHeal),
+            new Cmd("sethealth", "Set the health of the player to the specified value", "<value>", 1, CmdSetHealth, true),
+            new Cmd("heal", "Set the health of the player to the max value", "", 0, CmdHeal, true),
             new Cmd("color_fg", "Set the color of the foreground", "<red> <green> <blue>", 3, CmdColorFG),
             new Cmd("color_bg", "Set the color of the background", "<red> <green> <blue>", 3, CmdColorBG),
+            new Cmd("cheats", "Enable or disable cheats", "<enabled>", 1, CmdCheats, false)
         };
         // TODO : Make an alias system of sorts, or maybe make it so that we can have a dict / list system to have multiple overloads for the same command
         // with different parameters (eg: tp <pos>, tp <name> <pos>, tp <name> <target>, etc...) or different cmd names for the same underlying cmd (eg: clear and cls)
@@ -249,6 +254,11 @@ public class ConsoleUIController : UIController
         CmdPrintln($"{msgBase}{msgBody}");
     }
 
+    private void CmdErrorCheats()
+    {
+        CmdError("Cheats are not enabled!");
+    }
+
     // Print a line to the console to display the usage of a command
     private void CmdUsage(Cmd cmd)
     {
@@ -300,6 +310,12 @@ public class ConsoleUIController : UIController
 
     private void CmdDelete(string[] args, int startIndex)
     {
+        if (!this.cheatsEnabled)
+        {
+            CmdErrorCheats();
+            return;
+        }
+
         string name = args[startIndex + 1];
         var obj = GameObject.Find(name);
         
@@ -355,6 +371,12 @@ public class ConsoleUIController : UIController
 
     private void CmdSetHealth(string[] args, int startIndex)
     {
+        if (!this.cheatsEnabled)
+        {
+            CmdErrorCheats();
+            return;
+        }
+
         string arg = args[startIndex + 1];
         float hp = CmdParseFloat(arg);
         PlayerDataManager.Instance?.GetPlayerHealth()?.ForceSetHealth(hp);
@@ -362,6 +384,12 @@ public class ConsoleUIController : UIController
 
     private void CmdHeal(string[] args, int startIndex)
     {
+        if (!this.cheatsEnabled)
+        {
+            CmdErrorCheats();
+            return;
+        }
+
         PlayerDataManager.Instance?.GetPlayerHealth()?.Heal();
     }
 
@@ -391,6 +419,13 @@ public class ConsoleUIController : UIController
         float a = this.consoleBackground.color.a;
 
         this.consoleBackground.color = new Color(r, g, b, a);
+    }
+
+    private void CmdCheats(string[] args, int startIndex)
+    {
+        var arg = args[startIndex + 1];
+        this.cheatsEnabled = CmdParseBool(arg);
+        CmdPrintln($"Cheats have been {(this.cheatsEnabled ? CmdGetColorString("Enabled", Color.green) : CmdGetColorString("Disabled", Color.red))}!");
     }
 
     #endregion
