@@ -27,7 +27,9 @@ public class SpellCasterController : MonoBehaviour
     private float accumulatedTimeMax = 3.0f; // 3 seconds max
     private float forcePerSecond = 1.5f; // force value added to the projectile based on the accumulatedTime value. The resulting force is forcePerSecond * accumulatedTime.
 
-    GameObject activeSpell;
+    private GameObject activeSpell;
+
+    private float autoStopCastingTime;
 
     #endregion
 
@@ -35,13 +37,16 @@ public class SpellCasterController : MonoBehaviour
 
     void Start()
     {
+        this.activeSpell = null;
         this.isCasting = false;
+        this.autoStopCastingTime = 0.0f;
         this.eq = new ElementQueue(5);
     }
 
     void Update()
     {
-        
+        float delta = Time.deltaTime;
+        UpdateAutoStopCasting(delta);
     }
 
     #endregion
@@ -64,8 +69,12 @@ public class SpellCasterController : MonoBehaviour
 
     public void Cast()
     {
+        // Can't cast if the element queue is null or if it has no elements queued up, so we bail out with an early return.
         if (this.eq == null || this.eq.Count <= 0)
             return;
+
+        // Update casting status
+        this.isCasting = true;
 
         if (this.eq.GetElementCount(Element.Shield) > 0)
         {
@@ -101,11 +110,17 @@ public class SpellCasterController : MonoBehaviour
                 var shieldObj = ObjectSpawner.Spawn(shieldPrefab, transform);
                 var shield = shieldObj.GetComponent<SpellShieldController>();
             }
+
+            // Stop casting since walls don't require constant casting.
+            SetCastTime(0.0f);
         }
         else
         if (this.eq.GetElementCount(Element.Projectile) > 0)
         {
             ObjectSpawner.Spawn(projectilePrefab, this.spawnTransform);
+
+            // Stop casting since projectiles don't require constant casting.
+            SetCastTime(0.0f);
         }
         else
         if(this.eq.GetElementCount(Element.Beam) > 0)
@@ -136,14 +151,25 @@ public class SpellCasterController : MonoBehaviour
 
             var beam = obj.GetComponent<SpellBeamController>();
             beam.SetSpellColor(color);
+
+            // Auto stop casting after 5 seconds of sustained beam firing.
+            // The user can manually stop casting on their own if they release the cast button, but if they keep holding it, to prevent them from being too OP,
+            // we force them to stop casting after a set amount of time.
+            SetCastTime(5.0f);
         }
+
+        // After finishing casting, clear the element queue
+        this.eq.Clear();
     }
 
     public void StopCast()
     {
-        DebugManager.Instance?.Log("stop!");
+        this.isCasting = false;
         if (this.activeSpell != null)
+        {
             Destroy(this.activeSpell.gameObject);
+            this.activeSpell = null;
+        }
     }
 
     #endregion
@@ -158,5 +184,23 @@ public class SpellCasterController : MonoBehaviour
     #endregion
 
     #region PrivateMethods
+
+    private void UpdateAutoStopCasting(float delta)
+    {
+        if (autoStopCastingTime <= 0.0f)
+        {
+            this.isCasting = false;
+        }
+        else
+        {
+            autoStopCastingTime -= delta;
+        }
+    }
+
+    private void SetCastTime(float time)
+    {
+        this.autoStopCastingTime = time;
+    }
+
     #endregion
 }
