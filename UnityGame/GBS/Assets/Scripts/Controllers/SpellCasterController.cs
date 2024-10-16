@@ -112,7 +112,7 @@ public class SpellCasterController : MonoBehaviour
             }
 
             // Stop casting since walls don't require constant casting.
-            SetCastTime(0.0f);
+            SetCastTime(0.5f);
         }
         else
         if (this.eq.GetElementCount(Element.Projectile) > 0)
@@ -120,7 +120,7 @@ public class SpellCasterController : MonoBehaviour
             ObjectSpawner.Spawn(projectilePrefab, this.spawnTransform);
 
             // Stop casting since projectiles don't require constant casting.
-            SetCastTime(0.0f);
+            SetCastTime(0.5f);
         }
         else
         if(this.eq.GetElementCount(Element.Beam) > 0)
