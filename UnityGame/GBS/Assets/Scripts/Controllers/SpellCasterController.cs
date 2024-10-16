@@ -20,6 +20,7 @@ public class SpellCasterController : MonoBehaviour
     [SerializeField] private Transform[] wallTransforms;
 
     private ElementQueue eq;
+    private bool isCasting;
 
     // NOTE : This idea may get scrapped, so we're leaving it here for now...
     private float accumulatedTime = 0.0f; // seconds that the cast button has been held down (used for projectile spells to increase strength)
@@ -34,7 +35,8 @@ public class SpellCasterController : MonoBehaviour
 
     void Start()
     {
-        
+        this.isCasting = false;
+        this.eq = new ElementQueue(5);
     }
 
     void Update()
@@ -44,12 +46,21 @@ public class SpellCasterController : MonoBehaviour
 
     #endregion
 
-    #region PublicMethods
+    #region PublicMethods - Getters
 
-    public void SetElementQueue(ElementQueue queue)
+    public ElementQueue GetElementQueue()
     {
-        this.eq = new ElementQueue(queue);
+        return this.eq;
     }
+
+    public bool GetIsCasting()
+    {
+        return this.isCasting;
+    }
+
+    #endregion
+
+    #region PublicMethods - Spell Casting
 
     public void Cast()
     {
@@ -135,91 +146,17 @@ public class SpellCasterController : MonoBehaviour
             Destroy(this.activeSpell.gameObject);
     }
 
-    /*
-    public void Cast()
+    #endregion
+
+    #region PublicMethods - Element Queue
+
+    public void AddElement(Element element)
     {
-        // If the queue is null or the queue has no elements queued up, then we return because there is nothing else to be done.
-        if (this.eq == null)
-        {
-            DebugManager.Instance?.Log("The ElementQueue is null!");
-            return;
-        }
-
-        if (this.eq.Count <= 0)
-        {
-            DebugManager.Instance?.Log("The ElementQueue is empty!");
-            return;
-        }
-        
-        if (this.eq.GetElementCount(Element.Shield) > 0)
-        {
-            DebugManager.Instance?.Log("Shield-like spell");
-            
-            if (this.eq.GetElementCount(Element.Earth) > 0)
-            {
-                DebugManager.Instance?.Log("Shield-like spell with rock wall");
-            }
-
-            if (this.eq.GetElementCount(Element.Ice) > 0)
-            {
-                DebugManager.Instance?.Log("Shield-like spell with ice wall");
-            }
-
-            return;
-        }
-
-        if (this.eq.GetElementCount(Element.Earth) > 0)
-        {
-            DebugManager.Instance?.Log("Projectile-like spell");
-            ObjectSpawner.Spawn(this.rockSpell, this.spawnTransform);
-            return;
-        }
-
-        if (this.eq.GetElementCount(Element.Ice) > 0)
-        {
-            DebugManager.Instance?.Log("Shard-like spell");
-            return;
-        }
-
-        if (this.eq.GetElementCount(Element.Heal) > 0 || this.eq.GetElementCount(Element.Death) > 0)
-        {
-            DebugManager.Instance?.Log("Beam-like spell");
-            return;
-        }
-
-        if (this.eq.GetElementCount(Element.Electricity) > 0)
-        {
-            DebugManager.Instance?.Log("Electric-like spell");
-            return;
-        }
-
-        DebugManager.Instance?.Log("Spray-like spell");
-        SpawnSpraySpell();
-        return;
+        this.eq.Add(element);
     }
-    */
 
     #endregion
 
     #region PrivateMethods
-
-    /*
-    private BasicSpellController SpawnSpell(GameObject prefab)
-    {
-        var obj = ObjectSpawner.Spawn(prefab, this.spawnTransform);
-        var controller = obj.GetComponent<BasicSpellController>();
-        return controller;
-    }
-
-    private void SpawnSpraySpell()
-    {
-        var spell = SpawnSpell(this.fireSpell);
-        spell.SetOwner(null);
-        spell.SetSpellType(SpellType.Spray);
-        spell.transform.SetParent(this.spawnTransform);
-        this.spellController = spell;
-    }
-    */
-
     #endregion
 }
