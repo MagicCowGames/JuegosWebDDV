@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float rotationSpeed; // speed at which the rotation takes place when using beams. Otherwise, the rotation vector is set instantaneously.
 
     [Header("Weapon Settings")]
-    [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private SpellCasterController spellCasterController;
 
     private Vector3 gravityVector;
@@ -34,14 +33,6 @@ public class PlayerController : MonoBehaviour
     private float movementForward;
     private Quaternion targetRotation;
 
-    private bool isCasting;
-
-    #endregion
-
-    #region Variables3
-
-    private ElementQueue elementQueue;
-
     #endregion
 
     #region MonoBehaviour
@@ -50,8 +41,6 @@ public class PlayerController : MonoBehaviour
     {
         this.movementForward = 0.0f;
         this.gravityVector = new Vector3(0.0f, -9.8f, 0.0f);
-
-        this.elementQueue = new ElementQueue(5);
 
         SetPlayerReferences(); // We set it at the end to make sure that everything has been constructed first.
         RegisterEvents();
@@ -89,11 +78,6 @@ public class PlayerController : MonoBehaviour
         return this.meshTransform;
     }
 
-    public ElementQueue GetElementQueue()
-    {
-        return this.elementQueue;
-    }
-
     #endregion
 
     #region Private Methods
@@ -109,11 +93,6 @@ public class PlayerController : MonoBehaviour
 
     #region PrivateMethods
 
-    private void Shoot()
-    {
-        ObjectSpawner.Spawn(bulletPrefab, shootSocket);
-    }
-
     private void UpdatePosition(float delta)
     {
         UpdatePositionWalk(delta);
@@ -123,7 +102,7 @@ public class PlayerController : MonoBehaviour
     private void UpdatePositionWalk(float delta)
     {
         // Can't walk while we're casting!
-        if (this.isCasting)
+        if (this.spellCasterController.GetIsCasting())
             return;
         Vector3 movementVector = delta * this.movementForward * this.meshTransform.forward * this.walkSpeed;
         this.characterController.Move(movementVector);
@@ -137,7 +116,8 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateRotation(float delta)
     {
-        if (this.isCasting)
+        // Rotate slower while we're casting to prevent beams from being insanely OP sniper lasers and to give them a little bit of extra eye-candy and a more weighted feel.
+        if (this.spellCasterController.GetIsCasting())
             this.meshTransform.rotation = Quaternion.Lerp(this.meshTransform.rotation, targetRotation, delta * this.rotationSpeed);
         else
             this.meshTransform.rotation = targetRotation;
@@ -202,27 +182,16 @@ public class PlayerController : MonoBehaviour
 
     private void AddElement(Element element)
     {
-        this.elementQueue.Add(element);
+        this.spellCasterController.AddElement(element);
     }
 
     private void RightClickDown()
     {
-        // Early return if the queue is empty. I mean, we can't really cast nothing... can we? (flashbacks to air bending in Magicka)
-        if (this.elementQueue.Count <= 0)
-        {
-            this.isCasting = false;
-            return;
-        }
-
-        this.isCasting = true;
-        this.spellCasterController.SetElementQueue(this.elementQueue);
         this.spellCasterController.Cast();
-        this.elementQueue.Clear();
     }
 
     private void RightClickUp()
     {
-        this.isCasting = false;
         this.spellCasterController.StopCast();
     }
 
