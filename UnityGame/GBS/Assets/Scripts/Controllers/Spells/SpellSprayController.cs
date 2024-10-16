@@ -7,6 +7,7 @@ public class SpellSprayController : MonoBehaviour
     #region Variables
 
     [SerializeField] private ParticleSystem sprayParticleSystem;
+    [SerializeField] private float lifeTime = 5.0f;
 
     #endregion
 
@@ -19,7 +20,9 @@ public class SpellSprayController : MonoBehaviour
 
     void Update()
     {
-        
+        this.lifeTime -= Time.deltaTime;
+        if (this.lifeTime <= 0.0f)
+            Destroy(this.gameObject);
     }
 
     #endregion
