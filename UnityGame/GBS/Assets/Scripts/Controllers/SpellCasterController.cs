@@ -189,7 +189,7 @@ public class SpellCasterController : MonoBehaviour
     {
         if (autoStopCastingTime <= 0.0f)
         {
-            this.isCasting = false;
+            StopCast();
         }
         else
         {
