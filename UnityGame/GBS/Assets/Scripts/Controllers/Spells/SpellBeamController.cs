@@ -11,6 +11,7 @@ public class SpellBeamController : SpellBaseController
     [SerializeField] private float maxDistance;
     [SerializeField] private ParticleSystem particleStart;
     [SerializeField] private ParticleSystem particleEnd;
+    [SerializeField] private CapsuleCollider capsuleCollider;
 
     private float currentMaxDistance;
     private float distanceGrowthRate = 80.0f;
