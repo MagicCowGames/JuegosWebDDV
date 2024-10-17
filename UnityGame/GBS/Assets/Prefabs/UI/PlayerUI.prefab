@@ -843,7 +843,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6156768520960480652}
         m_TargetAssemblyTypeName: PlayerUIController, Assembly-CSharp
-        m_MethodName: Button_AddElement_Water
+        m_MethodName: Button_SetForm_Projectile
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1109,7 +1109,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6156768520960480652}
         m_TargetAssemblyTypeName: PlayerUIController, Assembly-CSharp
-        m_MethodName: Button_AddElement_Shield
+        m_MethodName: Button_SetForm_Shield
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3446,7 +3446,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6156768520960480652}
         m_TargetAssemblyTypeName: PlayerUIController, Assembly-CSharp
-        m_MethodName: Button_AddElement_Heal
+        m_MethodName: Button_SetForm_Beam
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
