@@ -763,6 +763,7 @@ GameObject:
   - component: {fileID: 1820937350}
   - component: {fileID: 1820937351}
   - component: {fileID: 1820937352}
+  - component: {fileID: 1820937353}
   m_Layer: 0
   m_Name: GameSystems
   m_TagString: Untagged
@@ -997,6 +998,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2cf0f182c819d44fb39b55c483f50ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1820937353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820937342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e199e50100f28d44a84cfbff249430f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverIp: localhost
+  serverPort: 27015
 --- !u!1001 &1881615478
 PrefabInstance:
   m_ObjectHideFlags: 0
