@@ -43,6 +43,7 @@ public class PlayerUIController : UIController, IComponentValidator
 
     // NOTE : These public functions are here because Unity's inspector doesn't support enums for OnClick events for buttons, so we use this workaround instead.
 
+    // Buttons : Elements
     public void Button_AddElement_Water() { Button_AddElement(Element.Water); }
     public void Button_AddElement_Heal() { Button_AddElement(Element.Heal); }
     public void Button_AddElement_Shield() { Button_AddElement(Element.Shield); }
@@ -51,6 +52,11 @@ public class PlayerUIController : UIController, IComponentValidator
     public void Button_AddElement_Death() { Button_AddElement(Element.Death); }
     public void Button_AddElement_Earth() { Button_AddElement(Element.Earth); }
     public void Button_AddElement_Fire() { Button_AddElement(Element.Fire); }
+
+    // Buttons : Form
+    public void Button_SetForm_Projectile() { Button_SetForm(Form.Projectile); }
+    public void Button_SetForm_Beam() { Button_SetForm(Form.Beam); }
+    public void Button_SetForm_Shield() { Button_SetForm(Form.Shield); }
 
     #endregion
 
@@ -81,6 +87,11 @@ public class PlayerUIController : UIController, IComponentValidator
     private void Button_AddElement(Element element)
     {
         InputManager.Instance?.AddElement(element);
+    }
+
+    private void Button_SetForm(Form form)
+    {
+        InputManager.Instance?.SetForm(form);
     }
 
     private void UpdateHealthBar(float delta)
