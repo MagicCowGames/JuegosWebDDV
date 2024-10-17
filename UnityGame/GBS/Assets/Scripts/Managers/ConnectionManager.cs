@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class ConnectionManager : SingletonPersistent<ConnectionManager>
 {
@@ -25,7 +26,8 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
 
     void Start()
     {
-        
+        SendMessageHTTP("/score/add/pedro/69");
+        SendMessageHTTP("/score");
     }
 
     void Update()
@@ -35,7 +37,7 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
 
     #endregion
 
-    #region PublicMethods
+    #region PublicMethods - Address
 
     public Address GetServerAddress()
     {
@@ -49,6 +51,36 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
 
     #endregion
 
+    #region PublicMethods - Messaging
+
+    public void SendMessageHTTP(string message)
+    {
+        Http(message);
+    }
+
+    #endregion
+
     #region PrivateMethods
+
+    private void Http(string message)
+    {
+        StartCoroutine(HttpCoroutine(this.ServerAddress.http, message));
+    }
+
+    private IEnumerator HttpCoroutine(string address, string message)
+    {
+        UnityWebRequest webRequest = new UnityWebRequest(address + message, "GET", new DownloadHandlerBuffer(), new UploadHandlerRaw(new byte[0]));
+        yield return webRequest.SendWebRequest();
+        if (webRequest.error == null)
+        {
+            DebugManager.Instance?.Log($"HTTP RESPONSE : {webRequest.downloadHandler.text}");
+        }
+        else
+        {
+            DebugManager.Instance?.Log($"HTTP ERROR : {webRequest.error}");
+        }
+        webRequest.Dispose();
+    }
+
     #endregion
 }
