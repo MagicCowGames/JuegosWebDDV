@@ -7,6 +7,7 @@ public class SpellBaseController : MonoBehaviour, ISpell
 {
     #region Variables
 
+    [Header("Basic Spell Settings")]
     [SerializeField] protected int[] ElementsCounts; // Array that holds the count of each element type.
     [SerializeField] protected Color spellColor;
 

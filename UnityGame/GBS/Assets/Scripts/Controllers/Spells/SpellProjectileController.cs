@@ -6,6 +6,7 @@ public class SpellProjectileController : SpellBaseController
 {
     #region Variables
 
+    [Header("Projectile Settings")]
     [SerializeField] private Rigidbody rigidBody;
     [SerializeField] private float force;
 

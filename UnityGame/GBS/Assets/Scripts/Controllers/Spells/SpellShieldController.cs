@@ -18,6 +18,8 @@ public class SpellShieldController : SpellBaseController
 
     #region Variables
 
+    [Header("Shield Settings")]
+
     // TODO : Replace this with an actual health component so that walls can be damaged and broken down faster with counter spells such as projectiles and whatnot.
     [SerializeField] private float lifeTime = 5.0f;
 

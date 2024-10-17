@@ -6,6 +6,7 @@ public class SpellSprayController : SpellBaseController
 {
     #region Variables
 
+    [Header("Spray Settings")]
     [SerializeField] private ParticleSystem sprayParticleSystem;
     [SerializeField] private float lifeTime = 5.0f;
 

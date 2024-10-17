@@ -6,6 +6,7 @@ public class SpellBeamController : SpellBaseController
 {
     #region Variables
 
+    [Header("Beam Settings")]
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private float maxDistance;
     [SerializeField] private ParticleSystem particleStart;
