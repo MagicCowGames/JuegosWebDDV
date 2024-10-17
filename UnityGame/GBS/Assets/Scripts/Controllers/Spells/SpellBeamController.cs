@@ -38,8 +38,16 @@ public class SpellBeamController : SpellBaseController
 
         this.OriginPoint = this.transform.position;
 
+        // Stupid fucking hack of a workaround. Prevents the beam from colliding with itself when performing the raycast.
+        // We disable the beam, raycast, then enable it again so that when other beams perform their raycasts, this beam will still
+        // have its collision enabled, all within the same frame.
+        // There is a proper Unity built-in system for this, but it seems like it only works with Physics2D...
+        this.capsuleCollider.enabled = false;
+
         RaycastHit hit;
         bool hasHit = Physics.Raycast(this.transform.position, this.transform.forward, out hit, this.currentMaxDistance);
+
+        this.capsuleCollider.enabled = true;
 
         if (hasHit)
         {
