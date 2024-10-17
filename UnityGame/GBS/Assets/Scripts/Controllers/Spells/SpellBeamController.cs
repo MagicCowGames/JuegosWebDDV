@@ -11,13 +11,15 @@ public class SpellBeamController : SpellBaseController
     [SerializeField] private float maxDistance;
     [SerializeField] private ParticleSystem particleStart;
     [SerializeField] private ParticleSystem particleEnd;
-    [SerializeField] private CapsuleCollider capsuleCollider;
+    [SerializeField] private CapsuleCollider capsuleCollider; // This capsule collider could be used both for beam collisions AND damage area. But maybe it makes more sense to only add a damage area at the target location, since that's technically the only possible contact point for a beam...
 
     private float currentMaxDistance;
     private float distanceGrowthRate = 80.0f;
     
     public Vector3 OriginPoint { get; private set; }
     public Vector3 TargetPoint { get; private set; }
+
+    public float Length { get; private set; } // Contains the length of the beam, which is the distance between the origin point and the target point.
 
     #endregion
 
@@ -49,6 +51,9 @@ public class SpellBeamController : SpellBaseController
             this.TargetPoint = this.OriginPoint + this.transform.forward * this.currentMaxDistance;
         }
 
+        this.Length = Vector3.Distance(this.TargetPoint, this.OriginPoint);
+
+
         // Update the positions for the beam's line renderer
         Vector3[] points = { this.OriginPoint, this.TargetPoint };
         this.lineRenderer.SetPositions(points);
@@ -56,6 +61,10 @@ public class SpellBeamController : SpellBaseController
         // Update the positions for the beam's particles
         this.particleStart.transform.position = this.OriginPoint;
         this.particleEnd.transform.position = this.TargetPoint;
+
+        // Update the capsule collider to fit the size of the beam
+        this.capsuleCollider.height = this.Length;
+        this.capsuleCollider.center = new Vector3(0.0f, 0.0f, this.Length / 2.0f);
     }
 
     #endregion
