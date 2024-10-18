@@ -27,8 +27,8 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
 
     void Start()
     {
-        SendMessageHTTP("/score/add/pedro/69");
-        SendMessageHTTP("/score");
+        // SendMessageHTTP("/score/add/pedro/69");
+        // SendMessageHTTP("/score");
 
         // StartCoroutine(Request_POST("localhost:27015/users"));
 
