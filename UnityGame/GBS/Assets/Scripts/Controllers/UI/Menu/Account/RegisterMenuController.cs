@@ -53,7 +53,19 @@ public class RegisterMenuController : MonoBehaviour
 
     public void Button_Submit()
     {
-
+        var name = this.inputFieldName.text;
+        var password = this.inputFieldPassword.text;
+        var callbacks = new ConnectionManager.RequestCallbacks();
+        callbacks.OnSuccess = (ans) => {
+            DebugManager.Instance?.Log($"Successfully created the account : {ans}");
+        };
+        callbacks.OnError = (err) => {
+            DebugManager.Instance?.Log($"Could not create the account : {err}");
+        };
+        callbacks.OnConnectionError = () => {
+            DebugManager.Instance?.Log("Connection Error");
+        };
+        AccountManager.Instance?.RegisterAccount(name, password, callbacks);
     }
 
     #endregion
