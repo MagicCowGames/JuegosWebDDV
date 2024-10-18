@@ -404,6 +404,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuBackgroundPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 4212689012766673698, guid: 5e8c11ffc94b3a84abff4f073e082f5b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5457059401737941967, guid: 5e8c11ffc94b3a84abff4f073e082f5b, type: 3}
       propertyPath: m_IsActive
       value: 1
