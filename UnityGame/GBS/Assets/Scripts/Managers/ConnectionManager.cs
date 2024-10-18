@@ -79,7 +79,11 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
 
     #region PublicMethods - Request
 
-    public void MakeRequest(string type, string url, string message, Action<string> onSuccess, Action<string> onError, Action onConnectionSuccess, Action onConnectionError)
+    // TODO : This whole request callback delegates business maybe should be encapsulated into some Request class of sorts or whatever
+    // so that we can configure the callbacks more easily in case that we want to use some of them but not all.
+    // idk, we'll see what happens, this public API is going to evolve with time anyways so whatever.
+
+    public void MakeRequest(string type, string url, string message, Action<string> onSuccess = null, Action<string> onError = null, Action onConnectionSuccess = null, Action onConnectionError = null)
     {
         StartCoroutine(MakeRequestInternal(type, url, message, onSuccess, onError, onConnectionSuccess, onConnectionError));
     }
