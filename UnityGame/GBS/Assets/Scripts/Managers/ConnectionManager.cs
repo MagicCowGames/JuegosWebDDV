@@ -6,6 +6,26 @@ using UnityEngine.Networking;
 
 public class ConnectionManager : SingletonPersistent<ConnectionManager>
 {
+    #region Classes
+
+    public struct RequestCallback
+    {
+        public Action<string> OnSuccess { get; set; }
+        public Action<string> OnError { get; set; }
+        public Action OnConnectionSuccess { get; set; }
+        public Action OnConnectionError { get; set; }
+
+        public RequestCallback(Action<string> onSuccess = null, Action<string> onError = null, Action onConnectionSuccess = null, Action onConnectionError = null)
+        {
+            this.OnSuccess = onSuccess;
+            this.OnError = onError;
+            this.OnConnectionSuccess = onConnectionSuccess;
+            this.OnConnectionError = onConnectionError;
+        }
+    }
+
+    #endregion
+
     #region Variables
 
     [Header("Server Address")]
