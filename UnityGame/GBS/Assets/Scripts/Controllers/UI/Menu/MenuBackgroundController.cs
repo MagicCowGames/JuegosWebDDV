@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// NOTE : This script could be used for all types of menus and UI elements with a background image, so maybe it would make sense to just rename
+// it to BackgroundUIController or something like that.
+
 [ExecuteInEditMode]
 public class MenuBackgroundController : UIController
 {
