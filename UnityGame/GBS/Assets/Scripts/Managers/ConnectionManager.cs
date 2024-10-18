@@ -8,14 +8,14 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
 {
     #region Classes
 
-    public struct RequestCallback
+    public class RequestCallbacks
     {
         public Action<string> OnSuccess { get; set; }
         public Action<string> OnError { get; set; }
         public Action OnConnectionSuccess { get; set; }
         public Action OnConnectionError { get; set; }
 
-        public RequestCallback(Action<string> onSuccess = null, Action<string> onError = null, Action onConnectionSuccess = null, Action onConnectionError = null)
+        public RequestCallbacks(Action<string> onSuccess = null, Action<string> onError = null, Action onConnectionSuccess = null, Action onConnectionError = null)
         {
             this.OnSuccess = onSuccess;
             this.OnError = onError;
@@ -52,7 +52,7 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
 
         // StartCoroutine(Request_POST("localhost:27015/users"));
 
-        MakeRequest("GET", "localhost:27015", "/users",
+        MakeRequest("GET", "localhost:27015", "/users", new RequestCallbacks(
             (ans) => {
                 DebugManager.Instance?.Log($"OnSuccess : {ans}");
             },
@@ -64,7 +64,7 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
             },
             () => {
                 DebugManager.Instance?.Log("OnConnectError");
-            });
+            }));
     }
 
     void Update()
@@ -97,26 +97,26 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
 
     #endregion
 
-    #region PublicMethods - Request
+    #region PublicMethods - Make Request
 
-    // TODO : This whole request callback delegates business maybe should be encapsulated into some Request class of sorts or whatever
-    // so that we can configure the callbacks more easily in case that we want to use some of them but not all.
-    // idk, we'll see what happens, this public API is going to evolve with time anyways so whatever.
-
-    public void MakeRequest(string type, string url, string message, Action<string> onSuccess = null, Action<string> onError = null, Action onConnectionSuccess = null, Action onConnectionError = null)
+    public void MakeRequest(string type, string url, string message, RequestCallbacks callbacks = null)
     {
-        StartCoroutine(MakeRequestInternal(type, url, message, onSuccess, onError, onConnectionSuccess, onConnectionError));
+        StartCoroutine(MakeRequestInternal(type, url, message, callbacks));
     }
 
-    public IEnumerator MakeRequestInternal(string type, string url, string message, Action<string> onSuccess, Action<string> onError, Action onConnectionSuccess, Action onConnectionError)
+    #endregion
+
+    #region PrivateMethods - Make Request
+
+    private IEnumerator MakeRequestInternal(string type, string url, string message, RequestCallbacks callbacks)
     {
         switch (type)
         {
             case "GET":
-                yield return Request_GET(url, message, onSuccess, onError, onConnectionSuccess, onConnectionError);
+                yield return Request_GET(url, message, callbacks);
                 break;
             case "POST":
-                yield return Request_POST(url, message, onSuccess, onError, onConnectionSuccess, onConnectionError);
+                yield return Request_POST(url, message, callbacks);
                 break;
             default:
                 break;
@@ -125,44 +125,44 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
 
     #endregion
 
-    #region PublicMethods - Request Types
+    #region PrivateMethods - Request Types
 
-    public IEnumerator Request_Generic_Run(UnityWebRequest uwr, Action<string> onSuccess, Action<string> onError, Action onConnectionSuccess, Action onConnectionError)
+    private IEnumerator Request_Generic_Run(UnityWebRequest uwr, RequestCallbacks callbacks)
     {
         yield return uwr.SendWebRequest();
 
         if (uwr.result == UnityWebRequest.Result.ConnectionError)
         {
-            onConnectionError?.Invoke();
+            callbacks?.OnConnectionError?.Invoke();
         }
         else
         {
-            onConnectionSuccess?.Invoke();
+            callbacks?.OnConnectionSuccess?.Invoke();
             if (uwr.error == null)
             {
-                onSuccess?.Invoke(uwr.downloadHandler.text);
+                callbacks?.OnSuccess?.Invoke(uwr.downloadHandler.text);
             }
             else
             {
-                onError?.Invoke(uwr.error);
+                callbacks?.OnError?.Invoke(uwr.error);
             }
         }
     }
 
-    public IEnumerator Request_GET(string url, string message, Action<string> onSuccess, Action<string> onError, Action onConnectionSuccess, Action onConnectionError)
+    private IEnumerator Request_GET(string url, string message, RequestCallbacks callbacks)
     {
         var uwr = new UnityWebRequest(url + message, "GET", new DownloadHandlerBuffer(), new UploadHandlerRaw(new byte[0]));
-        yield return Request_Generic_Run(uwr, onSuccess, onError, onConnectionSuccess, onConnectionError);
+        yield return Request_Generic_Run(uwr, callbacks);
     }
 
-    public IEnumerator Request_POST(string url, string message, Action<string> onSuccess, Action<string> onError, Action onConnectionSuccess, Action onConnectionError)
+    private IEnumerator Request_POST(string url, string message, RequestCallbacks callbacks)
     {
         var uwr = new UnityWebRequest(url, "POST");
         byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(message); // message is of type JSON string
         uwr.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
         uwr.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         uwr.SetRequestHeader("Content-Type", "application/json");
-        yield return Request_Generic_Run(uwr, onSuccess, onError, onConnectionSuccess, onConnectionError);
+        yield return Request_Generic_Run(uwr, callbacks);
     }
 
     #endregion
