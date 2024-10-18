@@ -548,8 +548,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 552914334}
-        m_TargetAssemblyTypeName: AccountMenuController, Assembly-CSharp
-        m_MethodName: Button_Return
+        m_TargetAssemblyTypeName: RegisterMenuController, Assembly-CSharp
+        m_MethodName: Button_Back
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -681,8 +681,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 552914334}
-        m_TargetAssemblyTypeName: AccountMenuController, Assembly-CSharp
-        m_MethodName: Button_Login
+        m_TargetAssemblyTypeName: RegisterMenuController, Assembly-CSharp
+        m_MethodName: Button_Submit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -741,7 +741,7 @@ GameObject:
   - component: {fileID: 552914333}
   - component: {fileID: 552914334}
   m_Layer: 0
-  m_Name: AM_UI
+  m_Name: RegisterUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -772,9 +772,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 552914332}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d4c73e1752cf2f4c8abf4a5ff09cf4c, type: 3}
+  m_Script: {fileID: 11500000, guid: 72bb316620720ca4487a603c7a501e81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputFieldName: {fileID: 1921212841}
+  inputFieldPassword: {fileID: 2069089004}
 --- !u!1 &800673905
 GameObject:
   m_ObjectHideFlags: 0
@@ -1218,8 +1220,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1227,7 +1229,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.2
 --- !u!222 &1276192084
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2279,8 +2281,8 @@ MonoBehaviour:
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
