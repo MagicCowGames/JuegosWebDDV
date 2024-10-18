@@ -26,16 +26,18 @@ public class AccountManager : SingletonPersistent<AccountManager>
 
     #region PublicMethods
 
-    public void RegisterAccount(string name, string password)
+    public void RegisterAccount(string name, string password, ConnectionManager.RequestCallbacks callbacks)
+    {
+        ConnectionManager.Instance.MakeRequest("GET", ConnectionManager.Instance.ServerAddress.http, $"/users/add/{name}/{password}", callbacks);
+    }
+
+    public void EnterAccount(string name, string password, ConnectionManager.RequestCallbacks callbacks)
     { }
 
-    public void EnterAccount(string name, string password)
+    public void DeleteAccount(string name, string password, ConnectionManager.RequestCallbacks callbacks)
     { }
 
-    public void DeleteAccount(string name, string password)
-    { }
-
-    public void ModifyAccount(string oldName, string oldPassword, string newName, string newPassword)
+    public void ModifyAccount(string oldName, string oldPassword, string newName, string newPassword, ConnectionManager.RequestCallbacks callbacks)
     { }
 
     #endregion
