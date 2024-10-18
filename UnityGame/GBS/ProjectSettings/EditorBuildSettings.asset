@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Debug/DebugSceneGameplay.unity
     guid: d1c3c2f73d6b3b9488d7067ae344468c
   - enabled: 1
-    path: Assets/Scenes/Menu/MenuScene_Account.unity
+    path: Assets/Scenes/Menu/Account/MS_Account.unity
     guid: aefc9bcb37459e74ea8a912d5d6317ce
+  - enabled: 1
+    path: Assets/Scenes/Menu/Account/MS_A_Register.unity
+    guid: 4e4038a63b7d307418011d36e7a6fbe2
   m_configObjects: {}
