@@ -31,6 +31,20 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
         SendMessageHTTP("/score");
 
         // StartCoroutine(Request_POST("localhost:27015/users"));
+
+        MakeRequest("GET", "localhost:27015", "/users",
+            (ans) => {
+                DebugManager.Instance?.Log($"OnSuccess : {ans}");
+            },
+            (err) => {
+                DebugManager.Instance?.Log($"OnError : {err}");
+            },
+            () => {
+                DebugManager.Instance?.Log("OnConnectSuccess");
+            },
+            () => {
+                DebugManager.Instance?.Log("OnConnectError");
+            });
     }
 
     void Update()
