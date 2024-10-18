@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +29,8 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
     {
         SendMessageHTTP("/score/add/pedro/69");
         SendMessageHTTP("/score");
+
+        // StartCoroutine(Request_POST("localhost:27015/users"));
     }
 
     void Update()
@@ -56,6 +59,48 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
     public void SendMessageHTTP(string message)
     {
         Http(message);
+    }
+
+    #endregion
+
+    #region PublicMethods - Request Types
+
+    public IEnumerator Request_Generic_Run(UnityWebRequest uwr, Action<string> onSuccess, Action<string> onError, Action onConnectionSuccess, Action onConnectionError)
+    {
+        yield return uwr.SendWebRequest();
+
+        if (uwr.result == UnityWebRequest.Result.ConnectionError)
+        {
+            onConnectionError?.Invoke();
+        }
+        else
+        {
+            onConnectionSuccess?.Invoke();
+            if (uwr.error == null)
+            {
+                onSuccess?.Invoke(uwr.downloadHandler.text);
+            }
+            else
+            {
+                onError?.Invoke(uwr.error);
+            }
+        }
+    }
+
+    public IEnumerator Request_GET(string url, string message, Action<string> onSuccess, Action<string> onError, Action onConnectionSuccess, Action onConnectionError)
+    {
+        var uwr = new UnityWebRequest(url + message, "GET", new DownloadHandlerBuffer(), new UploadHandlerRaw(new byte[0]));
+        yield return Request_Generic_Run(uwr, onSuccess, onError, onConnectionSuccess, onConnectionError);
+    }
+
+    public IEnumerator Request_POST(string url, string message, Action<string> onSuccess, Action<string> onError, Action onConnectionSuccess, Action onConnectionError)
+    {
+        var uwr = new UnityWebRequest(url, "POST");
+        byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(message); // message is of type JSON string
+        uwr.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
+        uwr.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        uwr.SetRequestHeader("Content-Type", "application/json");
+        yield return Request_Generic_Run(uwr, onSuccess, onError, onConnectionSuccess, onConnectionError);
     }
 
     #endregion
