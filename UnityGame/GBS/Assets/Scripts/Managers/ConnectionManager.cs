@@ -63,6 +63,30 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
 
     #endregion
 
+    #region PublicMethods - Request
+
+    public void MakeRequest(string type, string url, string message, Action<string> onSuccess, Action<string> onError, Action onConnectionSuccess, Action onConnectionError)
+    {
+        StartCoroutine(MakeRequestInternal(type, url, message, onSuccess, onError, onConnectionSuccess, onConnectionError));
+    }
+
+    public IEnumerator MakeRequestInternal(string type, string url, string message, Action<string> onSuccess, Action<string> onError, Action onConnectionSuccess, Action onConnectionError)
+    {
+        switch (type)
+        {
+            case "GET":
+                yield return Request_GET(url, message, onSuccess, onError, onConnectionSuccess, onConnectionError);
+                break;
+            case "POST":
+                yield return Request_POST(url, message, onSuccess, onError, onConnectionSuccess, onConnectionError);
+                break;
+            default:
+                break;
+        }
+    }
+
+    #endregion
+
     #region PublicMethods - Request Types
 
     public IEnumerator Request_Generic_Run(UnityWebRequest uwr, Action<string> onSuccess, Action<string> onError, Action onConnectionSuccess, Action onConnectionError)
