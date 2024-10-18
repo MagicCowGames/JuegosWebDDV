@@ -36,6 +36,11 @@ public class MainMeuController : MonoBehaviour
         SceneLoadingManager.Instance?.LoadScene("DebugSceneGameplay");
     }
 
+    public void LoadAccountMenu()
+    {
+        SceneLoadingManager.Instance?.LoadScene("MenuScene_Account");
+    }
+
     #endregion
 
     #region PrivateMethods
