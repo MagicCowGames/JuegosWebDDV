@@ -43,10 +43,18 @@ public class DebugManager : Singleton<DebugManager>
 
     #region PublicMethods
 
+    public void LogInternal(string str)
+    {
+        if (this.debugEnabled)
+            Debug.Log(str);
+    }
+
     public void Log(string str)
     {
-        if(this.debugEnabled)
-            Debug.Log($"[Debug] : {str}");
+        if (!this.debugEnabled)
+            return;
+        var p = $"[Debug] : {str}";
+        UIManager.Instance?.GetConsoleUI().CmdPrintln(p);
     }
 
     public void Run(Action function)

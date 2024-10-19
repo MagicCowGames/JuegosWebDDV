@@ -115,7 +115,7 @@ public class ConsoleUIController : UIController
     public void RunCommand(string command)
     {
         string str = command.Trim(); // Trim whitespace on the left and right sides of the input command string.
-        DebugManager.Instance?.Log($"Running command : {str}");
+        // DebugManager.Instance?.Log($"Running command : {str}");
         if(str.Length > 0) // only run the command if it contains at least 1 single character.
             this.CmdRun(str);
         // With the trimming and length check, commands that are entirely made up of whitespace will be ignored, preventing errors from being displayed when pressing enter with no commands written on the input field.
@@ -215,14 +215,22 @@ public class ConsoleUIController : UIController
     #region Cmd - Print
 
     // Print a message to the console
-    private void CmdPrint(string message = "")
+    public void CmdPrint(string message = "")
     {
-        DebugManager.Instance?.Log(message);
+        // This is a fucking hack, and if you look at the implementation within DebugManager you will understand why...
+        // a fucking intertwined and mangled piece of shit of coupled calls between this controller instance and the DebugManager,
+        // having to expose internal functions to the public interface, etc etc...
+        // A more logical solution would be creating a .ConsoleLog() function within the DebugManager and enforcing its use instead of the regular Log,
+        // or adding a parameter to .Log() to determine whether you want the output to appear on the console or not... for now, this works flawlessly, but
+        // it makes me uncomfortable...
+        // Also logs on loops will become annoying as fuck, maybe I should implement some debug level command rather than it being a boolean value...
+        // It would still act as a global kill switch setting it to 0, so yeah.
+        DebugManager.Instance?.LogInternal(message);
         this.consoleText.text += $"{message}";
     }
 
     // Print a line to the console
-    private void CmdPrintln(string message = "")
+    public void CmdPrintln(string message = "")
     {
         CmdPrint($"{message}\n");
     }
@@ -334,8 +342,8 @@ public class ConsoleUIController : UIController
     {
         string arg = args[startIndex + 1];
         bool b = CmdParseBool(arg);
-        DebugManager.Instance?.SetDebugEnabled(b);
         CmdPrintln($"Debug Logging Enabled : {b}");
+        DebugManager.Instance?.SetDebugEnabled(b);
     }
 
     private void CmdInfo(string[] args, int startIndex)
