@@ -6,6 +6,9 @@ public class SpellBeamController : SpellBaseController
 {
     #region Variables
 
+    [Header("Prefab Reference")]
+    [SerializeField] private GameObject beamPrefab;
+
     [Header("Beam Settings")]
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private float maxDistance;
@@ -21,6 +24,12 @@ public class SpellBeamController : SpellBaseController
 
     public float Length { get; private set; } // Contains the length of the beam, which is the distance between the origin point and the target point.
 
+
+    // NOTE : The encapsulation is fucked with these ones, but it's the only way I could come up with after a couple of beers to achieve setting
+    // the child beam on the collided-with beam when 2 beams collide with eachother so as to prevent spawning another fucking child.
+    public SpellBeamController OtherBeam { get; set; }
+    public SpellBeamController ChildBeam { get; set; }
+
     #endregion
 
     #region MonoBehaviour
@@ -28,6 +37,9 @@ public class SpellBeamController : SpellBaseController
     void Start()
     {
         this.currentMaxDistance = 0.0f;
+
+        this.OtherBeam = null;
+        this.ChildBeam = null;
     }
 
     void Update()
@@ -43,20 +55,45 @@ public class SpellBeamController : SpellBaseController
         // have its collision enabled, all within the same frame.
         // There is a proper Unity built-in system for this, but it seems like it only works with Physics2D...
         this.capsuleCollider.enabled = false;
+        if(this.ChildBeam != null)
+            this.ChildBeam.GetComponent<CapsuleCollider>().enabled = false;
 
         RaycastHit hit;
         bool hasHit = Physics.Raycast(this.transform.position, this.transform.forward, out hit, this.currentMaxDistance);
 
         this.capsuleCollider.enabled = true;
+        if (this.ChildBeam != null)
+            this.ChildBeam.GetComponent<CapsuleCollider>().enabled = true;
 
         if (hasHit)
         {
             this.TargetPoint = hit.point;
             this.currentMaxDistance = hit.distance; // Reset the current max distance to the distance between the origin point and the hit point so that the beam wont grow instantly when moving between surfaces at different distances.
+
+            this.OtherBeam = hit.collider.gameObject.GetComponent<SpellBeamController>();
+
+            if (this.ChildBeam == null && this.OtherBeam != null)
+            {
+                this.ChildBeam = ObjectSpawner.Spawn(this.beamPrefab, this.TargetPoint).GetComponent<SpellBeamController>();
+                this.OtherBeam.ChildBeam = this.ChildBeam;
+            }
+            else
+            {
+                if(this.ChildBeam != null)
+                    this.ChildBeam.transform.position = this.TargetPoint;
+            }
         }
         else
         {
             this.TargetPoint = this.OriginPoint + this.transform.forward * this.currentMaxDistance;
+
+            if (this.OtherBeam != null)
+            {
+                this.OtherBeam.ChildBeam = null;
+                this.OtherBeam = null;
+                Destroy(this.ChildBeam.gameObject);
+                this.ChildBeam = null;
+            }
         }
 
         this.Length = Vector3.Distance(this.TargetPoint, this.OriginPoint);

@@ -4993,6 +4993,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ElementsCounts: 
   spellColor: {r: 0, g: 0, b: 0, a: 0}
+  beamPrefab: {fileID: 4110217941577811738}
   lineRenderer: {fileID: 6243396936320162742}
   maxDistance: 1000
   particleStart: {fileID: 6559726009360083850}
