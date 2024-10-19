@@ -8,8 +8,7 @@ public class RegisterMenuController : MonoBehaviour
 {
     #region Variables
 
-    [SerializeField] private TMP_InputField inputFieldName;
-    [SerializeField] private TMP_InputField inputFieldPassword;
+    [SerializeField] UserDataInputBoxController inputBox;
 
     #endregion
 
@@ -29,32 +28,17 @@ public class RegisterMenuController : MonoBehaviour
 
     #region PublicMethods
 
-    public bool GetPasswordVisible()
-    {
-        return this.inputFieldPassword.contentType == TMP_InputField.ContentType.Password;
-    }
-
     public void Button_Back()
     {
         SceneLoadingManager.Instance?.LoadScene("MS_Account");
     }
 
-    public void Button_SwitchPasswordVisibility()
-    {
-        if (GetPasswordVisible())
-        {
-            ShowPassword();
-        }
-        else
-        {
-            HidePassword();
-        }
-    }
-
     public void Button_Submit()
     {
-        var name = this.inputFieldName.text;
-        var password = this.inputFieldPassword.text;
+        DebugManager.Instance?.Log("Submitting Request to Register Account...");
+
+        var name = this.inputBox.GetName();
+        var password = this.inputBox.GetPassword();
         var callbacks = new ConnectionManager.RequestCallbacks();
         callbacks.OnSuccess = (ans) => {
             DebugManager.Instance?.Log($"Successfully created the account : {ans}");
@@ -71,16 +55,5 @@ public class RegisterMenuController : MonoBehaviour
     #endregion
 
     #region PrivateMethods
-
-    private void ShowPassword()
-    {
-        this.inputFieldPassword.contentType = TMP_InputField.ContentType.Standard;
-    }
-
-    private void HidePassword()
-    {
-        this.inputFieldPassword.contentType = TMP_InputField.ContentType.Password;
-    }
-
     #endregion
 }
