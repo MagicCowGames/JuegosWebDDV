@@ -24,7 +24,7 @@ public class AccountManager : SingletonPersistent<AccountManager>
 
     #endregion
 
-    #region PublicMethods
+    #region PublicMethods - Account Requests
 
     public void RegisterAccount(string name, string password, ConnectionManager.RequestCallbacks callbacks)
     {
@@ -40,6 +40,13 @@ public class AccountManager : SingletonPersistent<AccountManager>
     { }
 
     public void ModifyAccount(string oldName, string oldPassword, string newName, string newPassword, ConnectionManager.RequestCallbacks callbacks)
+    { }
+
+    #endregion
+
+    #region PublicMethods - Account Data
+
+    public void SetAccountData()
     { }
 
     #endregion
