@@ -65,6 +65,7 @@ public class SpellBeamController : SpellBaseController
         if (this.ChildBeam != null)
             this.ChildBeam.GetComponent<CapsuleCollider>().enabled = true;
 
+        // TODO : Fix this shit. Also make beams thinnger. Also implement the fucking spell pool on the magic manager... etc, etc...
         if (hasHit)
         {
             this.TargetPoint = hit.point;
@@ -81,6 +82,12 @@ public class SpellBeamController : SpellBaseController
             {
                 if(this.ChildBeam != null)
                     this.ChildBeam.transform.position = this.TargetPoint;
+
+                if (this.OtherBeam == null && this.ChildBeam != null)
+                {
+                    Destroy(this.ChildBeam.gameObject);
+                    this.ChildBeam = null;
+                }
             }
         }
         else
