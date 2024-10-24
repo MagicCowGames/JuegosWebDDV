@@ -12,9 +12,16 @@ public static class LanguageSystem
 {
     #region Variables
 
-    private static string currentLanguage { get; set; }
+    private static string currentLanguage { get; set; } = "english";
 
-    private static Dictionary<string, Dictionary<string, string>> languageData;
+    private static Dictionary<string, Dictionary<string, string>> languageData = new Dictionary<string, Dictionary<string, string>> {
+        {"english", new Dictionary<string, string> {
+            { "loc_play", "Play"},
+            { "loc_account", "Account" },
+            { "loc_settings", "Settings" },
+            { "loc_credits", "Credits" }
+        } }
+    };
 
     #endregion
 
@@ -22,9 +29,10 @@ public static class LanguageSystem
 
     public static string GetLocalizedString(string language, string locString)
     {
-        if(languageData.ContainsKey(language))
-            if (languageData[language].ContainsKey(locString))
-                return languageData[language][locString];
+        if(languageData != null)
+            if(languageData.ContainsKey(language))
+                if (languageData[language].ContainsKey(locString))
+                    return languageData[language][locString];
         return $"LOC[\"{language}\"][\"{locString}\"] NOT FOUND";
     }
 
