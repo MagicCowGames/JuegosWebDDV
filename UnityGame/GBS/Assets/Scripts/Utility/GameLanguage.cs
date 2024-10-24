@@ -8,7 +8,7 @@ using UnityEngine;
 // Unity include and then read config files in the build for WebGL when it would be as trivial as including a simple
 // JS script file with a JSON object for the language data like back in Burning Village...
 // but yeah, it is what it is... it kind of kills modding support, but it's not like it even matters for this game tbh
-public static class LanguageSystem
+public static class LanguageSystem // TODO : Rename this fucking class bruh
 {
     #region Variables
 
@@ -19,7 +19,15 @@ public static class LanguageSystem
             { "loc_play", "Play"},
             { "loc_account", "Account" },
             { "loc_settings", "Settings" },
-            { "loc_credits", "Credits" }
+            { "loc_credits", "Credits" },
+            { "loc_return", "Return" }
+        } },
+        { "spanish", new Dictionary<string, string> {
+            { "loc_play", "Jugar" },
+            { "loc_account", "Cuenta" },
+            { "loc_settings", "Configuración" },
+            { "loc_credits", "Créditos" },
+            { "loc_return", "Volver" }
         } }
     };
 
