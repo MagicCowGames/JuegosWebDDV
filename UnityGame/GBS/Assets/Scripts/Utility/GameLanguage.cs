@@ -29,7 +29,8 @@ public static class LanguageSystem
 
     public static string GetLocalizedString(string language, string locString)
     {
-        if(languageData != null)
+        // This if ladder is ugly, and I know how to fix it, but it's not even going to make performance better or worse so I can't be assed right now to clean this shit.
+        if(languageData != null && language != null && locString != null)
             if(languageData.ContainsKey(language))
                 if (languageData[language].ContainsKey(locString))
                     return languageData[language][locString];
