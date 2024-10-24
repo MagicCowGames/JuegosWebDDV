@@ -16,20 +16,12 @@ public class LocalizedTextController : MonoBehaviour
 
     void Start()
     {
-        
-    }
-
-    void Update()
-    {
-        
+        UpdateLocalizedText();
     }
 
     void OnValidate()
     {
-        var obj = this.GetComponent<TMP_Text>();
-        if (obj == null)
-            return;
-        obj.text = LanguageSystem.GetLocalizedString(localizationString);
+        UpdateLocalizedText();
     }
 
     #endregion
@@ -38,5 +30,14 @@ public class LocalizedTextController : MonoBehaviour
     #endregion
 
     #region PrivateMethods
+
+    private void UpdateLocalizedText()
+    {
+        var obj = this.GetComponent<TMP_Text>();
+        if (obj == null)
+            return;
+        obj.text = LanguageSystem.GetLocalizedString(localizationString);
+    }
+
     #endregion
 }
