@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class LocalizedTextController : MonoBehaviour
 {
     #region Variables
+
+    [SerializeField] private string localizationString;
 
     #endregion
 
@@ -18,6 +22,14 @@ public class LocalizedTextController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnValidate()
+    {
+        var obj = this.GetComponent<TMP_Text>();
+        if (obj == null)
+            return;
+        obj.text = LanguageSystem.GetLocalizedString(localizationString);
     }
 
     #endregion
