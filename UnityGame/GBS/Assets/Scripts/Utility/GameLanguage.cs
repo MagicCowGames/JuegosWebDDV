@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 // NOTE : If it were up to me, I would personally store the language data within some JSON files on the game's files
@@ -10,12 +11,38 @@ using UnityEngine;
 public static class LanguageSystem
 {
     #region Variables
-    
-    public static string DefaultString { get; private set; }
+
+    private static string currentLanguage { get; set; }
+
+    private static Dictionary<string, Dictionary<string, string>> languageData;
 
     #endregion
 
     #region PublicMethods
+
+    public static string GetLocalizedString(string language, string locString)
+    {
+        if(languageData.ContainsKey(language))
+            if (languageData[language].ContainsKey(locString))
+                return languageData[language][locString];
+        return $"LOC[\"{language}\"][\"{locString}\"] NOT FOUND";
+    }
+
+    public static string GetLocalizedString(string locString)
+    {
+        return GetLocalizedString(currentLanguage, locString);
+    }
+
+    public static void SetLanguage(string language)
+    {
+        currentLanguage = language;
+    }
+
+    public static string GetLanguage()
+    {
+        return currentLanguage;
+    }
+
     #endregion
 
     #region PrivateMethods
