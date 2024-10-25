@@ -83,7 +83,8 @@ public class ConsoleUIController : UIController
             new Cmd("color_bg", "Set the color of the background", "<red> <green> <blue>", 3, CmdColorBG),
             new Cmd("cheats", "Enable or disable cheats", "<enabled>", 1, CmdCheats, false),
             new Cmd("lang", "Set the current language", "<language>", 1, CmdLang),
-            new Cmd("langlist", "Display a list of all the available languages", "", 0, CmdLangList)
+            new Cmd("langlist", "Display a list of all the available languages", "", 0, CmdLangList),
+            // TODO : Add commands to get the current map name and the current language or something...
         };
         // TODO : Make an alias system of sorts, or maybe make it so that we can have a dict / list system to have multiple overloads for the same command
         // with different parameters (eg: tp <pos>, tp <name> <pos>, tp <name> <target>, etc...) or different cmd names for the same underlying cmd (eg: clear and cls)
