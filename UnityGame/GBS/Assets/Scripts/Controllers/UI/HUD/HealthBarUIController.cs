@@ -53,6 +53,9 @@ public class HealthBarUIController : UIController, IComponentValidator
 
     #region IComponentValidator
 
+    // TODO : In the future, we can add the camera and stuff like that to the init scene so that it always exists, and always use that one and manipulate it
+    // with the camera manager with teleports and ease-in/out movements. That way, none of the null checks would have to be performed every single frame, since
+    // we can guarantee that the data exists statically at all times from the moment the game data is initialized.
     public bool AllComponentsAreValid()
     {
         return
