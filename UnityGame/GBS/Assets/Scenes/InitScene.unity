@@ -422,7 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da73a5219dd0d5e4da8fa825d3d225ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasReference: {fileID: 0}
+  canvasReference: {fileID: 1641264776}
 --- !u!1001 &696676319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -864,6 +864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuScene: MenuScene_MainMenu
   creditsScene: MenuScene_Credits
+  settingsScene: MenuScene_Settings
 --- !u!114 &1820937350
 MonoBehaviour:
   m_ObjectHideFlags: 0

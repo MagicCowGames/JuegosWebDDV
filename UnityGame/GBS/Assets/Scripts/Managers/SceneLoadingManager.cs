@@ -7,9 +7,16 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
 {
     #region Variables
 
+    // NOTE : This may seem like a weird system... why not just load them by name always? well, simple. What happens if I need to rename a scene that is accessed
+    // by many other scenes? then I would need to go renaming the destination scene of the return button on multiple scenes that lead back to said scene...
+    // an alternative would be to make a stack system for the menus where the menus you entered are saved on a stack so that you can make the return button
+    // just pop the last level and return to the previous level without having to specify names. This would also add weird beahviour if we used the map command
+    // to load any specific menu map... because using map would require clearing the stack, and possibly breaking things, so I need to think about this before
+    // implementing shit all willy nilly...
     [Header("Scene Names - Menus")]
     [SerializeField] private string mainMenuScene;
     [SerializeField] private string creditsScene;
+    [SerializeField] private string settingsScene;
 
     #endregion
 
@@ -53,6 +60,11 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
     public void LoadSceneCredits()
     {
         LoadScene(creditsScene);
+    }
+
+    public void LoadSceneSettings()
+    {
+        LoadScene(settingsScene);
     }
 
     #endregion
