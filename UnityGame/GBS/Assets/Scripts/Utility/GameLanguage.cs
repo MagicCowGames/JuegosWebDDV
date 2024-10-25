@@ -78,7 +78,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             foreach (var lang in languageStrings)
                 if (lang.Value.Contains(language))
                     currentLanguage = lang.Key;
-        currentLanguage = Language.None;
+        currentLanguage = Language.English; // Set the language to English by default if the string could not be found.
+        // NOTE : Maybe we should just not change the current language if the language is not found? Or offer an external bool func to return if the str is valid or not.
     }
 
     public static void SetLanguage(Language language)
