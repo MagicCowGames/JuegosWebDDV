@@ -46,7 +46,7 @@ public class HealthBarUIController : UIController, IComponentValidator
 
     private void UpdateLookAtTarget()
     {
-        this.lookAtController.SetLookAtTarget(CameraManager.Instance.GetActiveCamera().transform);
+        this.lookAtController.TargetTransform = CameraManager.Instance.GetActiveCamera().transform;
     }
 
     #endregion
