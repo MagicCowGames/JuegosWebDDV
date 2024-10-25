@@ -10,6 +10,8 @@ public class LocalizedTextController : MonoBehaviour
 
     [SerializeField] private string localizationString;
 
+    LanguageSystem.Language currentLanguage; // The language this localized text currently has
+
     #endregion
 
     #region MonoBehaviour
@@ -17,6 +19,13 @@ public class LocalizedTextController : MonoBehaviour
     void Start()
     {
         UpdateLocalizedText();
+    }
+
+    void Update()
+    {
+        // Update the language if it has been changed.
+        if (this.currentLanguage != LanguageSystem.GetLanguage())
+            UpdateLocalizedText();
     }
 
     void OnValidate()
@@ -33,10 +42,14 @@ public class LocalizedTextController : MonoBehaviour
 
     private void UpdateLocalizedText()
     {
+        // Update the displayed text of this localized text
         var obj = this.GetComponent<TMP_Text>();
         if (obj == null)
             return;
         obj.text = LanguageSystem.GetLocalizedString(localizationString);
+
+        // Update the current language value of this localized text
+        this.currentLanguage = LanguageSystem.GetLanguage();
     }
 
     #endregion
