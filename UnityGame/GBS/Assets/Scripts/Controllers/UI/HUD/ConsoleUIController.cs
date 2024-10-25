@@ -81,7 +81,9 @@ public class ConsoleUIController : UIController
             new Cmd("heal", "Set the health of the player to the max value", "", 0, CmdHeal, true),
             new Cmd("color_fg", "Set the color of the foreground", "<red> <green> <blue>", 3, CmdColorFG),
             new Cmd("color_bg", "Set the color of the background", "<red> <green> <blue>", 3, CmdColorBG),
-            new Cmd("cheats", "Enable or disable cheats", "<enabled>", 1, CmdCheats, false)
+            new Cmd("cheats", "Enable or disable cheats", "<enabled>", 1, CmdCheats, false),
+            new Cmd("lang", "Set the current language", "<language>", 1, CmdLang),
+            new Cmd("langlist", "Display a list of all the available languages", "", 0, CmdLangList)
         };
         // TODO : Make an alias system of sorts, or maybe make it so that we can have a dict / list system to have multiple overloads for the same command
         // with different parameters (eg: tp <pos>, tp <name> <pos>, tp <name> <target>, etc...) or different cmd names for the same underlying cmd (eg: clear and cls)
@@ -434,6 +436,21 @@ public class ConsoleUIController : UIController
         var arg = args[startIndex + 1];
         this.cheatsEnabled = CmdParseBool(arg);
         CmdPrintln($"Cheats have been {(this.cheatsEnabled ? CmdGetColorString("Enabled", Color.green) : CmdGetColorString("Disabled", Color.red))}!");
+    }
+
+    private void CmdLang(string[] args, int startIndex)
+    {
+        var arg = args[startIndex + 1];
+        LanguageSystem.SetLanguage(arg.ToLower());
+        CmdPrintln($"Language set to \"{LanguageSystem.GetLanguage()}\"");
+    }
+
+    private void CmdLangList(string[] args, int startIndex)
+    {
+        CmdPrint("Languages : [ ");
+        for (int i = 0; i < (int)LanguageSystem.Language.COUNT; ++i)
+            CmdPrint($"{(LanguageSystem.Language)i} ");
+        CmdPrintln("]");
     }
 
     #endregion

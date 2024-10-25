@@ -53,8 +53,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
     };
 
     private static Dictionary<Language, string[]> languageStrings = new Dictionary<Language, string[]> {
-        { Language.English, new string[] { "english", "en" } },
-        { Language.Spanish, new string[] { "spanish", "es" } }
+        { Language.English, new string[] { "0", "english", "en", "eng" } },
+        { Language.Spanish, new string[] { "1", "spanish", "es", "esp" } }
     };
 
     #endregion
@@ -81,7 +81,10 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
         if (language != null)
             foreach (var lang in languageStrings)
                 if (lang.Value.Contains(language))
+                {
                     currentLanguage = lang.Key;
+                    return;
+                }
         currentLanguage = Language.English; // Set the language to English by default if the string could not be found.
         // NOTE : Maybe we should just not change the current language if the language is not found? Or offer an external bool func to return if the str is valid or not.
     }
