@@ -1616,8 +1616,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasReference: {fileID: 2124717928}
-  buttonLanguageLeft: {fileID: 0}
-  buttonLanguageRight: {fileID: 0}
+  languageText: {fileID: 1019129878}
+  buttonLanguageLeft: {fileID: 156769119}
+  buttonLanguageRight: {fileID: 448799510}
 --- !u!1 &2124717924
 GameObject:
   m_ObjectHideFlags: 0
