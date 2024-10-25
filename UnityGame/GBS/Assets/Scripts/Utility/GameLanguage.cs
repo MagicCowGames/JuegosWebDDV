@@ -11,19 +11,34 @@ using UnityEngine;
 // but yeah, it is what it is... it kind of kills modding support, but it's not like it even matters for this game tbh
 public static class LanguageSystem // TODO : Rename this fucking class bruh
 {
+    #region Enums
+
+    public enum Language
+    {
+        None = 0,
+        English,
+        Spanish,
+        COUNT
+    }
+
+    #endregion
+
     #region Variables
 
-    private static string currentLanguage { get; set; } = "english";
+    private static Language currentLanguage = Language.English;
 
-    private static Dictionary<string, Dictionary<string, string>> languageData = new Dictionary<string, Dictionary<string, string>> {
-        {"english", new Dictionary<string, string> {
+    // TODO : Rework the dictionary systems to use plain arrays instead since the language is now an enum and not a string, so the lookup would be O(1) anyways...
+    // All the dict is doing now is actually harming performance and memory usage lol...
+
+    private static Dictionary<Language, Dictionary<string, string>> languageData = new Dictionary<Language, Dictionary<string, string>> {
+        { Language.English, new Dictionary<string, string> {
             { "loc_play", "Play"},
             { "loc_account", "Account" },
             { "loc_settings", "Settings" },
             { "loc_credits", "Credits" },
             { "loc_return", "Return" }
         } },
-        { "spanish", new Dictionary<string, string> {
+        { Language.Spanish, new Dictionary<string, string> {
             { "loc_play", "Jugar" },
             { "loc_account", "Cuenta" },
             { "loc_settings", "Configuración" },
@@ -32,14 +47,19 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
         } }
     };
 
+    private static Dictionary<Language, string[]> languageStrings = new Dictionary<Language, string[]> {
+        { Language.English, new string[] { "english", "en" } },
+        { Language.Spanish, new string[] { "spanish", "es" } }
+    };
+
     #endregion
 
     #region PublicMethods
 
-    public static string GetLocalizedString(string language, string locString)
+    public static string GetLocalizedString(Language language, string locString)
     {
         // This if ladder is ugly, and I know how to fix it, but it's not even going to make performance better or worse so I can't be assed right now to clean this shit.
-        if(languageData != null && language != null && locString != null)
+        if(languageData != null && locString != null)
             if(languageData.ContainsKey(language))
                 if (languageData[language].ContainsKey(locString))
                     return languageData[language][locString];
@@ -53,23 +73,28 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
 
     public static void SetLanguage(string language)
     {
+        if (language != null)
+            foreach (var lang in languageStrings)
+                if (lang.Value.Contains(language))
+                    currentLanguage = lang.Key;
+        currentLanguage = Language.None;
+    }
+
+    public static void SetLanguage(Language language)
+    {
         currentLanguage = language;
     }
 
-    public static string GetLanguage()
+    public static void SetLanguage(int language)
     {
-        return currentLanguage;
+        if (language < 0 || language >= (int)Language.COUNT)
+            language = 0;
+        currentLanguage = (Language)language;
     }
 
-    // NOTE : Maybe we should hard code this list or just build it on start up to prevent having to construct this data every single time...
-    // For now, it will suffice, but this makes me sad :(
-    // FUCKING DEADLINES
-    // Or maybe we can just hack around this problem by making it so that whatever component requires getting this value gets it on start or on validate.
-    // That would kind of add support for adding new languages during runtime, which we don't really need, but whatever... it is what it is!
-    public static string[] GetAllLanguages()
+    public static Language GetLanguage()
     {
-        string[] ans = languageData.Keys.ToArray();
-        return ans;
+        return currentLanguage;
     }
 
     #endregion
