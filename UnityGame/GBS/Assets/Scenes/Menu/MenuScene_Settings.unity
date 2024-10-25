@@ -1081,7 +1081,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2049583494}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: CreditsMenuController, Assembly-CSharp
         m_MethodName: ReturnToMenu
         m_Mode: 1
@@ -1612,9 +1612,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2049583492}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c76a3d91f9b22b4698f4932cdf2ba34, type: 3}
+  m_Script: {fileID: 11500000, guid: 771191da0d791224889a4df035f008ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasReference: {fileID: 2124717928}
+  buttonLanguageLeft: {fileID: 0}
+  buttonLanguageRight: {fileID: 0}
 --- !u!1 &2124717924
 GameObject:
   m_ObjectHideFlags: 0
