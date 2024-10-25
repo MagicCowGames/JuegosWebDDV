@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -58,6 +59,17 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
     public static string GetLanguage()
     {
         return currentLanguage;
+    }
+
+    // NOTE : Maybe we should hard code this list or just build it on start up to prevent having to construct this data every single time...
+    // For now, it will suffice, but this makes me sad :(
+    // FUCKING DEADLINES
+    // Or maybe we can just hack around this problem by making it so that whatever component requires getting this value gets it on start or on validate.
+    // That would kind of add support for adding new languages during runtime, which we don't really need, but whatever... it is what it is!
+    public static string[] GetAllLanguages()
+    {
+        string[] ans = languageData.Keys.ToArray();
+        return ans;
     }
 
     #endregion
