@@ -15,7 +15,7 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
 
     public enum Language
     {
-        English,
+        English = 0,
         Spanish,
         COUNT
     }
@@ -36,7 +36,9 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_account", "Account" },
             { "loc_settings", "Settings" },
             { "loc_credits", "Credits" },
-            { "loc_return", "Return" }
+            { "loc_return", "Return" },
+            { "loc_language", "Language" },
+            { "loc_setting_language", "Choose Language" }
         } },
         { Language.Spanish, new Dictionary<string, string> {
             { "loc_language_name", "Español" },
@@ -44,7 +46,9 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_account", "Cuenta" },
             { "loc_settings", "Configuración" },
             { "loc_credits", "Créditos" },
-            { "loc_return", "Volver" }
+            { "loc_return", "Volver" },
+            { "loc_language", "Lenguaje" },
+            { "loc_setting_language", "Seleccionar Idioma" }
         } }
     };
 
@@ -87,11 +91,15 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
         currentLanguage = language;
     }
 
-    // NOTE : Maybe it would be wise to rename this to SetLanguageWraparound() or something like that, and have the old system for basic language setting?
+    // This used to be a proper language wrap around function, but the wrap around code did not work correctly because the modulo operator does not work
+    // the same way in Unity's version of C# as it does in base .NET or C or C++, and I can't be assed to figure out why Unity does things different
+    // for the fucking modulo operator, so yeah. It is what it is.
     public static void SetLanguage(int language)
     {
-        // This method now wraps around the integer value so that it can be easily used for language settings menus
-        language = (language % (int)Language.COUNT) * language < 0 ? -1 : 1;
+        if (language < 0)
+            language = (int)Language.COUNT - 1;
+        if (language >= (int)Language.COUNT)
+            language = 0;
         currentLanguage = (Language)language;
     }
 
