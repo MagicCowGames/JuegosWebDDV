@@ -7,7 +7,7 @@ public class UIController : MonoBehaviour, IUI
     #region Variables
 
     [Header("UIController Components")]
-    [SerializeField] private Canvas canvasReference;
+    [SerializeField] protected Canvas canvasReference;
 
     #endregion
 
