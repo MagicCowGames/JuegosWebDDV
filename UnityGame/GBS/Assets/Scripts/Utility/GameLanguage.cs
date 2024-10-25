@@ -32,6 +32,7 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
 
     private static Dictionary<Language, Dictionary<string, string>> languageData = new Dictionary<Language, Dictionary<string, string>> {
         { Language.English, new Dictionary<string, string> {
+            { "loc_language_name", "English" },
             { "loc_play", "Play"},
             { "loc_account", "Account" },
             { "loc_settings", "Settings" },
@@ -39,6 +40,7 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_return", "Return" }
         } },
         { Language.Spanish, new Dictionary<string, string> {
+            { "loc_language_name", "Español" },
             { "loc_play", "Jugar" },
             { "loc_account", "Cuenta" },
             { "loc_settings", "Configuración" },
@@ -85,10 +87,11 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
         currentLanguage = language;
     }
 
+    // NOTE : Maybe it would be wise to rename this to SetLanguageWraparound() or something like that, and have the old system for basic language setting?
     public static void SetLanguage(int language)
     {
-        if (language < 0 || language >= (int)Language.COUNT)
-            language = 0;
+        // This method now wraps around the integer value so that it can be easily used for language settings menus
+        language = (language % (int)Language.COUNT) * language < 0 ? -1 : 1;
         currentLanguage = (Language)language;
     }
 
