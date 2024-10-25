@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class LookAtController : MonoBehaviour
 {
-    
-
     #region Variables
 
     [SerializeField] private Transform objectTransform;
