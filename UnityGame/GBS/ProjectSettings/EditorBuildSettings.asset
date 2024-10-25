@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu/Account/MS_AccountLogged.unity
     guid: 4b08f3c1b491b0a48b92c1fb9a30c6a2
+  - enabled: 1
+    path: Assets/Scenes/Menu/MenuScene_Settings.unity
+    guid: 61e40eb2be5f76f469b877ac87a5a5e4
   m_configObjects: {}
