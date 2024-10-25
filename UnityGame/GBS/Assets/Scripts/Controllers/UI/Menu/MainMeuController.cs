@@ -41,6 +41,11 @@ public class MainMeuController : MonoBehaviour
         SceneLoadingManager.Instance?.LoadScene("MS_Account");
     }
 
+    public void LoadSettings()
+    {
+        SceneLoadingManager.Instance?.LoadSceneSettings();
+    }
+
     #endregion
 
     #region PrivateMethods
