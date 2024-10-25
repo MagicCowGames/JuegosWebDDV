@@ -31,6 +31,22 @@ public class SettingsMenuController : UIController
     #endregion
 
     #region PublicMethods
+
+    public void ButtonLanguageLeft()
+    {
+        LanguageSystem.SetLanguage((int)LanguageSystem.GetLanguage() - 1);
+    }
+
+    public void ButtonLanguageRight()
+    {
+        LanguageSystem.SetLanguage((int)LanguageSystem.GetLanguage() + 1);
+    }
+
+    public void ButtonReturn()
+    {
+        SceneLoadingManager.Instance?.LoadSceneMainMenu();
+    }
+
     #endregion
 
     #region PrivateMethods
