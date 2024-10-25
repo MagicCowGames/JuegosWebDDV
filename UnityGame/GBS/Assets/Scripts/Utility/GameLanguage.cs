@@ -15,7 +15,6 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
 
     public enum Language
     {
-        None = 0,
         English,
         Spanish,
         COUNT
