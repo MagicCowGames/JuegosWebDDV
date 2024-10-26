@@ -38,7 +38,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_credits", "Credits" },
             { "loc_return", "Return" },
             { "loc_language", "Language" },
-            { "loc_setting_language", "Choose Language" }
+            { "loc_setting_language", "Choose Language" },
+            { "loc_tutorial", "Tutorial" }
         } },
         { Language.Spanish, new Dictionary<string, string> {
             { "loc_language_name", "Español" },
@@ -48,7 +49,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_credits", "Créditos" },
             { "loc_return", "Volver" },
             { "loc_language", "Lenguaje" },
-            { "loc_setting_language", "Seleccionar Idioma" }
+            { "loc_setting_language", "Seleccionar Idioma" },
+            { "loc_tutorial", "Tutorial" }
         } }
     };
 
