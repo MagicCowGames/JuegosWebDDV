@@ -17,6 +17,7 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
     [SerializeField] private string mainMenuScene;
     [SerializeField] private string creditsScene;
     [SerializeField] private string settingsScene;
+    [SerializeField] private string tutorialScene;
 
     #endregion
 
@@ -65,6 +66,11 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
     public void LoadSceneSettings()
     {
         LoadScene(settingsScene);
+    }
+
+    public void LoadSceneTutorial()
+    {
+        LoadScene(tutorialScene);
     }
 
     #endregion
