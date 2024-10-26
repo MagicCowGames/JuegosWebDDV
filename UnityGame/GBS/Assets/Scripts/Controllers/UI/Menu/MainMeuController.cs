@@ -46,6 +46,11 @@ public class MainMeuController : MonoBehaviour
         SceneLoadingManager.Instance?.LoadSceneSettings();
     }
 
+    public void LoadTutorial()
+    {
+        SceneLoadingManager.Instance?.LoadSceneTutorial();
+    }
+
     #endregion
 
     #region PrivateMethods

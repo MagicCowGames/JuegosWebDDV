@@ -941,6 +941,7 @@ MonoBehaviour:
   mainMenuScene: MenuScene_MainMenu
   creditsScene: MenuScene_Credits
   settingsScene: MenuScene_Settings
+  tutorialScene: MenuScene_Tutorial
 --- !u!114 &1820937350
 MonoBehaviour:
   m_ObjectHideFlags: 0
