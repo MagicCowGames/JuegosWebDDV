@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.EventSystems;
 
 public class InputManager : Singleton<InputManager>
 {
@@ -97,6 +98,10 @@ public class InputManager : Singleton<InputManager>
         if (!Input.mousePresent)
             return;
 
+        // Don't send any inputs if we are pressing a button, because the UI button takes precedence over all other mouse actions. Same happens with touch inputs.
+        if (IsPointerOverButton())
+            return;
+
         SetScreenPoint(Input.mousePosition);
 
         if (Input.GetMouseButton(0))
@@ -118,6 +123,9 @@ public class InputManager : Singleton<InputManager>
     private void UpdateInputTouch()
     {
         if (Input.mousePresent)
+            return;
+
+        if (IsPointerOverButton())
             return;
 
         if (Input.touchCount > 0)
@@ -187,6 +195,22 @@ public class InputManager : Singleton<InputManager>
         // Console
         if (Input.GetKeyDown(KeyCode.BackQuote))
             SwitchConsole();
+    }
+
+    #endregion
+
+    #region Private Methods - Other
+
+    private bool IsPointerOverButton()
+    {
+        bool ans =
+            EventSystem.current != null &&
+            EventSystem.current.IsPointerOverGameObject() &&
+            EventSystem.current.currentSelectedGameObject != null &&
+            EventSystem.current.currentSelectedGameObject.GetComponent<UnityEngine.UI.Button>() != null
+            ;
+        // NOTE : GetComponent<CanvasRenderer>() would be used to determine if we're clicking ANY UI element at all. But in this case we only care about buttons.
+        return ans;
     }
 
     #endregion
