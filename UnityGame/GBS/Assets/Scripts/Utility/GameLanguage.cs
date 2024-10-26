@@ -45,7 +45,7 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_language_name", "Español" },
             { "loc_play", "Jugar" },
             { "loc_account", "Cuenta" },
-            { "loc_settings", "Configuración" },
+            { "loc_settings", "Opciones" }, // This used to be "Configuración", my beloved </3 :( but the fucking thing was too large to fit on the UI buttons. Oh well, too bad!
             { "loc_credits", "Créditos" },
             { "loc_return", "Volver" },
             { "loc_language", "Lenguaje" },
