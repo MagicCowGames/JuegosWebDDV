@@ -30,6 +30,16 @@ public class CreditsMenuController : MonoBehaviour
         SceneLoadingManager.Instance?.LoadSceneMainMenu();
     }
 
+    public void EmployeeURL_DRA()
+    {
+        Application.OpenURL("https://github.com/DanielRodriguezAriza");
+    }
+
+    public void CompanyURL_MCG()
+    {
+        Application.OpenURL("https://magiccowgames.github.io/");
+    }
+
     #endregion
 
     #region PrivateMethods
