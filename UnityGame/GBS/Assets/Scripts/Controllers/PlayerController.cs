@@ -132,9 +132,15 @@ public class PlayerController : MonoBehaviour
     // Subscribe to events
     private void RegisterEvents()
     {
+        GameUtility.SetCanPause(true); // This is a fucking hack tho
+        UIManager.Instance?.GetDeathUIController().UI_SetVisible(false);
+
+        // Other Events
+        this.GetComponent<HealthController>().OnValueChanged += HealthUpdated;
+
+        // User Input Events
         if (InputManager.Instance == null)
             return;
-
         InputManager.Instance.OnSetForwardAxis += SetForwardAxis;
         InputManager.Instance.OnSetScreenPoint += SetLookToPoint;
         InputManager.Instance.OnAddElement += AddElement;
@@ -146,9 +152,14 @@ public class PlayerController : MonoBehaviour
     // Unsubscribe from events
     private void UnregisterEvents()
     {
+        GameUtility.SetCanPause(false); // Same, fucking hack, need to find a cleaner way to do this shit.
+
+        // Other Events
+        this.GetComponent<HealthController>().OnValueChanged -= HealthUpdated;
+
+        // User Input Events
         if (InputManager.Instance == null)
             return;
-
         InputManager.Instance.OnSetForwardAxis -= SetForwardAxis;
         InputManager.Instance.OnSetScreenPoint -= SetLookToPoint;
         InputManager.Instance.OnAddElement -= AddElement;
@@ -200,6 +211,19 @@ public class PlayerController : MonoBehaviour
     private void SetForm(Form form)
     {
         this.spellCasterController.SetForm(form);
+    }
+
+    #endregion
+
+    #region Other Events
+
+    private void HealthUpdated(float oldValue, float newValue)
+    {
+        if (newValue <= 0.0f)
+        {
+            GameUtility.SetCanPause(false);
+            UIManager.Instance.GetDeathUIController().UI_SetVisible(true);
+        }
     }
 
     #endregion
