@@ -8,7 +8,7 @@ public class DummyManager : SingletonPersistent<DummyManager>
     {
         // This is not where this should be, but idk what class I should put global config in so here it goes lol...
         // This gives an error on web when running on a PC, but it doesn't matter cause it just does nothing so that's fine for now.
-        Screen.orientation = ScreenOrientation.AutoRotation;
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
     }
 
     void Update()
