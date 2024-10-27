@@ -40,4 +40,16 @@ public class SpellProjectileController : SpellBaseController
     }
 
     #endregion
+
+    #region Collisions
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
+
+        // TODO : Change this logic when we implement spell pooling.
+        Destroy(this.gameObject);
+    }
+
+    #endregion
 }
