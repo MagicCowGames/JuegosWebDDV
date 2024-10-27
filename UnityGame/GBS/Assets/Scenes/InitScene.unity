@@ -1065,6 +1065,28 @@ MonoBehaviour:
     image: {fileID: 21300000, guid: 0c67d96d21a593146872b0da8f51473e, type: 3}
   - form: 4
     image: {fileID: 21300000, guid: 767ce74845fa98148a2d3d66e42bf998, type: 3}
+  defaultElementDamageData:
+    element: 0
+    damage: 0
+  elementDamageData:
+  - element: 1
+    damage: 0
+  - element: 2
+    damage: 10
+  - element: 4
+    damage: -5
+  - element: 5
+    damage: -5
+  - element: 6
+    damage: -10
+  - element: 7
+    damage: -8
+  - element: 8
+    damage: -6
+  - element: 9
+    damage: -8
+  - element: 10
+    damage: -8
 --- !u!114 &1820937352
 MonoBehaviour:
   m_ObjectHideFlags: 0

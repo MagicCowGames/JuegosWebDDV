@@ -105,6 +105,8 @@ public class MagicManager : SingletonPersistent<MagicManager>
 
     #endregion
 
+    // NOTE : In the future, this might have to be modified to also consider element status data such as wet, burn, poison, etc...
+    // Also you need to think about how to handle electricity doing more damage if the target is wet, or water having knockback, etc...
     #region Variables - Elements - Damage Values
 
     [Header("Element Damage Settings")]
