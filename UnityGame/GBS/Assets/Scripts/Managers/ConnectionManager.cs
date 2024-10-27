@@ -47,11 +47,13 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
 
     void Start()
     {
+        // TODO : Clean up these test calls and remove them lol
         // SendMessageHTTP("/score/add/pedro/69");
         // SendMessageHTTP("/score");
 
         // StartCoroutine(Request_POST("localhost:27015/users"));
 
+        /*
         MakeRequest("GET", "localhost:27015", "/users", new RequestCallbacks(
             (ans) => {
                 DebugManager.Instance?.Log($"OnSuccess : {ans}");
@@ -65,6 +67,7 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
             () => {
                 DebugManager.Instance?.Log("OnConnectError");
             }));
+        */
     }
 
     void Update()
