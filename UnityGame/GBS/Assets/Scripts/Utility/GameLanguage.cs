@@ -29,6 +29,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
     // TODO : Rework the dictionary systems to use plain arrays instead since the language is now an enum and not a string, so the lookup would be O(1) anyways...
     // All the dict is doing now is actually harming performance and memory usage lol...
 
+    // NOTE : We could change these strings to be enums too...
+
     private static Dictionary<Language, Dictionary<string, string>> languageData = new Dictionary<Language, Dictionary<string, string>> {
         { Language.English, new Dictionary<string, string> {
             { "loc_language_name", "English" },
@@ -39,7 +41,14 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_return", "Return" },
             { "loc_language", "Language" },
             { "loc_setting_language", "Choose Language" },
-            { "loc_tutorial", "Tutorial" }
+            { "loc_tutorial", "Tutorial" },
+            { "loc_test_dummy", "Test Dummy" },
+            { "loc_test_dummy_description", "Test your spells on this immortal dummy" },
+            { "loc_test_dummies", "Test Dummies" },
+            { "loc_test_dummies_description", "Test your spells on these immortal dummies" },
+            { "loc_test_dummies_mortal_description", "Test your spells on these dummies" },
+            { "loc_test_healing_area", "Healing Area" },
+            { "loc_test_damage_area", "Damage Area" }
         } },
         { Language.Spanish, new Dictionary<string, string> {
             { "loc_language_name", "Español" },
@@ -50,7 +59,14 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_return", "Volver" },
             { "loc_language", "Lenguaje" },
             { "loc_setting_language", "Seleccionar Idioma" },
-            { "loc_tutorial", "Tutorial" }
+            { "loc_tutorial", "Tutorial" },
+            { "loc_test_dummy", "Muñeco de Pruebas" },
+            { "loc_test_dummy_description", "Prueba tus conjuros en este muñeco de pruebas inmortal" },
+            { "loc_test_dummies", "Muñecos de Pruebas" },
+            { "loc_test_dummies_description", "Prueba tus conjuros en estos muñecos de pruebas inmortales" },
+            { "loc_test_dummies_mortal_description", "Prueba tus conjuros en estos muñecos de pruebas" },
+            { "loc_test_healing_area", "Area de Curación" },
+            { "loc_test_damage_area", "Area de Daño" }
         } }
     };
 
