@@ -46,6 +46,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_paused", "Paused" },
             { "loc_resume", "Resume" },
             { "loc_return_to_menu", "Return to Menu" },
+            { "loc_you_are_dead", "You are Dead" },
+            { "loc_retry", "Retry" },
 
 
             { "loc_test_dummy", "Test Dummy" },
@@ -70,6 +72,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_paused", "Pausado" },
             { "loc_resume", "Reanudar" },
             { "loc_return_to_menu", "Volver al Menú" },
+            { "loc_you_are_dead", "Estás Muerto" },
+            { "loc_retry", "Reintentar" },
 
 
             { "loc_test_dummy", "Muñeco de Pruebas" },
