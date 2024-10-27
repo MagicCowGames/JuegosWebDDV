@@ -21,6 +21,9 @@ public class HealthController : MonoBehaviour
             float oldValue = this.health;
             this.health = Mathf.Clamp(value, this.healthMin, this.healthMax);
             this.OnValueChanged?.Invoke(oldValue, this.health);
+
+            if (this.health <= this.healthMin)
+                this.OnDeath?.Invoke();
         }
     }
 
@@ -28,6 +31,7 @@ public class HealthController : MonoBehaviour
     public float HealthMin { get { return this.healthMin; } set { this.healthMin = value; } }
 
     public Action<float, float> OnValueChanged;
+    public Action OnDeath;
 
     #endregion
 
