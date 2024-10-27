@@ -4256,7 +4256,7 @@ GameObject:
   - component: {fileID: 1129796000}
   - component: {fileID: 1129795999}
   - component: {fileID: 1129796002}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6590,7 +6590,7 @@ GameObject:
   - component: {fileID: 1641553919}
   - component: {fileID: 1641553918}
   - component: {fileID: 1641553921}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17580,7 +17580,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2702904779677947871, guid: 8e82e07ae041dd74eabd50a07ae44e2c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.85
+      value: -15.62
       objectReference: {fileID: 0}
     - target: {fileID: 2702904779677947871, guid: 8e82e07ae041dd74eabd50a07ae44e2c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -17588,7 +17588,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2702904779677947871, guid: 8e82e07ae041dd74eabd50a07ae44e2c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.51
+      value: -11.95
       objectReference: {fileID: 0}
     - target: {fileID: 2702904779677947871, guid: 8e82e07ae041dd74eabd50a07ae44e2c, type: 3}
       propertyPath: m_LocalRotation.w
