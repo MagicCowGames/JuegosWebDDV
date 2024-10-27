@@ -51,7 +51,7 @@ public class CoinController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("DOES THIS WORK!");
+
     }
 
     void Update()
