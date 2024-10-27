@@ -4934,6 +4934,7 @@ GameObject:
   - component: {fileID: 440536794047507495}
   - component: {fileID: 8633388462888370009}
   - component: {fileID: 6113192171682100365}
+  - component: {fileID: 5540752131964213612}
   m_Layer: 0
   m_Name: SpellProjectilePrefab
   m_TagString: Untagged
@@ -5018,5 +5019,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b53c594d8f30d449e3bee8fd25f309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  elementsCounts: 
+  spellColor: {r: 0, g: 0, b: 0, a: 0}
+  healthModifierController: {fileID: 5540752131964213612}
   rigidBody: {fileID: 8633388462888370009}
   force: 20
+--- !u!114 &5540752131964213612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8898792701997654404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82613f123eeb52f45af09007890a7c37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  modifierEnabled: 1
+  collisionEnabled: 1
+  useDefaultValues: 1
+  resetValues: 0
+  inputDamageArray:
+    damageValues:
+    - element: 0
+      amount: 0
+    - element: 1
+      amount: 0
+    - element: 2
+      amount: 1
+    - element: 3
+      amount: 0
+    - element: 4
+      amount: 0
+    - element: 5
+      amount: 0
+    - element: 6
+      amount: 0
+    - element: 7
+      amount: 0
+    - element: 8
+      amount: 0
+    - element: 9
+      amount: 0
+    - element: 10
+      amount: 0
+    - element: 11
+      amount: 0
+    - element: 12
+      amount: 0
