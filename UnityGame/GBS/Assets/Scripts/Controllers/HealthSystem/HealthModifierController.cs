@@ -57,6 +57,7 @@ public class HealthModifierController : MonoBehaviour
     [SerializeField] private bool collisionEnabled;
 
     [Header("Element Modifier Values")]
+    [SerializeField] private bool useDefaultValues; // determines if this is a prefabricated damage area and it uses the default values located within the inspector panel in the Unity Editor.
     [SerializeField] private bool resetValues;
     [SerializeField] private InputDamageArray inputDamageArray; // Can't use default constructor for serializable structs for some reason. Ok Unity, you win...
 
@@ -76,11 +77,20 @@ public class HealthModifierController : MonoBehaviour
 
     void OnValidate()
     {
-        if (this.inputDamageArray.damageValues.Length <= 0 || this.resetValues)
+        if (this.useDefaultValues)
         {
-            this.inputDamageArray = new InputDamageArray(0);
-            this.resetValues = false;
+            if (this.inputDamageArray.damageValues.Length <= 0 || this.resetValues)
+            {
+                this.inputDamageArray = new InputDamageArray(0);
+            }
         }
+        else
+        {
+            this.inputDamageArray = default;
+        }
+
+        if (this.resetValues)
+            this.resetValues = false;
     }
 
     #endregion
