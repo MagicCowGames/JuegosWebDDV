@@ -11,6 +11,7 @@ public class TestDummyController : MonoBehaviour
     [SerializeField] private HealthController healthController;
 
     [Header("TestDummy Config")]
+    [SerializeField] private bool hasAi;
     [SerializeField] private bool canDie;
     
     #endregion
@@ -19,7 +20,7 @@ public class TestDummyController : MonoBehaviour
 
     void Start()
     {
-        
+        this.healthController.OnDeath += HandleDeath;
     }
 
     void Update()
@@ -33,5 +34,12 @@ public class TestDummyController : MonoBehaviour
     #endregion
 
     #region PrivateMethods
+
+    private void HandleDeath()
+    {
+        if (this.canDie)
+            Destroy(this.gameObject);
+    }
+
     #endregion
 }
