@@ -677,7 +677,7 @@ Este menú contiene los siguientes botones:
 
 ### 
 
-![](./data/img/img_menu_main_menu.png)
+![](./data/img/img_menu_settings.png)
 
 #### *Figura 2 : Imagen del menú de Opciones*
 
