@@ -756,6 +756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  modifierEnabled: 1
   collisionEnabled: 1
   useDefaultValues: 1
   resetValues: 0
@@ -1229,6 +1230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  modifierEnabled: 1
   collisionEnabled: 1
   useDefaultValues: 1
   resetValues: 0

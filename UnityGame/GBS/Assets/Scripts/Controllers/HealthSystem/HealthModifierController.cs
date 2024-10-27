@@ -54,7 +54,8 @@ public class HealthModifierController : MonoBehaviour
 
     [Header("Modifier Configuration")]
     [SerializeField] private Type type;
-    [SerializeField] private bool collisionEnabled;
+    [SerializeField] private bool modifierEnabled = true; // global switch that controls if the health modifier is enabled or not. If disabled, then no damage, healing or status effects can be applied.
+    [SerializeField] private bool collisionEnabled = true;
 
     [Header("Element Modifier Values")]
     [SerializeField] private bool useDefaultValues; // determines if this is a prefabricated damage area and it uses the default values located within the inspector panel in the Unity Editor.
@@ -124,6 +125,10 @@ public class HealthModifierController : MonoBehaviour
     // NOTE : If the selected game object has no health component, we just return, so the game won't explode and things will be just fine.
     public void Apply(GameObject obj, float delta = 1.0f)
     {
+        // If it's disabled, then bail out and don't apply any effects to the target.
+        if (this.modifierEnabled)
+            return;
+
         var protection = obj.GetComponent<ProtectionController>();
         var hp = obj.GetComponent<HealthController>();
         // TODO : Add get component for status effect component so that we can handle burning and stuff in the future.
