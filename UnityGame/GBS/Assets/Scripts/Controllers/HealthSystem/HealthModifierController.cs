@@ -121,8 +121,21 @@ public class HealthModifierController : MonoBehaviour
             this.elementCounts[i] = amounts[i];
     }
 
+    // NOTE : If the selected game object has no health component, we just return, so the game won't explode and things will be just fine.
     public void Apply(GameObject obj, float delta = 1.0f)
-    { }
+    {
+        var protection = obj.GetComponent<ProtectionController>();
+        var hp = obj.GetComponent<HealthController>();
+        // TODO : Add get component for status effect component so that we can handle burning and stuff in the future.
+
+        // TODO : Add protection logic here.
+
+        if (hp == null)
+            return;
+
+        foreach (var elementCount in this.elementCounts)
+            hp.Health += -10.0f * elementCount; // TODO : Remove placeholder 10.0f value and change it with an actual damage value from the element manager... or maybe all elements do the same damage, who knows! We'll see in the future.
+    }
 
     #endregion
 
