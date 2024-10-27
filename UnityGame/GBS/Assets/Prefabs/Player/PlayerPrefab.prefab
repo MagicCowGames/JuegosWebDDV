@@ -295,6 +295,7 @@ GameObject:
   - component: {fileID: 8574623358394360817}
   - component: {fileID: 5165320198455412615}
   - component: {fileID: 2132709503834204316}
+  - component: {fileID: 4671014162685389885}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -386,7 +387,6 @@ MonoBehaviour:
   shootSocket: {fileID: 8887552340944860899}
   walkSpeed: 10
   rotationSpeed: 1
-  bulletPrefab: {fileID: 7946712689336364576, guid: 867b5ee53495e4542b64dde7d3b8fe51, type: 3}
   spellCasterController: {fileID: 8772199267205948739}
 --- !u!114 &2132709503834204316
 MonoBehaviour:
@@ -403,6 +403,19 @@ MonoBehaviour:
   health: 100
   healthMax: 100
   healthMin: 0
+--- !u!114 &4671014162685389885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7547504269008325229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 644651266473a2844acd0965e766e2cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  money: 0
 --- !u!1001 &6258976201457924928
 PrefabInstance:
   m_ObjectHideFlags: 0
