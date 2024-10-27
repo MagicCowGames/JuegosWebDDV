@@ -1,16 +1,13 @@
+# **Información del Proyecto**
+
+**Universidad Rey Juan Carlos**  
+**JUEGOS PARA WEB Y REDES SOCIALES**  
 **Nombre:** Daniel Rodríguez Ariza  
 **Grado:** Grado en Diseño y Desarrollo de Videojuegos  
 **Curso:** 4º  
 **Grupo:** J
 
-**Universidad Rey Juan Carlos**
-
-**JUEGOS PARA WEB Y REDES SOCIALES**
-
-**Magic Cow Games**
-
-**“Wizard’s Death Wish”**  
-**Game Design Document**
+# **GDD - Wizard's Death Wish by Magic Cow Games**
 
 **·Índice de Contenidos:**
 
