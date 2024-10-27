@@ -61,9 +61,22 @@ public class HealthModifierController : MonoBehaviour
     [SerializeField] private bool resetValues;
     [SerializeField] private InputDamageArray inputDamageArray; // Can't use default constructor for serializable structs for some reason. Ok Unity, you win...
 
+    int[] elementCounts;
+
     #endregion
 
     #region MonoBehaviour
+
+    void Awake()
+    {
+        // Initialize the elements counts array
+        this.elementCounts = new int[(int)Element.COUNT];
+        for (int i = 0; i < (int)Element.COUNT; ++i)
+            this.elementCounts[i] = 0;
+        if (this.inputDamageArray.damageValues != null)
+            for (int i = 0; i < this.inputDamageArray.damageValues.Length; ++i)
+                this.elementCounts[(int)this.inputDamageArray.damageValues[i].element] = this.inputDamageArray.damageValues[i].amount;
+    }
 
     void Start()
     {
@@ -96,6 +109,16 @@ public class HealthModifierController : MonoBehaviour
     #endregion
 
     #region PublicMethods
+
+    public void SetValue(Element element, int amount)
+    {
+
+    }
+
+    public void SetValues(int[] amounts)
+    {
+
+    }
 
     public void Apply(GameObject obj, float delta = 1.0f)
     { }
