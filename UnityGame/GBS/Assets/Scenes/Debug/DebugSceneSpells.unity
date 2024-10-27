@@ -649,35 +649,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   collisionEnabled: 0
+  useDefaultValues: 0
   resetValues: 0
   inputDamageArray:
-    damageValues:
-    - element: 0
-      damage: 1
-    - element: 1
-      damage: 1
-    - element: 2
-      damage: 1
-    - element: 3
-      damage: 1
-    - element: 4
-      damage: 1
-    - element: 5
-      damage: 1
-    - element: 6
-      damage: 1
-    - element: 7
-      damage: 1
-    - element: 8
-      damage: 1
-    - element: 9
-      damage: 1
-    - element: 10
-      damage: 1
-    - element: 11
-      damage: 1
-    - element: 12
-      damage: 1
+    damageValues: []
 --- !u!4 &1558266168
 Transform:
   m_ObjectHideFlags: 0
