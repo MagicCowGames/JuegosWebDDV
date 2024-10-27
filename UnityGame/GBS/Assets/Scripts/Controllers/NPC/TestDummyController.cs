@@ -17,6 +17,8 @@ public class TestDummyController : MonoBehaviour
     [SerializeField] private bool hasAi = false;
     [SerializeField] private bool canDie = false;
     
+    public bool CanDie { get { return this.canDie; } set { this.canDie = value; } }
+
     #endregion
 
     #region MonoBehaviour
