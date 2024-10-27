@@ -129,7 +129,7 @@ public class HealthModifierController : MonoBehaviour
         if (!this.modifierEnabled)
             return;
 
-        // If the input object is null, return.
+        // If the input object is null, return. This should never happen, but if it does, we're safe! (famous last words, I know...)
         if (obj == null)
             return;
 
@@ -167,6 +167,17 @@ public class HealthModifierController : MonoBehaviour
             return;
         if (this.type == Type.OverTime)
             Apply(other.gameObject, Time.deltaTime);
+    }
+
+    // This one is an exact copy of OnTriggerEnter, it only exists to support spells with a collider that has a rigid body and is not a trigger.
+    // Altough, it is adviced that spell damage areas / health modifiers be placed as components on a slightly bigger trigger area that wraps around
+    // the physics collider for the rigid body. Still, this has been implemented to allow things to work, even if it is not the best approach.
+    void OnCollisionEnter(Collision collision)
+    {
+        if (!this.collisionEnabled)
+            return;
+        if (this.type == Type.Instant)
+            Apply(collision.gameObject);
     }
 
     #endregion
