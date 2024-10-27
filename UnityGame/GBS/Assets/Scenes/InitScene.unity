@@ -897,7 +897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2584d97c133d93547a2b721c5542197b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugEnabled: 1
+  debugEnabled: 0
   debugLineObject: {fileID: 4753095623274425605, guid: 7949396dba7b0f94aa8ae29ecc50cf0c, type: 3}
 --- !u!114 &1820937347
 MonoBehaviour:
