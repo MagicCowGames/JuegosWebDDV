@@ -112,12 +112,13 @@ public class HealthModifierController : MonoBehaviour
 
     public void SetValue(Element element, int amount)
     {
-
+        this.elementCounts[(int)element] = amount;
     }
 
     public void SetValues(int[] amounts)
     {
-
+        for (int i = 0; i < (int)Element.COUNT; ++i)
+            this.elementCounts[i] = amounts[i];
     }
 
     public void Apply(GameObject obj, float delta = 1.0f)
