@@ -678,7 +678,7 @@ Este menú contiene los siguientes botones:
 
 ### 
 
-![][image2]
+![](./data/img/img_menu_main_menu.png)
 
 #### *Figura 2 : Imagen del menú de Opciones*
 
@@ -698,11 +698,11 @@ El menú de cuenta tiene las siguientes pantallas:
 
 ## 
 
-![][image3]
+![](./data/img/img_menu_account.png)
 
 #### *Figura 3 : Imagen del menú de Cuenta*
 
-![][image4]  
+![](./data/img/img_menu_account_register.png)
 *Figura 4 : Imagen del menú de Registro de Cuenta*
 
 ## **3.2 \- Interfaces de Juego**
@@ -745,7 +745,7 @@ Actualmente se han implementado 17 comandos.
 
 A continuación, se muestra una imagen con el diagrama de flujo de los menús e interfaces del juego:
 
-![][image5]
+![](./data/img/img_diagrama_flujo.png)
 
 # 
 
@@ -855,7 +855,7 @@ A su vez, asegura la creación de una comunidad activa y comprometida que respal
 
 A continuación, se muestra un esquema con el mapa de empatía diseñado para el jugador objetivo de “**Wizard’s Death Wish**”:
 
-![][image6]
+![](./data/img/img_mdn_mapa_de_empatia.png)
 
 #### *Figura 5 : Mapa de Empatía*
 
@@ -865,7 +865,7 @@ A continuación, se muestra un esquema con el mapa de empatía diseñado para el
 
 A continuación, se muestra la caja de herramientas diseñada para la compañía, detallando los diferentes integrantes e interacciones que son esenciales para el correcto desarrollo de las actividades empresariales de **Magic Cow Games**:
 
-![][image7]
+![](./data//img/img_mdn_caja_de_herramientas.png)
 
 #### *Figura 6 : Caja de Herramientas*
 
@@ -875,7 +875,7 @@ A continuación, se muestra la caja de herramientas diseñada para la compañía
 
 A continuación, se presenta el lienzo de Modelo de Negocio de **Magic Cow Games**:
 
-![][image8]
+![](./data/img/img_mdn_canvas.png)
 
 #### *Figura 7 : Lienzo de Modelo de Negocio*
 
