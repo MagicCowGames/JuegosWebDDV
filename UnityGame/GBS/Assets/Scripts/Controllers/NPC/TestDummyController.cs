@@ -11,8 +11,8 @@ public class TestDummyController : MonoBehaviour
     [SerializeField] private HealthController healthController;
 
     [Header("TestDummy Config")]
-    [SerializeField] private bool hasAi;
-    [SerializeField] private bool canDie;
+    [SerializeField] private bool hasAi = false;
+    [SerializeField] private bool canDie = false;
     
     #endregion
 
