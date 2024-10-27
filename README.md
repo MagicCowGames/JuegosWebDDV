@@ -135,6 +135,8 @@
 
 * [Figura 3 : Imagen del menú de Cuenta](#figura-3--imagen-del-menú-de-cuenta)
 
+* [Figura 4 :  Imagen del menú de Registro de Cuenta](#figura-4--imagen-del-menú-de-registro-de-cuenta)
+
 * [Figura 5 : Mapa de Empatía](#figura-5--mapa-de-empatía)
 
 * [Figura 6 : Caja de Herramientas](#figura-6--caja-de-herramientas)
