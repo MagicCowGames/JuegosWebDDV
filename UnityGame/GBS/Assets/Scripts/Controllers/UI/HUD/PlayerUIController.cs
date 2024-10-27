@@ -17,6 +17,8 @@ public class PlayerUIController : UIController, IComponentValidator
     [SerializeField] private TMP_Text moneyTextBack;
     [SerializeField] private TMP_Text moneyText;
 
+    private int displayedMoney = 0;
+
     #endregion
 
     #region MonoBehaviour
@@ -39,6 +41,7 @@ public class PlayerUIController : UIController, IComponentValidator
         UpdateHealthBar(Time.deltaTime);
         UpdateElementDisplay();
         UpdateFormDisplay();
+        UpdateMoneyDisplay(Time.deltaTime);
     }
 
     #endregion
@@ -109,6 +112,14 @@ public class PlayerUIController : UIController, IComponentValidator
         var form = PlayerDataManager.Instance.GetPlayerSpellCaster().GetForm();
         var img = MagicManager.Instance.GetFormSprite(form);
         this.formImage.sprite = img;
+    }
+
+    private void UpdateMoneyDisplay(float delta)
+    {
+        this.displayedMoney = (int)Mathf.Lerp(this.displayedMoney, PlayerDataManager.Instance.GetPlayerMoney().Money, delta * 10.0f);
+        string str = $"${displayedMoney}";
+        this.moneyTextBack.text = str;
+        this.moneyText.text = str;
     }
 
     #endregion
