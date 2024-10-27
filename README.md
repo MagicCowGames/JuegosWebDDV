@@ -132,17 +132,17 @@
 
 # **·Índice de Figuras:**
 
-* [Figura 1 : Imagen del Menú Principal](#figura-1-:-imagen-del-menú-principal)
+* [Figura 1 : Imagen del Menú Principal](#figura-1--imagen-del-menú-principal)
 
-* [Figura 2 : Imagen del menú de Opciones](#figura-2-:-imagen-del-menú-de-opciones)
+* [Figura 2 : Imagen del menú de Opciones](#figura-2--imagen-del-menú-de-opciones)
 
-* [Figura 3 : Imagen del menú de Cuenta](#figura-3-:-imagen-del-menú-de-cuenta)
+* [Figura 3 : Imagen del menú de Cuenta](#figura-3--imagen-del-menú-de-cuenta)
 
-* [Figura 5 : Mapa de Empatía](#figura-5-:-mapa-de-empatía)
+* [Figura 5 : Mapa de Empatía](#figura-5--mapa-de-empatía)
 
-* [Figura 6 : Caja de Herramientas](#figura-6-:-caja-de-herramientas)
+* [Figura 6 : Caja de Herramientas](#figura-6--caja-de-herramientas)
 
-* [Figura 7 : Lienzo de Modelo de Negocio](#figura-7-:-lienzo-de-modelo-de-negocio)
+* [Figura 7 : Lienzo de Modelo de Negocio](#figura-7--lienzo-de-modelo-de-negocio)
 
 # 
 
