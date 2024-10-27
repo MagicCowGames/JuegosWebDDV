@@ -146,7 +146,7 @@
 
 # 
 
-# **1 \- Introducción** {#1---introducción}
+# **1 \- Introducción**
 
 El presente documento presenta una propuesta para un videojuego competitivo con estrategia, que mezcla elementos de acción y arcade con una temática fantástica, creado por la compañía **Magic Cow Games**.
 
@@ -156,7 +156,7 @@ Este documento tiene como propósito describir los distintos aspectos que confor
 
 La información expuesta en este documento está sujeta a ser expandida y/o modificada conforme se avanza en el desarrollo del juego.
 
-## **1.1 \- Concepto** {#1.1---concepto}
+## **1.1 \- Concepto**
 
 En “**Wizard’s Death Wish**”, el jugador toma el papel de un poderoso mago despiadado el cuál ha sido despojado de su magia por sus atroces actos contra la humanidad. Para evitar que abuse de su poder, es castigado por la Orden de Magos y es encerrado en La Torre, una prisión para todos los malvados hechiceros del mundo.
 
@@ -164,7 +164,7 @@ El jugador tendrá que embarcarse en una misión para recuperar sus poderes y ve
 
 ## 
 
-## **1.2 \- Género** {#1.2---género}
+## **1.2 \- Género**
 
 “**Wizard’s Death Wish**” combina elementos de múltiples géneros de videojuegos. Contiene características de los siguientes géneros de videojuego:
 
@@ -178,7 +178,7 @@ El jugador tendrá que embarcarse en una misión para recuperar sus poderes y ve
 
 ## 
 
-## **1.3 \- Historia** {#1.3---historia}
+## **1.3 \- Historia**
 
 En “**Wizard’s Death Wish**”, el jugador toma el papel de un mago sarcástico y hambriento de poder que está empeñado en recuperar su magia perdida y aplastar a cualquiera que se cruce en su camino.
 
@@ -190,7 +190,7 @@ Con un sistema de lanzamiento de hechizos dinámicos que evoluciona a medida que
 
 El objetivo final es alcanzar lo alto de La Torre para así escapar de la prisión y lograr gobernar el mundo, atesorar riquezas y asegurarse de que todos recuerden su nombre como un legendario y poderoso mago.
 
-## **1.4 \- Personajes** {#1.4---personajes}
+## **1.4 \- Personajes**
 
 A continuación, se detallan los personajes que forman parte del juego.
 
@@ -202,7 +202,7 @@ A continuación, se detallan los personajes que forman parte del juego.
 
 ## 
 
-## **1.5 \- Características Principales** {#1.5---características-principales}
+## **1.5 \- Características Principales**
 
 El videojuego “**Wizard’s Death Wish**” comprende las siguientes características de juego:
 
@@ -226,7 +226,7 @@ El videojuego “**Wizard’s Death Wish**” comprende las siguientes caracter�
     
 * **Condición de Victoria**: Para ganar en “**Wizard’s Death Wish**”, el jugador debe superar todos los pisos de La Torre y escapar. Para poder escapar, el jugador tendrá que superar una lucha contra un Boss Final.
 
-## **1.6 \- Propóstio** {#1.6---propóstio}
+## **1.6 \- Propóstio**
 
 El propósito del juego “**Wizard’s Death Wish**” es crear adicción en el jugador para cautivar a la mayor cantidad de jugadores potenciales posibles.
 
@@ -236,7 +236,7 @@ Además, los niveles son generados proceduralmente, por lo que los jugadores emp
 
 ## 
 
-## **1.7 \- Públic Objetivo** {#1.7---públic-objetivo}
+## **1.7 \- Públic Objetivo**
 
 El público objetivo de “**Wizard’s Death Wish**” es un amplio rango de jugadores, incluyendo tanto jugadores casuales como competitivos, ya que es un juego que está compuesto por características de múltiples géneros, por lo que cada tipo de jugador puede encontrar algo que disfrutar en el juego.
 
@@ -258,7 +258,7 @@ El público objetivo de “**Wizard’s Death Wish**” es un amplio rango de ju
 
 ## 
 
-## **1.8 \- Tecnologías Utilizadas** {#1.8---tecnologías-utilizadas}
+## **1.8 \- Tecnologías Utilizadas**
 
 Para el eficiente desarrollo de un videojuego, es preciso hacer uso de un framework profesional que ofrezca herramientas de desarrollo maduras y que permitan crear productos de alta calidad.
 
@@ -270,13 +270,13 @@ Además, Unity tiene soporte para exportar a múltiples plataformas de forma sen
 
 ## 
 
-## **1.9 \- Plataformas** {#1.9---plataformas}
+## **1.9 \- Plataformas**
 
 El juego “**Wizard’s Death Wish**” estará disponible como videojuego web, permitiendo ejecutar el juego en cualquier dispositivo con acceso a un navegador web, permitiendo así ser ejecutado tanto en ordenadores de sobremesa y portátiles como en dispositivos móviles como tablets y teléfonos móviles, entre otros.
 
 El juego está desarrollado en **Unity**, haciendo uso del lenguaje de programación **C\#** y compilado con el build target de **WebGL**, por lo que puede ser ejecutado con alto rendimiento en todas las plataformas que tengan soporte para **WebGL**, incluyendo dispositivos móviles.
 
-## **1.10 \- Alcance** {#1.10---alcance}
+## **1.10 \- Alcance**
 
 # 
 
@@ -284,13 +284,13 @@ El alcance del proyecto es crear un videojuego web para navegador programado en 
 
 El objetivo principal es desarrollar los sistemas de juego que permitan introducir contenido sin dificultad en futuras actualizaciones, permitiendo mantener a largo plazo con facilidad el juego, dándole una vida extendida, y permitiendo futuras ampliaciones del contenido.
 
-## **1.11 \- Licencia Software** {#1.11---licencia-software}
+## **1.11 \- Licencia Software**
 
 # 
 
 El juego “**Wizard’s Death Wish**” se distribuye bajo la licencia **GPL-3.0** (Licencia Pública General de GNU, versión 3). Esta licencia permite que el software sea libre y de código abierto, lo que implica que cualquier usuario tiene el derecho de ejecutar, estudiar, compartir y modificar el juego, siempre que se respeten los términos establecidos por la **GPL-3.0**.
 
-# **2 \- Mecánicas** {#2---mecánicas}
+# **2 \- Mecánicas**
 
 Este apartado del documento se centra en detallar las mecánicas principales de “**Wizard’s Death Wish**”, un juego de acción y aventura, donde los jugadores combinan elementos mágicos en tiempo real para crear hechizos dinámicos y resolver combates, acertijos y puzzles.
 
@@ -298,7 +298,7 @@ El enfoque central está en un sistema de hechizos que permite combinaciones ún
 
 ## 
 
-## **2.1 \- Concepto** {#2.1---concepto}
+## **2.1 \- Concepto**
 
 “**Wizard’s Death Wish**” es un juego de acción y aventura que ofrece a los jugadores la libertad de conjurar hechizos combinando varios elementos en tiempo real.
 
@@ -312,7 +312,7 @@ Los niveles son generados proceduralmente, lo que fomenta la exploración y perm
 
 ## 
 
-## **2.2 \- Jugabilidad** {#2.2---jugabilidad}
+## **2.2 \- Jugabilidad**
 
 La jugabilidad de “**Wizard’s Death Wish**” se centra en la acción a través de combates dinámicos y la exploración de entornos desafiantes generados proceduralmente.
 
@@ -342,7 +342,7 @@ A continuación se detallan ciertos elementos de la Jugabilidad del videojuego �
 
 ## 
 
-## **2.3 \- Flujo de Juego** {#2.3---flujo-de-juego}
+## **2.3 \- Flujo de Juego**
 
 El flujo de juego de “**Wizard’s Death Wish**” sigue un ciclo de exploración, combate y resolución de acertijos y puzzles. Los jugadores recorren niveles que plantean obstáculos específicos, con momentos de descanso para analizar y planificar combinaciones de hechizos.
 
@@ -387,7 +387,7 @@ Si el jugador abandona una partida sin haber muerto, se cargará nuevamente su p
 
 Cada vez que se inicie una nueva partida, siempre se comenzará desde el nivel más bajo de La Torre.
 
-## **2.4 \- Cámara** {#2.4---cámara}
+## **2.4 \- Cámara**
 
 El juego “**Wizard’s Death Wish**” hace uso de una cámara en tercera persona, con vista isométrica, elevada por encima del entorno para ofrecer una vista completa del área alrededor del jugador, permitiendo ver los objetos y los enemigos con claridad durante el combate.
 
@@ -399,7 +399,7 @@ La cámara sigue al jugador, por lo que el área de visibilidad es el entorno qu
 
 ## 
 
-## **2.5 \- Controles** {#2.5---controles}
+## **2.5 \- Controles**
 
 “**Wizard’s Death Wish**” utiliza un esquema de controles intuitivo que permite al jugador combinar elementos rápidamente.
 
@@ -445,7 +445,7 @@ El juego implementa soporte para controles tanto para teclado y ratón como para
       
   * **Pausar**: El juego puede ser pausado presionando un botón táctil que se encuentra en una esquina de la pantalla.
 
-## **2.6 \- Movimiento y Físicas** {#2.6---movimiento-y-físicas}
+## **2.6 \- Movimiento y Físicas**
 
 El movimiento de los personajes y objetos del entorno se basa en un sistema de físicas simple, capaces de computar colisiones e interacciones entre objetos sin consumir una gran cantidad de recursos.
 
@@ -455,7 +455,7 @@ Los personajes con habilidades mágicas, incluyendo al jugador, NO pueden despla
 
 La física de los hechizos es interactiva y afecta tanto a enemigos como al entorno. Por ejemplo, un hechizo de agua moja a las entidades y permite incrementar el daño de los conjuros eléctricos, permitiendo electrocutar a los enemigos.
 
-## **2.7 \- Niveles y Misiones** {#2.7---niveles-y-misiones}
+## **2.7 \- Niveles y Misiones**
 
 En “**Wizard’s Death Wish**” cada nivel es generado proceduralmente y corresponde a un piso de La Torre, además de seguir una cierta temática o “bioma”.
 
@@ -469,7 +469,7 @@ Los niveles están repletos de objetos que pueden ser recolectados, como puedan 
 
 ## 
 
-## **2.8 \- Sistema de Magia** {#2.8---sistema-de-magia}
+## **2.8 \- Sistema de Magia**
 
 El sistema de magia es el núcleo del gameplay en “**Wizard’s Death Wish**”. El sistema de magia se basa en la combinación de elementos en tiempo real permitiendo que el jugador pueda crear conjuros personalizados mientras está jugando.
 
@@ -511,7 +511,7 @@ A continuación se detallan los componentes del sistema de magia en “**Wizard�
   * **Rayo**: Permite lanzar un conjuro en forma de rayo. Los rayos son disparados en línea recta hasta el objetivo al que está apuntando el jugador.  
   * **Escudo**: Permite generar muros con los elementos utilizados.
 
-## **2.9 \- Objetos** {#2.9---objetos}
+## **2.9 \- Objetos**
 
 En el juego se pueden encontrar diferentes tipos de objetos, cada uno con su propio uso.
 
@@ -527,7 +527,7 @@ El jugador podrá recolectar los diferentes tipos de objetos al entrar en contac
 
 Los diferentes tipos de objetos disponibles son los siguientes:
 
-### **2.9.1 \- Monedas:** {#2.9.1---monedas:}
+### **2.9.1 \- Monedas:**
 
 Se encontrarán repartidas por el nivel, además de ser generadas al eliminar a los enemigos. Existen monedas de diferentes categorías de moneda, las cuales tienen diferente valor:  
 **·** **Cobre**: 1 unidad  
@@ -536,7 +536,7 @@ Se encontrarán repartidas por el nivel, además de ser generadas al eliminar a 
 
 Las monedas recolectadas son guardadas al finalizar cada nivel, y pueden ser utilizadas en la tienda para comprar objetos puramente cosméticos.
 
-### **2.9.2 \- Gemas:** {#2.9.2---gemas:}
+### **2.9.2 \- Gemas:**
 
 Se encuentran en salas a las que se puede acceder al resolver ciertos puzzles. Al costar más obtenerlas, su valor es más alto que el de las monedas.
 
@@ -549,7 +549,7 @@ Las gemas pueden ser intercambiadas en la tienda a cambio de monedas si el usuar
 
 Algunos objetos de la tienda requieren gemas como pago adicional para ser adquiridos, por lo que el jugador deberá encontrar un balance entre conversión de gemas a dinero y conservación de gemas en función de los objetos cosméticos que desee adquirir.
 
-### **2.9.3 \- Coleccionables:** {#2.9.3---coleccionables:}
+### **2.9.3 \- Coleccionables:**
 
 Se obtienen al resolver una serie de puzzles de mayor dificultad.
 
@@ -557,7 +557,7 @@ Los coleccionables de un nivel pueden ser combinados para obtener un objeto cole
 
 Obtener todos los coleccionables en un nivel desbloquea un logro y el objeto coleccionable visualizable en el expositorio.
 
-### **2.9.4 \- Pociones:** {#2.9.4---pociones:}
+### **2.9.4 \- Pociones:**
 
 Las pociones son objetos consumibles que el jugador puede utilizar para restaurar los puntos de vida rápidamente.
 
@@ -565,15 +565,15 @@ Mientras el jugador no tenga acceso al elemento de curación, será necesario ha
 
 Todas las pociones de curación son idénticas y restauran la misma cantidad de puntos de salud.
 
-### **2.9.5 \- Llaves:** {#2.9.5---llaves:}
+### **2.9.5 \- Llaves:**
 
 El jugador necesita encontrar una llave en cada nivel para poder abrir la puerta que da acceso al siguiente nivel. Esta llave es obtenida al derrotar al boss del nivel actual.
 
-### **2.9.6 \- Pergaminos:** {#2.9.6---pergaminos:}
+### **2.9.6 \- Pergaminos:**
 
 Desvelan combinaciones específicas que otorgan poderes especiales al jugador. Estas combinaciones especiales pueden ser utilizadas para ejecutar poderosos conjuros con un efecto especial, como puede ser la teletransportación.
 
-## **2.10 \- Sistema de Puntuación** {#2.10---sistema-de-puntuación}
+## **2.10 \- Sistema de Puntuación**
 
 El juego “**Wizard’s Death Wish**” tiene un sistema de puntuación que valora al jugador por el número de enemigos eliminados, además de la efectividad con la que los elimine.
 
@@ -589,7 +589,7 @@ El juego cuenta con un servidor web en el cuál se almacena la información de l
 
 # 
 
-# **3 \- Interfaces** {#3---interfaces}
+# **3 \- Interfaces**
 
 En “**Wizard’s Death Wish**”, las interfaces de usuario (User Interface / UI) han sido diseñadas para proporcionar una experiencia de juego envolvente e intuitiva, además de ser diseñadas para ser visualmente atractivas, dando lugar a interfaces claras e intuitivas.
 
@@ -599,9 +599,9 @@ La estética de la interfaz es coherente y ha sido diseñada para cuadrar con la
 
 A continuación, se detalla la estructura de las principales interfaces del juego. También se ha agregado un diagrama de flujo que permite visualizar el recorrido de un jugador a través de las distintas pantallas y menús que existen en el juego.
 
-## **3.1 \- Interfaces de Menús** {#3.1---interfaces-de-menús}
+## **3.1 \- Interfaces de Menús**
 
-### **3.1.1 \- Pantalla de Inicio** {#3.1.1---pantalla-de-inicio}
+### **3.1.1 \- Pantalla de Inicio**
 
 Es una escena cuyo propósito es cargar todos los sistemas estáticos del juego que existirán de forma persistente durante el resto del tiempo de ejecución.
 
@@ -609,7 +609,7 @@ Durante la breve carga, se puede visualizar una pantalla de bienvenida que consi
 
 Esta pantalla existe únicamente para inicializar sistemas globales del juego y la carga es casi instantánea incluso en sistemas con pocos recursos, dando paso al menú principal poco después de lanzar el juego.
 
-### **3.1.2 \- Menú Principal** {#3.1.2---menú-principal}
+### **3.1.2 \- Menú Principal**
 
 El menú principal es la primera interfaz completa que pueden visualizar los jugadores y ha sido diseñado para ser tanto funcional como atractiva.
 
@@ -629,13 +629,13 @@ El menú principal contiene los siguientes botones:
 
 ### **![][image1]**
 
-#### *Figura 1 : Imagen del Menú Principal* {#figura-1-:-imagen-del-menú-principal}
+#### *Figura 1 : Imagen del Menú Principal*
 
 ### 
 
 ### 
 
-### **3.1.3 \- Menú de Tutorial** {#3.1.3---menú-de-tutorial}
+### **3.1.3 \- Menú de Tutorial**
 
 El menú de tutorial es una interfaz que contiene toda la información necesaria para aprender a jugar el juego.
 
@@ -651,7 +651,7 @@ Este menú contiene los siguientes botones:
 
 ### 
 
-### **3.1.4 \- Menú de Créditos** {#3.1.4---menú-de-créditos}
+### **3.1.4 \- Menú de Créditos**
 
 En el menú de créditos se muestran los créditos del equipo de desarrollo de **Magic Cow Games** que ha estado involucrado en el desarrollo del videojuego “**Wizard’s Death Wish**”.
 
@@ -661,7 +661,7 @@ Este menú contiene los siguientes botones:
 
 ### 
 
-### **3.1.5 \- Menú de Opciones** {#3.1.5---menú-de-opciones}
+### **3.1.5 \- Menú de Opciones**
 
 El apartado de **Opciones** será fundamental para que el jugador pueda ajustar el juego a su gusto. Las opciones estarán divididas en varias categorías.
 
@@ -680,13 +680,13 @@ Este menú contiene los siguientes botones:
 
 ![][image2]
 
-#### *Figura 2 : Imagen del menú de Opciones* {#figura-2-:-imagen-del-menú-de-opciones}
+#### *Figura 2 : Imagen del menú de Opciones*
 
 ### 
 
 ### 
 
-### **3.1.6 \- Menú de Cuenta** {#3.1.6---menú-de-cuenta}
+### **3.1.6 \- Menú de Cuenta**
 
 En este menú, el jugador tiene acceso a diferentes opciones para poder dar de alta, acceder y eliminar cuentas que permitirán almacenar la información del jugador en el servidor del juego.
 
@@ -700,14 +700,14 @@ El menú de cuenta tiene las siguientes pantallas:
 
 ![][image3]
 
-#### *Figura 3 : Imagen del menú de Cuenta* {#figura-3-:-imagen-del-menú-de-cuenta}
+#### *Figura 3 : Imagen del menú de Cuenta*
 
 ![][image4]  
 *Figura 4 : Imagen del menú de Registro de Cuenta*
 
-## **3.2 \- Interfaces de Juego** {#3.2---interfaces-de-juego}
+## **3.2 \- Interfaces de Juego**
 
-### **3.2.1 \- Menú de Pausa** {#3.2.1---menú-de-pausa}
+### **3.2.1 \- Menú de Pausa**
 
 Esta pantalla aparece cuando el usuario presiona la tecla de pausa. Permite pausar la ejecución del juego temporalmente, además de mostrar una serie de botones para acceder a diferentes opciones del juego.
 
@@ -717,7 +717,7 @@ Los botones de este menú son:
 - **Opciones**: Permite acceder al menú de opciones desde la partida  
 - **Abandonar**: Permite abandonar la partida y volver al menú principal
 
-### **3.2.2 \- Interfaz del Jugador** {#3.2.2---interfaz-del-jugador}
+### **3.2.2 \- Interfaz del Jugador**
 
 La interfaz del jugador muestra toda la información y las acciones necesarias para poder desarrollar la jugabilidad del juego durante las partidas.
 
@@ -731,7 +731,7 @@ En un lateral de la pantalla se puede visualizar la barra de pantalla del jugado
 
 En esta pantalla también se pueden encontrar contadores con iconos para la puntuación, las monedas recolectadas y las gemas.
 
-### **3.2.3 \- Interfaz de Consola de Comandos** {#3.2.3---interfaz-de-consola-de-comandos}
+### **3.2.3 \- Interfaz de Consola de Comandos**
 
 El juego “**Wizard’s Death Wish**” viene equipado con una consola de comandos programada enteramente desde cero para permitir al equipo de desarrollo acceder a características avanzadas y visualizar información de Debug durante el tiempo de ejecución en la build final durante los testeos de la build de WebGL en el web server.
 
@@ -741,7 +741,7 @@ Escribir el comando help permite visualizar una lista de todos los comandos inco
 
 Actualmente se han implementado 17 comandos.
 
-## **3.3 \- Diagrama de Flujo** {#3.3---diagrama-de-flujo}
+## **3.3 \- Diagrama de Flujo**
 
 A continuación, se muestra una imagen con el diagrama de flujo de los menús e interfaces del juego:
 
@@ -749,17 +749,17 @@ A continuación, se muestra una imagen con el diagrama de flujo de los menús e 
 
 # 
 
-# **4 \- Modelo de Negocio y Monetización** {#4---modelo-de-negocio-y-monetización}
+# **4 \- Modelo de Negocio y Monetización**
 
 En esta sección del documento se exponen los detalles de diseño de producto, el modelo de negocio utilizado por **Magic Cow Games** y la monetización del videojuego “**Wizard’s Death Wish**”.
 
-## **4.1 \- Modelo de Negocio** {#4.1---modelo-de-negocio}
+## **4.1 \- Modelo de Negocio**
 
 El videojuego “**Wizard’s Death Wish**” saldrá al mercado como un videojuego free-to-play, permitiendo que cualquier usuario pueda acceder de manera gratuita al producto y jugar sin necesidad de realizar ningún tipo de pago.
 
 El modelo de negocio de “**Wizard’s Death Wish**” es free-to-play con microtransacciones y basado en cebo y anzuelo, para incentivar a los usuarios a realizar pagos por medio de productos cosméticos.
 
-## **4.2 \- Monetización** {#4.2---monetización}
+## **4.2 \- Monetización**
 
 Al ser un juego free-to-play, la forma de monetización utilizada por “**Wizard’s Death Wish**” es por medio de las microtransacciones, permitiendo a los jugadores comprar in-game currency a cambio de un importe.
 
@@ -773,13 +773,13 @@ El precio de este objeto será ajustado para cubrir los gastos del mantenimiento
 
 Como se hace uso de un modelo de negocio free-to-play con microtransacciones y basado en cebo y anzuelo, para incentivar a los usuarios a realizar pagos, el juego otorgará objetos cosméticos de bajo nivel de categoría “**Común**” de forma automática, con un total de 12 objetos a la semana. De esta manera, el inventario se llena rápidamente, forzando a los usuarios a tomar la decisión de descartar objetos o realizar la compra por micropagos para extender su inventario y adquirir mejores objetos cosméticos, ya que los objetos de la tienda serán personalizables y de mayor rareza como “**Extraños**”, “**Inusuales**”, “**Edición de Coleccionista**”, “**Encantados**” y “**Legendarios**”, entre otras.
 
-## **4.3 \- Mapa de Empatía** {#4.3---mapa-de-empatía}
+## **4.3 \- Mapa de Empatía**
 
 Para desarrollar el mapa de empatía para el videojuego “**Wizard’s Death Wish**”, se ha analizado el perfil de los usuarios que forman parte del público objetivo: jugadores que buscan experiencias competitivas, desafiantes y colaborativas, con un enfoque en el aprendizaje y la mejora de habilidades para superar retos y el disfrute de la interacción social en un entorno de juego dinámico y en constante evolución.
 
 Se han identificado los siguientes puntos clave en cada área del mapa de empatía del jugador de “**Wizard’s Death Wish**”:
 
-### **4.3.1 \- ¿Qué Piensa y Siente?** {#4.3.1---¿qué-piensa-y-siente?}
+### **4.3.1 \- ¿Qué Piensa y Siente?**
 
 El jugador medio de “**Wizard’s Death Wish**” es alguien que disfruta de enfrentarse a desafíos en videojuegos y considera la competencia como una oportunidad para superarse y mejorar sus habilidades.
 
@@ -789,7 +789,7 @@ Este tipo de jugador suele elegir títulos que representen un reto constante, al
 
 Los jugadores sienten una satisfacción particular en superar retos complejos y buscan experiencias de juego que les permitan mejorar sus habilidades, lo cual influye directamente en la necesidad de que “**Wizard’s Death Wish**” ofrezca una curva de aprendizaje constante y recompensas que reflejan el esfuerzo y el progreso personal.
 
-### **4.3.2 \- ¿Qué Oye?** {#4.3.2---¿qué-oye?}
+### **4.3.2 \- ¿Qué Oye?**
 
 Los jugadores suelen hablar con sus amigos sobre videojuegos, especialmente con aquellos con los que pueden comparar sus logros y habilidades en los juegos que disfrutan jugar.
 
@@ -799,7 +799,7 @@ A su vez, estos jugadores valoran la cooperación para descubrir las mejores est
 
 Este contexto social demuestra la importancia de incluir logros complejos, secretos, y elementos desbloqueables en el diseño de “**Wizard’s Death Wish**”, así como la necesidad de fomentar la creación de una comunidad donde los jugadores puedan compartir estrategias, logros, opiniones y dar feedback, contribuyendo así a la viralización del juego en círculos de amigos y redes sociales.
 
-### **4.3.3 \- ¿Qué Ve?** {#4.3.3---¿qué-ve?}
+### **4.3.3 \- ¿Qué Ve?**
 
 El jugador del público objetivo está inmerso en comunidades en línea que son activas, donde puede observar de forma constante qué juegos están jugando otros jugadores y cómo mejoran en ellos.
 
@@ -809,13 +809,13 @@ La exposición a este tipo de contenido hace que los jugadores se interesen por 
 
 Dado que estos jugadores están influenciados por lo que ven en las redes y el contenido que crean otros jugadores, es importante diseñar la base del sistema de comunicación de **Magic Cow Games** haciendo uso de diferentes plataformas y redes sociales, permitiendo estar en contacto con jugadores a los que les gusta este tipo de juego, así como atraer a nuevos jugadores.
 
-### **4.3.4 \- ¿Qué Dice?** {#4.3.4---¿qué-dice?}
+### **4.3.4 \- ¿Qué Dice?**
 
 Cuando hablan de su experiencia de juego, estos jugadores suelen comentar sus logros, los objetos que han conseguido, y las skins o personalizaciones que han desbloqueado. También son activos al compartir sus experiencias y estrategias con otros jugadores, buscando intercambiar información útil que los ayude a mejorar. Este deseo de contar sus logros y experiencias subraya la importancia de una comunidad activa en la que los jugadores puedan compartir y comparar sus progresos.
 
 “**Wizard’s Death Wish**” debe incluir un sistema de recompensas atractivo y variado, con elementos de personalización como skins y logros que puedan compartirse fácilmente, incentivando a los jugadores a hablar sobre el juego y atraer así a nuevos usuarios.
 
-### **4.3.5 \- ¿Qué Hace?** {#4.3.5---¿qué-hace?}
+### **4.3.5 \- ¿Qué Hace?**
 
 Para los potenciales jugadores de “**Wizard’s Death Wish**”, jugar es una mezcla de entretenimiento, superación personal y competencia. Disfrutan mejorar sus habilidades, demostrar su nivel a otros, y se involucran activamente en comunidades de jugadores. La interacción con la comunidad les permite recibir feedback sobre sus habilidades y mantenerse motivados para continuar mejorando.
 
@@ -823,7 +823,7 @@ Para los potenciales jugadores de “**Wizard’s Death Wish**”, jugar es una 
 
 ### 
 
-### **4.3.6 \- Resultados que Buscan** {#4.3.6---resultados-que-buscan}
+### **4.3.6 \- Resultados que Buscan**
 
 Los jugadores valoran un entorno de juego sin interrupciones, libre de publicidad intrusiva, y desean que la experiencia se mantenga centrada en la habilidad, sin elementos pay-to-win.
 
@@ -835,7 +835,7 @@ También es crucial para ellos que haya una comunidad activa donde puedan compar
 
 La satisfacción de los potenciales jugadores de “**Wizard’s Death Wish**” depende de que el juego ofrezca un flujo constante de contenido nuevo y una experiencia justa donde la habilidad sea el único factor para progresar. Por lo tanto, el diseño de Wizard’s Death Wish debe centrarse en un modelo de juego equilibrado y libre de elementos pay-to-win, con actualizaciones periódicas que agreguen contenido y desafíos nuevos.
 
-### **4.3.7 \- Esfuerzos y Frustraciones** {#4.3.7---esfuerzos-y-frustraciones}
+### **4.3.7 \- Esfuerzos y Frustraciones**
 
 Los jugadores tienden a frustrarse con interfaces complejas, poco intuitivas y difíciles de navegar, partidas repetitivas, o juegos que no ofrecen un reto con mecánicas interesantes.
 
@@ -845,41 +845,41 @@ Buscan experiencias de juego nuevas y desafiantes, con una interfaz intuitiva y 
 
 La prioridad en el desarrollo de “**Wizard’s Death Wish**” debe ser ofrecer una experiencia optimizada en términos de rendimiento, con una interfaz fácil de utilizar e intuitiva, además de un sistema de progresión claro. Esto mitigará frustraciones comunes y mantendrá el interés del jugador a largo plazo.
 
-### **4.3.8 \- Conclusión** {#4.3.8---conclusión}
+### **4.3.8 \- Conclusión**
 
 Este análisis de empatía permite comprender en mayor profundidad las motivaciones y expectativas del público objetivo, guiando el diseño de “**Wizard’s Death Wish**” para que ofrezca una experiencia que sea satisfactoria para los jugadores, ofreciendo combates dinámicos y enfocados en la habilidad.
 
 A su vez, asegura la creación de una comunidad activa y comprometida que respalde y promocione el juego en múltiples plataformas y redes sociales, permitiendo recibir feedback de los jugadores para mantener la experiencia de juego en consonancia con las expectativas de los jugadores.
 
-### **4.3.9 \- Imagen del Mapa de Empatía** {#4.3.9---imagen-del-mapa-de-empatía}
+### **4.3.9 \- Imagen del Mapa de Empatía**
 
 A continuación, se muestra un esquema con el mapa de empatía diseñado para el jugador objetivo de “**Wizard’s Death Wish**”:
 
 ![][image6]
 
-#### *Figura 5 : Mapa de Empatía* {#figura-5-:-mapa-de-empatía}
+#### *Figura 5 : Mapa de Empatía*
 
 ## 
 
-## **4.4 \- Caja de Herramientas** {#4.4---caja-de-herramientas}
+## **4.4 \- Caja de Herramientas**
 
 A continuación, se muestra la caja de herramientas diseñada para la compañía, detallando los diferentes integrantes e interacciones que son esenciales para el correcto desarrollo de las actividades empresariales de **Magic Cow Games**:
 
 ![][image7]
 
-#### *Figura 6 : Caja de Herramientas* {#figura-6-:-caja-de-herramientas}
+#### *Figura 6 : Caja de Herramientas*
 
 ## 
 
-## **4.5 \- Lienzo de Modelo de Negocio** {#4.5---lienzo-de-modelo-de-negocio}
+## **4.5 \- Lienzo de Modelo de Negocio**
 
 A continuación, se presenta el lienzo de Modelo de Negocio de **Magic Cow Games**:
 
 ![][image8]
 
-#### *Figura 7 : Lienzo de Modelo de Negocio* {#figura-7-:-lienzo-de-modelo-de-negocio}
+#### *Figura 7 : Lienzo de Modelo de Negocio*
 
-# **5 \- Bibliografía** {#5---bibliografía}
+# **5 \- Bibliografía**
 
 \[1\] :   
 [https://www.dykinson.com/libros/mundo-de-los-videojuegos-monografico-juegos-para-web/9788413248813/](https://www.dykinson.com/libros/mundo-de-los-videojuegos-monografico-juegos-para-web/9788413248813/)
