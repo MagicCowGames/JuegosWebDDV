@@ -4921,7 +4921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elementsCounts: 
   spellColor: {r: 0, g: 0, b: 0, a: 0}
-  healthModifierController: {fileID: 0}
+  healthModifierController: {fileID: 6267436749440777408}
   sprayParticleSystem: {fileID: 3640161005752448802}
   lifeTime: 5
 --- !u!135 &3189739474158278755
