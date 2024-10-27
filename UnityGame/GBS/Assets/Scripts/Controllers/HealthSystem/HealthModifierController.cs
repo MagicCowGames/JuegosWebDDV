@@ -126,7 +126,7 @@ public class HealthModifierController : MonoBehaviour
     public void Apply(GameObject obj, float delta = 1.0f)
     {
         // If it's disabled, then bail out and don't apply any effects to the target.
-        if (this.modifierEnabled)
+        if (!this.modifierEnabled)
             return;
 
         var protection = obj.GetComponent<ProtectionController>();
