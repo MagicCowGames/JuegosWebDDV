@@ -9,6 +9,7 @@ public class SpellProjectileController : SpellBaseController
     [Header("Projectile Settings")]
     [SerializeField] private Rigidbody rigidBody;
     [SerializeField] private float force;
+    [SerializeField] private ParticleSystem elementParticles;
 
     #endregion
 
@@ -36,7 +37,8 @@ public class SpellProjectileController : SpellBaseController
 
     public override void UpdateSpellColor()
     {
-
+        // TODO : Find non-deprecated alternative to do this.
+        this.elementParticles.startColor = this.spellColor;
     }
 
     #endregion

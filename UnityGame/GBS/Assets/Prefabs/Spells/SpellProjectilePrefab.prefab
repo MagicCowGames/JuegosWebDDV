@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 1105996456764016187}
   - component: {fileID: 5010910073369459523}
   m_Layer: 0
-  m_Name: Fire_Particle_System (1)
+  m_Name: ElementParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5024,6 +5024,7 @@ MonoBehaviour:
   healthModifierController: {fileID: 5540752131964213612}
   rigidBody: {fileID: 8633388462888370009}
   force: 20
+  elementParticles: {fileID: 1105996456764016187}
 --- !u!114 &5540752131964213612
 MonoBehaviour:
   m_ObjectHideFlags: 0
