@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements.Experimental;
@@ -12,6 +13,9 @@ public class PlayerUIController : UIController, IComponentValidator
     [SerializeField] private Image formImage;
     [SerializeField] private Image[] elementQueueImages;
     [SerializeField] private Image healthBar;
+
+    [SerializeField] private TMP_Text moneyTextBack;
+    [SerializeField] private TMP_Text moneyText;
 
     #endregion
 
@@ -132,7 +136,9 @@ public class PlayerUIController : UIController, IComponentValidator
             MagicManager.Instance != null && // This should never happen, but if it does, we're fucked, so we should just return early to prevent any issues.
             PlayerDataManager.Instance != null &&
             PlayerDataManager.Instance.GetPlayerHealth() != null &&
-            PlayerDataManager.Instance.GetPlayerSpellCaster() != null
+            PlayerDataManager.Instance.GetPlayerSpellCaster() != null &&
+            this.moneyTextBack != null &&
+            this.moneyText != null
             ;
     }
 

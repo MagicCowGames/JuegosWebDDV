@@ -798,6 +798,8 @@ MonoBehaviour:
   - {fileID: 2438445251923640741}
   - {fileID: 4027180403180498128}
   healthBar: {fileID: 6495364130375149124}
+  moneyTextBack: {fileID: 6735230112439351178}
+  moneyText: {fileID: 6650723831820036285}
 --- !u!1 &2301635861765014642
 GameObject:
   m_ObjectHideFlags: 0
