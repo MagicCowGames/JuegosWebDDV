@@ -29,7 +29,7 @@ public class HealthModifierController : MonoBehaviour
     public struct InputDamageElement
     {
         public Element element;
-        public float damage;
+        public int amount;
     }
 
     [System.Serializable]
@@ -37,13 +37,13 @@ public class HealthModifierController : MonoBehaviour
     {
         public InputDamageElement[] damageValues;
 
-        public InputDamageArray(float defaultDamage = 1.0f)
+        public InputDamageArray(int defaultAmount = 0)
         {
             this.damageValues = new InputDamageElement[(int)Element.COUNT];
             for (int i = 0; i < this.damageValues.Length; ++i)
             {
                 damageValues[i].element = (Element)i;
-                damageValues[i].damage = defaultDamage;
+                damageValues[i].amount = defaultAmount;
             }
         }
     }
@@ -58,7 +58,7 @@ public class HealthModifierController : MonoBehaviour
 
     [Header("Element Modifier Values")]
     [SerializeField] private bool resetValues;
-    [SerializeField] private InputDamageArray inputDamageArray = new InputDamageArray(5.0f);
+    [SerializeField] private InputDamageArray inputDamageArray; // Can't use default constructor for serializable structs for some reason. Ok Unity, you win...
 
     #endregion
 
@@ -78,7 +78,7 @@ public class HealthModifierController : MonoBehaviour
     {
         if (this.inputDamageArray.damageValues.Length <= 0 || this.resetValues)
         {
-            this.inputDamageArray = new InputDamageArray(1.0f);
+            this.inputDamageArray = new InputDamageArray(0);
             this.resetValues = false;
         }
     }
