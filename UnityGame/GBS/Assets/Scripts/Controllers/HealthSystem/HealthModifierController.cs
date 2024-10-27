@@ -85,7 +85,7 @@ public class HealthModifierController : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     void OnValidate()
