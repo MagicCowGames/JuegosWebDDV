@@ -63,6 +63,12 @@ public class PlayerUIController : UIController, IComponentValidator
     public void Button_SetForm_Beam() { Button_SetForm(Form.Beam); }
     public void Button_SetForm_Shield() { Button_SetForm(Form.Shield); }
 
+    // Buttons : Pause and Other Actions
+    public void Button_Pause()
+    {
+        InputManager.Instance?.SwitchPaused();
+    }
+
     #endregion
 
     #region PrivateMethods

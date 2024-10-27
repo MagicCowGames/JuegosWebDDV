@@ -64,6 +64,11 @@ public class InputManager : Singleton<InputManager>
         this.OnSwitchConsole?.Invoke();
     }
 
+    public void SwitchPaused()
+    {
+        GameUtility.SwitchPaused(); // This should send an event instead but whatever, temporary fix.
+    }
+
     public void RightClickDown()
     {
         this.OnRightClickDown?.Invoke();
@@ -190,7 +195,7 @@ public class InputManager : Singleton<InputManager>
     {
         // Pause
         if (Input.GetKeyDown(KeyCode.Escape))
-            GameUtility.SwitchPaused();
+            SwitchPaused();
 
         // Console
         if (Input.GetKeyDown(KeyCode.BackQuote))
