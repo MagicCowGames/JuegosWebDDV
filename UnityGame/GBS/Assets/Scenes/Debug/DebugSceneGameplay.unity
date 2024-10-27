@@ -3940,7 +3940,7 @@ GameObject:
   - component: {fileID: 1013408371}
   - component: {fileID: 1013408370}
   - component: {fileID: 1013408369}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: heal_area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5323,7 +5323,7 @@ GameObject:
   - component: {fileID: 1437879579}
   - component: {fileID: 1437879580}
   - component: {fileID: 1437879581}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5840,7 +5840,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1512350400}
   m_LocalRotation: {x: 0.70710737, y: -0, z: -0, w: 0.7071062}
-  m_LocalPosition: {x: 0, y: 0, z: -11.52}
+  m_LocalPosition: {x: 0, y: 0, z: -11.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17220,7 +17220,7 @@ GameObject:
   - component: {fileID: 1937773972}
   - component: {fileID: 1937773971}
   - component: {fileID: 1937773970}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: damage_area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
