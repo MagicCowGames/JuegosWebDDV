@@ -4882,6 +4882,7 @@ GameObject:
   - component: {fileID: 8380074452185296951}
   - component: {fileID: 3189739474158278755}
   - component: {fileID: 6267436749440777408}
+  - component: {fileID: 6197233759521691044}
   m_Layer: 0
   m_Name: SpellSprayPrefab
   m_TagString: Untagged
@@ -4964,6 +4965,19 @@ MonoBehaviour:
   resetValues: 0
   inputDamageArray:
     damageValues: []
+--- !u!114 &6197233759521691044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7258614691735134581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fd6ec9c1ebf85a4da96d05886bec7c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sphereCollider: {fileID: 3189739474158278755}
 --- !u!1 &8490993986500311921
 GameObject:
   m_ObjectHideFlags: 0
