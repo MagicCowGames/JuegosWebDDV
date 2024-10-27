@@ -45,6 +45,23 @@ public class DamageController : MonoBehaviour
     #endregion
 
     #region PublicMethods
+
+    // If the target has no health controller, then no damage will be applied, but the game won't explode either, we just early return, so it's all good.
+    // NOTE : This function is redundant with the whole ApplyDamage() method, but I'm trying to come up with a relatively good and standardised public interface
+    // for damaging and healing when protection is involved...
+    public void Damage(GameObject target)
+    {
+        var protection = target.GetComponent<ProtectionController>();
+        var health = target.GetComponent<HealthController>();
+
+        if (health == null)
+            return;
+
+        // TODO : Add protection handling.
+
+        health.Health -= this.damage;
+    }
+
     #endregion
 
     #region PrivateMethods
