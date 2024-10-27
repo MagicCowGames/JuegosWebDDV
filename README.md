@@ -627,7 +627,7 @@ El menú principal contiene los siguientes botones:
 * **Créditos**: Carga el menú de créditos del desarrollo del videojuego.  
 * **Tutorial**: Carga un menú de tutorial dónde se explican los controles básicos del juego.
 
-### **![][image1]**
+### **![](./data/img/img_menu_main_menu.png)**
 
 #### *Figura 1 : Imagen del Menú Principal*
 
