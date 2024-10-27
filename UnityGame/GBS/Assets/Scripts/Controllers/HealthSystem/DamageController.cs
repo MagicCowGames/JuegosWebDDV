@@ -27,7 +27,7 @@ public class DamageController : MonoBehaviour
     [Header("Damage Configuration")]
     [SerializeField] private float damage = 10.0f;
     [SerializeField] private DamageType damageType = DamageType.Instant;
-
+    
     #endregion
 
     #region MonoBehaviour
