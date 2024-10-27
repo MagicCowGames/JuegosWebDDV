@@ -133,8 +133,8 @@ public class HealthModifierController : MonoBehaviour
         if (hp == null)
             return;
 
-        foreach (var elementCount in this.elementCounts)
-            hp.Health += delta * -10.0f * elementCount; // TODO : Remove placeholder 10.0f value and change it with an actual damage value from the element manager... or maybe all elements do the same damage, who knows! We'll see in the future.
+        for(int i = 0; i < (int)Element.COUNT; ++i)
+            hp.Health += delta * MagicManager.Instance.GetElementDamage((Element)i) * elementCounts[i];
     }
 
     #endregion
