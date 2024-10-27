@@ -22,10 +22,11 @@ public class DamageController : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private Collider damageCollider; // wtf are u used for tho TODO : Cleanup
+    [SerializeField] private bool usesCollision = true;
 
     [Header("Damage Configuration")]
-    [SerializeField] private float damage;
-    [SerializeField] private DamageType damageType;
+    [SerializeField] private float damage = 10.0f;
+    [SerializeField] private DamageType damageType = DamageType.Instant;
 
     #endregion
 
@@ -33,7 +34,7 @@ public class DamageController : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -62,12 +63,16 @@ public class DamageController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (!this.usesCollision)
+            return;
         if (this.damageType == DamageType.Instant)
             ApplyDamage(other.gameObject);
     }
 
     void OnTriggerStay(Collider other)
     {
+        if (!this.usesCollision)
+            return;
         if (this.damageType == DamageType.OverTime)
             ApplyDamage(other.gameObject, Time.deltaTime);
     }
