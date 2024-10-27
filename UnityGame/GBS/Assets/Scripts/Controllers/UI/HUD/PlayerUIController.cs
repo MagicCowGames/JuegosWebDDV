@@ -17,8 +17,6 @@ public class PlayerUIController : UIController, IComponentValidator
     [SerializeField] private TMP_Text moneyTextBack;
     [SerializeField] private TMP_Text moneyText;
 
-    private float displayedMoney = 0.0f;
-
     #endregion
 
     #region MonoBehaviour
@@ -116,8 +114,6 @@ public class PlayerUIController : UIController, IComponentValidator
 
     private void UpdateMoneyDisplay(float delta)
     {
-        // this.displayedMoney = Mathf.Lerp(this.displayedMoney, (float)PlayerDataManager.Instance.GetPlayerMoney().Money, delta * 100.0f);
-        // string str = $"${(int)displayedMoney}";
         string str = $"${PlayerDataManager.Instance.GetPlayerMoney().Money}";
         this.moneyTextBack.text = str;
         this.moneyText.text = str;
