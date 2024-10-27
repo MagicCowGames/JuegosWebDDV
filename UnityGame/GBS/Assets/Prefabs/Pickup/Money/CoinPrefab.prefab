@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3300366100344480345}
   - component: {fileID: 7910820559242932376}
+  - component: {fileID: 8892547476447959571}
   m_Layer: 0
   m_Name: CoinPrefab
   m_TagString: Untagged
@@ -48,12 +49,30 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8892547476447959571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870525929213694101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9592391cc95c18f4d94518a09ea3571a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinCollider: {fileID: 7910820559242932376}
+  coinMesh: {fileID: 0}
+  coinType: 0
+  valueType: 0
+  valueBase: 5
+  valueTotal: 5
 --- !u!1001 &378267006009258394
 PrefabInstance:
   m_ObjectHideFlags: 0
