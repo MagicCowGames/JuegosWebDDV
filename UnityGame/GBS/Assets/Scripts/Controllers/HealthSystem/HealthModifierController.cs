@@ -129,6 +129,10 @@ public class HealthModifierController : MonoBehaviour
         if (!this.modifierEnabled)
             return;
 
+        // If the input object is null, return.
+        if (obj == null)
+            return;
+
         var protection = obj.GetComponent<ProtectionController>();
         var hp = obj.GetComponent<HealthController>();
         // TODO : Add get component for status effect component so that we can handle burning and stuff in the future.
