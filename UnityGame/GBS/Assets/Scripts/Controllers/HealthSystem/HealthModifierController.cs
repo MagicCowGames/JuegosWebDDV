@@ -86,8 +86,32 @@ public class HealthModifierController : MonoBehaviour
     #endregion
 
     #region PublicMethods
+
+    public void Apply(GameObject obj, float delta = 1.0f)
+    { }
+
     #endregion
 
     #region PrivateMethods
+    #endregion
+
+    #region CollisionMethods
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (!this.collisionEnabled)
+            return;
+        if (this.type == Type.Instant)
+            Apply(other.gameObject);
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (!this.collisionEnabled)
+            return;
+        if (this.type == Type.OverTime)
+            Apply(other.gameObject, Time.deltaTime);
+    }
+
     #endregion
 }
