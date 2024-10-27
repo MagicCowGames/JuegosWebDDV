@@ -8,8 +8,9 @@ public class SpellBaseController : MonoBehaviour, ISpell
     #region Variables
 
     [Header("Basic Spell Settings")]
-    [SerializeField] protected int[] ElementsCounts; // Array that holds the count of each element type.
+    [SerializeField] protected int[] elementsCounts; // Array that holds the count of each element type.
     [SerializeField] protected Color spellColor;
+    [SerializeField] protected HealthModifierController healthModifierController;
 
     #endregion
 
@@ -53,10 +54,10 @@ public class SpellBaseController : MonoBehaviour, ISpell
         float g = 0.0f;
         float b = 0.0f;
 
-        this.ElementsCounts = new int[(int)Element.COUNT];
+        this.elementsCounts = new int[(int)Element.COUNT];
         for(int i = 0; i < queue.ElementsCounts.Length; ++i)
         {
-            this.ElementsCounts[i] = queue.ElementsCounts[i];
+            this.elementsCounts[i] = queue.ElementsCounts[i];
             Element currentElement = (Element)i;
             Color currentColor = MagicManager.Instance.GetElementColor(currentElement);
             var cr = (currentColor.r / queue.Count) * queue.ElementsCounts[i];
@@ -66,6 +67,7 @@ public class SpellBaseController : MonoBehaviour, ISpell
             g += cg;
             b += cb;
         }
+        this.healthModifierController?.SetValues(this.elementsCounts);
 
         Color colorAns = new Color(r, g, b, 1.0f);
         SetSpellColor(colorAns);
