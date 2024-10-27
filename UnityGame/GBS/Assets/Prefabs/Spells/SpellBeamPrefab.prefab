@@ -4851,6 +4851,7 @@ GameObject:
   - component: {fileID: 6243396936320162742}
   - component: {fileID: 6467483886300222376}
   - component: {fileID: 2662841331532251865}
+  - component: {fileID: 6346869403243110719}
   m_Layer: 0
   m_Name: SpellBeamPrefab
   m_TagString: Untagged
@@ -4991,8 +4992,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 216b2e299253f98409e74c943dadb119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ElementsCounts: 
+  elementsCounts: 
   spellColor: {r: 0, g: 0, b: 0, a: 0}
+  healthModifierController: {fileID: 6346869403243110719}
   beamPrefab: {fileID: 4110217941577811738}
   lineRenderer: {fileID: 6243396936320162742}
   maxDistance: 1000
@@ -5022,6 +5024,25 @@ CapsuleCollider:
   m_Height: 10
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 5}
+--- !u!114 &6346869403243110719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4110217941577811738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82613f123eeb52f45af09007890a7c37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+  modifierEnabled: 1
+  collisionEnabled: 1
+  useDefaultValues: 0
+  resetValues: 0
+  inputDamageArray:
+    damageValues: []
 --- !u!1 &8039456660412643613
 GameObject:
   m_ObjectHideFlags: 0
@@ -5033,9 +5054,6 @@ GameObject:
   - component: {fileID: 1429296235749328521}
   - component: {fileID: 7659739931283673959}
   - component: {fileID: 5830526053907604503}
-  - component: {fileID: 2403767229527846760}
-  - component: {fileID: 665600627209754538}
-  - component: {fileID: 6664591849745890334}
   m_Layer: 0
   m_Name: ParticlesEnd
   m_TagString: Untagged
@@ -9864,56 +9882,3 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &2403767229527846760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8039456660412643613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82613f123eeb52f45af09007890a7c37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 1
-  modifierEnabled: 1
-  collisionEnabled: 1
-  useDefaultValues: 0
-  resetValues: 0
-  inputDamageArray:
-    damageValues: []
---- !u!135 &665600627209754538
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8039456660412643613}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 2
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6664591849745890334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8039456660412643613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fd6ec9c1ebf85a4da96d05886bec7c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sphereCollider: {fileID: 665600627209754538}
