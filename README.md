@@ -16,117 +16,117 @@
 
 * [**1 \- Introducción**](#1---introducción)
 
-  * [1.1 \- Concepto](#1.1---concepto)
+  * [1.1 \- Concepto](#11---concepto)
 
-  * [1.2 \- Género](#1.2---género)
+  * [1.2 \- Género](#12---género)
 
-  * [1.3 \- Historia](#1.3---historia)
+  * [1.3 \- Historia](#13---historia)
 
-  * [1.4 \- Personajes](#1.4---personajes)
+  * [1.4 \- Personajes](#14---personajes)
 
-  * [1.5 \- Características Principales](#1.5---características-principales)
+  * [1.5 \- Características Principales](#15---características-principales)
 
-  * [1.6 \- Propóstio](#1.6---propóstio)
+  * [1.6 \- Propóstio](#16---propóstio)
 
-  * [1.7 \- Públic Objetivo](#1.7---públic-objetivo)
+  * [1.7 \- Públic Objetivo](#17---públic-objetivo)
 
-  * [1.8 \- Tecnologías Utilizadas](#1.8---tecnologías-utilizadas)
+  * [1.8 \- Tecnologías Utilizadas](#18---tecnologías-utilizadas)
 
-  * [1.9 \- Plataformas](#1.9---plataformas)
+  * [1.9 \- Plataformas](#19---plataformas)
 
-  * [1.10 \- Alcance](#1.10---alcance)
+  * [1.10 \- Alcance](#110---alcance)
 
-  * [1.11 \- Licencia Software](#1.11---licencia-software)
+  * [1.11 \- Licencia Software](#111---licencia-software)
 
 * [**2 \- Mecánicas**](#2---mecánicas)
 
-  * [2.1 \- Concepto](#2.1---concepto)
+  * [2.1 \- Concepto](#21---concepto)
 
-  * [2.2 \- Jugabilidad](#2.2---jugabilidad)
+  * [2.2 \- Jugabilidad](#22---jugabilidad)
 
-  * [2.3 \- Flujo de Juego](#2.3---flujo-de-juego)
+  * [2.3 \- Flujo de Juego](#23---flujo-de-juego)
 
-  * [2.4 \- Cámara](#2.4---cámara)
+  * [2.4 \- Cámara](#24---cámara)
 
-  * [2.5 \- Controles](#2.5---controles)
+  * [2.5 \- Controles](#25---controles)
 
-  * [2.6 \- Movimiento y Físicas](#2.6---movimiento-y-físicas)
+  * [2.6 \- Movimiento y Físicas](#26---movimiento-y-físicas)
 
-  * [2.7 \- Niveles y Misiones](#2.7---niveles-y-misiones)
+  * [2.7 \- Niveles y Misiones](#27---niveles-y-misiones)
 
-  * [2.8 \- Sistema de Magia](#2.8---sistema-de-magia)
+  * [2.8 \- Sistema de Magia](#28---sistema-de-magia)
 
-  * [2.9 \- Objetos](#2.9---objetos)
+  * [2.9 \- Objetos](#29---objetos)
 
-    * [2.9.1 \- Monedas:](#2.9.1---monedas:)
+    * [2.9.1 \- Monedas:](#291---monedas)
 
-    * [2.9.2 \- Gemas:](#2.9.2---gemas:)
+    * [2.9.2 \- Gemas:](#292---gemas)
 
-    * [2.9.3 \- Coleccionables:](#2.9.3---coleccionables:)
+    * [2.9.3 \- Coleccionables:](#293---coleccionables)
 
-    * [2.9.4 \- Pociones:](#2.9.4---pociones:)
+    * [2.9.4 \- Pociones:](#294---pociones)
 
-    * [2.9.5 \- Llaves:](#2.9.5---llaves:)
+    * [2.9.5 \- Llaves:](#295---llaves)
 
-    * [2.9.6 \- Pergaminos:](#2.9.6---pergaminos:)
+    * [2.9.6 \- Pergaminos:](#296---pergaminos)
 
-  * [2.10 \- Sistema de Puntuación](#2.10---sistema-de-puntuación)
+  * [2.10 \- Sistema de Puntuación](#210---sistema-de-puntuación)
 
 * [**3 \- Interfaces**](#3---interfaces)
 
-  * [3.1 \- Interfaces de Menús](#3.1---interfaces-de-menús)
+  * [3.1 \- Interfaces de Menús](#31---interfaces-de-menús)
 
-    * [3.1.1 \- Pantalla de Inicio](#3.1.1---pantalla-de-inicio)
+    * [3.1.1 \- Pantalla de Inicio](#311---pantalla-de-inicio)
 
-    * [3.1.2 \- Menú Principal](#3.1.2---menú-principal)
+    * [3.1.2 \- Menú Principal](#312---menú-principal)
 
-    * [3.1.3 \- Menú de Tutorial](#3.1.3---menú-de-tutorial)
+    * [3.1.3 \- Menú de Tutorial](#313---menú-de-tutorial)
 
-    * [3.1.4 \- Menú de Créditos](#3.1.4---menú-de-créditos)
+    * [3.1.4 \- Menú de Créditos](#314---menú-de-créditos)
 
-    * [3.1.5 \- Menú de Opciones](#3.1.5---menú-de-opciones)
+    * [3.1.5 \- Menú de Opciones](#315---menú-de-opciones)
 
-    * [3.1.6 \- Menú de Cuenta](#3.1.6---menú-de-cuenta)
+    * [3.1.6 \- Menú de Cuenta](#316---menú-de-cuenta)
 
-  * [3.2 \- Interfaces de Juego](#3.2---interfaces-de-juego)
+  * [3.2 \- Interfaces de Juego](#32---interfaces-de-juego)
 
-    * [3.2.1 \- Menú de Pausa](#3.2.1---menú-de-pausa)
+    * [3.2.1 \- Menú de Pausa](#321---menú-de-pausa)
 
-    * [3.2.2 \- Interfaz del Jugador](#3.2.2---interfaz-del-jugador)
+    * [3.2.2 \- Interfaz del Jugador](#322---interfaz-del-jugador)
 
-    * [3.2.3 \- Interfaz de Consola de Comandos](#3.2.3---interfaz-de-consola-de-comandos)
+    * [3.2.3 \- Interfaz de Consola de Comandos](#323---interfaz-de-consola-de-comandos)
 
-  * [3.3 \- Diagrama de Flujo](#3.3---diagrama-de-flujo)
+  * [3.3 \- Diagrama de Flujo](#33---diagrama-de-flujo)
 
 * [**4 \- Modelo de Negocio y Monetización**](#4---modelo-de-negocio-y-monetización)
 
-  * [4.1 \- Modelo de Negocio](#4.1---modelo-de-negocio)
+  * [4.1 \- Modelo de Negocio](#41---modelo-de-negocio)
 
-  * [4.2 \- Monetización](#4.2---monetización)
+  * [4.2 \- Monetización](#42---monetización)
 
-  * [4.3 \- Mapa de Empatía](#4.3---mapa-de-empatía)
+  * [4.3 \- Mapa de Empatía](#43---mapa-de-empatía)
 
-    * [4.3.1 \- ¿Qué Piensa y Siente?](#4.3.1---¿qué-piensa-y-siente?)
+    * [4.3.1 \- ¿Qué Piensa y Siente?](#431---¿qué-piensa-y-siente?)
 
-    * [4.3.2 \- ¿Qué Oye?](#4.3.2---¿qué-oye?)
+    * [4.3.2 \- ¿Qué Oye?](#432---¿qué-oye?)
 
-    * [4.3.3 \- ¿Qué Ve?](#4.3.3---¿qué-ve?)
+    * [4.3.3 \- ¿Qué Ve?](#433---¿qué-ve?)
 
-    * [4.3.4 \- ¿Qué Dice?](#4.3.4---¿qué-dice?)
+    * [4.3.4 \- ¿Qué Dice?](#434---¿qué-dice?)
 
-    * [4.3.5 \- ¿Qué Hace?](#4.3.5---¿qué-hace?)
+    * [4.3.5 \- ¿Qué Hace?](#435---¿qué-hace?)
 
-    * [4.3.6 \- Resultados que Buscan](#4.3.6---resultados-que-buscan)
+    * [4.3.6 \- Resultados que Buscan](#436---resultados-que-buscan)
 
-    * [4.3.7 \- Esfuerzos y Frustraciones](#4.3.7---esfuerzos-y-frustraciones)
+    * [4.3.7 \- Esfuerzos y Frustraciones](#437---esfuerzos-y-frustraciones)
 
-    * [4.3.8 \- Conclusión](#4.3.8---conclusión)
+    * [4.3.8 \- Conclusión](#438---conclusión)
 
-    * [4.3.9 \- Imagen del Mapa de Empatía](#4.3.9---imagen-del-mapa-de-empatía)
+    * [4.3.9 \- Imagen del Mapa de Empatía](#439---imagen-del-mapa-de-empatía)
 
-  * [4.4 \- Caja de Herramientas](#4.4---caja-de-herramientas)
+  * [4.4 \- Caja de Herramientas](#44---caja-de-herramientas)
 
-  * [4.5 \- Lienzo de Modelo de Negocio](#4.5---lienzo-de-modelo-de-negocio)
+  * [4.5 \- Lienzo de Modelo de Negocio](#45---lienzo-de-modelo-de-negocio)
 
 * [**5 \- Bibliografía**](#5---bibliografía)
 
