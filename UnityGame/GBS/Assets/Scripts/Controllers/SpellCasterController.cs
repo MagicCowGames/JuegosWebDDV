@@ -153,7 +153,10 @@ public class SpellCasterController : MonoBehaviour
                 break;
             case Form.Projectile:
                 {
-                    ObjectSpawner.Spawn(this.projectilePrefab, this.spawnTransform);
+                    var obj = ObjectSpawner.Spawn(this.projectilePrefab, this.spawnTransform);
+
+                    var proj = obj.GetComponent<SpellProjectileController>();
+                    proj.SetSpellData(this.eq);
 
                     // Stop casting since projectiles don't require constant casting.
                     SetCastTime(0.5f);
