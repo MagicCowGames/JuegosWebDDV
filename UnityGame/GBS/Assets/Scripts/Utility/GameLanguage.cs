@@ -57,7 +57,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_test_dummies_mortal_description", "Test your spells on these dummies" },
             { "loc_test_healing_area", "Healing Area" },
             { "loc_test_damage_area", "Damage Area" },
-            { "loc_test_pickup_coins", "Grab the Coins" }
+            { "loc_test_pickup_coins", "Grab the Coins" },
+            { "loc_test_dummy_spawn", "Step on the pressure plate to spawn a dummy" }
         } },
         { Language.Spanish, new Dictionary<string, string> {
             { "loc_language_name", "Español" },
@@ -84,7 +85,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_test_dummies_mortal_description", "Prueba tus conjuros en estos muñecos de pruebas" },
             { "loc_test_healing_area", "Area de Curación" },
             { "loc_test_damage_area", "Area de Daño" },
-            { "loc_test_pickup_coins", "Recolecta las Monedas" }
+            { "loc_test_pickup_coins", "Recolecta las Monedas" },
+            { "loc_test_dummy_spawn", "Pisa la placa de presión para spawner un muñeco" }
         } }
     };
 
