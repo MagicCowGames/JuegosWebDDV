@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // TODO : Move some of this logic to a base NPC class or something like that so that we can more easily implement NPCs. Either that or make an NPC component.
+// Or maybe just have a basic set of "Entity" related things on an Entity component (like the health bar and handling all of the life stuff and canDie stuff, wet / burning status, etc...)
+// And also an "NPCController" or "AIController" component to handle all of the combat and path finding related stuff.
+// For now, just bundle it all together in the same place.
 public class TestDummyController : MonoBehaviour
 {
     #region Variables
