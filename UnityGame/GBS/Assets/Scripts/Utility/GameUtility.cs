@@ -8,7 +8,7 @@ public static class GameUtility
     #region Pause
 
     private static bool isPaused = false;
-    private static bool canPause = true;
+    private static bool canPause = false;
 
     public static bool GetPaused()
     {
@@ -66,6 +66,7 @@ public static class GameUtility
     // This should be used any time the user enters a menu we don't want them to be able to pause in.
     // This will be useful if, for example, we want the escape key on those menus to mean "get out of this menu".
     // Also on the death screen, but yeah.
+    // The day has come!!! LMAO Thanks myself from the past for thinking ahead of time!
     public static void SetCanPause(bool value)
     {
         canPause = value;
