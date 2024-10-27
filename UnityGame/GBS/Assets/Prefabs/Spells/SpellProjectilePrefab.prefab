@@ -5023,7 +5023,7 @@ MonoBehaviour:
   spellColor: {r: 0, g: 0, b: 0, a: 0}
   healthModifierController: {fileID: 5540752131964213612}
   rigidBody: {fileID: 8633388462888370009}
-  force: 20
+  force: 50
   elementParticles: {fileID: 1105996456764016187}
 --- !u!114 &5540752131964213612
 MonoBehaviour:
