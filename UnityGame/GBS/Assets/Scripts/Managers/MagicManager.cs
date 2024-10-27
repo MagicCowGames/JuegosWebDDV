@@ -44,6 +44,14 @@ public class MagicManager : SingletonPersistent<MagicManager>
         public List<List<Element>> combinableElements;
     }
 
+    // This struct contains how much damage 1 single unit of a given element does when applied to an entity.
+    [System.Serializable]
+    public struct InputElementDamageData
+    {
+        public Element element;
+        public float damage;
+    }
+
     #endregion
 
     #region Structs - Forms
@@ -94,6 +102,16 @@ public class MagicManager : SingletonPersistent<MagicManager>
     [SerializeField] private InputFormVisualData[] formVisualData;
 
     private Sprite[] formSprites;
+
+    #endregion
+
+    #region Variables - Elements - Damage Values
+
+    [Header("Element Damage Settings")]
+    [SerializeField] private InputElementDamageData defaultElementDamageData;
+    [SerializeField] private InputElementDamageData[] elementDamageData;
+
+    private float[] elementDamageValues;
 
     #endregion
 
@@ -152,6 +170,14 @@ public class MagicManager : SingletonPersistent<MagicManager>
         return this.combinationData.Length;
     }
 
+    public float GetElementDamage(Element element)
+    {
+        int idx = (int)element;
+        if (idx < 0 || idx >= this.elementDamageValues.Length)
+            return this.defaultElementDamageData.damage;
+        return this.elementDamageValues[idx];
+    }
+
     #endregion
 
     #region PublicMethods - Forms
@@ -169,6 +195,7 @@ public class MagicManager : SingletonPersistent<MagicManager>
     {
         GenerateElementCombinationData();
         GenerateElementVisualData();
+        GenerateElementDamageData();
     }
 
     private void GenerateElementCombinationData()
@@ -218,6 +245,19 @@ public class MagicManager : SingletonPersistent<MagicManager>
             this.images[(int)img.element] = img.image;
             this.colors[(int)img.element] = img.color;
         }
+    }
+
+    private void GenerateElementDamageData()
+    {
+        int inputLen = (int)this.elementDamageData.Length;
+        int elementsLen = (int)Element.COUNT;
+        
+        this.elementDamageValues = new float[elementsLen];
+        for (int i = 0; i < elementsLen; ++i)
+            this.elementDamageValues[i] = this.defaultElementDamageData.damage;
+
+        for(int i = 0; i < inputLen; ++i)
+            this.elementDamageValues[(int)this.elementDamageData[i].element] = this.elementDamageData[i].damage;
     }
 
     #endregion
