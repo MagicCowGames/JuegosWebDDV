@@ -9,6 +9,7 @@ public class InfoUIController : UIController
 
     [Header("Info UI Components")]
     [SerializeField] private TMP_Text fpsText;
+    [SerializeField] private TMP_Text versionText;
 
     [Header("Info UI Configuration")]
     [SerializeField] private float fpsUpdateTime = 0.4f;
@@ -30,6 +31,9 @@ public class InfoUIController : UIController
         // 1) It is more expensive to redraw the text every frame.
         // 2) It is annoying as fuck to see the framerate text change every single frame. The user wants to fucking read it, so we need to give them some time at least...
         this.UpdateFpsDisplayText((int)(1.0f / Time.unscaledDeltaTime));
+
+        // Update the Version display text to the currently configured version data
+        this.UpdateVersionDisplayText(VersionManager.Instance.GetVersion()); // The VersionManager instance should be guaranteed to exist by this point, so this should be safe.
     }
 
     void Update()
@@ -64,6 +68,12 @@ public class InfoUIController : UIController
         if (this.fpsText == null)
             return;
         this.fpsText.text = $"{fps} FPS";
+    }
+
+    private void UpdateVersionDisplayText(GameVersion version)
+    {
+        string str = $"Version {version.major}.{version.minor}.{version.patch} - {version.type}{(version.name.Trim().Length > 0 ? $" - {version.name}" : "")}";
+        this.versionText.text = str;
     }
 
     #endregion

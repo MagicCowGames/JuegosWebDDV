@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 1424154021294715488}
   - component: {fileID: 5922721271148770165}
   m_Layer: 0
-  m_Name: Text_VersionNumber
+  m_Name: Text_Version
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,8 +271,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 114, y: 36.899994}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 545.595, y: 36.899994}
+  m_SizeDelta: {x: 1063.19, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1424154021294715488
 CanvasRenderer:
@@ -418,4 +418,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasReference: {fileID: 863621322798288016}
   fpsText: {fileID: 7989653697682815737}
+  versionText: {fileID: 5922721271148770165}
   fpsUpdateTime: 0.4
