@@ -131,12 +131,18 @@ public class SpellBeamController : SpellBaseController
 
     public override void UpdateSpellColor()
     {
+        // NOTE : Still works even after adding custom shaders since we're using vertex color.
         this.lineRenderer.startColor = GetSpellColor();
         this.lineRenderer.endColor = GetSpellColor();
 
         // TODO : Find something that is not deprecated...
         this.particleStart.startColor = GetSpellColor();
         this.particleEnd.startColor = GetSpellColor();
+
+        // NOTE : The following is an example of how to change color when using custom shaders that have a color property that is not tied to vertex color.
+        // This works because we pray that there's always a material in slot 0. Which should be the case with the beam prefab tbh.
+        // And if it isn't that means that someone fucked up big time by removing the material from the line renderer.
+        // this.lineRenderer.materials[0].color = GetSpellColor();
     }
 
     #endregion
