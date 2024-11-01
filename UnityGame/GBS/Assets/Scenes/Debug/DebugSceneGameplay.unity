@@ -5359,6 +5359,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnTrigger:
     m_PersistentCalls:
+      m_Calls: []
+  OnTriggerAreaEnter:
+    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 775798959}
         m_TargetAssemblyTypeName: TestDummySpawnerController, Assembly-CSharp
@@ -5372,6 +5375,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnTriggerAreaExit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerAreaStay:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!135 &1437879581
 SphereCollider:
   m_ObjectHideFlags: 0
