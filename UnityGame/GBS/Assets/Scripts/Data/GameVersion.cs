@@ -5,6 +5,10 @@ public enum GameVersionType
     Release
 }
 
+// Struct used to identify a version of the game.
+// NOTE : This struct can also be used to perform save data translation functions in case that the save format structure changes between
+// versions by adding incremental save methods.
+// TODO : Add a set of comparator methods to determine which version is lower or higher.
 [System.Serializable]
 public struct GameVersion
 {
