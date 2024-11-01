@@ -11,7 +11,7 @@ public class TriggerController : MonoBehaviour
     #region Variables
 
     // [SerializeField] private string triggerName;
-    [SerializeField] private UnityEvent OnTrigger; // This one runs when the trigger is activated through some script or another trigger. Will mostly go unused.
+    [SerializeField] private UnityEvent OnTrigger; // This one runs when the trigger is activated through some script or another trigger. Will mostly go unused. Could also be renamed to OnTriggerActivated or something like that, but that could be confusing, idk. Maybe should add a trigger always callback that will be triggered from all of the other ones?
     [SerializeField] private UnityEvent OnTriggerAreaEnter; // This one runs when an entity enters the trigger's area
     [SerializeField] private UnityEvent OnTriggerAreaExit; // This one runs when an entity exits the trigger's area
     [SerializeField] private UnityEvent OnTriggerAreaStay; // This one runs when an entity stays on the trigger's area
