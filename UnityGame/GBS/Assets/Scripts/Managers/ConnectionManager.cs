@@ -68,6 +68,19 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
                 DebugManager.Instance?.Log("OnConnectError");
             }));
         */
+        MakeRequest("GET", "https://raw.githubusercontent.com/MagicCowGames/JuegosWebDDV/refs/heads/main/UnityGame/GBS/Assets/Scripts/Data/Account.cs", new RequestCallbacks(
+            (ans) => {
+                DebugManager.Instance?.Log($"OnSuccess : {ans}");
+            },
+            (err) => {
+                DebugManager.Instance?.Log($"OnError : {err}");
+            },
+            () => {
+                DebugManager.Instance?.Log("OnConnectSuccess");
+            },
+            () => {
+                DebugManager.Instance?.Log("OnConnectError");
+            }));
     }
 
     void Update()
@@ -105,6 +118,16 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
     public void MakeRequest(string type, string url, string message, RequestCallbacks callbacks = null)
     {
         StartCoroutine(MakeRequestInternal(type, url, message, callbacks));
+    }
+
+    // This shit's pretty fucking dumb, but it exists to make GET requests less of a pain in the arse when we're
+    // just passing through a string with both the base address and whatever resource we're trying to access.
+    // Also, allows making POST requests with an empty body without having to write an empty string for the message.
+    // Again, this shit's pretty fucking dumb, but whatever, I'm adding it because why not...
+    // tbh, I doubt I'll use it much, but it is what it is.
+    public void MakeRequest(string type, string urlMessage, RequestCallbacks callbacks = null)
+    {
+        MakeRequest(type, urlMessage, "", callbacks);
     }
 
     #endregion
