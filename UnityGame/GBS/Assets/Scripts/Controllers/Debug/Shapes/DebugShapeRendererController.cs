@@ -23,7 +23,8 @@ public class DebugShapeRendererController : MonoBehaviour
 
     // [SerializeField] private Shape shape; // The render shape used by this debug renderer.
 
-    [SerializeField] private SphereCollider sphereCollider;
+    [SerializeField] private SphereCollider[] sphereColliders;
+    [SerializeField] private BoxCollider[] boxColliders;
 
     #endregion
 
@@ -36,11 +37,8 @@ public class DebugShapeRendererController : MonoBehaviour
 
     void Update()
     {
-        if (sphereCollider != null)
-        {
-            float scale = Mathf.Max(this.sphereCollider.transform.localScale.x, this.sphereCollider.transform.localScale.y, this.sphereCollider.transform.localScale.z);
-            DebugManager.Instance.DrawSphere(this.sphereCollider.transform.position, this.sphereCollider.radius * scale, Color.red);
-        }
+        DrawBoxes();
+        DrawSpheres();
     }
 
     #endregion
@@ -71,5 +69,51 @@ public class DebugShapeRendererController : MonoBehaviour
     #endregion
 
     #region PrivateMethods
+
+    private void DrawBoxes()
+    {
+        foreach (var boxCollider in boxColliders)
+            DrawBox(boxCollider);
+    }
+
+    private void DrawSpheres()
+    {
+        foreach(var sphereCollider in sphereColliders)
+            DrawSphere(sphereCollider);
+    }
+
+    private void DrawBox(BoxCollider boxCollider)
+    {
+        if (boxCollider == null)
+            return;
+
+        Vector3 origin = boxCollider.center + boxCollider.transform.position;
+        Vector3 sideLengths = new Vector3(
+            boxCollider.size.x * boxCollider.transform.localScale.x,
+            boxCollider.size.y * boxCollider.transform.localScale.y,
+            boxCollider.size.z * boxCollider.transform.localScale.z
+            );
+        Color color = Color.red;
+
+        DebugManager.Instance.DrawBox(origin, sideLengths, color);
+    }
+
+    private void DrawSphere(SphereCollider sphereCollider)
+    {
+        if (sphereCollider == null)
+            return;
+
+        Vector3 origin = sphereCollider.center + sphereCollider.transform.position;
+        float scale = Mathf.Max(
+            sphereCollider.transform.localScale.x,
+            sphereCollider.transform.localScale.y,
+            sphereCollider.transform.localScale.z
+            );
+        float radius = sphereCollider.radius * scale;
+        Color color = Color.red;
+
+        DebugManager.Instance.DrawSphere(origin, radius, color);
+    }
+
     #endregion
 }
