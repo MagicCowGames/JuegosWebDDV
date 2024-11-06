@@ -6,6 +6,36 @@ using UnityEngine.Networking;
 
 public class ConnectionManager : SingletonPersistent<ConnectionManager>
 {
+    #region Structs - DTO
+
+    // These structs are used as Data Transfer Objects (DTOs) to get the address table from the GET petition when the game is booted.
+
+    public struct AddressTableEntryDTO
+    {
+        public string name { get; set; }
+        public string ip { get; set; }
+        public int port { get; set; }
+
+        public AddressTableEntryDTO(string name = "default", string ip = "localhost", int port = 27015)
+        {
+            this.name = name;
+            this.ip = ip;
+            this.port = port;
+        }
+    }
+
+    public struct AddressTableDTO
+    {
+        public List<AddressTableEntryDTO> addresses { get; set; }
+
+        public AddressTableDTO(List<AddressTableEntryDTO> list = null)
+        {
+            this.addresses = list;
+        }
+    }
+
+    #endregion
+
     #region Classes
 
     public class RequestCallbacks
@@ -56,13 +86,19 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
         // Get the web server's address from the address files on github and assign it to the ServerAddress object.
         // If the operation fails to fetch the server addresses table, then we run with whatever address was manually configured.
         // Yes, a patchy as fuck solution, but this solves the problem until I can get a fucking domain of my own.
+        // This is also a workaround to the facts that:
+        // 1) We cannot access the site's ip through JS using location without dirty tricks on Unity's side, even for WebGL builds.
+        // 2) We cannot guarantee that the site will have the same address as the server. For example, what happens when the game is hosted on itch.io? The web server is not on the same machine!
         if (this.fetchAddress)
         {
             MakeRequest("GET", this.fetchLocation, new RequestCallbacks(
                 (ans) =>
                 {
                     DebugManager.Instance?.Log($"OnSuccess : {ans}");
-                    // TODO : Implement extracting the data from the JSON file.
+
+                    string json = ans;
+
+
                     string fetchIp = "";
                     int fetchPort = 0;
                     this.ServerAddress = new Address($"{fetchIp}:{fetchPort}");
