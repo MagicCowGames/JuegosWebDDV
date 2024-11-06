@@ -13,6 +13,7 @@ public class TestDummyController : MonoBehaviour
 
     [Header("TestDummy Components")]
     [SerializeField] private HealthController healthController;
+    [SerializeField] private CharacterController characterController;
     [SerializeField] private NavMeshAgent agent;
 
     [Header("TestDummy Config")]
@@ -33,6 +34,8 @@ public class TestDummyController : MonoBehaviour
     void Update()
     {
         agent.destination = PlayerDataManager.Instance.GetPlayer().transform.position;
+        if(hasAi)
+            DebugManager.Instance?.Log($"steeringTarget = {agent.steeringTarget}");
     }
 
     #endregion
