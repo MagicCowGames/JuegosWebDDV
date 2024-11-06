@@ -29,10 +29,14 @@ public class TestDummyController : MonoBehaviour
     void Start()
     {
         this.healthController.OnDeath += HandleDeath;
+
+        this.agent.updatePosition = false;
+        this.agent.updateRotation = false;
     }
 
     void Update()
     {
+
         agent.destination = PlayerDataManager.Instance.GetPlayer().transform.position;
         if(hasAi)
             DebugManager.Instance?.Log($"steeringTarget = {agent.steeringTarget}");
