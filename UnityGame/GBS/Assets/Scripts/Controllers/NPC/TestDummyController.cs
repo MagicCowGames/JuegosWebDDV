@@ -43,6 +43,23 @@ public class TestDummyController : MonoBehaviour
 
         UpdateMovement(delta);
 
+        #region Comment - this.agent.Warp()
+        /*
+            This is such a fucking stupid situation that I had to make a region exclussively for this comment that is basically a wall of text...
+            Stupid fix that exists because Unity's NavMeshAgent components seem to be allowed to move freely on their own away from their body if
+            updatePosition is set to false...
+            updatePosition in the documentation promises that the AI controller would not update its position allowing the user to use their own method
+            for position updating, such as physics or a character controller, allwoing the NavMeshAgent component to be used as a logical unit for pathing...
+            sadly this is not the case, and what it actually does is allow the logical pathing to move through the nav mesh independent of the body.
+            Funnily enough, the origin of the GameObject changes, causing any other form of movement to spaz out.
+            The solution in the official documentation hidden deep within layers and layers of indirection is legit, I shit you not, to warp the AI controller
+            to the position where we want the NPC's physical representation to be located. What the fuck is this shit. Wouldn't it make more sense to just
+            have a method to NOT update the AI's logical position and set it manually or use nextPosition? yes, yes it would. But the Unity people seem to disagree.
+        */
+        #endregion
+        this.agent.Warp(this.characterController.transform.position);
+
+
         this.agent.destination = PlayerDataManager.Instance.GetPlayer().transform.position;
         
     }
