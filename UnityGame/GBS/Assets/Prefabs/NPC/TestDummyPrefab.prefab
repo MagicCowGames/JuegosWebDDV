@@ -513,8 +513,9 @@ MonoBehaviour:
   healthController: {fileID: 4904838482518294911}
   characterController: {fileID: 8043318680210230778}
   agent: {fileID: 7713064221824962987}
-  hasAi: 0
-  canDie: 0
+  hasAi: 1
+  canDie: 1
+  speed: 3
 --- !u!195 &7713064221824962987
 NavMeshAgent:
   m_ObjectHideFlags: 0
