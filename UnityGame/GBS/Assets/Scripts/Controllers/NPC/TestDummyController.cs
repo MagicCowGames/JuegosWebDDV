@@ -83,8 +83,13 @@ public class TestDummyController : MonoBehaviour
 
     private void UpdateMovement(float delta)
     {
-        UpdateMovementWalk(delta);
+        // AI independent movement
         UpdateMovementGravity(delta);
+
+        // AI dependent movement
+        if (!this.hasAi)
+            return;
+        UpdateMovementWalk(delta);
     }
 
     #endregion
@@ -100,8 +105,11 @@ public class TestDummyController : MonoBehaviour
 
     private void UpdatePathing()
     {
-        // Stupid fixes for Unity's NavMeshAgent being kinda weird...
+        // If the AI is disabled, just early return because no pathing logic should be performed at all.
+        if (!this.hasAi)
+            return;
 
+        // Stupid fixes for Unity's NavMeshAgent being kinda weird...
         #region Comment - this.agent.Warp()
         /*
             This is such a fucking stupid situation that I had to make a region exclussively for this comment that is basically a wall of text...
@@ -129,7 +137,7 @@ public class TestDummyController : MonoBehaviour
         // This crappy patchy solution allows Unity's built in nav mesh agent's rotation system to work and not shit its pants...
 
         #endregion
-
+        
         NavMeshHit hit;
         bool hasHit = NavMesh.SamplePosition(this.characterController.transform.position, out hit, 1.0f, NavMesh.AllAreas);
         if (hasHit && Vector3.Distance(this.agent.nextPosition, this.transform.position) > 2.0f)
