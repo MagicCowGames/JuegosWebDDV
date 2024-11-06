@@ -35,12 +35,16 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
     [Header("Server Address - Fetch")]
     [SerializeField] private string fetchLocation = "https://raw.githubusercontent.com/MagicCowGames/MagicCowGamesFiles/refs/heads/main/data/addresses.json";
 
+    [Header("Server Address - Configuration")]
+    [SerializeField] private bool fetchAddress = true; // Determines if the address is to be fetched or not. Useful during testing and / or when programming without an internet connection.
+
     public Address ServerAddress { get; set; }
 
     #endregion
 
     #region MonoBehaviour
 
+    // WARNING!!! Ugly code ahead!!! Please kill me...
     public override void Awake()
     {
         // Call base class' awake method
@@ -52,15 +56,19 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
         // Get the web server's address from the address files on github and assign it to the ServerAddress object.
         // If the operation fails to fetch the server addresses table, then we run with whatever address was manually configured.
         // Yes, a patchy as fuck solution, but this solves the problem until I can get a fucking domain of my own.
-        MakeRequest("GET", this.fetchLocation, new RequestCallbacks(
-            (ans) => {
-                DebugManager.Instance?.Log($"OnSuccess : {ans}");
-                // TODO : Implement extracting the data from the JSON file.
-                string fetchIp = "";
-                int fetchPort = 0;
-                this.ServerAddress = new Address($"{fetchIp}:{fetchPort}");
-            })
-        );
+        if (this.fetchAddress)
+        {
+            MakeRequest("GET", this.fetchLocation, new RequestCallbacks(
+                (ans) =>
+                {
+                    DebugManager.Instance?.Log($"OnSuccess : {ans}");
+                    // TODO : Implement extracting the data from the JSON file.
+                    string fetchIp = "";
+                    int fetchPort = 0;
+                    this.ServerAddress = new Address($"{fetchIp}:{fetchPort}");
+                })
+            );
+        }
     }
 
     void Start()
