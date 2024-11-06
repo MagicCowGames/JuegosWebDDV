@@ -19,8 +19,11 @@ public class TestDummyController : MonoBehaviour
     [Header("TestDummy Config")]
     [SerializeField] private bool hasAi = false;
     [SerializeField] private bool canDie = false;
+    [SerializeField] private float speed = 3.0f;
     
     public bool CanDie { get { return this.canDie; } set { this.canDie = value; } }
+
+    private Vector3 gravityVector = new Vector3(0.0f, -9.8f, 0.0f);
 
     #endregion
 
@@ -31,15 +34,17 @@ public class TestDummyController : MonoBehaviour
         this.healthController.OnDeath += HandleDeath;
 
         this.agent.updatePosition = false;
-        this.agent.updateRotation = false;
+        this.agent.updateRotation = true;
     }
 
     void Update()
     {
+        float delta = Time.deltaTime;
 
-        agent.destination = PlayerDataManager.Instance.GetPlayer().transform.position;
-        if(hasAi)
-            DebugManager.Instance?.Log($"steeringTarget = {agent.steeringTarget}");
+        UpdateMovement(delta);
+
+        this.agent.destination = PlayerDataManager.Instance.GetPlayer().transform.position;
+        
     }
 
     #endregion
@@ -53,6 +58,28 @@ public class TestDummyController : MonoBehaviour
     {
         if (this.canDie)
             Destroy(this.gameObject);
+    }
+
+    private void Move(float delta, Vector3 direction = default, float speed = 1.0f)
+    {
+        Vector3 movementVector = delta * direction * speed;
+        this.characterController.Move(movementVector);
+    }
+
+    private void UpdateMovementWalk(float delta)
+    {
+        Move(delta, this.transform.forward, this.speed);
+    }
+
+    private void UpdateMovementGravity(float delta)
+    {
+        Move(delta, this.gravityVector);
+    }
+
+    private void UpdateMovement(float delta)
+    {
+        // UpdateMovementWalk(delta);
+        UpdateMovementGravity(delta);
     }
 
     #endregion
