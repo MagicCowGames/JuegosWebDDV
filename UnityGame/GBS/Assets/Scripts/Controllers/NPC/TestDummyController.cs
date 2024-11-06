@@ -62,12 +62,21 @@ public class TestDummyController : MonoBehaviour
             on its own rather than taking as an input the new position?
         */
         #endregion
-        this.agent.Warp(this.characterController.transform.position);
+        // Only allow warping the logical agent position to the physical one if it is close enough to attach to a nav mesh.
+        // This prevents any warnings from coming up. Could be discarded, but still, it's cleaner to use it.
+        NavMeshHit hit;
+        bool hasHit = NavMesh.SamplePosition(this.characterController.transform.position, out hit, 1.0f, NavMesh.AllAreas);
+        if (hasHit)
+        {
+            this.agent.Warp(this.characterController.transform.position);
+        }
 
-        // Prevent the agent from trying to path if they are out of a nav mesh, preventing any errors from coming up.
+        // Only update AI / nav agent logic if the agent is within the bounds of a nav mesh.
+        // Prevents the agent from trying to path if they are out of a nav mesh, which prevents any errors from coming up.
         if (this.agent.isOnNavMesh)
         {
-            this.agent.destination = PlayerDataManager.Instance.GetPlayer().transform.position; // Update the destination to the player's position.
+            // Update the destination to the player's position.
+            this.agent.destination = PlayerDataManager.Instance.GetPlayer().transform.position;
         }
     }
 
