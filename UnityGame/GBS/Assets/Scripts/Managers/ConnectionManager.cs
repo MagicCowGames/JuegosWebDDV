@@ -10,27 +10,29 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
 
     // These structs are used as Data Transfer Objects (DTOs) to get the address table from the GET petition when the game is booted.
 
-    public struct AddressTableEntryDTO
+    [System.Serializable]
+    public class AddressTableEntryDTO
     {
-        public string name { get; set; }
-        public string ip { get; set; }
-        public int port { get; set; }
+        public string name;
+        public string ip;
+        public int port;
 
-        public AddressTableEntryDTO(string name = "default", string ip = "localhost", int port = 27015)
+        public AddressTableEntryDTO()
         {
-            this.name = name;
-            this.ip = ip;
-            this.port = port;
+            this.name = "";
+            this.ip = "";
+            this.port = 0;
         }
     }
 
-    public struct AddressTableDTO
+    [System.Serializable]
+    public class AddressTableDTO
     {
-        public List<AddressTableEntryDTO> addresses { get; set; }
+        public List<AddressTableEntryDTO> addresses;
 
-        public AddressTableDTO(List<AddressTableEntryDTO> list = null)
+        public AddressTableDTO()
         {
-            this.addresses = list;
+            this.addresses = new List<AddressTableEntryDTO>();
         }
     }
 
@@ -64,6 +66,7 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
 
     [Header("Server Address - Fetch")]
     [SerializeField] private string fetchLocation = "https://raw.githubusercontent.com/MagicCowGames/MagicCowGamesFiles/refs/heads/main/data/addresses.json";
+    [SerializeField] private string gameNameString = "wdw"; // The string to be searched for on the look-up address table / list.
 
     [Header("Server Address - Configuration")]
     [SerializeField] private bool fetchAddress = true; // Determines if the address is to be fetched or not. Useful during testing and / or when programming without an internet connection.
@@ -96,12 +99,26 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
                 {
                     DebugManager.Instance?.Log($"OnSuccess : {ans}");
 
-                    string json = ans;
+                    try
+                    {
+                        AddressTableDTO table = JsonUtility.FromJson<AddressTableDTO>(ans); // I miss System.Text.Json, but fucking Unity refueses to add support for something as simple as that. I might as well just write my own implementation if I'm going to use this crap.
 
+                        foreach (var entry in table.addresses)
+                        {
+                            if (entry.name == this.gameNameString)
+                            {
+                                this.ServerAddress = new Address($"{entry.ip}:{entry.port}");
+                                break;
+                            }
+                        }
 
-                    string fetchIp = "";
-                    int fetchPort = 0;
-                    this.ServerAddress = new Address($"{fetchIp}:{fetchPort}");
+                        DebugManager.Instance?.Log($"Connection Manager : Server Address is now : {this.ServerAddress.address}");
+                    }
+                    catch
+                    {
+                        // Don't do anything if the Json deserialization fails
+                        DebugManager.Instance?.Log("Connection Manager : Message Deserialization failed!");
+                    }
                 })
             );
         }
