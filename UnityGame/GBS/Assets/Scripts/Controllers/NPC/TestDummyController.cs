@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 // TODO : Move some of this logic to a base NPC class or something like that so that we can more easily implement NPCs. Either that or make an NPC component.
 // Or maybe just have a basic set of "Entity" related things on an Entity component (like the health bar and handling all of the life stuff and canDie stuff, wet / burning status, etc...)
@@ -12,6 +13,7 @@ public class TestDummyController : MonoBehaviour
 
     [Header("TestDummy Components")]
     [SerializeField] private HealthController healthController;
+    [SerializeField] private NavMeshAgent agent;
 
     [Header("TestDummy Config")]
     [SerializeField] private bool hasAi = false;
@@ -30,7 +32,7 @@ public class TestDummyController : MonoBehaviour
 
     void Update()
     {
-        
+        agent.destination = PlayerDataManager.Instance.GetPlayer().transform.position;
     }
 
     #endregion
