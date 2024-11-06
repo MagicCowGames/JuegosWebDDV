@@ -43,6 +43,7 @@ public class TestDummyController : MonoBehaviour
 
         UpdateMovement(delta);
 
+        // Stupid fix for Unity's NavMeshAgent being kinda weird...
         #region Comment - this.agent.Warp()
         /*
             This is such a fucking stupid situation that I had to make a region exclussively for this comment that is basically a wall of text...
@@ -55,13 +56,19 @@ public class TestDummyController : MonoBehaviour
             The solution in the official documentation hidden deep within layers and layers of indirection is legit, I shit you not, to warp the AI controller
             to the position where we want the NPC's physical representation to be located. What the fuck is this shit. Wouldn't it make more sense to just
             have a method to NOT update the AI's logical position and set it manually or use nextPosition? yes, yes it would. But the Unity people seem to disagree.
+
+            In short: it's pretty cool that the logical position and physical position can be separated, but why can't we define the logical position to follow
+            a GO's transform out of the box? I know it would do the same as updating it ourselves every single frame but... then why the fuck does it update and move
+            on its own rather than taking as an input the new position?
         */
         #endregion
         this.agent.Warp(this.characterController.transform.position);
 
-
-        this.agent.destination = PlayerDataManager.Instance.GetPlayer().transform.position;
-        
+        // Prevent the agent from trying to path if they are out of a nav mesh, preventing any errors from coming up.
+        if (this.agent.isOnNavMesh)
+        {
+            this.agent.destination = PlayerDataManager.Instance.GetPlayer().transform.position; // Update the destination to the player's position.
+        }
     }
 
     #endregion
