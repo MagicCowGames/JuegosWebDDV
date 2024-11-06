@@ -28,9 +28,12 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
 
     #region Variables
 
-    [Header("Server Address")]
+    [Header("Server Address - Custom")]
     [SerializeField] private string serverIp = "localhost";
     [SerializeField] private int serverPort = 27015;
+
+    [Header("Server Address - Fetch")]
+    [SerializeField] private string fetchLocation = "https://raw.githubusercontent.com/MagicCowGames/MagicCowGamesFiles/refs/heads/main/data/addresses.json";
 
     public Address ServerAddress { get; set; }
 
@@ -40,9 +43,24 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
 
     public override void Awake()
     {
+        // Call base class' awake method
         base.Awake();
 
+        // Assign the server address to the custom / "fallback" values
         this.ServerAddress = new Address($"{this.serverIp}:{this.serverPort}");
+
+        // Get the web server's address from the address files on github and assign it to the ServerAddress object.
+        // If the operation fails to fetch the server addresses table, then we run with whatever address was manually configured.
+        // Yes, a patchy as fuck solution, but this solves the problem until I can get a fucking domain of my own.
+        MakeRequest("GET", this.fetchLocation, new RequestCallbacks(
+            (ans) => {
+                DebugManager.Instance?.Log($"OnSuccess : {ans}");
+                // TODO : Implement extracting the data from the JSON file.
+                string fetchIp = "";
+                int fetchPort = 0;
+                this.ServerAddress = new Address($"{fetchIp}:{fetchPort}");
+            })
+        );
     }
 
     void Start()
@@ -68,19 +86,6 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
                 DebugManager.Instance?.Log("OnConnectError");
             }));
         */
-        MakeRequest("GET", "https://raw.githubusercontent.com/MagicCowGames/JuegosWebDDV/refs/heads/main/UnityGame/GBS/Assets/Scripts/Data/Account.cs", new RequestCallbacks(
-            (ans) => {
-                DebugManager.Instance?.Log($"OnSuccess : {ans}");
-            },
-            (err) => {
-                DebugManager.Instance?.Log($"OnError : {err}");
-            },
-            () => {
-                DebugManager.Instance?.Log("OnConnectSuccess");
-            },
-            () => {
-                DebugManager.Instance?.Log("OnConnectError");
-            }));
     }
 
     void Update()
