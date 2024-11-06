@@ -125,6 +125,11 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
                     }
                 })
             );
+            // NOTE : This part of the code could be used as a sort of simple and shitty way to check if the client currently has an internet connection or
+            // the servers are down.
+            // Checking if the user has an internet connection only makes sense on builds that are not on WebGL for obvious reasons lmao. If you are
+            // playing on web, that means you should have an internet connection, at least maybe throughout most of the gameplay, but it can still be possible
+            // to lose connection during gameplay...
         }
     }
 
