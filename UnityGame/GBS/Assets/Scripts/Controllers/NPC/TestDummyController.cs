@@ -64,9 +64,13 @@ public class TestDummyController : MonoBehaviour
         #endregion
         // Only allow warping the logical agent position to the physical one if it is close enough to attach to a nav mesh.
         // This prevents any warnings from coming up. Could be discarded, but still, it's cleaner to use it.
+        
+        // Also only warp the NPC if the logical position has moved further than 2.0f units from the real position.
+        // This crappy patchy solution allows Unity's built in nav mesh agent's rotation system to work and not shit its pants...
+        
         NavMeshHit hit;
         bool hasHit = NavMesh.SamplePosition(this.characterController.transform.position, out hit, 1.0f, NavMesh.AllAreas);
-        if (hasHit)
+        if (hasHit && Vector3.Distance(this.agent.nextPosition, this.transform.position) > 2.0f)
         {
             this.agent.Warp(this.characterController.transform.position);
         }
@@ -111,7 +115,7 @@ public class TestDummyController : MonoBehaviour
 
     private void UpdateMovement(float delta)
     {
-        // UpdateMovementWalk(delta);
+        UpdateMovementWalk(delta);
         UpdateMovementGravity(delta);
     }
 

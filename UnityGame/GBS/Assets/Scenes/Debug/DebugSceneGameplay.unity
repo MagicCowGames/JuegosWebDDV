@@ -3284,6 +3284,10 @@ PrefabInstance:
       value: TestDummyPrefab (3)
       objectReference: {fileID: 0}
     - target: {fileID: 7289517046949347476, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289517046949347476, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
       propertyPath: canDie
       value: 1
       objectReference: {fileID: 0}
@@ -4899,6 +4903,10 @@ PrefabInstance:
     - target: {fileID: 6979400288211159785, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
       propertyPath: m_Name
       value: TestDummyPrefab (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289517046949347476, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
+      propertyPath: speed
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6778,6 +6786,10 @@ PrefabInstance:
     - target: {fileID: 6979400288211159785, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
       propertyPath: m_Name
       value: TestDummyPrefab (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289517046949347476, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
+      propertyPath: speed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7289517046949347476, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
       propertyPath: canDie
@@ -17776,6 +17788,10 @@ PrefabInstance:
     - target: {fileID: 6979400288211159785, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
       propertyPath: m_Name
       value: TestDummyPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289517046949347476, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
+      propertyPath: speed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7289517046949347476, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
       propertyPath: canDie
