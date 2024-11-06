@@ -60,6 +60,10 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
 
     #region Variables
 
+    // NOTE : A lot of this config should pretty much be always modified from here or never modified at all, but I'm still exposing it to the inspector
+    // for some reason... I find it can be useful to prevent hardcoding information if this code ever gets reused for a future project, but for now
+    // this could all just be hardcoded and never touched ever again.
+
     [Header("Server Address - Custom")]
     [SerializeField] private string serverIp = "localhost";
     [SerializeField] private int serverPort = 27015;
@@ -126,27 +130,7 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
 
     void Start()
     {
-        // TODO : Clean up these test calls and remove them lol
-        // SendMessageHTTP("/score/add/pedro/69");
-        // SendMessageHTTP("/score");
 
-        // StartCoroutine(Request_POST("localhost:27015/users"));
-
-        /*
-        MakeRequest("GET", "localhost:27015", "/users", new RequestCallbacks(
-            (ans) => {
-                DebugManager.Instance?.Log($"OnSuccess : {ans}");
-            },
-            (err) => {
-                DebugManager.Instance?.Log($"OnError : {err}");
-            },
-            () => {
-                DebugManager.Instance?.Log("OnConnectSuccess");
-            },
-            () => {
-                DebugManager.Instance?.Log("OnConnectError");
-            }));
-        */
     }
 
     void Update()
