@@ -9,7 +9,12 @@ public class AISensorController : MonoBehaviour
 {
     #region Variables
 
+    [Header("AI Controller")]
     [SerializeField] private TestDummyController aiController;
+
+    [Header("Sensors")]
+    [SerializeField] private SphereCollider radiusCollider;
+    [SerializeField] private CapsuleCollider sightCollider;
 
     #endregion
 
