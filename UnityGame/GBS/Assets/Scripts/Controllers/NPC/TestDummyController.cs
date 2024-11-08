@@ -23,6 +23,7 @@ public class TestDummyController : MonoBehaviour
     
     public bool CanDie { get { return this.canDie; } set { this.canDie = value; } }
     public Vector3 NavTarget { get; set; }
+    public GameObject Target { get; set; }
 
     private Vector3 gravityVector = new Vector3(0.0f, -9.8f, 0.0f);
 
@@ -43,6 +44,7 @@ public class TestDummyController : MonoBehaviour
         float delta = Time.deltaTime;
 
         UpdateMovement(delta);
+        UpdateFSM(delta);
         UpdatePathing();
 
         this.NavTarget = PlayerDataManager.Instance.GetPlayer().transform.position; // For now, just move towards the player's position always.
@@ -94,7 +96,7 @@ public class TestDummyController : MonoBehaviour
 
     #endregion
 
-    #region PrivateMethods - AI Logical position
+    #region PrivateMethods - Pathing and AI Logical position handling
 
     // All of this convoluted crap is filled with patches and terrible solutions to artificially created problems that exist due to Unity's terrible
     // nav mesh implementation that everyone seems to praise, except those who are not on a payroll ofc.
@@ -152,6 +154,15 @@ public class TestDummyController : MonoBehaviour
             // Update the destination to the target position
             this.agent.destination = this.NavTarget;
         }
+    }
+
+    #endregion
+
+    #region PrivateMethods - FSM
+
+    private void UpdateFSM(float delta)
+    {
+
     }
 
     #endregion
