@@ -431,8 +431,9 @@ GameObject:
   - component: {fileID: 2190596816526315912}
   - component: {fileID: 6816995219774470181}
   - component: {fileID: 8549585221742607515}
+  - component: {fileID: 332550406218798819}
   m_Layer: 2
-  m_Name: DetectionRadius
+  m_Name: Sensors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -487,6 +488,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiController: {fileID: 7289517046949347476}
+--- !u!136 &332550406218798819
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5851506362251369991}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 8
+  m_Height: 30
+  m_Direction: 2
+  m_Center: {x: 0, y: 2, z: 15}
 --- !u!1 &6979400288211159785
 GameObject:
   m_ObjectHideFlags: 0
