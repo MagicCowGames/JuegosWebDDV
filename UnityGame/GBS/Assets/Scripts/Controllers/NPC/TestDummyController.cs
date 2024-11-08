@@ -37,6 +37,9 @@ public class TestDummyController : MonoBehaviour
 
         this.agent.updatePosition = false;
         this.agent.updateRotation = true;
+
+        this.Target = null;
+        this.NavTarget = Vector3.zero;
     }
 
     void Update()
@@ -47,7 +50,11 @@ public class TestDummyController : MonoBehaviour
         UpdateFSM(delta);
         UpdatePathing();
 
-        this.NavTarget = PlayerDataManager.Instance.GetPlayer().transform.position; // For now, just move towards the player's position always.
+        // For now, just walk toward the selected target GameObject.
+        if (this.Target != null)
+            this.NavTarget = this.Target.transform.position;
+
+        // this.NavTarget = PlayerDataManager.Instance.GetPlayer().transform.position; // For now, just move towards the player's position always.
     }
 
     #endregion
