@@ -5,7 +5,7 @@ using UnityEngine;
 // TODO : Possibly replace this with a regular trigger when the Entity system is implemented?
 // Or keep it like this since the detection radius controller could be refactored into a more generic detection areas controller with a detection radius
 // and a capsule for sight, and maybe some hearing abilities, etc...
-public class NPCDetectionRadiusController : MonoBehaviour
+public class AISensorController : MonoBehaviour
 {
     #region Variables
 
