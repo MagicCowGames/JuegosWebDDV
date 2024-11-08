@@ -4,7 +4,7 @@ using UnityEngine;
 
 // TODO : Possibly replace this with a regular trigger when the Entity system is implemented?
 // TODO : Finish implementing logic for all the other sensors, such as hearing and stuff like that.
-public class AISensorController : MonoBehaviour
+public class AISensorSystemController : MonoBehaviour
 {
     #region Variables
 
