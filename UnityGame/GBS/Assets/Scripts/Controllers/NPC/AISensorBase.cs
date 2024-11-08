@@ -7,6 +7,10 @@ public class AISensorBase : MonoBehaviour
 {
     #region Variables
 
+    [SerializeField] public bool senseOnEnter = true;
+    [SerializeField] public bool senseOnStay = false;
+    [SerializeField] public bool senseOnExit = false;
+
     public Action<GameObject> OnSense;
 
     #endregion
@@ -24,7 +28,20 @@ public class AISensorBase : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        this.Sense(other.gameObject);
+        if(this.senseOnEnter)
+            this.Sense(other.gameObject);
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (this.senseOnStay)
+            this.Sense(other.gameObject);
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (this.senseOnExit)
+            this.Sense(other.gameObject);
     }
 
     #endregion
