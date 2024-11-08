@@ -29,6 +29,12 @@ public class TestDummyController : MonoBehaviour
 
     #endregion
 
+    #region Variables - AI State
+
+    private AI_State state;
+
+    #endregion
+
     #region MonoBehaviour
 
     void Start()
@@ -169,7 +175,12 @@ public class TestDummyController : MonoBehaviour
 
     private void UpdateFSM(float delta)
     {
-
+        switch (this.state)
+        {
+            default:
+                this.state = AI_State.None;
+                break;
+        }
     }
 
     #endregion
