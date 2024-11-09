@@ -185,7 +185,16 @@ public class HealthModifierController : MonoBehaviour
                 Apply(other.gameObject, Time.deltaTime);
                 break;
             case Type.Repeat:
-                if (this.accumulatedTime >= this.repeatTime)
+                // This aux var crap should not be needed but for some reason having a float variable exposed on Unity's inspector breaks <, <=, > and => comparisons,
+                // they will all basically act the same as == which makes no fucking sense at all, not to mention that equality makes no sense on floats
+                // in the first place... The temporary, crappy and patchy workaround is to make a temp copy of the value to be compared and store it in an aux var.
+                // This behaviour is also found on builds, so this means that this crap is at Unity's compiler level. Why? who the fuck knows.
+                // All I know is that I hate Unity more and more by the day.
+                // Oh btw adding a debug log here also fixes the problem, God knows why, I don't. There ain't no race conditions in this code, so wtf? It's a fucking
+                // simple single threaded if statement, why tho??
+                // Can this PLEASE be the last fucking hack on this game?
+                float aux = this.repeatTime;
+                if (this.accumulatedTime >= aux)
                 {
                     Apply(other.gameObject);
                     this.accumulatedTime = 0.0f;
