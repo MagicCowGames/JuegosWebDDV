@@ -43,7 +43,7 @@ public class TestDummyController : MonoBehaviour
     {
         this.healthController.OnDeath += HandleDeath;
 
-        this.agent.updatePosition = false;
+        this.agent.updatePosition = true;
         this.agent.updateRotation = true;
 
         this.Target = null;
@@ -57,15 +57,20 @@ public class TestDummyController : MonoBehaviour
         UpdateMovement(delta);
         UpdateFSM(delta);
         UpdatePathing();
-
+        
         // For now, just walk toward the selected target GameObject.
         if (this.Target != null)
         {
             this.forwardAxis = 1.0f;
             this.NavTarget = this.Target.transform.position;
+            // this.agent.destination = NavTarget;
         }
 
-        // this.NavTarget = PlayerDataManager.Instance.GetPlayer().transform.position; // For now, just move towards the player's position always.
+        // Stop the actor from moving if they reach a distance that is less than or equal to the stopping distance of the NavMeshAgent component.
+        if (Vector3.Distance(this.transform.position, this.NavTarget) <= this.agent.stoppingDistance)
+        {
+            this.forwardAxis = 0.0f;
+        }
     }
 
     #endregion
@@ -123,7 +128,15 @@ public class TestDummyController : MonoBehaviour
 
     // Do note that 90% of what's written here is comments, all because the hacky solutions need to be explained so that they make sense...
 
-    private void UpdatePathing()
+    // NOTE : This function is now deprecated since I have found a better way to get an Unreal-like behaviour by mixing the character controller component
+    // and the NavMeshAgent component. This is not properly documented, but it works because agent.updatePosition makes it so that the nav mesh agent's logical
+    // position sticks to the agent's real physical position if a character controller component is involved. This is not actually written anywhere within the
+    // documentation, but they say that this is not UB and that it is expected, so I suppose I'll keep using it for now, since it does feel like a more
+    // simple solution.
+
+    // This behaviour does not appear to be documented officially but it is consistent across versions, so it is going to be the solution used for now.
+
+    private void UpdatePathing_OLD()
     {
         // If the AI is disabled, just early return because no pathing logic should be performed at all.
         if (!this.hasAi)
@@ -172,6 +185,17 @@ public class TestDummyController : MonoBehaviour
             // Update the destination to the target position
             this.agent.destination = this.NavTarget;
         }
+    }
+
+    private void UpdatePathing()
+    {
+        if (!this.hasAi)
+            return;
+
+        if (this.Target == null)
+            return;
+
+        this.agent.destination = this.NavTarget;
     }
 
     #endregion
