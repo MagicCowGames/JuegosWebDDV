@@ -31,7 +31,9 @@ public class TestDummyController : MonoBehaviour
 
     #region Variables - AI State
 
-    private AI_State state;
+    private float forwardAxis = 0.0f;
+
+    private AIState state;
 
     #endregion
 
@@ -58,7 +60,10 @@ public class TestDummyController : MonoBehaviour
 
         // For now, just walk toward the selected target GameObject.
         if (this.Target != null)
+        {
+            this.forwardAxis = 1.0f;
             this.NavTarget = this.Target.transform.position;
+        }
 
         // this.NavTarget = PlayerDataManager.Instance.GetPlayer().transform.position; // For now, just move towards the player's position always.
     }
@@ -88,7 +93,7 @@ public class TestDummyController : MonoBehaviour
 
     private void UpdateMovementWalk(float delta)
     {
-        Move(delta, this.transform.forward, this.speed);
+        Move(delta, this.transform.forward, this.speed * this.forwardAxis);
     }
 
     private void UpdateMovementGravity(float delta)
@@ -175,12 +180,27 @@ public class TestDummyController : MonoBehaviour
 
     private void UpdateFSM(float delta)
     {
+        /*
         switch (this.state)
         {
+            case AIState.Idle:
+                this.forwardAxis = 0.0f;
+                if (this.Target != null)
+                    this.state = AIState.Chasing;
+                break;
+            case AIState.Wandering:
+                this.forwardAxis = 1.0f;
+                break;
+            case AIState.Chasing:
+                this.forwardAxis = 1.0f;
+                break;
+            case AIState.Fighting:
+                break;
             default:
-                this.state = AI_State.None;
+                this.state = AIState.Idle;
                 break;
         }
+        */
     }
 
     #endregion
