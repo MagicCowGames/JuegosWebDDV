@@ -5,10 +5,13 @@
 // · COUNT = Not really a valid AI state, it's used to store the number of states that exist within the enum. Depends on the fact that the first state is 0 and
 //           the rest are automatically numbered from there.
 
-public enum AI_State
+public enum AIState
 {
     None = 0,
-    
+    Idle,
+    Wandering,
+    Chasing,
+    Fighting,
     COUNT
 }
 
