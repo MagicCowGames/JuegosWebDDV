@@ -52,17 +52,24 @@ public class HealthModifierController : MonoBehaviour
 
     #region Variables
 
+    [Header("Owner Configuration")]
+    [SerializeField] private GameObject owner; // The owner game object of this component. Refers to the GameObject that contains the health component which we do not want to be able to affect.
+    // TODO : Add some kind of team handling system in the future? maybe? or just let everyone damage everyone and leave things as they are.
+    // Also, maybe rather than an owner it should be an "ignore list" so that we can ignore multiple entities / gameobjects?
+
     [Header("Modifier Configuration")]
     [SerializeField] private Type type;
-    [SerializeField] private bool modifierEnabled = true; // global switch that controls if the health modifier is enabled or not. If disabled, then no damage, healing or status effects can be applied to any entity that is targetted by this health modifier controller.
-    [SerializeField] private bool collisionEnabled = true; // global switch that determines whether the collision based damage application is enabled or not.
+    [SerializeField] private bool modifierEnabled = true; // Global switch that controls if the health modifier is enabled or not. If disabled, then no damage, healing or status effects can be applied to any entity that is targetted by this health modifier controller.
+    [SerializeField] private bool collisionEnabled = true; // Global switch that determines whether the collision based damage application is enabled or not.
 
     [Header("Element Modifier Values")]
-    [SerializeField] private bool useDefaultValues; // determines if this is a prefabricated damage area and it uses the default values located within the inspector panel in the Unity Editor.
+    [SerializeField] private bool useDefaultValues; // Determines if this is a prefabricated damage area and it uses the default values located within the inspector panel in the Unity Editor.
     [SerializeField] private bool resetValues;
     [SerializeField] private InputDamageArray inputDamageArray; // Can't use default constructor for serializable structs for some reason. Ok Unity, you win...
 
     int[] elementCounts;
+
+    public GameObject Owner { get { return this.owner; } set { this.owner = value; } }
 
     #endregion
 
@@ -131,6 +138,10 @@ public class HealthModifierController : MonoBehaviour
 
         // If the input object is null, return. This should never happen, but if it does, we're safe! (famous last words, I know...)
         if (obj == null)
+            return;
+
+        // If the input object is our owner, return. That way, we prevent entities damaging themselves in situations where we do not want them to be able to do so.
+        if (obj == this.owner)
             return;
 
         var protection = obj.GetComponent<ProtectionController>();
