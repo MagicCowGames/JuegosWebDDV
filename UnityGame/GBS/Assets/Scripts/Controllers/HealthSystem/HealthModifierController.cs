@@ -54,8 +54,8 @@ public class HealthModifierController : MonoBehaviour
 
     [Header("Modifier Configuration")]
     [SerializeField] private Type type;
-    [SerializeField] private bool modifierEnabled = true; // global switch that controls if the health modifier is enabled or not. If disabled, then no damage, healing or status effects can be applied.
-    [SerializeField] private bool collisionEnabled = true;
+    [SerializeField] private bool modifierEnabled = true; // global switch that controls if the health modifier is enabled or not. If disabled, then no damage, healing or status effects can be applied to any entity that is targetted by this health modifier controller.
+    [SerializeField] private bool collisionEnabled = true; // global switch that determines whether the collision based damage application is enabled or not.
 
     [Header("Element Modifier Values")]
     [SerializeField] private bool useDefaultValues; // determines if this is a prefabricated damage area and it uses the default values located within the inspector panel in the Unity Editor.
