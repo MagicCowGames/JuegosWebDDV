@@ -4591,14 +4591,6 @@ PrefabInstance:
       propertyPath: hasAi
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7289517046949347476, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
-      propertyPath: speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289517046949347476, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
-      propertyPath: canDie
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6117,9 +6109,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82613f123eeb52f45af09007890a7c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
   type: 1
   modifierEnabled: 1
   collisionEnabled: 1
+  repeatTime: 1
   useDefaultValues: 1
   resetValues: 0
   inputDamageArray:
@@ -7196,14 +7190,6 @@ PrefabInstance:
       propertyPath: hasAi
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7289517046949347476, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
-      propertyPath: speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289517046949347476, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
-      propertyPath: canDie
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8050,18 +8036,6 @@ PrefabInstance:
     - target: {fileID: 6979400288211159785, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
       propertyPath: m_Name
       value: TestDummyPrefab (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289517046949347476, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
-      propertyPath: hasAi
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289517046949347476, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
-      propertyPath: speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289517046949347476, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
-      propertyPath: canDie
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9789,14 +9763,6 @@ PrefabInstance:
       propertyPath: hasAi
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7289517046949347476, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
-      propertyPath: speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289517046949347476, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
-      propertyPath: canDie
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9838,9 +9804,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82613f123eeb52f45af09007890a7c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
   type: 1
   modifierEnabled: 1
   collisionEnabled: 1
+  repeatTime: 1
   useDefaultValues: 1
   resetValues: 0
   inputDamageArray:
@@ -21475,14 +21443,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7289517046949347476, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
       propertyPath: hasAi
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289517046949347476, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
-      propertyPath: speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289517046949347476, guid: 00adec8ae976ab6458cb315eaa5e239d, type: 3}
-      propertyPath: canDie
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
