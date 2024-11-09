@@ -18,7 +18,8 @@ public class HealthModifierController : MonoBehaviour
     public enum Type
     {
         Instant = 0,
-        OverTime
+        OverTime,
+        Repeat
     }
 
     #endregion
@@ -61,13 +62,15 @@ public class HealthModifierController : MonoBehaviour
     [SerializeField] private Type type;
     [SerializeField] private bool modifierEnabled = true; // Global switch that controls if the health modifier is enabled or not. If disabled, then no damage, healing or status effects can be applied to any entity that is targetted by this health modifier controller.
     [SerializeField] private bool collisionEnabled = true; // Global switch that determines whether the collision based damage application is enabled or not.
+    [SerializeField] private float repeatTime = 1.0f; // How often to repeat the health modification Apply() call when a GameObject with a health component stays within the trigger area. Every 1.0f seconds by default.
 
     [Header("Element Modifier Values")]
     [SerializeField] private bool useDefaultValues; // Determines if this is a prefabricated damage area and it uses the default values located within the inspector panel in the Unity Editor.
     [SerializeField] private bool resetValues;
     [SerializeField] private InputDamageArray inputDamageArray; // Can't use default constructor for serializable structs for some reason. Ok Unity, you win...
 
-    int[] elementCounts;
+    private int[] elementCounts;
+    private float accumulatedTime = 0.0f;
 
     public GameObject Owner { get { return this.owner; } set { this.owner = value; } }
 
@@ -93,7 +96,7 @@ public class HealthModifierController : MonoBehaviour
 
     void Update()
     {
-
+        this.accumulatedTime += Time.deltaTime;
     }
 
     void OnValidate()
@@ -176,8 +179,21 @@ public class HealthModifierController : MonoBehaviour
     {
         if (!this.collisionEnabled)
             return;
-        if (this.type == Type.OverTime)
-            Apply(other.gameObject, Time.deltaTime);
+        switch (this.type)
+        {
+            case Type.OverTime:
+                Apply(other.gameObject, Time.deltaTime);
+                break;
+            case Type.Repeat:
+                if (this.accumulatedTime >= this.repeatTime)
+                {
+                    Apply(other.gameObject);
+                    this.accumulatedTime = 0.0f;
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     // This one is an exact copy of OnTriggerEnter, it only exists to support spells with a collider that has a rigid body and is not a trigger.
