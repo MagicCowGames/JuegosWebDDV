@@ -18,6 +18,8 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
     [SerializeField] private string creditsScene;
     [SerializeField] private string settingsScene;
     [SerializeField] private string tutorialScene;
+    [SerializeField] private string inventoryScene;
+    [SerializeField] private string storeScene;
 
     #endregion
 
@@ -51,26 +53,36 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
 
     #endregion
 
-    #region PublicMethods Specific Scenes
+    #region PublicMethods - Specific Scenes
 
     public void LoadSceneMainMenu()
     {
-        LoadScene(mainMenuScene);
+        LoadScene(this.mainMenuScene);
     }
 
     public void LoadSceneCredits()
     {
-        LoadScene(creditsScene);
+        LoadScene(this.creditsScene);
     }
 
     public void LoadSceneSettings()
     {
-        LoadScene(settingsScene);
+        LoadScene(this.settingsScene);
     }
 
     public void LoadSceneTutorial()
     {
-        LoadScene(tutorialScene);
+        LoadScene(this.tutorialScene);
+    }
+
+    public void LoadSceneStore()
+    {
+        LoadScene(this.storeScene);
+    }
+
+    public void LoadSceneInventory()
+    {
+        LoadScene(this.inventoryScene);
     }
 
     #endregion
