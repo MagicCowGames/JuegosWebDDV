@@ -33,7 +33,10 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
 
     private static Dictionary<Language, Dictionary<string, string>> languageData = new Dictionary<Language, Dictionary<string, string>> {
         { Language.English, new Dictionary<string, string> {
+            // Loc Strings : Generic
             { "loc_language_name", "English" },
+            
+            // Loc Strings : Menu
             { "loc_play", "Play"},
             { "loc_account", "Account" },
             { "loc_settings", "Settings" },
@@ -48,8 +51,10 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_return_to_menu", "Return to Menu" },
             { "loc_you_are_dead", "You are Dead" },
             { "loc_retry", "Retry" },
+            { "loc_store", "Store" },
+            { "loc_inventory", "Inventory" },
 
-
+            // Loc Strings : Test
             { "loc_test_dummy", "Test Dummy" },
             { "loc_test_dummy_description", "Test your spells on this immortal dummy" },
             { "loc_test_dummies", "Test Dummies" },
@@ -61,7 +66,10 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_test_dummy_spawn", "Step on the pressure plate to spawn a dummy" }
         } },
         { Language.Spanish, new Dictionary<string, string> {
+            // Loc Strings : Generic
             { "loc_language_name", "Español" },
+            
+            // Loc Strings : Menu
             { "loc_play", "Jugar" },
             { "loc_account", "Cuenta" },
             { "loc_settings", "Opciones" }, // This used to be "Configuración", my beloved </3 :( but the fucking thing was too large to fit on the UI buttons. Oh well, too bad!
@@ -76,8 +84,10 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_return_to_menu", "Volver al Menú" },
             { "loc_you_are_dead", "Estás Muerto" },
             { "loc_retry", "Reintentar" },
+            { "loc_store", "Tienda" },
+            { "loc_inventory", "Inventario" },
 
-
+            // Loc Strings : Test
             { "loc_test_dummy", "Muñeco de Pruebas" },
             { "loc_test_dummy_description", "Prueba tus conjuros en este muñeco de pruebas inmortal" },
             { "loc_test_dummies", "Muñecos de Pruebas" },
