@@ -7,6 +7,7 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
     #region Variables
 
     // NOTE : Each spell caster is responsible for dealing with its own spawn transforms and prefabs.
+    // README!!!! : The idea should be scrapped altogether. This cleaner code should be moved to the spell caster controller, and then we should just have specific functions for handling each spell type there. That way, we could also add element based form handling in the future if the project evolves like that...
 
     [Header("Spell Caster Base Controller")]
     [SerializeField] protected GameObject[] spellPrefabs; // NOTE : Maybe the magic manager should be the one to have a field with all of the prefabs stored so that we do not have multiple copies needlessly stored in memory?
