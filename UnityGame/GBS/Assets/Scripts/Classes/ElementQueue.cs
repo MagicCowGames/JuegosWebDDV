@@ -105,6 +105,15 @@ public class ElementQueue
         this.ElementsCounts[(int)element] += 1;
     }
 
+    public void Add(Element[] elements)
+    {
+        // Adds the elements within the array one by one to the element queue to make sure that combinations are handled properly.
+        // We do it this way since we cannot trust that the input element array actually contains a correct combination, so we just parse it to make sure that
+        // we properly add the elements within the array to the element queue.
+        foreach (var element in elements)
+            Add(element);
+    }
+
     public int GetElementCount(Element element)
     {
         int idx = (int)element;

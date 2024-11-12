@@ -8,7 +8,7 @@ public interface ISpellCaster
     public ElementQueue GetElementQueue();
 
     public void SetElements(Element[] elements);
-    public Element[] GetElements();
+    public Element[] GetElements(); // Most fucking worthless function tho wtf was I thinking...
     public void AddElement(Element element);
     
     public void SetForm(Form form);
