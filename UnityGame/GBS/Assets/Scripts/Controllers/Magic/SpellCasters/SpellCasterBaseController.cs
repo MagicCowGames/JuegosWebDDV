@@ -14,14 +14,13 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
     [Header("Spell Data - Projectile")]
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform projectileTransform;
-    [SerializeField] private float projectileMaxChargeTime;
-    [SerializeField] private float projectileForcePerSecond;
+    [SerializeField] private float projectileDuration = 15.0f; // max allowed projectile charge time
     private GameObject activeProjectile;
 
     [Header("Spell Data - Beam")]
     [SerializeField] private GameObject beamPrefab;
     [SerializeField] private Transform beamTransform;
-    [SerializeField] private float beamDuration = 5.0f;
+    [SerializeField] private float beamDuration = 5.0f; // max allowed beam cast time
     private GameObject activeBeam;
 
     [Header("Spell Data - Wall")]
@@ -214,15 +213,26 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
 
     private void HandleStartCasting_Projectile()
     {
+        // Spawn a projectile
+        var obj = ObjectSpawner.Spawn(this.projectilePrefab, this.projectileTransform);
 
+        // Set spell data
+        var proj = obj.GetComponent<SpellProjectileController>();
+        proj.SetSpellData(this.elementQueue);
+
+        // Projectiles don't require constant casting. What this does is charge up the projectile speed.
+        // TODO : Implement projectile charging.
+        // Auto stop casting projectiles after 15 seconds of charging.
+        SetCastDuration(this.projectileDuration);
     }
 
     private void HandleStartCasting_Beam()
     {
-        var obj = ObjectSpawner.Spawn(this.beamPrefab, this.beamTransform); // Spawn beam
-        obj.transform.parent = this.beamTransform; // Attach beam so that it follows camera rotation
+        var obj = ObjectSpawner.Spawn(this.beamPrefab, this.beamTransform); // Spawn a beam
+        obj.transform.parent = this.beamTransform; // Attach the beam so that it follows the player's camera rotation
         this.activeBeam = obj;
 
+        // Set spell data
         var beam = obj.GetComponent<SpellBeamController>();
         beam.SetSpellData(this.elementQueue);
 
