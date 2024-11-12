@@ -1,234 +1,334 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class SpellCasterController : MonoBehaviour
+// NOTE : At some point, the idea was to handle spell casting through inheritance of a base spell caster controller component.
+// Since forms are enum based and are extensible by adding new elements to the enum, we came back to the original idea of just having a "monolithic" class with
+// a switch on form type to determine the behaviour of the spell caster and the spawned spells.
+public class SpellCasterController : MonoBehaviour, ISpellCaster
 {
     #region Variables
 
-    [SerializeField] private Transform spawnTransform;
+    // NOTE : Maybe the magic manager should be the one to have a field with all of the prefabs stored so that we do not have multiple copies needlessly stored in memory?
 
-    // TODO : Implement this system in a somewhat clean way...?
-    // [SerializeField] private GameObject parentTarget; // The target entity that owns this spell caster. This is the entity to which the self-cast spells must be applied to.
-    // NOTE : A specific spell caster type can be created for this in the future, so yeah.
-
+    [Header("Spell Data - Projectile")]
     [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform projectileTransform;
+    [SerializeField] private float projectileDuration = 15.0f; // max allowed projectile charge time
+    private GameObject activeProjectile; // NOTE : This goes unused for now...
+
+    [Header("Spell Data - Beam")]
     [SerializeField] private GameObject beamPrefab;
-    [SerializeField] private GameObject shieldPrefab;
-    [SerializeField] private GameObject sprayPrefab;
+    [SerializeField] private Transform beamTransform;
+    [SerializeField] private float beamDuration = 5.0f; // max allowed beam cast time
+    private GameObject activeBeam;
 
-
+    [Header("Spell Data - Wall")]
+    [SerializeField] private GameObject wallPrefab;
+    [SerializeField] private GameObject elementalWallPrefab;
     [SerializeField] private Transform[] wallTransforms;
+    [SerializeField] private int maxWalls;
+    private GameObject[] activeWalls;
+    private GameObject[] activeElementalWalls;
 
-    private ElementQueue eq;
+    [Header("Spell Data - Spray")]
+    [SerializeField] private GameObject sprayPrefab;
+    [SerializeField] private Transform sprayTransform;
+
+    private Form form;
+    private ElementQueue elementQueue;
     private bool isCasting;
 
-    /*
-    // NOTE : This idea may get scrapped, so we're leaving it here for now...
-    private float accumulatedTime = 0.0f; // seconds that the cast button has been held down (used for projectile spells to increase strength)
-    private float accumulatedTimeMax = 3.0f; // 3 seconds max
-    private float forcePerSecond = 1.5f; // force value added to the projectile based on the accumulatedTime value. The resulting force is forcePerSecond * accumulatedTime.
-    */
-
-    private GameObject activeSpell;
-
-    private float autoStopCastingTime;
-
-    [SerializeField] private Form form = Form.Projectile;
+    private float castDuration;
+    private float castTimeAccumulator;
 
     #endregion
 
     #region MonoBehaviour
 
+    void Awake()
+    {
+        Init();
+    }
+
     void Start()
     {
-        this.form = Form.Projectile; // Default form is projectile.
-        this.activeSpell = null;
-        this.isCasting = false;
-        this.autoStopCastingTime = 0.0f;
-        this.eq = new ElementQueue(5);
+        
     }
 
     void Update()
     {
         float delta = Time.deltaTime;
-        UpdateAutoStopCasting(delta);
+        HandleAutoStopCasting(delta);
     }
 
     #endregion
 
-    #region PublicMethods - Getters
+    #region PublicMethods
 
-    public ElementQueue GetElementQueue()
+    // Could maybe be renamed to "UpdateAutoStopCasting"? Also, need to notify the owner of this spell caster that the casting has been terminated manually.
+    // Either that or they are manually polling / listening to the casting status.
+    private void HandleAutoStopCasting(float delta)
     {
-        return this.eq;
-    }
-
-    public bool GetIsCasting()
-    {
-        return this.isCasting;
-    }
-
-    public Form GetForm()
-    {
-        return this.form;
-    }
-
-    #endregion
-
-    #region PublicMethods - Spell Casting
-
-    public void Cast()
-    {
-        // Can't cast if the element queue is null or if it has no elements queued up, so we bail out with an early return.
-        if (this.eq == null || this.eq.Count <= 0)
+        if (!this.isCasting)
             return;
+        
+        this.castTimeAccumulator += delta;
 
-        // Update casting status
-        this.isCasting = true;
-
-        // Select the type of spell to cast based on the selected form
-        switch (this.form)
-        {
-            default:
-                DebugManager.Instance?.Log("The form should never be an invalid value!!!");
-                break;
-            case Form.Shield:
-                {
-                    foreach (var transform in this.wallTransforms)
-                    {
-                        // bool wallSpawned = false;
-
-                        // TODO : Remove some of the early return cases so that we can mix different elements.
-
-                        // Spawn walls if earth or ice are involved
-                        if (this.eq.GetElementCount(Element.Earth) > 0 || this.eq.GetElementCount(Element.Ice) > 0)
-                        {
-                            var obj = ObjectSpawner.Spawn(this.shieldPrefab, transform);
-                            var wall = obj.GetComponent<SpellShieldController>();
-                            wall.SetSpellData(this.eq);
-                            // wallSpawned = true;
-                        }
-
-                        // Spawn mines if death or heal elements are involved
-                        /*
-                        if (this.eq.GetElementCount(Element.Death) > 0 || this.eq.GetElementCount(Element.Heal) > 0)
-                        {
-                            // var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
-                            // var wall = obj.GetComponent<SpellShieldController>();
-                            continue;
-                        }
-                        */
-
-                        // Spawn elemental barrier if any other element is involved
-                        int otherElements = this.eq.Count - (this.eq.GetElementCount(Element.Earth) + this.eq.GetElementCount(Element.Ice));
-                        if (otherElements > 0)
-                        {
-                            var obj = ObjectSpawner.Spawn(this.sprayPrefab, transform);
-                            var wall = obj.GetComponent<SpellSprayController>();
-                            wall.SetSpellData(this.eq);
-                            continue;
-                        }
-
-                        // Spawn regular shield if no other type of wall was spawned.
-                        /*
-                        if (!wallSpawned)
-                        {
-                            var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
-                            var shield = obj.GetComponent<SpellShieldController>();
-                        }
-                        */
-
-
-
-                        // NOTE : Currently mines and regular shield are disabled cause this is a Magicka thing and
-                        // I'm thinking that I don't want to fully copy it even tho it's a cool feature.
-
-                        // TODO : Figure out whether I want this in the final game or not.
-                    }
-
-                    // Stop casting since walls don't require constant casting.
-                    SetCastTime(0.5f);
-                }
-                break;
-            case Form.Projectile:
-                {
-                    var obj = ObjectSpawner.Spawn(this.projectilePrefab, this.spawnTransform);
-
-                    var proj = obj.GetComponent<SpellProjectileController>();
-                    proj.SetSpellData(this.eq);
-
-                    // Projectiles don't require constant casting. What this does is charge up the projectile speed.
-                    // TODO : Implement projectile charging.
-                    // Auto stop casting projectiles after 15 seconds of charging.
-                    SetCastTime(15.0f);
-                }
-                break;
-            case Form.Beam:
-                {
-                    var obj = ObjectSpawner.Spawn(this.beamPrefab, this.spawnTransform);
-                    obj.transform.parent = this.spawnTransform;
-                    this.activeSpell = obj;
-
-                    var beam = obj.GetComponent<SpellBeamController>();
-                    beam.SetSpellData(this.eq);
-
-                    // Auto stop casting after 5 seconds of sustained beam firing.
-                    // The user can manually stop casting on their own if they release the cast button, but if they keep holding it, to prevent them from being too OP,
-                    // we force them to stop casting after a set amount of time.
-                    SetCastTime(5.0f);
-                }
-                break;
-        }
-
-        // After finishing casting, clear the element queue
-        this.eq.Clear();
-    }
-
-    public void StopCast()
-    {
-        this.isCasting = false;
-        if (this.activeSpell != null)
-        {
-            Destroy(this.activeSpell.gameObject);
-            this.activeSpell = null;
-        }
-    }
-
-    #endregion
-
-    #region PublicMethods - Element Queue
-
-    public void AddElement(Element element)
-    {
-        this.eq.Add(element);
-    }
-
-    public void SetForm(Form form)
-    {
-        this.form = form;
+        if (this.castTimeAccumulator >= castDuration)
+            StopCasting();
     }
 
     #endregion
 
     #region PrivateMethods
 
-    private void UpdateAutoStopCasting(float delta)
+    private void Init()
     {
-        if (autoStopCastingTime <= 0.0f)
+        // Initialize variables to default values.
+        this.elementQueue = null;
+        this.isCasting = false;
+        this.castDuration = 0.0f;
+        this.form = Form.Projectile; // Projectile form by default.
+
+        // Initialize "activeSpell" game objects (which serve as pointers to the currently spawned spell)
+        this.activeProjectile = null;
+        this.activeBeam = null;
+        this.activeWalls = new GameObject[this.maxWalls];
+        this.activeElementalWalls = new GameObject[this.maxWalls];
+    }
+
+    #endregion
+
+    #region ProtectedMethods
+    #endregion
+
+    // TODO : Implement
+    #region ISpellCaster
+
+    public void StartCasting()
+    {
+        // Can't cast if the element queue is null or if it has no elements queued up, so we bail out with an early return.
+        if (this.elementQueue == null || this.elementQueue.Count <= 0)
+            return;
+
+        // Update isCasting status.
+        this.isCasting = true;
+
+        HandleStartCasting();
+
+        // After casting the spell, clear the element queue. The element queue is cleared "as soon as the casting starts" (kinda), not after it is finished, so during
+        // sustained casting the player will already see the queue as empty.
+        this.elementQueue.Clear();
+    }
+    public void StopCasting()
+    {
+        // NOTE : We handle the stop casting function first so that we can access the cast time accumulator for projectile spells so that we can get the accumulated charge time.
+        this.isCasting = false;
+        HandleStopCasting(); // Here, specific impls for sustained spells such as beam spells will handle cleaning up their own spawned spells when they are no longer needed.
+        this.castTimeAccumulator = 0.0f;
+    }
+    public bool GetIsCasting()
+    {
+        return this.isCasting;
+    }
+
+    public void SetElementQueue(ElementQueue queue)
+    {
+        this.elementQueue = queue;
+    }
+    public ElementQueue GetElementQueue()
+    {
+        return this.elementQueue;
+    }
+
+    public void AddElements(Element[] elements)
+    {
+        this.elementQueue.Add(elements); // Add the elements within the array one by one to the element queue to make sure that combinations are handled properly.
+    }
+    public Element[] GetElements()
+    {
+        return this.elementQueue.Elements;
+    }
+    public void AddElement(Element element)
+    {
+        this.elementQueue.Add(element);
+    }
+
+    public void SetForm(Form form)
+    {
+        this.form = form;
+    }
+    public Form GetForm()
+    {
+        return this.form;
+    }
+
+    public void SetCastDuration(float time)
+    {
+        this.castDuration = time;
+    }
+    public float GetCastDuration()
+    {
+        return this.castDuration;
+    }
+
+    public void HandleStartCasting()
+    {
+        DebugManager.Instance?.Log($"HandleStartCasting() with form \"{this.form}\"");
+        switch (this.form)
         {
-            StopCast();
+            default:
+            case Form.Projectile:
+                HandleStartCasting_Projectile();
+                break;
+            case Form.Beam:
+                HandleStartCasting_Beam();
+                break;
+            case Form.Shield:
+                HandleStartCasting_Shield();
+                break;
         }
-        else
+    }
+    public void HandleStopCasting()
+    {
+        DebugManager.Instance?.Log($"HandleStopCasting() with form \"{this.form}\"");
+        switch (this.form)
         {
-            autoStopCastingTime -= delta;
+            default:
+            case Form.Projectile:
+                HandleStopCasting_Projectile();
+                break;
+            case Form.Beam:
+                HandleStopCasting_Beam();
+                break;
+            case Form.Shield:
+                HandleStopCasting_Shield();
+                break;
         }
     }
 
-    private void SetCastTime(float time)
+    #endregion
+
+    #region PrivateMethods - Handling - Start Casting
+
+    private void HandleStartCasting_Projectile()
     {
-        this.autoStopCastingTime = time;
+        // Projectiles don't require constant casting. What this does is charge up the projectile speed.
+        // TODO : Implement projectile charging.
+        // Auto stop casting projectiles after 15 seconds of charging.
+        SetCastDuration(this.projectileDuration);
+    }
+
+    private void HandleStartCasting_Beam()
+    {
+        var obj = ObjectSpawner.Spawn(this.beamPrefab, this.beamTransform); // Spawn a beam
+        obj.transform.parent = this.beamTransform; // Attach the beam so that it follows the player's rotation
+        this.activeBeam = obj;
+
+        // Set spell data
+        var beam = obj.GetComponent<SpellBeamController>();
+        beam.SetSpellData(this.elementQueue);
+
+        // Auto stop casting after N seconds of sustained beam firing.
+        // The user can manually stop casting on their own if they release the cast button, but if they keep holding it, to prevent them from being too OP,
+        // we force them to stop casting after a set amount of time.
+        SetCastDuration(this.beamDuration);
+    }
+
+    private void HandleStartCasting_Shield()
+    {
+        foreach (var transform in this.wallTransforms)
+        {
+            // Spawn walls if earth or ice are involved
+            if (this.elementQueue.GetElementCount(Element.Earth) > 0 || this.elementQueue.GetElementCount(Element.Ice) > 0)
+            {
+                var obj = ObjectSpawner.Spawn(this.wallPrefab, transform);
+                var wall = obj.GetComponent<SpellShieldController>();
+                wall.SetSpellData(this.elementQueue);
+                // TODO : Add the logic to store the spawned walls and despawn old walls when going over the max walls cap.
+            }
+
+            #region DisabledCode
+
+            // Spawn mines if death or heal elements are involved
+            /*
+            if (this.eq.GetElementCount(Element.Death) > 0 || this.eq.GetElementCount(Element.Heal) > 0)
+            {
+                // var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
+                // var wall = obj.GetComponent<SpellShieldController>();
+                continue;
+            }
+            */
+
+            #endregion
+
+            // Spawn elemental barrier if any other element is involved
+            int otherElements = this.elementQueue.Count - (this.elementQueue.GetElementCount(Element.Earth) + this.elementQueue.GetElementCount(Element.Ice));
+            if (otherElements > 0)
+            {
+                var obj = ObjectSpawner.Spawn(this.sprayPrefab, transform);
+                var wall = obj.GetComponent<SpellSprayController>();
+                wall.SetSpellData(this.elementQueue);
+                continue;
+            }
+
+            #region DisabledCode
+
+            // Spawn regular shield if no other type of wall was spawned.
+            /*
+            if (!wallSpawned)
+            {
+                var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
+                var shield = obj.GetComponent<SpellShieldController>();
+            }
+            */
+
+
+
+            // NOTE : Currently mines and regular shield are disabled cause this is a Magicka thing and
+            // I'm thinking that I don't want to fully copy it even tho it's a cool feature.
+            // TODO : Figure out whether I want this in the final game or not.
+
+            #endregion
+        }
+
+        // Stop casting since walls don't require constant casting.
+        // TODO : Modify logic to add wall creation cooldown? maybe through player animations?
+        SetCastDuration(0.5f);
+    }
+
+    #endregion
+
+    #region PrivateMethods - Handling - Stop Casting
+
+    // Projectiles spawn here because they spawn on RMB release.
+    private void HandleStopCasting_Projectile()
+    {
+        // Spawn a projectile
+        var obj = ObjectSpawner.Spawn(this.projectilePrefab, this.projectileTransform);
+
+        // Set spell data
+        var proj = obj.GetComponent<SpellProjectileController>();
+        proj.SetSpellData(this.elementQueue);
+
+        // TODO : Add some method to set the projectile's force based on the current cast time accumulator.
+    }
+
+    private void HandleStopCasting_Beam()
+    {
+        // Despawn the beam
+        // TODO : Modify logic when object pooling is implemented for beam spawning.
+        if (this.activeBeam != null)
+        {
+            Destroy(this.activeBeam.gameObject);
+            this.activeBeam = null;
+        }
+    }
+
+    private void HandleStopCasting_Shield()
+    {
+        // Walls don't need any extra handling, they despawn on their own (maybe this behaviour will change in the future when object pooling is implemented).
     }
 
     #endregion
