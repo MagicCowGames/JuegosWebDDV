@@ -4935,6 +4935,7 @@ GameObject:
   - component: {fileID: 8633388462888370009}
   - component: {fileID: 6113192171682100365}
   - component: {fileID: 5540752131964213612}
+  - component: {fileID: 7736555702736976215}
   m_Layer: 0
   m_Name: SpellProjectilePrefab
   m_TagString: Untagged
@@ -5037,10 +5038,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82613f123eeb52f45af09007890a7c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
   type: 0
   modifierEnabled: 1
   collisionEnabled: 1
+  repeatTime: 1
   useDefaultValues: 0
   resetValues: 0
   inputDamageArray:
     damageValues: []
+--- !u!114 &7736555702736976215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8898792701997654404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fd6ec9c1ebf85a4da96d05886bec7c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sphereColliders:
+  - {fileID: 440536794047507495}
+  boxColliders: []
