@@ -98,6 +98,9 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
         this.activeBeam = null;
         this.activeWalls = new GameObject[this.maxWalls];
         this.activeElementalWalls = new GameObject[this.maxWalls];
+
+        // Initialize element queue class
+        this.elementQueue = new ElementQueue(5); // Gets initialized with 5 slots for 5 elements per combination.
     }
 
     #endregion
