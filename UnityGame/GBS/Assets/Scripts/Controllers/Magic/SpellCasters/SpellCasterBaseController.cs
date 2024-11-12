@@ -123,9 +123,10 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
     }
     public void StopCasting()
     {
+        // NOTE : We handle the stop casting function first so that we can access the cast time accumulator for projectile spells so that we can get the accumulated charge time.
         this.isCasting = false;
-        this.castTimeAccumulator = 0.0f;
         HandleStopCasting(); // Here, specific impls for sustained spells such as beam spells will handle cleaning up their own spawned spells when they are no longer needed.
+        this.castTimeAccumulator = 0.0f;
     }
     public bool GetIsCasting()
     {
