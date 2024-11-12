@@ -15,7 +15,7 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform projectileTransform;
     [SerializeField] private float projectileDuration = 15.0f; // max allowed projectile charge time
-    private GameObject activeProjectile;
+    private GameObject activeProjectile; // NOTE : This goes unused for now...
 
     [Header("Spell Data - Beam")]
     [SerializeField] private GameObject beamPrefab;
@@ -223,7 +223,7 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
     private void HandleStartCasting_Beam()
     {
         var obj = ObjectSpawner.Spawn(this.beamPrefab, this.beamTransform); // Spawn a beam
-        obj.transform.parent = this.beamTransform; // Attach the beam so that it follows the player's camera rotation
+        obj.transform.parent = this.beamTransform; // Attach the beam so that it follows the player's rotation
         this.activeBeam = obj;
 
         // Set spell data
@@ -237,12 +237,72 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
     }
 
     private void HandleStartCasting_Shield()
-    { }
+    {
+        foreach (var transform in this.wallTransforms)
+        {
+            // Spawn walls if earth or ice are involved
+            if (this.elementQueue.GetElementCount(Element.Earth) > 0 || this.elementQueue.GetElementCount(Element.Ice) > 0)
+            {
+                var obj = ObjectSpawner.Spawn(this.wallPrefab, transform);
+                var wall = obj.GetComponent<SpellShieldController>();
+                wall.SetSpellData(this.elementQueue);
+                // TODO : Add the logic to store the spawned walls and despawn old walls when going over the max walls cap.
+            }
+
+            #region DisabledCode
+
+            // Spawn mines if death or heal elements are involved
+            /*
+            if (this.eq.GetElementCount(Element.Death) > 0 || this.eq.GetElementCount(Element.Heal) > 0)
+            {
+                // var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
+                // var wall = obj.GetComponent<SpellShieldController>();
+                continue;
+            }
+            */
+
+            #endregion
+
+            // Spawn elemental barrier if any other element is involved
+            int otherElements = this.elementQueue.Count - (this.elementQueue.GetElementCount(Element.Earth) + this.elementQueue.GetElementCount(Element.Ice));
+            if (otherElements > 0)
+            {
+                var obj = ObjectSpawner.Spawn(this.sprayPrefab, transform);
+                var wall = obj.GetComponent<SpellSprayController>();
+                wall.SetSpellData(this.elementQueue);
+                continue;
+            }
+
+            #region DisabledCode
+
+            // Spawn regular shield if no other type of wall was spawned.
+            /*
+            if (!wallSpawned)
+            {
+                var obj = ObjectSpawner.Spawn(shieldPrefab, transform);
+                var shield = obj.GetComponent<SpellShieldController>();
+            }
+            */
+
+
+
+            // NOTE : Currently mines and regular shield are disabled cause this is a Magicka thing and
+            // I'm thinking that I don't want to fully copy it even tho it's a cool feature.
+            // TODO : Figure out whether I want this in the final game or not.
+
+            #endregion
+        }
+
+        // Stop casting since walls don't require constant casting.
+        // TODO : Modify logic to add wall creation cooldown? maybe through player animations?
+        SetCastDuration(0.5f);
+    }
 
     #endregion
 
     #region PrivateMethods - Handling - Stop Casting
 
+    // Projectiles spawn here because they spawn on RMB release.
     private void HandleStopCasting_Projectile()
     {
         // Spawn a projectile
@@ -256,10 +316,20 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
     }
 
     private void HandleStopCasting_Beam()
-    { }
+    {
+        // Despawn the beam
+        // TODO : Modify logic when object pooling is implemented for beam spawning.
+        if (this.activeBeam != null)
+        {
+            Destroy(this.activeBeam.gameObject);
+            this.activeBeam = null;
+        }
+    }
 
     private void HandleStopCasting_Shield()
-    { }
+    {
+        // Walls don't need any extra handling, they despawn on their own (maybe this behaviour will change in the future when object pooling is implemented).
+    }
 
     #endregion
 }
