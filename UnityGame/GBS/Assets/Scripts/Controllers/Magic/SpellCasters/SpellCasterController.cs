@@ -31,9 +31,11 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
     private GameObject[] activeWalls;
     private GameObject[] activeElementalWalls;
 
+    /*
     [Header("Spell Data - Spray")]
     [SerializeField] private GameObject sprayPrefab;
     [SerializeField] private Transform sprayTransform;
+    */
 
     private Form form;
     private ElementQueue elementQueue;
