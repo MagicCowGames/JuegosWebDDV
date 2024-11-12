@@ -150,6 +150,10 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
     {
         return this.elementQueue;
     }
+    public void ClearElementQueue()
+    {
+        this.elementQueue.Clear();
+    }
 
     public void AddElements(Element[] elements)
     {

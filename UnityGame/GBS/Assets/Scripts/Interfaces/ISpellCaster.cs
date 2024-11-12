@@ -6,6 +6,7 @@ public interface ISpellCaster
     
     public void SetElementQueue(ElementQueue queue);
     public ElementQueue GetElementQueue();
+    public void ClearElementQueue();
 
     public void AddElements(Element[] elements);
     public Element[] GetElements(); // Most fucking worthless function tho wtf was I thinking...
