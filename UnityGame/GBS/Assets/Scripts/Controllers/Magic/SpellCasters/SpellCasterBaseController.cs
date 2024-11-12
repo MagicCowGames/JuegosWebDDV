@@ -58,7 +58,8 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
 
     void Update()
     {
-        
+        if (this.isCasting)
+            this.castTimeAccumulator += Time.deltaTime;
     }
 
     #endregion
@@ -75,6 +76,12 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
         this.isCasting = false;
         this.castDuration = 0.0f;
         this.form = Form.Projectile; // Projectile form by default.
+
+        // Initialize "activeSpell" game objects (which serve as pointers to the currently spawned spell)
+        this.activeProjectile = null;
+        this.activeBeam = null;
+        this.activeWalls = new GameObject[this.maxWalls];
+        this.activeElementalWalls = new GameObject[this.maxWalls];
     }
 
     #endregion
@@ -152,7 +159,7 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
 
     public void HandleStartCasting()
     {
-        DebugManager.Instance?.Log("SpellCasterBaseController::HandleStartCasting()");
+        DebugManager.Instance?.Log($"HandleStartCasting() with form \"{this.form}\"");
         switch (this.form)
         {
             default:
@@ -169,7 +176,7 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
     }
     public void HandleStopCasting()
     {
-        DebugManager.Instance?.Log("SpellCasterBaseController::HandleStopCasting()");
+        DebugManager.Instance?.Log($"HandleStopCasting() with form \"{this.form}\"");
         switch (this.form)
         {
             default:
