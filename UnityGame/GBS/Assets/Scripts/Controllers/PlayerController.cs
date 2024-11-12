@@ -200,12 +200,12 @@ public class PlayerController : MonoBehaviour
 
     private void RightClickDown()
     {
-        this.spellCasterController.Cast();
+        this.spellCasterController.StartCasting();
     }
 
     private void RightClickUp()
     {
-        this.spellCasterController.StopCast();
+        this.spellCasterController.StopCasting();
     }
 
     private void SetForm(Form form)
