@@ -7,19 +7,16 @@ public interface ISpellCaster
     public void SetElementQueue(ElementQueue queue);
     public ElementQueue GetElementQueue();
 
-    public void SetElements(Element[] elements);
+    public void AddElements(Element[] elements);
     public Element[] GetElements(); // Most fucking worthless function tho wtf was I thinking...
     public void AddElement(Element element);
     
-    /*
     public void SetForm(Form form);
     public Form GetForm();
-    */
 
     public void SetCastDuration(float time);
     public float GetCastDuration();
 
-    // These 2 could be done using events rather than virtual methods, but I've already used this idea so whatever, fuck it.
-    protected virtual void HandleStartCasting() { }
-    protected virtual void HandleStopCasting() { }
+    public void HandleStartCasting() { }
+    public void HandleStopCasting() { }
 }
