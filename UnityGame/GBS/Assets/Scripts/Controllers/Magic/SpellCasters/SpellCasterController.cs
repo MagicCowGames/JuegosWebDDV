@@ -158,8 +158,10 @@ public class SpellCasterController : MonoBehaviour
                     var proj = obj.GetComponent<SpellProjectileController>();
                     proj.SetSpellData(this.eq);
 
-                    // Stop casting since projectiles don't require constant casting.
-                    SetCastTime(0.5f);
+                    // Projectiles don't require constant casting. What this does is charge up the projectile speed.
+                    // TODO : Implement projectile charging.
+                    // Auto stop casting projectiles after 15 seconds of charging.
+                    SetCastTime(15.0f);
                 }
                 break;
             case Form.Beam:
