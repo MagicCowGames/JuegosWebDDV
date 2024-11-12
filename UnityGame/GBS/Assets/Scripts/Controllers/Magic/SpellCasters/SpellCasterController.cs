@@ -11,6 +11,7 @@ public class SpellCasterController : MonoBehaviour
 
     // TODO : Implement this system in a somewhat clean way...?
     // [SerializeField] private GameObject parentTarget; // The target entity that owns this spell caster. This is the entity to which the self-cast spells must be applied to.
+    // NOTE : A specific spell caster type can be created for this in the future, so yeah.
 
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private GameObject beamPrefab;
