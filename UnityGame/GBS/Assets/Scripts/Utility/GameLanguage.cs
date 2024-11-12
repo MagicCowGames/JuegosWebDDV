@@ -54,6 +54,10 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_store", "Store" },
             { "loc_inventory", "Inventory" },
 
+            // Loc Strings : Actions (wtf is this name?)
+            { "loc_use", "Use" },
+            { "loc_delete", "Delete" },
+
             // Loc Strings : Test
             { "loc_test_dummy", "Test Dummy" },
             { "loc_test_dummy_description", "Test your spells on this immortal dummy" },
@@ -86,6 +90,10 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_retry", "Reintentar" },
             { "loc_store", "Tienda" },
             { "loc_inventory", "Inventario" },
+
+            // Loc Strings : Actions (wtf is this name?)
+            { "loc_use", "Usar" },
+            { "loc_delete", "Borrar" },
 
             // Loc Strings : Test
             { "loc_test_dummy", "Muñeco de Pruebas" },
