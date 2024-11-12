@@ -103,7 +103,6 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
     #region ProtectedMethods
     #endregion
 
-    // TODO : Implement
     #region ISpellCaster
 
     public void StartCasting()
