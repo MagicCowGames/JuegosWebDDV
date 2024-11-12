@@ -212,10 +212,24 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
     #region PrivateMethods - Handling
 
     private void HandleStartCasting_Projectile()
-    { }
+    {
+
+    }
 
     private void HandleStartCasting_Beam()
-    { }
+    {
+        var obj = ObjectSpawner.Spawn(this.beamPrefab, this.beamTransform); // Spawn beam
+        obj.transform.parent = this.beamTransform; // Attach beam so that it follows camera rotation
+        this.activeBeam = obj;
+
+        var beam = obj.GetComponent<SpellBeamController>();
+        beam.SetSpellData(this.elementQueue);
+
+        // Auto stop casting after 5 seconds of sustained beam firing.
+        // The user can manually stop casting on their own if they release the cast button, but if they keep holding it, to prevent them from being too OP,
+        // we force them to stop casting after a set amount of time.
+        SetCastDuration(5.0f);
+    }
 
     private void HandleStartCasting_Shield()
     { }
