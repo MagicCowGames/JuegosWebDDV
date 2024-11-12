@@ -11,6 +11,8 @@ public class SpellProjectileController : SpellBaseController
     [SerializeField] private float force;
     [SerializeField] private ParticleSystem elementParticles;
 
+    public float Force { get { return this.force; } set { this.force = value; } }
+
     #endregion
 
     #region MonoBehaviour
@@ -47,8 +49,6 @@ public class SpellProjectileController : SpellBaseController
 
     private void OnCollisionEnter(Collision collision)
     {
-
-
         // TODO : Change this logic when we implement spell pooling.
         Destroy(this.gameObject);
     }
