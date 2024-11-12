@@ -11,8 +11,10 @@ public interface ISpellCaster
     public Element[] GetElements(); // Most fucking worthless function tho wtf was I thinking...
     public void AddElement(Element element);
     
+    /*
     public void SetForm(Form form);
     public Form GetForm();
+    */
 
     public void SetCastDuration(float time);
     public float GetCastDuration();
