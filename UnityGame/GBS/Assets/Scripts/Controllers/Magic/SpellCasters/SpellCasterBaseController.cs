@@ -214,13 +214,6 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
 
     private void HandleStartCasting_Projectile()
     {
-        // Spawn a projectile
-        var obj = ObjectSpawner.Spawn(this.projectilePrefab, this.projectileTransform);
-
-        // Set spell data
-        var proj = obj.GetComponent<SpellProjectileController>();
-        proj.SetSpellData(this.elementQueue);
-
         // Projectiles don't require constant casting. What this does is charge up the projectile speed.
         // TODO : Implement projectile charging.
         // Auto stop casting projectiles after 15 seconds of charging.
@@ -251,7 +244,16 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
     #region PrivateMethods - Handling - Stop Casting
 
     private void HandleStopCasting_Projectile()
-    { }
+    {
+        // Spawn a projectile
+        var obj = ObjectSpawner.Spawn(this.projectilePrefab, this.projectileTransform);
+
+        // Set spell data
+        var proj = obj.GetComponent<SpellProjectileController>();
+        proj.SetSpellData(this.elementQueue);
+
+        // TODO : Add some method to set the projectile's force based on the current cast time accumulator.
+    }
 
     private void HandleStopCasting_Beam()
     { }
