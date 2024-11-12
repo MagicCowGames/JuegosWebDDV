@@ -15,6 +15,7 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform projectileTransform;
     [SerializeField] private float projectileDuration = 15.0f; // max allowed projectile charge time
+    [SerializeField] private float projectileForceGain = 20.0f; // force gained per second holding down the cast button.
     private GameObject activeProjectile; // NOTE : This goes unused for now...
 
     [Header("Spell Data - Beam")]
@@ -127,6 +128,10 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
     }
     public void StopCasting()
     {
+        // Can't call the stop casting function if we are not casting. Otherwise, projectile spells would shoot even with an empty element queue.
+        if (!this.isCasting)
+            return;
+
         // NOTE : We handle the stop casting function first so that we can access the cast time accumulator for projectile spells so that we can get the accumulated charge time.
         this.isCasting = false;
         HandleStopCasting(); // Here, specific impls for sustained spells such as beam spells will handle cleaning up their own spawned spells when they are no longer needed.
@@ -316,7 +321,10 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
         var proj = obj.GetComponent<SpellProjectileController>();
         proj.SetSpellData(this.elementQueue);
 
-        // TODO : Add some method to set the projectile's force based on the current cast time accumulator.
+        // Set the projectile's force based on the current cast time accumulator.
+        // NOTE : We have a base of 1.0f for the cast time multiplider so that the projectile will always have a small amount of forwards force, even when
+        // we just press the RMB click without holding down to charge the spell's force.
+        proj.Force = (1.0f + this.castTimeAccumulator) * this.projectileForceGain;
     }
 
     private void HandleStopCasting_Beam()
