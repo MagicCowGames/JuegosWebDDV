@@ -268,7 +268,7 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
             int otherElements = this.elementQueue.Count - (this.elementQueue.GetElementCount(Element.Earth) + this.elementQueue.GetElementCount(Element.Ice));
             if (otherElements > 0)
             {
-                var obj = ObjectSpawner.Spawn(this.sprayPrefab, transform);
+                var obj = ObjectSpawner.Spawn(this.elementalWallPrefab, transform);
                 var wall = obj.GetComponent<SpellSprayController>();
                 wall.SetSpellData(this.elementQueue);
                 continue;
