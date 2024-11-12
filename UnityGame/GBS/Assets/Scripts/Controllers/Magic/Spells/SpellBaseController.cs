@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO : Implement
+// TODO : Check if this has been fully implemented. There was a TODO Implement here before, but LGTM, so I am not sure what was left to be finished.
+// Maybe I forgot to remove the TODO comment after I was done at the time. Check the git history for this shit and stuff...
 public class SpellBaseController : MonoBehaviour, ISpell
 {
     #region Variables
