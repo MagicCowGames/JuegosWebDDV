@@ -58,13 +58,27 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
 
     void Update()
     {
-        if (this.isCasting)
-            this.castTimeAccumulator += Time.deltaTime;
+        float delta = Time.deltaTime;
+        HandleAutoStopCasting(delta);
     }
 
     #endregion
 
     #region PublicMethods
+
+    // Could maybe be renamed to "UpdateAutoStopCasting"? Also, need to notify the owner of this spell caster that the casting has been terminated manually.
+    // Either that or they are manually polling / listening to the casting status.
+    private void HandleAutoStopCasting(float delta)
+    {
+        if (!this.isCasting)
+            return;
+        
+        this.castTimeAccumulator += delta;
+
+        if (this.castTimeAccumulator >= castDuration)
+            StopCasting();
+    }
+
     #endregion
 
     #region PrivateMethods
@@ -110,6 +124,7 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
     public void StopCasting()
     {
         this.isCasting = false;
+        this.castTimeAccumulator = 0.0f;
         HandleStopCasting(); // Here, specific impls for sustained spells such as beam spells will handle cleaning up their own spawned spells when they are no longer needed.
     }
     public bool GetIsCasting()
