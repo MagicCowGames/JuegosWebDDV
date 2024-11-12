@@ -2,22 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// NOTE : At some point, the idea was to handle spell casting through inheritance of a base spell caster controller component.
+// Since forms are enum based and are extensible by adding new elements to the enum, we came back to the original idea of just having a "monolithic" class with
+// a switch on form type to determine the behaviour of the spell caster and the spawned spells.
 public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
 {
     #region Variables
 
-    // NOTE : Each spell caster is responsible for dealing with its own spawn transforms and prefabs.
-    // README!!!! : The idea should be scrapped altogether. This cleaner code should be moved to the spell caster controller, and then we should just have specific functions for handling each spell type there. That way, we could also add element based form handling in the future if the project evolves like that...
+    // NOTE : Maybe the magic manager should be the one to have a field with all of the prefabs stored so that we do not have multiple copies needlessly stored in memory?
 
-    [Header("Spell Caster Base Controller")]
-    [SerializeField] protected GameObject[] spellPrefabs; // NOTE : Maybe the magic manager should be the one to have a field with all of the prefabs stored so that we do not have multiple copies needlessly stored in memory?
-    [SerializeField] protected Transform[] spawnTransforms;
+    [Header("Spell Data - Projectile")]
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform projectileTransform;
+    [SerializeField] private float projectileMaxChargeTime;
+    [SerializeField] private float projectileForcePerSecond;
+    private GameObject activeProjectile;
 
-    // protected Form form;
-    protected ElementQueue elementQueue;
-    protected bool isCasting;
+    [Header("Spell Data - Beam")]
+    [SerializeField] private GameObject beamPrefab;
+    [SerializeField] private Transform beamTransform;
+    private GameObject activeBeam;
 
-    protected float castDuration;
+    [Header("Spell Data - Wall")]
+    [SerializeField] private GameObject wallPrefab;
+    [SerializeField] private GameObject elementalWallPrefab;
+    [SerializeField] private Transform[] wallTransforms;
+    [SerializeField] private int maxWalls;
+    private GameObject[] activeWalls;
+    private GameObject[] activeElementalWalls;
+
+    [Header("Spell Data - Spray")]
+    [SerializeField] private GameObject sprayPrefab;
+    [SerializeField] private Transform sprayTransform;
+
+    private Form form;
+    private ElementQueue elementQueue;
+    private bool isCasting;
+
+    private float castDuration;
+    private float castTimeAccumulator;
 
     #endregion
 
@@ -51,6 +74,7 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
         this.elementQueue = null;
         this.isCasting = false;
         this.castDuration = 0.0f;
+        this.form = Form.Projectile; // Projectile form by default.
     }
 
     #endregion
@@ -95,7 +119,7 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
         return this.elementQueue;
     }
 
-    public void SetElements(Element[] elements)
+    public void AddElements(Element[] elements)
     {
         this.elementQueue.Add(elements); // Add the elements within the array one by one to the element queue to make sure that combinations are handled properly.
     }
@@ -104,9 +128,10 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
         return this.elementQueue.Elements;
     }
     public void AddElement(Element element)
-    { }
+    {
+        this.elementQueue.Add(element);
+    }
 
-    /*
     public void SetForm(Form form)
     {
         this.form = form;
@@ -115,7 +140,6 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
     {
         return this.form;
     }
-    */
 
     public void SetCastDuration(float time)
     {
@@ -126,20 +150,62 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
         return this.castDuration;
     }
 
-    #endregion
-
-    #region ISpellCaster - Virtual
-
-    // NOTE : These are some shitty default implementations that should never be called, as each specific type should call their own specific impl,
-    // but here they are anyway, so fuck it lol.
-    protected virtual void HandleStartCasting()
+    public void HandleStartCasting()
     {
         DebugManager.Instance?.Log("SpellCasterBaseController::HandleStartCasting()");
+        switch (this.form)
+        {
+            default:
+            case Form.Projectile:
+                HandleStartCasting_Projectile();
+                break;
+            case Form.Beam:
+                HandleStartCasting_Beam();
+                break;
+            case Form.Shield:
+                HandleStartCasting_Shield();
+                break;
+        }
     }
-    protected virtual void HandleStopCasting()
+    public void HandleStopCasting()
     {
         DebugManager.Instance?.Log("SpellCasterBaseController::HandleStopCasting()");
+        switch (this.form)
+        {
+            default:
+            case Form.Projectile:
+                HandleStopCasting_Projectile();
+                break;
+            case Form.Beam:
+                HandleStopCasting_Beam();
+                break;
+            case Form.Shield:
+                HandleStopCasting_Shield();
+                break;
+        }
     }
+
+    #endregion
+
+    #region PrivateMethods - Handling
+
+    private void HandleStartCasting_Projectile()
+    { }
+
+    private void HandleStartCasting_Beam()
+    { }
+
+    private void HandleStartCasting_Shield()
+    { }
+
+    private void HandleStopCasting_Projectile()
+    { }
+
+    private void HandleStopCasting_Beam()
+    { }
+
+    private void HandleStopCasting_Shield()
+    { }
 
     #endregion
 }
