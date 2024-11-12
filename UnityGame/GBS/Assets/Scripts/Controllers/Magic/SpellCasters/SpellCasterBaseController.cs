@@ -210,7 +210,7 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
 
     #endregion
 
-    #region PrivateMethods - Handling
+    #region PrivateMethods - Handling - Start Casting
 
     private void HandleStartCasting_Projectile()
     {
@@ -245,6 +245,10 @@ public class SpellCasterBaseController : MonoBehaviour, ISpellCaster
 
     private void HandleStartCasting_Shield()
     { }
+
+    #endregion
+
+    #region PrivateMethods - Handling - Stop Casting
 
     private void HandleStopCasting_Projectile()
     { }
