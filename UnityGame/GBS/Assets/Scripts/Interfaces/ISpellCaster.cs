@@ -16,4 +16,8 @@ public interface ISpellCaster
 
     public void SetCastDuration(float time);
     public float GetCastDuration();
+
+    // These 2 could be done using events rather than virtual methods, but I've already used this idea so whatever, fuck it.
+    protected virtual void HandleStartCasting() { }
+    protected virtual void HandleStopCasting() { }
 }
