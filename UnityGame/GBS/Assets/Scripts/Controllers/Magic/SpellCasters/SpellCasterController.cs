@@ -40,6 +40,7 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
 
     private Form form;
     private ElementQueue elementQueue;
+    private ElementQueue elementQueueTemp; // A temporary / "internal" copy of the element queue used to handle spells after the queue has been cleared.
     private bool isCasting;
 
     private float castDuration;
@@ -102,7 +103,7 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
 
         // Initialize element queue class
         this.elementQueue = new ElementQueue(5); // Gets initialized with 5 slots for 5 elements per combination.
-        
+        this.elementQueueTemp = new ElementQueue(5);
     }
 
     #endregion
@@ -121,6 +122,9 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
         // Update isCasting status.
         this.isCasting = true;
 
+        // Update the temporary queue by making a copy of the original one.
+        this.elementQueueTemp = new ElementQueue(this.elementQueue); // This copy kinda hurts my soul... :(
+        this.elementQueue.Clear();
 
         HandleStartCasting();
     }
@@ -305,7 +309,7 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
 
         // Set spell data
         var beam = obj.GetComponent<SpellBeamController>();
-        beam.SetSpellData(this.elementQueue);
+        beam.SetSpellData(this.elementQueueTemp);
     }
 
     private void SpawnShield()
@@ -313,11 +317,11 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
         foreach (var transform in this.wallTransforms)
         {
             // Spawn walls if earth or ice are involved
-            if (this.elementQueue.GetElementCount(Element.Earth) > 0 || this.elementQueue.GetElementCount(Element.Ice) > 0)
+            if (this.elementQueueTemp.GetElementCount(Element.Earth) > 0 || this.elementQueueTemp.GetElementCount(Element.Ice) > 0)
             {
                 var obj = ObjectSpawner.Spawn(this.wallPrefab, transform);
                 var wall = obj.GetComponent<SpellShieldController>();
-                wall.SetSpellData(this.elementQueue);
+                wall.SetSpellData(this.elementQueueTemp);
                 // TODO : Add the logic to store the spawned walls and despawn old walls when going over the max walls cap.
             }
 
@@ -336,12 +340,12 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
             #endregion
 
             // Spawn elemental barrier if any other element is involved
-            int otherElements = this.elementQueue.Count - (this.elementQueue.GetElementCount(Element.Earth) + this.elementQueue.GetElementCount(Element.Ice));
+            int otherElements = this.elementQueueTemp.Count - (this.elementQueueTemp.GetElementCount(Element.Earth) + this.elementQueueTemp.GetElementCount(Element.Ice));
             if (otherElements > 0)
             {
                 var obj = ObjectSpawner.Spawn(this.elementalWallPrefab, transform);
                 var wall = obj.GetComponent<SpellSprayController>();
-                wall.SetSpellData(this.elementQueue);
+                wall.SetSpellData(this.elementQueueTemp);
                 continue;
             }
 
