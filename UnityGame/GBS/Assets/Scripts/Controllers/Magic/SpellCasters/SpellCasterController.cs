@@ -11,6 +11,10 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
 
     // NOTE : Maybe the magic manager should be the one to have a field with all of the prefabs stored so that we do not have multiple copies needlessly stored in memory?
 
+    [Header("Element Queue Config")]
+    [SerializeField] private int elementQueueSize = 5; // Size is 5 elements max on the queue by default. This is what the player uses. Some special entities could have a custom size queue.
+    [SerializeField] private ParticleSystem[] elementParticles;
+
     [Header("Spell Data - Projectile")]
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform projectileTransform;
@@ -101,9 +105,9 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
         this.activeWalls = new GameObject[this.maxWalls];
         this.activeElementalWalls = new GameObject[this.maxWalls];
 
-        // Initialize element queue class
-        this.elementQueue = new ElementQueue(5); // Gets initialized with 5 slots for 5 elements per combination.
-        this.elementQueueTemp = new ElementQueue(5);
+        // Initialize element queues with the number of elements configured on Unity's inspector panel.
+        this.elementQueue = new ElementQueue(this.elementQueueSize);
+        this.elementQueueTemp = new ElementQueue(this.elementQueueSize);
     }
 
     #endregion
