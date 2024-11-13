@@ -123,7 +123,7 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
         this.isCasting = true;
 
         // Update the temporary queue by making a copy of the original one.
-        this.elementQueueTemp = new ElementQueue(this.elementQueue); // This copy kinda hurts my soul... :(
+        this.elementQueueTemp = new ElementQueue(this.elementQueue); // This copy kinda hurts my soul... :( won't anyone think of the performance and the memory fragmentation??? lmao...
         this.elementQueue.Clear();
 
         HandleStartCasting();
