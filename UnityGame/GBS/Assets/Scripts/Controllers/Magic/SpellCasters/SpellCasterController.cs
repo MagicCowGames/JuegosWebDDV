@@ -16,7 +16,7 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
     [SerializeField] private Transform projectileTransform;
     [SerializeField] private float projectileDuration = 15.0f; // max allowed projectile charge time
     [SerializeField] private float projectileForceGain = 20.0f; // force gained per second holding down the cast button.
-    private GameObject activeProjectile; // NOTE : This goes unused for now...
+    private GameObject activeProjectile; // NOTE : This goes unused for now... and probably forever! Oh well...
 
     [Header("Spell Data - Beam")]
     [SerializeField] private GameObject beamPrefab;
@@ -29,7 +29,7 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
     [SerializeField] private GameObject elementalWallPrefab;
     [SerializeField] private Transform[] wallTransforms;
     [SerializeField] private int maxWalls;
-    private GameObject[] activeWalls;
+    private GameObject[] activeWalls; // TODO : Implement active walls usage, duh... Some day we'll use these guys lmao...
     private GameObject[] activeElementalWalls;
 
     /*
