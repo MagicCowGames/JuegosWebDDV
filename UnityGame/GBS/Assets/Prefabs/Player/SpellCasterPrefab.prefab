@@ -174,9 +174,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f287c4460ac7d842b06e1ab1351ed83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  elementQueueSize: 5
+  hasElementParticles: 1
+  elementParticles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   projectilePrefab: {fileID: 8898792701997654404, guid: 301f277af263bd1448bcbdcec50dd5f4, type: 3}
   projectileTransform: {fileID: 6583990023400043801}
   projectileDuration: 15
+  projectileForceGain: 20
   beamPrefab: {fileID: 4110217941577811738, guid: 545c4e357857fd141b836ba27a0df2a8, type: 3}
   beamTransform: {fileID: 6907960208072818400}
   beamDuration: 5
@@ -187,8 +196,6 @@ MonoBehaviour:
   - {fileID: 3864805257391592178}
   - {fileID: 5283064782315113233}
   maxWalls: 12
-  sprayPrefab: {fileID: 0}
-  sprayTransform: {fileID: 0}
 --- !u!1 &7992218122015918569
 GameObject:
   m_ObjectHideFlags: 0

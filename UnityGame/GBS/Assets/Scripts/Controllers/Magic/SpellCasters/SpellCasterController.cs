@@ -12,7 +12,11 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
     // NOTE : Maybe the magic manager should be the one to have a field with all of the prefabs stored so that we do not have multiple copies needlessly stored in memory?
 
     [Header("Element Queue Config")]
-    [SerializeField] private int elementQueueSize = 5; // Size is 5 elements max on the queue by default. This is what the player uses. Some special entities could have a custom size queue.
+    // Size is 5 elements max on the queue by default. This is what the player uses. Some special entities could have a custom size queue.
+    // NOTE : The size can only be configured at compiletime from the editor for now, since the value wont change afterwards.
+    // This can be modified in the future to make this value configurable during runtime, but it is not necessary for now.
+    [SerializeField] private int elementQueueSize = 5;
+    [SerializeField] private bool hasElementParticles = false;
     [SerializeField] private ParticleSystem[] elementParticles;
 
     [Header("Spell Data - Projectile")]
@@ -68,6 +72,7 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
     {
         float delta = Time.deltaTime;
         HandleAutoStopCasting(delta);
+        UpdateElementParticles();
     }
 
     #endregion
@@ -108,6 +113,29 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
         // Initialize element queues with the number of elements configured on Unity's inspector panel.
         this.elementQueue = new ElementQueue(this.elementQueueSize);
         this.elementQueueTemp = new ElementQueue(this.elementQueueSize);
+    }
+
+    private void UpdateElementParticles()
+    {
+        if (this.elementParticles == null)
+            return;
+
+        var elements = this.elementQueue.Elements;
+
+        for(int i = 0; i < Mathf.Min(this.elementQueueSize, this.elementParticles.Length); ++i)
+        {
+            if (this.elementParticles[i] == null)
+                return;
+
+            if (!this.elementParticles[i].isPlaying && elements[i] != Element.None)
+            {
+                this.elementParticles[i].Play();
+            }
+            else
+            {
+                this.elementParticles[i].Stop();
+            }
+        }
     }
 
     #endregion
