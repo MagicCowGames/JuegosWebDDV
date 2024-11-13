@@ -102,6 +102,7 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
 
         // Initialize element queue class
         this.elementQueue = new ElementQueue(5); // Gets initialized with 5 slots for 5 elements per combination.
+        
     }
 
     #endregion
@@ -120,11 +121,8 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
         // Update isCasting status.
         this.isCasting = true;
 
-        HandleStartCasting();
 
-        // After casting the spell, clear the element queue. The element queue is cleared "as soon as the casting starts" (kinda), not after it is finished, so during
-        // sustained casting the player will already see the queue as empty.
-        this.elementQueue.Clear();
+        HandleStartCasting();
     }
     public void StopCasting()
     {
@@ -149,10 +147,6 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
     public ElementQueue GetElementQueue()
     {
         return this.elementQueue;
-    }
-    public void ClearElementQueue()
-    {
-        this.elementQueue.Clear();
     }
 
     public void AddElements(Element[] elements)
@@ -227,21 +221,14 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
 
     private void HandleStartCasting_Projectile()
     {
-        // Projectiles don't require constant casting. What this does is charge up the projectile speed.
-        // TODO : Implement projectile charging.
-        // Auto stop casting projectiles after 15 seconds of charging.
+        // Projectiles don't require constant casting. What this does is charge up the projectile speed
+        // Auto stop casting projectiles after N seconds of charging.
         SetCastDuration(this.projectileDuration);
     }
 
     private void HandleStartCasting_Beam()
     {
-        var obj = ObjectSpawner.Spawn(this.beamPrefab, this.beamTransform); // Spawn a beam
-        obj.transform.parent = this.beamTransform; // Attach the beam so that it follows the player's rotation
-        this.activeBeam = obj;
-
-        // Set spell data
-        var beam = obj.GetComponent<SpellBeamController>();
-        beam.SetSpellData(this.elementQueue);
+        SpawnBeam();
 
         // Auto stop casting after N seconds of sustained beam firing.
         // The user can manually stop casting on their own if they release the cast button, but if they keep holding it, to prevent them from being too OP,
@@ -250,6 +237,78 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
     }
 
     private void HandleStartCasting_Shield()
+    {
+        SpawnShield();
+
+        // Stop casting since walls don't require constant casting.
+        // TODO : Modify logic to add wall creation cooldown? maybe through player animations?
+        SetCastDuration(0.5f);
+    }
+
+    #endregion
+
+    #region PrivateMethods - Handling - Stop Casting
+
+    // Projectiles spawn here because they spawn on RMB release.
+    private void HandleStopCasting_Projectile()
+    {
+        SpawnProjectile();
+    }
+
+    private void HandleStopCasting_Beam()
+    {
+        // Despawn the beam
+        // TODO : Modify logic when object pooling is implemented for beam spawning.
+        if (this.activeBeam != null)
+        {
+            Destroy(this.activeBeam.gameObject);
+            this.activeBeam = null;
+        }
+    }
+
+    private void HandleStopCasting_Shield()
+    {
+        // Walls don't need any extra handling, they despawn on their own (maybe this behaviour will change in the future when object pooling is implemented).
+    }
+
+    #endregion
+
+    #region Cast Spell Methods
+
+    // These are the methods that handle the logic for spawning each spell type based on form / prefab.
+    // NOTE : After casting the spell, we must clear the element queue.
+    // The element queue is cleared "as soon as the casting starts" (kinda), not after it is finished, so during
+    // sustained casting the player will already see the queue as empty.
+    // In the case of projectile spells, since we spawn those after we release the click, we must store the value in a temporary.
+
+    private void SpawnProjectile()
+    {
+        // Spawn a projectile
+        var obj = ObjectSpawner.Spawn(this.projectilePrefab, this.projectileTransform);
+
+        // Set spell data
+        var proj = obj.GetComponent<SpellProjectileController>();
+        proj.SetSpellData(this.elementQueueTemp);
+
+        // Set the projectile's force based on the current cast time accumulator.
+        // NOTE : We have a base of 1.0f for the cast time multiplider so that the projectile will always have a small amount of forwards force, even when
+        // we just press the RMB click without holding down to charge the spell's force.
+        proj.Force = (1.0f + this.castTimeAccumulator) * this.projectileForceGain;
+    }
+
+    private void SpawnBeam()
+    {
+        // Spawn a beam
+        var obj = ObjectSpawner.Spawn(this.beamPrefab, this.beamTransform);
+        obj.transform.parent = this.beamTransform; // Attach the beam so that it follows the player's rotation
+        this.activeBeam = obj;
+
+        // Set spell data
+        var beam = obj.GetComponent<SpellBeamController>();
+        beam.SetSpellData(this.elementQueue);
+    }
+
+    private void SpawnShield()
     {
         foreach (var transform in this.wallTransforms)
         {
@@ -305,46 +364,6 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
 
             #endregion
         }
-
-        // Stop casting since walls don't require constant casting.
-        // TODO : Modify logic to add wall creation cooldown? maybe through player animations?
-        SetCastDuration(0.5f);
-    }
-
-    #endregion
-
-    #region PrivateMethods - Handling - Stop Casting
-
-    // Projectiles spawn here because they spawn on RMB release.
-    private void HandleStopCasting_Projectile()
-    {
-        // Spawn a projectile
-        var obj = ObjectSpawner.Spawn(this.projectilePrefab, this.projectileTransform);
-
-        // Set spell data
-        var proj = obj.GetComponent<SpellProjectileController>();
-        proj.SetSpellData(this.elementQueue);
-
-        // Set the projectile's force based on the current cast time accumulator.
-        // NOTE : We have a base of 1.0f for the cast time multiplider so that the projectile will always have a small amount of forwards force, even when
-        // we just press the RMB click without holding down to charge the spell's force.
-        proj.Force = (1.0f + this.castTimeAccumulator) * this.projectileForceGain;
-    }
-
-    private void HandleStopCasting_Beam()
-    {
-        // Despawn the beam
-        // TODO : Modify logic when object pooling is implemented for beam spawning.
-        if (this.activeBeam != null)
-        {
-            Destroy(this.activeBeam.gameObject);
-            this.activeBeam = null;
-        }
-    }
-
-    private void HandleStopCasting_Shield()
-    {
-        // Walls don't need any extra handling, they despawn on their own (maybe this behaviour will change in the future when object pooling is implemented).
     }
 
     #endregion
