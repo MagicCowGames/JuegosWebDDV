@@ -1,12 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Comment : MonoBehaviour
 {
+#if UNITY_EDITOR
+
     #region Variables
 
-    [SerializeField] private string comment;
+    [SerializeField][TextArea] private string comment;
 
     #endregion
+
+#endif
 }
