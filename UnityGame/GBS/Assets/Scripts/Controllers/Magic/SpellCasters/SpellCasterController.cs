@@ -127,9 +127,11 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
             if (this.elementParticles[i] == null)
                 return;
 
-            bool shouldPlay = !this.elementParticles[i].GetEmitterPlaying() && elements[i] != Element.None;
-            this.elementParticles[i].SetEmitterPlaying(shouldPlay);
-            this.elementParticles[i].SetSpellData(this.elementQueue);
+            // NOTE : This shouldPlay logic is not required, apparently setting particle color to Element.None's color is good enough, LOL.
+            // bool shouldPlay = !this.elementParticles[i].GetEmitterPlaying() && elements[i] != Element.None;
+            // this.elementParticles[i].SetEmitterPlaying(shouldPlay);
+            
+            this.elementParticles[i].SetEmitterElement(elements[i]);
         }
     }
 
