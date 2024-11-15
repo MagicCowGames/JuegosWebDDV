@@ -2,10 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// NOTE : This spell exists only for visual purposes. It is so that it can reuse the SpellBaseController's spell color logic.
-// The damage code is literally going to go unused, and it would be wiser to just refactor the color calculation side of the code to the Magic Manager, but
-// whatever, this quick hack works for now.
-public class SpellEmitterController : SpellBaseController
+public class SpellEmitterController : MonoBehaviour
 {
     #region Variables
 
@@ -32,33 +29,31 @@ public class SpellEmitterController : SpellBaseController
 
     public void SetEmitterPlaying(bool b)
     {
-        if (b)
-        {
-            this.elementParticle.Play();
-        }
-        else
+        if (!b)
         {
             this.elementParticle.Stop();
+        }
+        else
+        if (this.elementParticle.isStopped) // If we just checked for b, then setting the particle to Play() while it is already playing would reset the particle animation.
+        {
+            this.elementParticle.Play();
+            return;
         }
     }
 
     public bool GetEmitterPlaying()
     {
-        return this.elementParticle.isPlaying;
+        return !this.elementParticle.isStopped;
+    }
+
+    public void SetEmitterElement(Element element)
+    {
+        Color color = MagicManager.Instance.GetElementColor(element); // NOTE : The element does not get stored within this class, it just changes the color and calls it a day... this may need to be changed in the future.
+        this.elementParticle.startColor = color; // TODO : Find non-deprecated alternative to do this.
     }
 
     #endregion
 
     #region PrivateMethods
-    #endregion
-
-    #region ISpell
-
-    public override void UpdateSpellColor()
-    {
-        // TODO : Find non-deprecated alternative to do this.
-        this.elementParticle.startColor = this.spellColor;
-    }
-
     #endregion
 }
