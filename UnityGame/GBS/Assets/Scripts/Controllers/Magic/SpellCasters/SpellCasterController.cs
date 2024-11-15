@@ -17,7 +17,7 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
     // This can be modified in the future to make this value configurable during runtime, but it is not necessary for now.
     [SerializeField] private int elementQueueSize = 5;
     [SerializeField] private bool hasElementParticles = false;
-    [SerializeField] private ParticleSystem[] elementParticles;
+    [SerializeField] private SpellEmitterController[] elementParticles;
 
     [Header("Spell Data - Projectile")]
     [SerializeField] private GameObject projectilePrefab;
@@ -127,14 +127,9 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
             if (this.elementParticles[i] == null)
                 return;
 
-            if (!this.elementParticles[i].isPlaying && elements[i] != Element.None)
-            {
-                this.elementParticles[i].Play();
-            }
-            else
-            {
-                this.elementParticles[i].Stop();
-            }
+            bool shouldPlay = !this.elementParticles[i].GetEmitterPlaying() && elements[i] != Element.None;
+            this.elementParticles[i].SetEmitterPlaying(shouldPlay);
+            this.elementParticles[i].SetSpellData(this.elementQueue);
         }
     }
 
