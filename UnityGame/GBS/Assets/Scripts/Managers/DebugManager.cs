@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class DebugManager : Singleton<DebugManager>
+public class DebugManager : SingletonPersistent<DebugManager>
 {
     #region Variables
 
@@ -20,11 +20,15 @@ public class DebugManager : Singleton<DebugManager>
 
     #region MonoBehaviour
 
+    public override void Awake()
+    {
+        base.Awake();
+        this.Init(); // The DebugManager is initialized on Awake so that systems that depend on it can work as soon as the game runs the first frame.
+    }
+
     void Start()
     {
-        // Init the list of line renderers and set the counters to 0
-        this.lineRenderers = new List<DebugLineRendererController>();
-        this.lineRenderersUsed = 0;
+        
     }
 
     void Update()
@@ -226,8 +230,21 @@ public class DebugManager : Singleton<DebugManager>
 
     #region PrivateMethods
 
+    private void Init()
+    {
+        // Init the list of line renderers and set the counters to 0
+        this.lineRenderers = new List<DebugLineRendererController>();
+        this.lineRenderersUsed = 0;
+    }
+
     private void DisableLineRenderers()
     {
+        // This null check would be more formally correct, but it does come with a performance impact since this method is ran every single frame, so it is
+        // disabled for now.
+        /*
+        if (this.lineRenderers == null)
+            return;
+        */
         foreach (var lineRenderer in this.lineRenderers)
             if (!lineRenderer.usedLastFrame)
                 lineRenderer.gameObject.SetActive(false);
