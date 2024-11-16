@@ -16,6 +16,7 @@ public class SingletonPersistent<T> : MonoBehaviour where T : Component
         {
             Instance = this as T;
             DontDestroyOnLoad(this);
+            // this.InitializeManager();
         }
         else
         {
@@ -24,4 +25,17 @@ public class SingletonPersistent<T> : MonoBehaviour where T : Component
     }
 
     #endregion
+
+    // NOTE : This code is disabled because it is an interesting idea but it feels overengineered. It's just easier to call base.Awake() and that's it.
+    /*
+    #region ProtectedMethods
+
+    protected virtual void InitializeManager()
+    {
+        // NOTE : This method should be overridden by classes that inherit from SingletonPersistent<T> so that they can customize their initialization on Awake
+        // without having to override Awake() and call base.Awake().
+    }
+
+    #endregion
+    */
 }
