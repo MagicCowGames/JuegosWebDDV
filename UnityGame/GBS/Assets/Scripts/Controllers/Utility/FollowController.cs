@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO : Implement a speed value for smoothly lerping...
 // NOTE : This could be used to replace the camera manager's move code in the future, but whatever, it works, so no need to fuck shit up.
 public class FollowController : MonoBehaviour
 {
@@ -10,9 +9,17 @@ public class FollowController : MonoBehaviour
 
     [SerializeField] private Transform selfTransform;
     [SerializeField] private Transform targetTransform;
+    [SerializeField] private float speed = 10.0f;
+    [SerializeField] bool lerp = true;
+
+    #endregion
+
+    #region Properties
 
     public Transform SelfTrasnform { get { return this.selfTransform; } set { this.selfTransform = value; } }
     public Transform TargetTransform { get { return this.targetTransform; } set { this.targetTransform = value; } }
+    public float Speed { get { return this.speed; } set { this.speed = value; } }
+    public bool Lerp { get { return this.lerp; } set { this.lerp = value; } }
 
     #endregion
 
@@ -40,8 +47,11 @@ public class FollowController : MonoBehaviour
     {
         if (this.selfTransform == null || this.targetTransform == null)
             return;
-
-        this.selfTransform.position = this.targetTransform.position; // NOTE : Use pos lerping here in the future lol
+        
+        if(this.lerp)
+            this.selfTransform.position = Vector3.Lerp(this.selfTransform.position, this.targetTransform.position, Mathf.Max(1.0f, delta * this.speed));
+        else
+            this.selfTransform.position = this.targetTransform.position;
     }
 
     #endregion
