@@ -128,9 +128,11 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
                 return;
 
             // NOTE : This shouldPlay logic is not required, apparently setting particle color to Element.None's color is good enough, LOL.
+            // That's because of the color assigned to Element.None and how it is displayed as transparent for particle systems in Unity.
+
             // bool shouldPlay = !this.elementParticles[i].GetEmitterPlaying() && elements[i] != Element.None;
             // this.elementParticles[i].SetEmitterPlaying(shouldPlay);
-            
+
             this.elementParticles[i].SetEmitterElement(elements[i]);
         }
     }
