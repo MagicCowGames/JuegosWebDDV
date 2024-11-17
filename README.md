@@ -878,7 +878,72 @@ A continuación, se presenta el lienzo de Modelo de Negocio de **Magic Cow Games
 
 #### *Figura 7 : Lienzo de Modelo de Negocio*
 
-# **5 \- Bibliografía**
+# **5 \- Postmortem**
+
+El postmortem es una parte esencial del proceso de desarrollo de cualquier videojuego, ya que permite al equipo reflexionar sobre el camino recorrido, identificar éxitos y fracasos, y aprender de la experiencia para futuros proyectos.
+
+En esta sección del documento se analizan en detalle los aspectos que funcionaron bien y aquellos que presentaron desafíos durante el desarrollo del juego.
+
+## **5.1 \- Lo que salió bien**
+
+Durante el desarrollo del proyecto, se han tomado múltiples decisiones que han dado lugar a resultados positivos. Se detallan a continuación en esta sección del postmortem.
+
+### **5.1.1 \- Eficiencia gracias a la redacción del GDD**
+
+La redacción del GDD (Game Design Document), permitió organizar las ideas que se aplicaron durante el desarrollo del proyecto.
+
+Al tener las ideas claras, se facilitó en gran medida la fase de programación, ya que el objetivo a cumplir estaba claro, y las mecánicas a programar habían sido definidas ampliamente.
+
+Haber empleado cierta cantidad de tiempo en una fase inicial de planificación y en la redacción del documento, no solo se ha facilitado el desarrollo de las ideas para su posterior implementación, si no que además se ha ahorrado tiempo durante el desarrollo y se ahorrará tiempo en un futuro al haber documentado correctamente la información sobre el juego, facilitando el desarrollo que pueda tomar en un futuro y permitiendo retomar el proyecto.
+
+Además, se han logrado todos los objetivos gracias a que el GDD tenía bien redactadas todas las especificaciones y las características necesarias para implementar el juego que se está desarrollando.
+
+### **5.1.2 \- Sistema de localización**
+
+Durante la realización de proyectos anteriores, se ha implementado de forma tardía el sistema de localización del juego, por lo que se han tenido que modificar múltiples elementos textuales y de audio del juego para poder terminar por implementar todos los idiomas a los que se ha traducido el juego, sufriendo problemas en ocasiones como la gran carga de trabajo que implica traducir todo el juego, además de poder olvidar implementar las traducciones para ciertas cadenas de texto.
+
+Tomando como referencia este problema, se ha decidido implementar el sistema de localización desde el principio, permitiendo implementar traducciones en todo el juego desde el principio y evitando que ciertos elementos textuales del juego no se traduzcan por error, además de evitar la gran carga que implica traducir todos los textos al final del proyecto.
+
+En caso de tener que implementar un nuevo lenguaje en las traducciones del juego, se puede hacer de forma sencilla ya que el sistema ha sido programado de forma modular desde el principio, evitando cualquier problema que pudiese surgir en un futuro.
+
+El sistema de localizaciones actual está basado en la composición, por lo que es tan sencillo como agregar un componente de localización a cualquier elemento que requiera ser traducido a múltiples idiomas. Toda la lógica es controlada por un manager que gestiona el sistema de localización del juego de forma global, permitiendo cambiar el lenguaje en cualquier momento.
+
+## **5.2 \- Lo que salió mal**
+
+Durante el desarrollo del proyecto, han surgido ciertos contratiempos que han ralentizado el desarrollo del proyecto, además de enfrentarse a múltiples retos a superar.
+
+A continuación se detallan todos los problemas que han surgido durante el desarrollo del proyecto y cómo se han afrontado.
+
+### **5.2.1 \- Tiempo y deadlines**
+
+A pesar de tener las ideas claras y haber realizado una buena planificación, el tiempo para desarrollar el juego y publicar la versión inicial del prototipo fue escaso.
+
+Esta escasez de tiempo hizo que se tuviera que acelerar la velocidad de desarrollo y emplear más horas de trabajo para poder implementar todas las características deseadas dentro del plazo de publicación.
+
+Aun a pesar de este contratiempo, todas las características han sido implementadas, pero las horas de trabajo empleadas redujeron la calidad de vida del equipo de desarrollo, durmiendo escasas horas y empleando grandes porciones de las noches para desarrollar e implementar todas las características y requisitos del proyecto.
+
+### **5.2.2 \- Scope creep**
+
+Se salió fuera de lo planificado para añadir nuevas características al juego. A pesar de tener las ideas claras y haber realizado una buena planificación inicial, ciertas características fueron surgiendo cuando se hizo aparente su necesidad durante el testeo.
+
+La implementación de estas características nuevas hizo que el proyecto aumentase su calidad, pero como consecuencia también aumentó el tamaño del proyecto, haciendo que hubiese más características que mantener e implementar, aumentando la carga de trabajo.
+
+## **5.3 \- Lecciones Aprendidas**
+
+Se ha aprendido mucho a partir de la experiencia obtenida con el desarrollo de este proyecto, tanto de la parte que ha salido bien, como de los problemas y contratiempos que se han tenido que solucionar.
+
+### **5.3.1 \- Repartir mejor el tiempo**
+
+Para evitar problemas de tiempo en un futuro, es esencial repartir el tiempo de forma razonable, destinando la mayor cantidad de tiempo al desarrollo de las características más esenciales del proyecto.
+
+### **5.3.2 \- Mantener un scope razonable**
+
+Hay que evitar querer añadir demasiadas características al juego para evitar que sea excesivamente complicado. Esta complicación afecta tanto a los desarrolladores como a los jugadores, ya que si el juego se hace excesivamente complejo, será demasiado difícil tanto de implementar como de comprender para poder jugar.
+
+Es esencial encontrar la idea base del juego y ser capaz de delinear una ruta de desarrollo para las características esenciales y no pretender agregar nuevas características constantemente, reservando la adición de nuevos elementos para momentos puntuales donde realmente sea necesario ampliar el ámbito del proyecto, como por ejemplo en grandes actualizaciones de gran importancia.
+
+
+# **6 \- Bibliografía**
 
 \[1\] :   
 [https://www.dykinson.com/libros/mundo-de-los-videojuegos-monografico-juegos-para-web/9788413248813/](https://www.dykinson.com/libros/mundo-de-los-videojuegos-monografico-juegos-para-web/9788413248813/)
