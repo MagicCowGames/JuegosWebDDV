@@ -125,7 +125,27 @@
 
   * [4.5 \- Lienzo de Modelo de Negocio](#45---lienzo-de-modelo-de-negocio)
 
-* [**5 \- Bibliografía**](#5---bibliografía)
+* [**5 \- Postmortem**](#5---postmortem)
+
+  * [5.1 \- Lo que salió bien](#51---lo-que-salió-bien)
+
+    * [5.1.1 \- Eficiencia gracias a la redacción del GDD](#511---eficiencia-gracias-a-la-redacción-del-gdd)
+
+    * [5.1.2 \- Sistema de localización](#512---sistema-de-localización)
+
+  * [5.2 \- Lo que salió mal](#52---lo-que-salió-mal)
+
+    * [5.2.1 \- Tiempo y deadlines](#521---tiempo-y-deadlines)
+
+    * [5.2.2 \- Scope creep](#522---scope-creep)
+
+  * [5.3 \- Lecciones Aprendidas](#53---lecciones-aprendidas)
+
+    * [5.3.1 \- Repartir mejor el tiempo](#531---repartir-mejor-el-tiempo)
+
+    * [5.3.2 \- Mantener un scope razonable](#532---mantener-un-scope-razonable)
+
+* [**6 \- Bibliografía**](#6---bibliografía)
 
 # **·Índice de Figuras:**
 
