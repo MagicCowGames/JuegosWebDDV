@@ -124,7 +124,6 @@ public class SpellShieldController : SpellBaseController
     // TODO : Fix this shit. It will be trivial when I finally implement the health component on shield spells.
     private void OnTriggerEnter(Collider other)
     {
-        DebugManager.Instance.Log("SHIELDS!!!!! fsafsafas");
         var wall = other.GetComponent<SpellShieldController>();
         if (wall == null)
             return;
