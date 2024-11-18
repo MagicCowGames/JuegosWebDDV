@@ -28,6 +28,9 @@ public class TriggerController : MonoBehaviour
     [SerializeField] private bool triggerOnAreaExit;
     [SerializeField] private bool triggerOnAreaStay;
 
+    [Header("Trigger Entities")] // The type of entities that can activate this trigger
+    [SerializeField] private bool triggeredByPlayer = true;
+
     public UnityEvent OnTrigger { get { return this.onTrigger; } set { this.onTrigger = value; } }
 
     // [SerializeField] private UnityEvent OnTriggerAreaEnter; // This one runs when an entity enters the trigger's area
@@ -72,11 +75,14 @@ public class TriggerController : MonoBehaviour
     private bool CanTrigger(GameObject obj)
     {
         var player = obj.GetComponent<PlayerController>();
+        bool playerOk = this.triggeredByPlayer && player != null;
+
         // TODO : Add support for other types of entities appart from the player by adding checks for other controller components
-        
-        bool ans = (
-                player != null // || whatever != null || etc...
-        );
+        // eg:
+        // var whatever = ...;
+        // bool whateverOk = this.triggeredByWhatever && whatever != null;
+
+        bool ans = playerOk; // || whateverOk || etc...
 
         return ans;
     }
