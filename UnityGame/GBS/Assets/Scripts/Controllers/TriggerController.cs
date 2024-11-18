@@ -11,7 +11,7 @@ public class TriggerController : MonoBehaviour
     #region Variables
 
     [Header("Trigger Properties")]
-    [SerializeField] private string triggerName; // TODO : Implement a system with a static list on TriggerController where all spawned triggers are added. That way, we can access them / look them up by name. This would mostly be useless unless we allow custom level creation or something like that.
+    [SerializeField] private string triggerName = "DefaultTrigger"; // TODO : Implement a system with a static list on TriggerController where all spawned triggers are added. That way, we can access them / look them up by name. This would mostly be useless unless we allow custom level creation or something like that.
     [SerializeField] private int triggerCount = 1; // Number of times the trigger can be triggered.
     [SerializeField] private bool infinite = true; // Determines if the trigger can be triggered infinite times.
 
@@ -77,6 +77,11 @@ public class TriggerController : MonoBehaviour
 
         // If the input GameObject can't activate this trigger, then we return.
         if (!CanTrigger(other))
+            return;
+
+        // If no listeners are registered to the event, then we return.
+        // Otherwise, we would consume the trigger count without the trigger actually doing anything.
+        if (triggerEvent.GetPersistentEventCount() <= 0)
             return;
 
         // Activate the trigger event.
