@@ -30,6 +30,7 @@ public class TriggerController : MonoBehaviour
 
     [Header("Trigger Entities")] // The type of entities that can activate this trigger
     [SerializeField] private bool triggeredByPlayer = true;
+    [SerializeField] private bool triggeredByDummy = false;
 
     public UnityEvent OnTrigger { get { return this.onTrigger; } set { this.onTrigger = value; } }
 
@@ -77,12 +78,15 @@ public class TriggerController : MonoBehaviour
         var player = obj.GetComponent<PlayerController>();
         bool playerOk = this.triggeredByPlayer && player != null;
 
+        var dummy = obj.GetComponent<TestDummyController>();
+        bool dummyOk = this.triggeredByDummy && dummy != null;
+
         // TODO : Add support for other types of entities appart from the player by adding checks for other controller components
         // eg:
         // var whatever = ...;
         // bool whateverOk = this.triggeredByWhatever && whatever != null;
 
-        bool ans = playerOk; // || whateverOk || etc...
+        bool ans = playerOk || dummyOk; // || whateverOk || etc...
 
         return ans;
     }
