@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO : Clean a lot of shit up in this class...
 public class PlayerController : MonoBehaviour
 {
     #region Variables
