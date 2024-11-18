@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpellShieldController : SpellBaseController
 {
     #region Enums
 
-    private enum ShieldAnimStatus
+    public enum ShieldAnimStatus
     {
         MovingUp = 0,
         Idle,
@@ -30,6 +31,13 @@ public class SpellShieldController : SpellBaseController
     [SerializeField] private float animSpeed = 10.0f;
 
     private ShieldAnimStatus animStatus;
+
+    #endregion
+
+    #region Properties
+
+    public float LifeTime { get { return this.lifeTime; } set { this.lifeTime = value; } }
+    public ShieldAnimStatus AnimStatus { get { return this.animStatus; } set { this.animStatus = value; } }
 
     #endregion
 
@@ -96,6 +104,35 @@ public class SpellShieldController : SpellBaseController
     public override void UpdateSpellColor()
     {
 
+    }
+
+    #endregion
+
+    #region Collision
+
+    // If the wall collides with another wall, the other wall is removed / killed.
+    // The wall actually deletes itself by setting their own lifetime to 0 if their lifetime is smaller than that of
+    // the other wall.
+    
+    // NOTE : This currently has a bug where the walls will have the same life time when they first detect eachother
+    // if they were spawned shortly one after the other, during the spawning animation (at that point in time,
+    // the life time has not started to go down yet on either of them).
+    // This means that, since both walls will have the same life time and they only detect eachother on the initial
+    // collision, they will never update and remove eachother, leading both walls to acting as if their collision had
+    // never happened and just despawning after 5 secs like normal.
+    
+    // TODO : Fix this shit. It will be trivial when I finally implement the health component on shield spells.
+    private void OnTriggerEnter(Collider other)
+    {
+        DebugManager.Instance.Log("SHIELDS!!!!! fsafsafas");
+        var wall = other.GetComponent<SpellShieldController>();
+        if (wall == null)
+            return;
+
+        if (this.lifeTime < wall.LifeTime)
+        {
+            this.lifeTime = 0.0f;
+        }
     }
 
     #endregion
