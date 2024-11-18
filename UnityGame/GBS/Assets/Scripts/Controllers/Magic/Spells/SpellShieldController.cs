@@ -30,6 +30,10 @@ public class SpellShieldController : SpellBaseController
 
     [SerializeField] private float animSpeed = 10.0f;
 
+    [Header("Shield Mesh Settings")]
+    [SerializeField] private MeshFilter wallMeshRock;
+    [SerializeField] private Mesh[] wallMeshesRock;
+
     private ShieldAnimStatus animStatus;
 
     #endregion
@@ -47,6 +51,8 @@ public class SpellShieldController : SpellBaseController
     {
         this.animStatus = ShieldAnimStatus.MovingUp;
         this.shieldTransform.position = this.startTransform.position;
+
+        this.wallMeshRock.mesh = wallMeshesRock[(int)Random.Range(0, wallMeshesRock.Length)]; // Set the rock wall mesh to a random one from the mesh list on spawn.
     }
 
     void Update()
