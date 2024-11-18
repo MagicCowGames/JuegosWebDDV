@@ -32,7 +32,9 @@ public class SpellShieldController : SpellBaseController
 
     [Header("Shield Mesh Settings")]
     [SerializeField] private MeshFilter wallMeshRock;
+    [SerializeField] private MeshFilter wallMeshIce;
     [SerializeField] private Mesh[] wallMeshesRock;
+    [SerializeField] private Mesh[] wallMeshesIce;
 
     private ShieldAnimStatus animStatus;
 
@@ -52,7 +54,16 @@ public class SpellShieldController : SpellBaseController
         this.animStatus = ShieldAnimStatus.MovingUp;
         this.shieldTransform.position = this.startTransform.position;
 
-        this.wallMeshRock.mesh = wallMeshesRock[(int)Random.Range(0, wallMeshesRock.Length)]; // Set the rock wall mesh to a random one from the mesh list on spawn.
+        // Set the rock and ice wall meshes to a random mesh from the meshes lists on spawn.
+        this.wallMeshRock.mesh = wallMeshesRock[(int)Random.Range(0, wallMeshesRock.Length)];
+        this.wallMeshIce.mesh = wallMeshesIce[(int)Random.Range(0, wallMeshesIce.Length)];
+
+        // Change wall type visibility according to used elements.
+        bool showRock = this.elementsCounts[(int)Element.Earth] > 0;
+        bool showIce = this.elementsCounts[(int)Element.Ice] > 0;
+
+        this.wallMeshRock.gameObject.SetActive(showRock);
+        this.wallMeshIce.gameObject.SetActive(showIce);
     }
 
     void Update()
@@ -109,7 +120,7 @@ public class SpellShieldController : SpellBaseController
 
     public override void UpdateSpellColor()
     {
-
+        
     }
 
     #endregion
