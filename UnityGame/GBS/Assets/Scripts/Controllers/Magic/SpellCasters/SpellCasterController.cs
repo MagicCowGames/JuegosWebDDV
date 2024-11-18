@@ -40,6 +40,8 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
     private GameObject[] activeWalls; // TODO : Implement active walls usage, duh... Some day we'll use these guys lmao...
     private GameObject[] activeElementalWalls;
 
+    private int totalSpawnedWalls;
+
     /*
     [Header("Spell Data - Spray")]
     [SerializeField] private GameObject sprayPrefab;
@@ -113,6 +115,9 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
         // Initialize element queues with the number of elements configured on Unity's inspector panel.
         this.elementQueue = new ElementQueue(this.elementQueueSize);
         this.elementQueueTemp = new ElementQueue(this.elementQueueSize);
+
+        // Initialize initial count values
+        this.totalSpawnedWalls = 0;
     }
 
     private void UpdateElementParticles()
@@ -354,6 +359,16 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
                 var wall = obj.GetComponent<SpellShieldController>();
                 wall.SetSpellData(this.elementQueueTemp);
                 // TODO : Add the logic to store the spawned walls and despawn old walls when going over the max walls cap.
+                // NOTE : This logic is kind of shitty, but we canwork with it...
+                // maybe change the active walls to being pointers to the component directly rather than the gameobject so that
+                // we dont need to get component every single time and stuff like that?
+                // Also, need to handle the elemental walls, which would require a public system to set their life time to 0.
+                /*
+                var currentActiveWall = this.activeWalls[this.totalSpawnedWalls % this.maxWalls];
+                if (currentActiveWall != null)
+                    currentActiveWall.GetComponent<SpellShieldController>().LifeTime = 0.0f;
+                this.activeWalls[this.totalSpawnedWalls % this.maxWalls] = obj;
+                */
             }
 
             #region DisabledCode
@@ -398,6 +413,8 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
             // TODO : Figure out whether I want this in the final game or not.
 
             #endregion
+
+            this.totalSpawnedWalls += 1;
         }
     }
 
