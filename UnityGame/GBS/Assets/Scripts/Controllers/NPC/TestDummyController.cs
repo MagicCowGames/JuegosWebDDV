@@ -42,6 +42,7 @@ public class TestDummyController : MonoBehaviour
     void Start()
     {
         this.healthController.OnDeath += HandleDeath;
+        this.healthController.OnValueChanged += HandleDamaged;
 
         this.agent.updatePosition = true;
         this.agent.updateRotation = true;
@@ -84,6 +85,11 @@ public class TestDummyController : MonoBehaviour
     {
         if (this.canDie)
             Destroy(this.gameObject);
+    }
+
+    private void HandleDamaged(float oldHealth, float newHealth)
+    {
+        this.Target = PlayerDataManager.Instance.GetPlayer().gameObject;
     }
 
     #endregion
