@@ -39,6 +39,31 @@ public class FollowController : MonoBehaviour
     #endregion
 
     #region PublicMethods
+
+    // NOTE : The main use of having setters when we already have properties is being able to wire these up in a scene to use with triggers.
+    // This allows us to make custom events with moveable objects without having to actually build yet another new component that does the movement logic
+    // all over again when we already have existing components that can do that behaviour just fine.
+
+    public void SetSelfTransform(Transform transform)
+    {
+        this.selfTransform = transform;
+    }
+
+    public void SetTargetTransform(Transform transform)
+    {
+        this.targetTransform = transform;
+    }
+
+    public Transform GetSelfTransform()
+    {
+        return this.selfTransform;
+    }
+
+    public Transform GetTargetTransform()
+    {
+        return this.targetTransform;
+    }
+
     #endregion
 
     #region PrivateMethods
