@@ -3,8 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // NOTE : This could be used to replace the camera manager's move code in the future, but whatever, it works, so no need to fuck shit up.
+
 // NOTE : Maybe it should be renamed to "MoveToController" or something like that? or "FollowTargetController"?
 // "FollowController" is too generic and could potentially get confused with some NPC AI related component when it is not.
+
+// NOTE : Overshooting lerping animations could be implemented if we lerped using as self position the same value despite changes in current position, only updating it
+// if the target position is modified.
+// This can be very easily implemented but would require thinking about whether we should rework this component's logic or make a completely different component for that.
+// It would be easier to implement / make more sense to implement it as a MoveTo() function that lerps over time. Maybe. Not sure.
+
 public class FollowController : MonoBehaviour
 {
     #region Variables
