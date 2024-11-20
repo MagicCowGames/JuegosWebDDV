@@ -571,6 +571,100 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 732470557}
   m_CullTransparentMesh: 1
+--- !u!1001 &1166269102
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1451641203707159748, guid: 0883d70e4cab475408b86448828bd2c6, type: 3}
+      propertyPath: m_Name
+      value: CameraNotes
+      objectReference: {fileID: 0}
+    - target: {fileID: 6611317140655336785, guid: 0883d70e4cab475408b86448828bd2c6, type: 3}
+      propertyPath: comment
+      value: 'Original camera settings:
+
+        this one kinda sucked tho
+
+        pos
+        : <0, 10.68, -11.55>
+
+        rot: <38.816, 0, 0>
+
+        camera angle:
+        60
+
+
+        Perspective Camera settings:
+
+        pos : <0, 12, -12>
+
+        rot:
+        <45, 0, 0>
+
+        in the camera prefab, the angle is 60
+
+
+        Current
+        camera settings ("classic" mode):
+
+        pos: <0, 40, -40>
+
+        rot:
+        <45, 0, 0>
+
+        in the player camera prefab, the camera has angle 20
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 9217841830073511969, guid: 0883d70e4cab475408b86448828bd2c6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -15.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9217841830073511969, guid: 0883d70e4cab475408b86448828bd2c6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9217841830073511969, guid: 0883d70e4cab475408b86448828bd2c6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9217841830073511969, guid: 0883d70e4cab475408b86448828bd2c6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9217841830073511969, guid: 0883d70e4cab475408b86448828bd2c6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9217841830073511969, guid: 0883d70e4cab475408b86448828bd2c6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9217841830073511969, guid: 0883d70e4cab475408b86448828bd2c6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9217841830073511969, guid: 0883d70e4cab475408b86448828bd2c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9217841830073511969, guid: 0883d70e4cab475408b86448828bd2c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9217841830073511969, guid: 0883d70e4cab475408b86448828bd2c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0883d70e4cab475408b86448828bd2c6, type: 3}
 --- !u!1 &1416452212
 GameObject:
   m_ObjectHideFlags: 0
@@ -1378,3 +1472,4 @@ SceneRoots:
   - {fileID: 558486298}
   - {fileID: 1820937343}
   - {fileID: 692916819}
+  - {fileID: 1166269102}
