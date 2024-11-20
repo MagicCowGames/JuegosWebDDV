@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // NOTE : This could be used to replace the camera manager's move code in the future, but whatever, it works, so no need to fuck shit up.
+// NOTE : Maybe it should be renamed to "MoveToController" or something like that? or "FollowTargetController"?
+// "FollowController" is too generic and could potentially get confused with some NPC AI related component when it is not.
 public class FollowController : MonoBehaviour
 {
     #region Variables
