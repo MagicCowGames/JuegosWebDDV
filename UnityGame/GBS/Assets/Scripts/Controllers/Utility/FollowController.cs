@@ -76,7 +76,7 @@ public class FollowController : MonoBehaviour
             return;
         
         if(this.lerp)
-            this.selfTransform.position = Vector3.Lerp(this.selfTransform.position, this.targetTransform.position, Mathf.Max(1.0f, delta * this.speed));
+            this.selfTransform.position = Vector3.Lerp(this.selfTransform.position, this.targetTransform.position, Mathf.Min(1.0f, delta * this.speed));
         else
             this.selfTransform.position = this.targetTransform.position;
     }
