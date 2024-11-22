@@ -12,6 +12,7 @@ public class PlayerAnimationController : MonoBehaviour
     [Header("Components")]
     [SerializeField] private CharacterController controller;
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private SpellCasterController spellCasterController;
 
     [Header("Animation Controller")]
     [SerializeField] private Animator animator;
@@ -51,6 +52,12 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void UpdateAnimation(float delta)
     {
+        UpdateAnimation_Walk(delta);
+        UpdateAnimation_Cast(delta);
+    }
+
+    private void UpdateAnimation_Walk(float delta)
+    {
         var vec = this.playerController.GetCurrentVelocity();
 
         // Update Forward Movement value.
@@ -61,6 +68,9 @@ public class PlayerAnimationController : MonoBehaviour
 
         // DebugManager.Instance?.Log($"forward = {this.forwardMovementValue}, velocity = {vec}");
     }
+
+    private void UpdateAnimation_Cast(float delta)
+    { }
 
     #endregion
 }
