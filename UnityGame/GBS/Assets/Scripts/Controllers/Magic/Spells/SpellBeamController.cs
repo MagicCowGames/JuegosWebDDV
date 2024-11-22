@@ -207,6 +207,7 @@ public class SpellBeamController : SpellBaseController
                 // TODO : Maybe change this to make use of the element mixing system so that beams with opposites cancel their opposites
                 // rather than creating super OP beams? Or maybe that's part of the fun of beams! breaking the rules and stuff!
                 // To do this, it would make more sense to add a ElementQueue to the SpellBaseController, which would make things easier for a small price to pay regarding memory usage / potential fragmentation... which would be basically gone when pooling is implemented. Kinda.
+                // Also, if we use an EQ, we can always make a new one with a copy of the parents, or make one that has as total slots the sum of the slots of ParentA and ParentB, which will guarantee that each successive child beam can potentially become ever so stronger.
                 int[] childElementCounts = new int[this.elementsCounts.Length];
                 int count = 0;
                 for (int i = 0; i < childElementCounts.Length; ++i)
