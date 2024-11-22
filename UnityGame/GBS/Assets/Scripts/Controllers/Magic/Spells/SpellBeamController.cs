@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO : Make it so that child beams are slightly more powerful and combine the parent beam elements...
+// Also make it so that when beams collide at extremely steep anbles (ie: facing eachother) they cause an explosion in the middle or something.
 public class SpellBeamController : SpellBaseController
 {
     #region Variables
