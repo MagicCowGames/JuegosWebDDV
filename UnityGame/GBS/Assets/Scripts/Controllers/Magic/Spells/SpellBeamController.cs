@@ -206,6 +206,7 @@ public class SpellBeamController : SpellBaseController
                 // Set the child beam's element counts to make a new spell.
                 // TODO : Maybe change this to make use of the element mixing system so that beams with opposites cancel their opposites
                 // rather than creating super OP beams? Or maybe that's part of the fun of beams! breaking the rules and stuff!
+                // To do this, it would make more sense to add a ElementQueue to the SpellBaseController, which would make things easier for a small price to pay regarding memory usage / potential fragmentation... which would be basically gone when pooling is implemented. Kinda.
                 int[] childElementCounts = new int[this.elementsCounts.Length];
                 int count = 0;
                 for (int i = 0; i < childElementCounts.Length; ++i)
