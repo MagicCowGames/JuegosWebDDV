@@ -5020,7 +5020,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.2
   m_Height: 10
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 5}
@@ -5036,9 +5036,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82613f123eeb52f45af09007890a7c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
   type: 1
   modifierEnabled: 1
   collisionEnabled: 1
+  repeatTime: 1
   useDefaultValues: 0
   resetValues: 0
   inputDamageArray:
