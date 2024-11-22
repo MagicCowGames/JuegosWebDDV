@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 gravityVector;
 
+    private Vector3 currentVelocity = Vector3.zero;
+
     #endregion
 
     #region Variables2
@@ -84,6 +86,11 @@ public class PlayerController : MonoBehaviour
         return this.walkSpeed;
     }
 
+    public Vector3 GetCurrentVelocity()
+    {
+        return this.currentVelocity;
+    }
+
     #endregion
 
     #region Private Methods
@@ -101,8 +108,23 @@ public class PlayerController : MonoBehaviour
 
     private void UpdatePosition(float delta)
     {
+        Vector3 oldPosition = this.transform.position;
+
         UpdatePositionWalk(delta);
         UpdatePositionGravity(delta);
+
+        Vector3 currentPosition = this.transform.position;
+
+        this.currentVelocity = (currentPosition - oldPosition) / delta; // This is a shitty patch that really needs to be moved to a different controller...
+        // NOTE : The reason this crappy patch exists is because the PlayerAnimationController cannot access characterController.velocity AT ALL!
+        // This happens because the velocity is calculated after all of the Move() and SimpleMove() calls take place... which means that at frame start, it is reset to
+        // <0,0,0>, so that means we need to either manually calculate it or save it so that it can be used by other classes...
+        // Oh btw, saving the value of characterController.velocity AFTER doing all of the Move() calls DOES NOT WORK EITHER! because the value is LOST if it is not
+        // fetched immediately AFTER any of the Move() calls. Oh btw (x2), this behaviour is not consistent! if it takes place within the same function call, then it's
+        // all fine and dandy... otherwise? you're fucked! why? WHO KNOWS! The solution to decouple this shit is to fuck Unity and, as always, do the work by hand
+        // ourselves... As always, the documentation says X, but the reality is Y, plus a few sprinkles of shit.
+        // TODO : Move all of the movement logic to a PlayerMovementController... ffs...
+        // DebugManager.Instance?.Log($"playervelocity = {this.currentVelocity}");
     }
 
     private void UpdatePositionWalk(float delta)
