@@ -66,7 +66,7 @@ public class PlayerAnimationController : MonoBehaviour
 
         // Update Forward Movement value.
         float newForwardMovementValue = (Vector3.Dot(/*this.controller.velocity*/vec, this.playerController.GetMeshTransform().forward) / this.playerController.GetWalkSpeed()) * 2.0f; // we map the value to [-1,1], then to [-2,2]. And since the player can't walk backward in this game, then it's kinda as if we mapped it to [0,2]...
-        this.forwardMovementValue = Mathf.Lerp(this.forwardMovementValue, newForwardMovementValue, delta * this.forwardMovementUpdateSpeed);
+        this.forwardMovementValue = AnimationLerpFloat(this.forwardMovementValue, newForwardMovementValue, delta, this.forwardMovementUpdateSpeed);
 
         animator.SetFloat(this.forwardMovementName, this.forwardMovementValue);
 
@@ -75,7 +75,14 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void UpdateAnimation_Cast(float delta)
     {
+        float newCastingValue = this.spellCasterController.GetIsCasting() ? 1.0f : 0.0f;
+        this.castingValue = AnimationLerpFloat(this.castingValue, newCastingValue, delta, this.castingUpdateSpeed);
+    }
 
+    // TODO : Implement custom structs to handle each type of parameter, such as a AnimParamFloat or something like that, with its own fields that contain the same 3 values we have as separate variables as of now...
+    private float AnimationLerpFloat(float oldValue, float newValue, float delta, float updateSpeed)
+    {
+        return Mathf.Lerp(oldValue, newValue, delta * updateSpeed);
     }
 
     #endregion
