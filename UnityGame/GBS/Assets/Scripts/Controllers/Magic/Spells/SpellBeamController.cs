@@ -27,7 +27,6 @@ public class SpellBeamController : SpellBaseController
 
     // NOTE : The encapsulation is fucked with these ones, but it's the only way I could come up with after a couple of beers to achieve setting
     // the child beam on the collided-with beam when 2 beams collide with eachother so as to prevent spawning another fucking child.
-    public SpellBeamController OtherBeam { get; set; }
     public SpellBeamController ChildBeam { get; set; }
 
     #endregion
@@ -37,8 +36,6 @@ public class SpellBeamController : SpellBaseController
     void Start()
     {
         this.currentMaxDistance = 0.0f;
-
-        this.OtherBeam = null;
         this.ChildBeam = null;
     }
 
@@ -143,7 +140,6 @@ public class SpellBeamController : SpellBaseController
                 // otherBeam.TargetPoint = hit.point;
 
                 // Then, handle the child beam logic
-                this.OtherBeam = otherBeam; // Update the OtherBeam reference (TODO : Get rid of this.OtherBeam since it does not get used at all anywhere else...)
                 if (this.ChildBeam == null && otherBeam.ChildBeam == null) // If both beams don't have a child beam, we spawn it.
                 {
                     this.ChildBeam = ObjectSpawner.Spawn(this.beamPrefab, this.TargetPoint).GetComponent<SpellBeamController>();
