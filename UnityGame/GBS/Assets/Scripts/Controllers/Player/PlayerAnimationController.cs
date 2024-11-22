@@ -51,10 +51,15 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void UpdateAnimation(float delta)
     {
+        var vec = this.playerController.GetCurrentVelocity();
+
         // Update Forward Movement value.
-        float newForwardMovementValue = (Vector3.Dot(controller.velocity, controller.transform.forward) / this.playerController.GetWalkSpeed()) * 2.0f; // we map the value to [-1,1], then to [-2,2]. And since the player can't walk backward in this game, then it's kinda as if we mapped it to [0,2]...
+        float newForwardMovementValue = (Vector3.Dot(/*this.controller.velocity*/vec, this.playerController.GetMeshTransform().forward) / this.playerController.GetWalkSpeed()) * 2.0f; // we map the value to [-1,1], then to [-2,2]. And since the player can't walk backward in this game, then it's kinda as if we mapped it to [0,2]...
         this.forwardMovementValue = Mathf.Lerp(this.forwardMovementValue, newForwardMovementValue, delta * this.forwardMovementUpdateSpeed);
+
         animator.SetFloat(this.forwardMovementName, this.forwardMovementValue);
+
+        DebugManager.Instance?.Log($"forward = {this.forwardMovementValue}, velocity = {vec}");
     }
 
     #endregion
