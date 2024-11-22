@@ -23,6 +23,10 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] private float forwardMovementValue = 0.0f;
     [SerializeField] private float forwardMovementUpdateSpeed = 2.0f;
 
+    [SerializeField] private string castingName = "Casting";
+    [SerializeField] private float castingValue = 0.0f;
+    [SerializeField] private float castingUpdateSpeed = 2.0f;
+
     #endregion
 
     #region MonoBehaviour
@@ -70,7 +74,9 @@ public class PlayerAnimationController : MonoBehaviour
     }
 
     private void UpdateAnimation_Cast(float delta)
-    { }
+    {
+
+    }
 
     #endregion
 }
