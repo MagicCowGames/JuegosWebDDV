@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// NOTE : In the future, we should take a PlayerMovementController or something like a velocity controller or whatever the fuck, that way we could just access the max
+// velocity values directly... right now we're going through the PlayerController reference, but we don't need everything about the PlayerController so yeah...
+// we're also polluting the PlayerController's code by adding so much extra stuff with new getters and shit.
 public class PlayerAnimationController : MonoBehaviour
 {
     #region Variables
 
     [Header("Components")]
     [SerializeField] private CharacterController controller;
+    [SerializeField] private PlayerController playerController;
 
     [Header("Animation Controller")]
     [SerializeField] private Animator animator;
@@ -48,7 +52,7 @@ public class PlayerAnimationController : MonoBehaviour
     private void UpdateAnimation(float delta)
     {
         // Update Forward Movement value.
-        float newForwardMovementValue = Vector3.Dot(controller.velocity, controller.transform.forward);
+        float newForwardMovementValue = (Vector3.Dot(controller.velocity, controller.transform.forward) / this.playerController.GetWalkSpeed()) * 2.0f; // we map the value to [-1,1], then to [-2,2]. And since the player can't walk backward in this game, then it's kinda as if we mapped it to [0,2]...
         this.forwardMovementValue = Mathf.Lerp(this.forwardMovementValue, newForwardMovementValue, delta * this.forwardMovementUpdateSpeed);
         animator.SetFloat(this.forwardMovementName, this.forwardMovementValue);
     }
