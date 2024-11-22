@@ -79,6 +79,11 @@ public class PlayerController : MonoBehaviour
         return this.meshTransform;
     }
 
+    public float GetWalkSpeed()
+    {
+        return this.walkSpeed;
+    }
+
     #endregion
 
     #region Private Methods
