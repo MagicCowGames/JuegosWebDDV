@@ -27,16 +27,31 @@ public class SpellBeamController : SpellBaseController
 
     // NOTE : The encapsulation is fucked with these ones, but it's the only way I could come up with after a couple of beers to achieve setting
     // the child beam on the collided-with beam when 2 beams collide with eachother so as to prevent spawning another fucking child.
+    public SpellBeamController OtherBeam { get; set; }
     public SpellBeamController ChildBeam { get; set; }
+
+    public SpellBeamController ParentBeamA { get; set; }
+    public SpellBeamController ParentBeamB { get; set; }
+
+    public bool IsChild { get; set; }
 
     #endregion
 
     #region MonoBehaviour
 
-    void Start()
+    void Awake()
     {
         this.currentMaxDistance = 0.0f;
+        this.OtherBeam = null;
         this.ChildBeam = null;
+        this.ParentBeamA = null;
+        this.ParentBeamB = null;
+        this.IsChild = false;
+    }
+
+    void Start()
+    {
+        
     }
 
     void Update()
@@ -67,6 +82,18 @@ public class SpellBeamController : SpellBaseController
         // If we have a child beam, we also set the collision so that it won't affect our raycasts.
         if (this.ChildBeam != null)
             this.ChildBeam.capsuleCollider.enabled = collisionEnabled;
+
+        // If we are a child beam, we also set the collision of our parents so that it won't affect our raycasts.
+        if (this.ParentBeamA != null)
+        {
+            this.ParentBeamA.capsuleCollider.enabled = collisionEnabled;
+            Debug.Log("parent A off");
+        }
+        if (this.ParentBeamB != null)
+        {
+            this.ParentBeamB.capsuleCollider.enabled = collisionEnabled;
+            Debug.Log("parent B off");
+        }
     }
 
     // TODO : Implement spell object pool in magic manager in the future.
@@ -105,11 +132,17 @@ public class SpellBeamController : SpellBaseController
         // Update the capsule collider to fit the size of the beam
         this.capsuleCollider.height = this.Length;
         this.capsuleCollider.center = new Vector3(0.0f, 0.0f, this.Length / 2.0f);
+
+        // Check if this beam is a child and must destroy themselves
+        if (this.IsChild && (this.ParentBeamA.ChildBeam == null || this.ParentBeamB.ChildBeam == null))
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void UpdateBeamRaycastLogic()
     {
-        bool mustDestroyChild = false;
+        // bool mustDestroyChild = false;
 
         // Make a raycast to check if the beam is colliding with anything.
         RaycastHit hit;
@@ -123,54 +156,53 @@ public class SpellBeamController : SpellBaseController
             this.currentMaxDistance = hit.distance; // Reset the current max distance to the distance between the origin point and the hit point so that the beam wont grow instantly when moving between surfaces at different distances
 
             // Check if the hit surface is another beam
-            var otherBeam = hit.collider.gameObject.GetComponent<SpellBeamController>();
+            this.OtherBeam = hit.collider.gameObject.GetComponent<SpellBeamController>();
 
             // If it is not a beam, then handle collision with a regular surface
-            if (otherBeam == null)
+            if (this.OtherBeam == null)
             {
-                mustDestroyChild = true;
+                // mustDestroyChild = true;
             }
             // If it is a beam, then handle collision with another beam
             else
             {
+                if (this.OtherBeam == this.ParentBeamA || this.OtherBeam == this.ParentBeamB || this.OtherBeam == this.ChildBeam)
+                    Debug.Log("WTF BRO!!!! INCEST!!!");
+
+                // Update the other beam's OtherBeam reference to this beam.
+                // If this beam was colliding with another beam and now collides with this one, it means that this beam is colliding at an earlier point along
+                // the other beam's length, so it will be shortened and we don't need to do anything else to update the logic.
+                this.OtherBeam.OtherBeam = this;
+
                 // First, shorten both beams to the length of the middle point between their collisions
-                // this.currentMaxDistance = Vector3.Distance(this.OriginPoint, hit.point);
-                // otherBeam.currentMaxDistance = Vector3.Distance(otherBeam.OriginPoint, hit.point);
-                // this.TargetPoint = hit.point;
-                // otherBeam.TargetPoint = hit.point;
+                this.OtherBeam.currentMaxDistance = Vector3.Distance(this.OtherBeam.OriginPoint, hit.point);
 
                 // Then, handle the child beam logic
-                if (this.ChildBeam == null && otherBeam.ChildBeam == null) // If both beams don't have a child beam, we spawn it.
+                if (this.ChildBeam == null && this.OtherBeam.ChildBeam == null) // If both beams don't have a child beam, we spawn it.
                 {
                     this.ChildBeam = ObjectSpawner.Spawn(this.beamPrefab, this.TargetPoint).GetComponent<SpellBeamController>();
+                    this.ChildBeam.IsChild = true;
+                    this.ChildBeam.transform.rotation = Quaternion.Lerp(this.transform.rotation, this.OtherBeam.transform.rotation, 0.5f);
+                    this.ChildBeam.ParentBeamA = this;
+                    this.ChildBeam.ParentBeamB = this.OtherBeam;
+                    this.OtherBeam.ChildBeam = this.ChildBeam;
                 }
                 else
                 if (this.ChildBeam != null) // If the child beam is not null for this beam, then we handle it. Otherwise, it will be handled by the other beam.
                 {
+                    // this.ChildBeam.transform.position = (this.TargetPoint + otherBeam.TargetPoint) / 2.0f;
                     this.ChildBeam.transform.position = this.TargetPoint;
                 }
                 else
                 {
-                    this.ChildBeam = otherBeam.ChildBeam; // Update our child beam reference if the other beam's child is not null but ours is.
+                    this.ChildBeam = this.OtherBeam.ChildBeam; // Update our child beam reference if the other beam's child is not null but ours is.
                 }
             }
         }
         else
         {
             this.TargetPoint = this.OriginPoint + this.transform.forward * this.currentMaxDistance; // Set the target point to the max distance point.
-            mustDestroyChild = true;
-        }
-
-        if (mustDestroyChild)
-        {
-            // If we had spawned a beam previously and we are now hitting a regular surface or no surface at all, we then get rid of the old spawned child beam
-            // NOTE : The other beam's reference will be set to null automatically by Unity when the GameObject is destroyed
-            // (remember that is null operator is overloaded in Unity)
-            if (this.ChildBeam != null)
-            {
-                Destroy(this.ChildBeam.gameObject);
-                this.ChildBeam = null;
-            }
+            
         }
     }
 
