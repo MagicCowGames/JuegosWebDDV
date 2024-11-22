@@ -6,10 +6,17 @@ public class PlayerAnimationController : MonoBehaviour
 {
     #region Variables
 
-    [Header("Animation")]
+    [Header("Components")]
+    [SerializeField] private CharacterController controller;
+
+    [Header("Animation Controller")]
     [SerializeField] private Animator animator;
 
-    private float forwardMovement;
+    // NOTE : This shouldn't be exposed tbh... but for now it's ok. I mean, maybe it could make sense for it to be editable in the future, but not really as of now.
+    [Header("Animation Values")]
+    [SerializeField] private string forwardMovementName = "ForwardMovement";
+    [SerializeField] private float forwardMovementValue = 0.0f;
+    [SerializeField] private float forwardMovementUpdateSpeed = 2.0f;
 
     #endregion
 
@@ -35,12 +42,15 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void Init()
     {
-        this.forwardMovement = 0.0f;
+
     }
 
     private void UpdateAnimation(float delta)
     {
-
+        // Update Forward Movement value.
+        float newForwardMovementValue = Vector3.Dot(controller.velocity, controller.transform.forward);
+        this.forwardMovementValue = Mathf.Lerp(this.forwardMovementValue, newForwardMovementValue, delta * this.forwardMovementUpdateSpeed);
+        animator.SetFloat(this.forwardMovementName, this.forwardMovementValue);
     }
 
     #endregion
