@@ -142,8 +142,6 @@ public class SpellBeamController : SpellBaseController
 
     private void UpdateBeamRaycastLogic()
     {
-        // bool mustDestroyChild = false;
-
         // Make a raycast to check if the beam is colliding with anything.
         RaycastHit hit;
         bool hasHit = Physics.Raycast(this.transform.position, this.transform.forward, out hit, this.currentMaxDistance);
@@ -161,7 +159,7 @@ public class SpellBeamController : SpellBaseController
             // If it is not a beam, then handle collision with a regular surface
             if (this.OtherBeam == null)
             {
-                // mustDestroyChild = true;
+                // Do Nothing
             }
             // If it is a beam, then handle collision with another beam
             else
@@ -187,8 +185,8 @@ public class SpellBeamController : SpellBaseController
                 else
                 if (this.ChildBeam != null) // If the child beam is not null for this beam, then we handle it. Otherwise, it will be handled by the other beam.
                 {
-                    // this.ChildBeam.transform.position = (this.TargetPoint + otherBeam.TargetPoint) / 2.0f;
-                    this.ChildBeam.transform.position = this.TargetPoint;
+                    // Set the child beam position to the middle point between the target points of both beams.
+                    this.ChildBeam.transform.position = (this.TargetPoint + this.OtherBeam.TargetPoint) / 2.0f;
                 }
                 else
                 {
