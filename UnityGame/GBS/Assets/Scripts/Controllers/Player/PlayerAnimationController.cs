@@ -59,7 +59,7 @@ public class PlayerAnimationController : MonoBehaviour
 
         animator.SetFloat(this.forwardMovementName, this.forwardMovementValue);
 
-        DebugManager.Instance?.Log($"forward = {this.forwardMovementValue}, velocity = {vec}");
+        // DebugManager.Instance?.Log($"forward = {this.forwardMovementValue}, velocity = {vec}");
     }
 
     #endregion
