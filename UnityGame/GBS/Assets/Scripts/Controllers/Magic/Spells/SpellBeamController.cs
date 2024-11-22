@@ -177,7 +177,6 @@ public class SpellBeamController : SpellBaseController
                 {
                     this.ChildBeam = ObjectSpawner.Spawn(this.beamPrefab, this.TargetPoint).GetComponent<SpellBeamController>();
                     this.ChildBeam.IsChild = true;
-                    this.ChildBeam.transform.rotation = Quaternion.Lerp(this.transform.rotation, this.OtherBeam.transform.rotation, 0.5f);
                     this.ChildBeam.ParentBeamA = this;
                     this.ChildBeam.ParentBeamB = this.OtherBeam;
                     this.OtherBeam.ChildBeam = this.ChildBeam;
@@ -187,6 +186,9 @@ public class SpellBeamController : SpellBaseController
                 {
                     // Set the child beam position to the middle point between the target points of both beams.
                     this.ChildBeam.transform.position = (this.TargetPoint + this.OtherBeam.TargetPoint) / 2.0f;
+
+                    // Set the child beam rotation to the average between the rotations of the parent beams.
+                    this.ChildBeam.transform.rotation = Quaternion.Lerp(this.transform.rotation, this.OtherBeam.transform.rotation, 0.5f);
                 }
                 else
                 {
