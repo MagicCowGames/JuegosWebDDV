@@ -495,10 +495,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 8574623358394360817}
   playerController: {fileID: 5165320198455412615}
+  spellCasterController: {fileID: 5337233691746038891}
   animator: {fileID: 1547275497802542496}
   forwardMovementName: ForwardMovement
   forwardMovementValue: 0
   forwardMovementUpdateSpeed: 2
+  castingName: Casting
+  castingValue: 0
+  castingUpdateSpeed: 2
 --- !u!1001 &152181874143987095
 PrefabInstance:
   m_ObjectHideFlags: 0
