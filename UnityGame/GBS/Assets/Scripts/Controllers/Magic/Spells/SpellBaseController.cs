@@ -48,6 +48,7 @@ public class SpellBaseController : MonoBehaviour, ISpell
     }
 
     // This is the one that should be used by the public interface when spawning spells from code.
+    /*
     public void SetSpellData(ElementQueue queue)
     {
         Color color = Color.white;
@@ -64,6 +65,38 @@ public class SpellBaseController : MonoBehaviour, ISpell
             var cr = (currentColor.r / queue.Count) * queue.ElementsCounts[i];
             var cg = (currentColor.g / queue.Count) * queue.ElementsCounts[i];
             var cb = (currentColor.b / queue.Count) * queue.ElementsCounts[i];
+            r += cr;
+            g += cg;
+            b += cb;
+        }
+        this.healthModifierController?.SetValues(this.elementsCounts);
+
+        Color colorAns = new Color(r, g, b, 1.0f);
+        SetSpellColor(colorAns);
+    }
+    */
+
+    public void SetSpellData(ElementQueue queue)
+    {
+        SetSpellData(queue.Count, queue.ElementsCounts);
+    }
+
+    public void SetSpellData(int count, int[] inputElementsCounts)
+    {
+        Color color = Color.white;
+        float r = 0.0f;
+        float g = 0.0f;
+        float b = 0.0f;
+
+        this.elementsCounts = new int[(int)Element.COUNT];
+        for (int i = 0; i < inputElementsCounts.Length; ++i)
+        {
+            this.elementsCounts[i] = inputElementsCounts[i];
+            Element currentElement = (Element)i;
+            Color currentColor = MagicManager.Instance.GetElementColor(currentElement);
+            var cr = (currentColor.r / count) * inputElementsCounts[i];
+            var cg = (currentColor.g / count) * inputElementsCounts[i];
+            var cb = (currentColor.b / count) * inputElementsCounts[i];
             r += cr;
             g += cg;
             b += cb;
