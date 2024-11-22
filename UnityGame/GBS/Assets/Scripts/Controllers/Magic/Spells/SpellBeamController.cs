@@ -201,6 +201,20 @@ public class SpellBeamController : SpellBaseController
                 this.isChildOwner = true;
                 this.OtherBeam.isChildOwner = false;
                 this.ChildBeam = ObjectSpawner.Spawn(this.beamPrefab, this.TargetPoint).GetComponent<SpellBeamController>();
+
+
+                // Set the child beam's element counts to make a new spell.
+                // TODO : Maybe change this to make use of the element mixing system so that beams with opposites cancel their opposites
+                // rather than creating super OP beams? Or maybe that's part of the fun of beams! breaking the rules and stuff!
+                int[] childElementCounts = new int[this.elementsCounts.Length];
+                int count = 0;
+                for (int i = 0; i < childElementCounts.Length; ++i)
+                {
+                    childElementCounts[i] = this.elementsCounts[i] + this.OtherBeam.elementsCounts[i];
+                    count += childElementCounts[i];
+                }
+                this.ChildBeam.SetSpellData(count, childElementCounts);
+                
                 this.ChildBeam.IsChild = true;
                 this.ChildBeam.ParentBeamA = this;
                 this.ChildBeam.ParentBeamB = this.OtherBeam;
