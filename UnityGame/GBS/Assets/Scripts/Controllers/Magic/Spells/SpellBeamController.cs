@@ -87,12 +87,12 @@ public class SpellBeamController : SpellBaseController
         if (this.ParentBeamA != null)
         {
             this.ParentBeamA.capsuleCollider.enabled = collisionEnabled;
-            Debug.Log("parent A off");
+            // DebugManager.Log("parent A off");
         }
         if (this.ParentBeamB != null)
         {
             this.ParentBeamB.capsuleCollider.enabled = collisionEnabled;
-            Debug.Log("parent B off");
+            // DebugManager.Log("parent B off");
         }
     }
 
@@ -166,9 +166,6 @@ public class SpellBeamController : SpellBaseController
             // If it is a beam, then handle collision with another beam
             else
             {
-                if (this.OtherBeam == this.ParentBeamA || this.OtherBeam == this.ParentBeamB || this.OtherBeam == this.ChildBeam)
-                    Debug.Log("WTF BRO!!!! INCEST!!!");
-
                 // Update the other beam's OtherBeam reference to this beam.
                 // If this beam was colliding with another beam and now collides with this one, it means that this beam is colliding at an earlier point along
                 // the other beam's length, so it will be shortened and we don't need to do anything else to update the logic.
