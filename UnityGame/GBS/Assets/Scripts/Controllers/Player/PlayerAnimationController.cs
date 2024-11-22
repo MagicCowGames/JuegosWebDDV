@@ -77,6 +77,7 @@ public class PlayerAnimationController : MonoBehaviour
     {
         float newCastingValue = this.spellCasterController.GetIsCasting() ? 1.0f : 0.0f;
         this.castingValue = AnimationLerpFloat(this.castingValue, newCastingValue, delta, this.castingUpdateSpeed);
+        animator.SetFloat(this.castingName, this.castingValue);
     }
 
     // TODO : Implement custom structs to handle each type of parameter, such as a AnimParamFloat or something like that, with its own fields that contain the same 3 values we have as separate variables as of now...
