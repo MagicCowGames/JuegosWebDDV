@@ -7,9 +7,12 @@ using UnityEngine.Events;
 
 // TODO : Rename this class, since the UIController nomenclature is sort of reserved in this project for classes that actually inherit from the UIController class...
 // Maybe it's time to start using fucking namespaces, eh? Retard...
+// NOTE : I renamed it to use UI_ prefix, but that still feels kinda shitty, idk, we'll leave it at that for now XD if only I had gone the namespace route at the
+// start of the project... it would be as simple as WDW.UI.ButtonController, that way if I made a gameplay scene button controller there would be no conflict...
+// Tho I do like the fact that UI_ is pretty C-like.
 
 [ExecuteInEditMode]
-public class ButtonUIController : MonoBehaviour, IComponentValidator
+public class UI_ButtonController : MonoBehaviour, IComponentValidator
 {
     #region Enums
 
