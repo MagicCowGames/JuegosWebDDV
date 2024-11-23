@@ -64,9 +64,16 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_register", "Register" },
             { "loc_login", "Login" },
 
-            // Loc Strings : Account Errors
-            { "loc_connection_error", "Could not connect to server!" },
-            { "loc_register_error", "Could not register account!"},
+            // Loc Strings : Errors
+            { "loc_error_network_title", "Network Error" },
+            { "loc_error_network_message", "A network error has occurred! Check your Internet connection." },
+            { "loc_error_connection_title", "Connection Error" },
+            { "loc_error_connection_message", "Could not connect to server!" },
+            { "loc_error_register_title", "Registration Error" },
+            { "loc_error_register_message", "Could not register account! The chosen name is already in use." },
+            { "loc_error_validation_title", "Validation Error" },
+            { "loc_error_validation_message_name", "The chosen name is not valid" },
+            { "loc_error_validation_message_password", "The chosen password is not valid" },
 
             // Loc Strings : Windows / PopUps
             { "loc_close", "Close" },
@@ -117,9 +124,16 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_register", "Registrarse" },
             { "loc_login", "Acceder" },
 
-            // Loc Strings : Account Errors
-            { "loc_connection_error", "¡No se pudo conectar al servidor!" },
-            { "loc_register_error", "¡No se pudo registrar la cuenta!"},
+            // Loc Strings : Errors
+            { "loc_error_network_title", "Error de Red" },
+            { "loc_error_network_message", "¡Ha ocurrido un error de red! Compruebe su conexión a Internet." },
+            { "loc_error_connection_title", "Error de Conexión" },
+            { "loc_error_connection_message", "¡No se pudo conectar al servidor!" },
+            { "loc_error_register_title", "Error de Registro" },
+            { "loc_error_register_message", "¡No se pudo registrar la cuenta! El nombre escogido ya está en uso." },
+            { "loc_error_validation_title", "Error de Validación" },
+            { "loc_error_validation_message_name", "El nombre escogido no es válido" },
+            { "loc_error_validation_message_password", "La contraseña escogida no es válida" },
 
             // Loc Strings : Windows / PopUps
             { "loc_close", "Cerrar" },
