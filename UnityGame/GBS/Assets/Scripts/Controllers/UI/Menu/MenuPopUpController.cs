@@ -30,7 +30,7 @@ public class MenuPopUpController : UIController
 
     public void ClosePopUp()
     {
-
+        this.UI_SetVisible(false);
     }
 
     public void SetTextRawString(string str)
