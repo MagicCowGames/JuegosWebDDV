@@ -1190,6 +1190,7 @@ MonoBehaviour:
   inventoryScene: MenuScene_Inventory
   storeScene: MenuScene_Store
   accountScene: MS_Account
+  scoreboardScene: MenuScene_Scoreboard
 --- !u!114 &1820937350
 MonoBehaviour:
   m_ObjectHideFlags: 0

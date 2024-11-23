@@ -21,6 +21,7 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
     [SerializeField] private string inventoryScene;
     [SerializeField] private string storeScene;
     [SerializeField] private string accountScene;
+    [SerializeField] private string scoreboardScene;
 
     // NOTE : Prefixes used in strings for scene names:
     /*
@@ -95,6 +96,11 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
     public void LoadSceneAccount()
     {
         LoadScene(this.accountScene);
+    }
+
+    public void LoadSceneScoreboard()
+    {
+        LoadScene(this.scoreboardScene);
     }
 
     #endregion
