@@ -11,7 +11,11 @@ public class AccountMenuController : MonoBehaviour
     
     void Start()
     {
-        
+        // If the user is logged in, then load the "Account control panel"-like UI menu scene, where all of the account info and actions are displayed.
+        if (AccountManager.Instance.UserAccount.IsLoggedIn)
+        {
+            SceneLoadingManager.Instance.LoadScene("MS_AccountLogged");
+        }
     }
 
     void Update()
