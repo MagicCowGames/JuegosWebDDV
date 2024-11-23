@@ -83,7 +83,8 @@ public class ButtonUIController : MonoBehaviour, IComponentValidator
             this.button != null &&
             this.buttonShadow != null &&
             this.text != null &&
-            this.textShadow != null
+            this.textShadow != null &&
+            this.localizedTextController != null
             ;
     }
 
