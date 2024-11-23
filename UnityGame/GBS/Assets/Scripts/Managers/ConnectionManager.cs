@@ -185,6 +185,13 @@ public class ConnectionManager : SingletonPersistent<ConnectionManager>
         MakeRequest(type, urlMessage, "", callbacks);
     }
 
+    // The other MakeRequest methods make a request to the specified address.
+    // This one makes a request automatically to the server stored within the connection manager.
+    public void MakeRequestToServer(string type, string message, RequestCallbacks callbacks = null)
+    {
+        MakeRequest(type, this.ServerAddress.http, message, callbacks);
+    }
+
     #endregion
 
     #region PrivateMethods - Make Request
