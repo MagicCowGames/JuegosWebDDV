@@ -33,6 +33,11 @@ public class AccountLoggedMenuController : UIController
         SceneLoadingManager.Instance?.LoadSceneMainMenu();
     }
 
+    public void Button_LogOut()
+    {
+        AccountManager.Instance?.LogOut();
+    }
+
     #endregion
 
     #region PrivateMethods
