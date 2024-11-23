@@ -35,23 +35,9 @@ public class RegisterMenuController : MonoBehaviour
 
     public void Button_Submit()
     {
-        DebugManager.Instance?.Log("Submitting Request to Register Account...");
-
         var name = this.inputBox.GetName();
         var password = this.inputBox.GetPassword();
-        var callbacks = new ConnectionManager.RequestCallbacks();
-        callbacks.OnSuccess = (ans) => {
-            DebugManager.Instance?.Log($"Successfully created the account : {ans}");
-            SceneLoadingManager.Instance?.LoadSceneAccount();
-        };
-        callbacks.OnError = (err) => {
-            DebugManager.Instance?.Log($"Could not create the account : {err}");
-        };
-        callbacks.OnConnectionError = () => {
-            DebugManager.Instance?.Log("Connection Error");
-            UIManager.Instance?.GetPopUpUIController().OpenLoc("loc_connection_error");
-        };
-        AccountManager.Instance?.RegisterAccount(name, password, callbacks);
+        AccountManager.Instance?.RegisterAccount(name, password);
     }
 
     #endregion
