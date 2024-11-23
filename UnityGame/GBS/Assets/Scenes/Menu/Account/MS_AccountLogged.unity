@@ -341,7 +341,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 552914334}
-        m_TargetAssemblyTypeName: AccountMenuController, Assembly-CSharp
+        m_TargetAssemblyTypeName: AccountLoggedMenuController, Assembly-CSharp
         m_MethodName: Button_Return
         m_Mode: 1
         m_Arguments:
@@ -473,7 +473,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 552914334}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AccountMenuController, Assembly-CSharp
         m_MethodName: Button_Login
         m_Mode: 1
@@ -534,7 +534,7 @@ GameObject:
   - component: {fileID: 552914333}
   - component: {fileID: 552914334}
   m_Layer: 0
-  m_Name: AccountMenuUI
+  m_Name: AccountMenuUI_Logged
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -565,7 +565,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 552914332}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d4c73e1752cf2f4c8abf4a5ff09cf4c, type: 3}
+  m_Script: {fileID: 11500000, guid: e86dc464fa43b974f84411ff312ed4bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &800673905
@@ -1116,7 +1116,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 552914334}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AccountMenuController, Assembly-CSharp
         m_MethodName: Button_Register
         m_Mode: 1
@@ -1296,7 +1296,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Account
+  m_text: Account (Logged In)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

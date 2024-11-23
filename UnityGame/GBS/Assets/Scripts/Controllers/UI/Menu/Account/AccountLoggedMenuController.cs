@@ -22,6 +22,12 @@ public class AccountLoggedMenuController : MonoBehaviour
     #endregion
 
     #region PublicMethods
+
+    public void Button_Return()
+    {
+        SceneLoadingManager.Instance?.LoadSceneMainMenu();
+    }
+
     #endregion
 
     #region PrivateMethods
