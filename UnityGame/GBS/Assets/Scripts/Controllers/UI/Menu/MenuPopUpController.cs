@@ -9,6 +9,7 @@ public class MenuPopUpController : UIController
 
     [Header("Menu PopUp Controller")]
     [SerializeField] private TMP_Text text;
+    [SerializeField] private CanvasGroup canvasGroup;
 
     #endregion
 
@@ -28,8 +29,15 @@ public class MenuPopUpController : UIController
 
     #region PublicMethods
 
+    public void OpenPopUp()
+    {
+        this.canvasGroup.blocksRaycasts = true;
+        this.UI_SetVisible(true);
+    }
+
     public void ClosePopUp()
     {
+        this.canvasGroup.blocksRaycasts = false;
         this.UI_SetVisible(false);
     }
 
