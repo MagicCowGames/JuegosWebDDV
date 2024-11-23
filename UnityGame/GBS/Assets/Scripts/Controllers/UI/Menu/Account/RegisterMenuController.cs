@@ -48,6 +48,7 @@ public class RegisterMenuController : MonoBehaviour
         };
         callbacks.OnConnectionError = () => {
             DebugManager.Instance?.Log("Connection Error");
+            UIManager.Instance.GetPopUpUIController().OpenLoc("loc_connection_error");
         };
         AccountManager.Instance?.RegisterAccount(name, password, callbacks);
     }

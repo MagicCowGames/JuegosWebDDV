@@ -64,6 +64,9 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_register", "Register" },
             { "loc_login", "Login" },
 
+            // Loc Strings : Account Errors
+            { "loc_connection_error", "Could not connect to server!" },
+
             // Loc Strings : Windows / PopUps
             { "loc_close", "Close" },
 
@@ -112,6 +115,9 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             // Loc Strings : Account
             { "loc_register", "Registrarse" },
             { "loc_login", "Acceder" },
+
+            // Loc Strings : Account Errors
+            { "loc_connection_error", "¡No se pudo conectar al servidor!" },
 
             // Loc Strings : Windows / PopUps
             { "loc_close", "Cerrar" },
