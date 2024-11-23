@@ -157,7 +157,13 @@ public class AccountManager : SingletonPersistent<AccountManager>
         SceneLoadingManager.Instance.LoadSceneAccount();
     }
 
-    public void DeleteAccount(string name, string password, ConnectionManager.RequestCallbacks callbacks)
+    public void DeleteAccount(string password)
+    {
+        var callbacks = new ConnectionManager.RequestCallbacks();
+        DeleteAccount(password, callbacks);
+    }
+
+    public void DeleteAccount(string password, ConnectionManager.RequestCallbacks callbacks)
     { }
 
     public void ModifyAccount(string oldName, string oldPassword, string newName, string newPassword, ConnectionManager.RequestCallbacks callbacks)
