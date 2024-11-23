@@ -57,6 +57,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_inventory", "Inventory" },
             { "loc_register_account", "Register Account"},
             { "loc_login_account", "Log Into Account" },
+            { "loc_score", "Score" },
+            { "loc_scoreboard", "Scoreboard" },
 
             // Loc Strings : Actions (wtf is this name?)
             { "loc_use", "Use" },
@@ -121,6 +123,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_inventory", "Inventario" },
             { "loc_register_account", "Registrar Cuenta"},
             { "loc_login_account", "Acceder a Cuenta" },
+            { "loc_score", "Puntuación" },
+            { "loc_scoreboard", "Tabla de Puntuación" },
 
             // Loc Strings : Actions (wtf is this name?)
             { "loc_use", "Usar" },
