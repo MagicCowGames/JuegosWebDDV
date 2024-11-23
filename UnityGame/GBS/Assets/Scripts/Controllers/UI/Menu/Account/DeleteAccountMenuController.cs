@@ -35,7 +35,7 @@ public class DeleteAccountMenuController : MonoBehaviour
 
     public void Button_Submit()
     {
-        var password = this.inputBox.GetPassword();
+        var password = this.inputBox.GetConfirmationPassword();
         AccountManager.Instance?.DeleteAccount(password);
     }
 
