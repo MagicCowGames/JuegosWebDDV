@@ -35,24 +35,9 @@ public class LoginMenuController : MonoBehaviour
 
     public void Button_Submit()
     {
-        DebugManager.Instance?.Log("Submitting Request to Log into Account...");
-
         var name = this.inputBox.GetName();
         var password = this.inputBox.GetPassword();
-        
-        var callbacks = new ConnectionManager.RequestCallbacks();
-        callbacks.OnSuccess = (ans) => {
-            DebugManager.Instance?.Log($"Successfully logged into account : {ans}");
-            Button_Back();
-        };
-        callbacks.OnError = (err) => {
-            DebugManager.Instance?.Log($"Could not log into account : {err}");
-        };
-        callbacks.OnConnectionError = () => {
-            DebugManager.Instance?.Log("Connection Error");
-        };
-
-        AccountManager.Instance?.AccessAccount(name, password, callbacks);
+        AccountManager.Instance?.AccessAccount(name, password);
     }
 
     #endregion
