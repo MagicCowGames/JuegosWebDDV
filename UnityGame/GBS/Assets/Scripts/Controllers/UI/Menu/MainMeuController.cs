@@ -38,7 +38,7 @@ public class MainMeuController : MonoBehaviour
 
     public void LoadAccountMenu()
     {
-        SceneLoadingManager.Instance?.LoadScene("MS_Account");
+        SceneLoadingManager.Instance?.LoadSceneAccount();
     }
 
     public void LoadSettings()
@@ -59,6 +59,11 @@ public class MainMeuController : MonoBehaviour
     public void LoadInventory()
     {
         SceneLoadingManager.Instance?.LoadSceneInventory();
+    }
+
+    public void LoadScoreboard()
+    {
+        SceneLoadingManager.Instance?.LoadSceneScoreboard();
     }
 
     #endregion
