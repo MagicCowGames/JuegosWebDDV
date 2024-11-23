@@ -82,6 +82,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_error_validation_message_password", "The chosen password is not valid" },
             { "loc_error_login_title", "Login Error" },
             { "loc_error_login_message", "Could not log into account! The credentials are not correct." },
+            { "loc_error_account_delete_title", "Validation Error" },
+            { "loc_error_account_delete_message", "Could not delete the account! The credentials are not correct." },
 
             // Loc Strings : Windows / PopUps
             { "loc_close", "Close" },
@@ -155,6 +157,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_error_validation_message_password", "La contraseña escogida no es válida" },
             { "loc_error_login_title", "Error de Acceso" },
             { "loc_error_login_message", "¡No se puedo acceder a la cuenta! Las credenciales no son correctas." },
+            { "loc_error_account_delete_title", "Error de Validación" },
+            { "loc_error_account_delete_message", "¡No se pudo eliminar la cuenta! Las credenciales no son correctas." },
 
             // Loc Strings : Windows / PopUps
             { "loc_close", "Cerrar" },
