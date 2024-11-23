@@ -70,8 +70,8 @@ public class AccountLoggedMenuController : UIController
     }
     private void UpdateScoreText()
     {
-        if (this.moneyText != null)
-            this.moneyText.text = $"{AccountManager.Instance.Account.score} pts";
+        if (this.scoreText != null)
+            this.scoreText.text = $"{AccountManager.Instance.Account.score} pts";
     }
 
     #endregion
