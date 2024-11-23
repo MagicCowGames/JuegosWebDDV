@@ -42,28 +42,29 @@ public class AccountManager : SingletonPersistent<AccountManager>
 
         if (name.Length <= 0)
         {
-            popUp.Open("Validation Error!", PopUpUIController.TextType.Raw, "The chosen name is not valid!", PopUpUIController.TextType.Raw);
+            popUp.Open("loc_error_validation_title", "loc_error_validation_message_name");
             return;
         }
 
         if (password.Length <= 0)
         {
-            popUp.Open("Validation Error!", PopUpUIController.TextType.Raw, "The chosen password is not valid!", PopUpUIController.TextType.Raw);
+            popUp.Open("loc_error_validation_title", "loc_error_validation_message_password");
             return;
         }
 
         var callbacks = new ConnectionManager.RequestCallbacks();
         callbacks.OnSuccess += (ans) => {
             DebugManager.Instance?.Log($"Successfully created the account : {ans}");
+            // TODO : Load user data into account variable. Use JSON deserialization and stuff...
             SceneLoadingManager.Instance?.LoadSceneAccount();
         };
         callbacks.OnError += (err) => {
             DebugManager.Instance?.Log($"Could not create the account : {err}");
-            // UIManager.Instance?.GetPopUpUIController().OpenLoc("loc_register_error");
+            popUp.Open("loc_error_register_title", "loc_error_register_message");
         };
         callbacks.OnConnectionError += () => {
             DebugManager.Instance?.Log("Connection Error");
-            // UIManager.Instance?.GetPopUpUIController().OpenLoc("loc_connection_error");
+            popUp.Open("loc_error_connection_title", "loc_error_connection_message");
         };
 
         ConnectionManager.Instance.MakeRequest("GET", ConnectionManager.Instance.ServerAddress.http, $"/users/add/{name}/{password}", callbacks);
