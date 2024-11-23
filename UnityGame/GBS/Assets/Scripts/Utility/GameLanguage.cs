@@ -35,6 +35,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
         { Language.English, new Dictionary<string, string> {
             // Loc Strings : Generic
             { "loc_language_name", "English" },
+            { "loc_default", "Default" },
+            { "loc_default_text", "Default Text"},
             
             // Loc Strings : Menu
             { "loc_play", "Play"},
@@ -79,6 +81,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
         { Language.Spanish, new Dictionary<string, string> {
             // Loc Strings : Generic
             { "loc_language_name", "Español" },
+            { "loc_default", "Por defecto" },
+            { "loc_default_text", "Texto por Defecto" },
             
             // Loc Strings : Menu
             { "loc_play", "Jugar" },
