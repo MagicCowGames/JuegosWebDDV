@@ -32,7 +32,13 @@ public class SettingsManager : SingletonPersistent<SettingsManager>
     // and easier to remember, so yeah lol.
     public void SaveSettings()
     {
+        // Can't save settings if we're not logged in yet!
+        if (!AccountManager.Instance.IsLoggedIn)
+            return;
 
+        var id = AccountManager.Instance.Account.id;
+        var password = AccountManager.Instance.Account.password;
+        ConnectionManager.Instance.MakeRequest("GET", ConnectionManager.Instance.ServerAddress.http, $"/users/update/settings/{id}/{password}/{this.settings}");
     }
 
     #endregion
@@ -71,6 +77,17 @@ public class SettingsManager : SingletonPersistent<SettingsManager>
         SetLanguage(this.settings.language);
         // TODO : More stuff in the future...
     }
+
+    // Some alternatives that could be called in UpdateSettings() could look something like this:
+    /*
+    private void UpdateSettings_Language()
+    {
+        LanguageSystem.SetLanguage(this.settings.language);
+    }
+    */
+
+    // TODO : Implement other settings in the future
+    // private void UpdateSettings_Whatever...() { } etc...
 
     #endregion
 }
