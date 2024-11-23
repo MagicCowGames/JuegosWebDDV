@@ -55,7 +55,9 @@ public class AccountManager : SingletonPersistent<AccountManager>
         var callbacks = new ConnectionManager.RequestCallbacks();
         callbacks.OnSuccess += (ans) => {
             DebugManager.Instance?.Log($"Successfully created the account : {ans}");
-            // TODO : Load user data into account variable. Use JSON deserialization and stuff... AddressTableDTO table = JsonUtility.FromJson<AddressTableDTO>(ans);
+            // TODO : Figure out how to handle errors in Unity where the received JSON doesn't actually match the requested class to deserialize to...
+            this.UserAccount = JsonUtility.FromJson<Account>(ans);
+            this.UserAccount.isLoggedIn = true;
             SceneLoadingManager.Instance?.LoadSceneAccount();
         };
         callbacks.OnError += (err) => {
