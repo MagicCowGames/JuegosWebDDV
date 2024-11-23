@@ -13,9 +13,14 @@ public class AccountMenuController : MonoBehaviour
     {
         // If the user is logged in, then load the "Account control panel"-like UI menu scene, where all of the account info and actions are displayed.
         // Note that this happens as soon as we enter this scene if we're logged in, so we should not see this scene appear on screen, or just a few frames at most...
-        if (AccountManager.Instance.UserAccount.IsLoggedIn)
+        if (AccountManager.Instance != null && AccountManager.Instance.IsLoggedIn)
         {
-            SceneLoadingManager.Instance.LoadScene("MS_AccountLogged");
+            DebugManager.Instance?.Log("User is logged in; Loading user account settings menu.");
+            SceneLoadingManager.Instance?.LoadScene("MS_AccountLogged");
+        }
+        else
+        {
+            DebugManager.Instance?.Log("User is not logged in; Loading default account menu.");
         }
     }
 
