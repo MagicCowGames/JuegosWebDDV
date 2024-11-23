@@ -448,8 +448,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasReference: {fileID: 8271029871534919466}
-  localizedTextController: {fileID: 7224610094664747672}
-  text: {fileID: 6603855965387685027}
+  titleController: {fileID: 3178639292548137734}
+  messageController: {fileID: 7224610094664747672}
+  titleText: {fileID: 969101701197240668}
+  messageText: {fileID: 6603855965387685027}
   canvasGroup: {fileID: 4727729951584777760}
 --- !u!1 &4332765231097506313
 GameObject:
