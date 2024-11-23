@@ -40,7 +40,7 @@ public class UIManager : Singleton<UIManager>, IManager
 
     void Start()
     {
-        this.menuPopUpController?.ClosePopUp();
+        this.menuPopUpController?.Close();
     }
 
     void Update()
