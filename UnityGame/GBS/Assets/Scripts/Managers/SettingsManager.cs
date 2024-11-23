@@ -22,8 +22,29 @@ public class SettingsManager : SingletonPersistent<SettingsManager>
     #endregion
 
     #region PublicMethods
+    #endregion
 
+    #region PublicMethods - Language Settings
 
+    public void SetLanguage(string language)
+    {
+        LanguageSystem.SetLanguage(language);
+    }
+
+    public void SetLanguage(LanguageSystem.Language language)
+    {
+        LanguageSystem.SetLanguage(language);
+    }
+
+    public void SetLanguageIncrease()
+    {
+        LanguageSystem.SetLanguage((int)LanguageSystem.GetLanguage() + 1);
+    }
+
+    public void SetLanguageDecrease()
+    {
+        LanguageSystem.SetLanguage((int)LanguageSystem.GetLanguage() - 1);
+    }
 
     #endregion
 
