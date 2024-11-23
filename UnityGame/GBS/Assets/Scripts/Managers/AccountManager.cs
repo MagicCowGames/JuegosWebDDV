@@ -7,7 +7,7 @@ public class AccountManager : SingletonPersistent<AccountManager>
     #region Variables
 
     public Account UserAccount { get; private set; }
-    public bool IsLoggedIn { get { return this.UserAccount.IsLoggedIn; } }
+    public bool IsLoggedIn { get { return this.UserAccount.isLoggedIn; } }
 
     #endregion
 
@@ -55,7 +55,7 @@ public class AccountManager : SingletonPersistent<AccountManager>
         var callbacks = new ConnectionManager.RequestCallbacks();
         callbacks.OnSuccess += (ans) => {
             DebugManager.Instance?.Log($"Successfully created the account : {ans}");
-            // TODO : Load user data into account variable. Use JSON deserialization and stuff...
+            // TODO : Load user data into account variable. Use JSON deserialization and stuff... AddressTableDTO table = JsonUtility.FromJson<AddressTableDTO>(ans);
             SceneLoadingManager.Instance?.LoadSceneAccount();
         };
         callbacks.OnError += (err) => {
