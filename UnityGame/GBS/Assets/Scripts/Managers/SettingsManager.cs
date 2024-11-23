@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// NOTE : Maybe it would have been a smarter idea to keep all settings within this class, and then allowing all the other managers to access those values from here,
+// but I feel like those properties should be also stored within the managers that correspond to each system, otherwise it can all get dirty and messy pretty quickly.
+
+// NOTE : Maybe it would make more sense if users had access to a save settings and a load settings buttons in the logged-in account screen rather than this being
+// handled automatically, but it's also a pretty nice feature to have...
+
 public class SettingsManager : SingletonPersistent<SettingsManager>
 {
     #region Variables
 
-    private UserSettings settings;
-
-    public UserSettings Settings { get { return this.settings; } set { this.settings = value; UpdateSettings(); } }
+    public UserSettings Settings { get { return GetSettings(); } set { SetSettings(value); } }
 
     #endregion
 
@@ -28,8 +32,8 @@ public class SettingsManager : SingletonPersistent<SettingsManager>
 
     #region PublicMethods
 
-    // Updates the settings on the web server. This used to be named "UpdateUserAccountSettings()", but SaveSettings() is shorter, faster to type
-    // and easier to remember, so yeah lol.
+    // Updates the settings on the web server.
+    // This used to be named "UpdateUserAccountSettings()", but SaveSettings() is shorter, faster to type and easier to remember, so yeah lol.
     public void SaveSettings()
     {
         // Can't save settings if we're not logged in yet!
@@ -38,7 +42,10 @@ public class SettingsManager : SingletonPersistent<SettingsManager>
 
         var id = AccountManager.Instance.Account.id;
         var password = AccountManager.Instance.Account.password;
-        ConnectionManager.Instance.MakeRequest("GET", ConnectionManager.Instance.ServerAddress.http, $"/users/update/settings/{id}/{password}/{this.settings}");
+        var settingsStr = JsonUtility.ToJson(this.Settings);
+
+        string msg = $"/users/update/settings/{id}/{password}/{settingsStr}";
+        ConnectionManager.Instance.MakeRequest("GET", ConnectionManager.Instance.ServerAddress.http, msg);
     }
 
     #endregion
@@ -72,22 +79,19 @@ public class SettingsManager : SingletonPersistent<SettingsManager>
 
     #region PrivateMethods
 
-    private void UpdateSettings()
+    // Generates the settings DTO that will be used for network serialization
+    private UserSettings GetSettings()
     {
-        SetLanguage(this.settings.language);
-        // TODO : More stuff in the future...
+        var settings = new UserSettings();
+        settings.language = LanguageSystem.GetLanguage();
+        return settings;
     }
 
-    // Some alternatives that could be called in UpdateSettings() could look something like this:
-    /*
-    private void UpdateSettings_Language()
+    // Take an input UserSettings DTO and load the data into the actual classes that contain the real data for these settings
+    private void SetSettings(UserSettings settings)
     {
-        LanguageSystem.SetLanguage(this.settings.language);
+        LanguageSystem.SetLanguage(settings.language);
     }
-    */
-
-    // TODO : Implement other settings in the future
-    // private void UpdateSettings_Whatever...() { } etc...
 
     #endregion
 }
