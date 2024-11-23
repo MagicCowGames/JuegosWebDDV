@@ -54,13 +54,16 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_store", "Store" },
             { "loc_inventory", "Inventory" },
 
+            // Loc Strings : Actions (wtf is this name?)
+            { "loc_use", "Use" },
+            { "loc_delete", "Delete" },
+
             // Loc Strings : Account
             { "loc_register", "Register" },
             { "loc_login", "Login" },
 
-            // Loc Strings : Actions (wtf is this name?)
-            { "loc_use", "Use" },
-            { "loc_delete", "Delete" },
+            // Loc Strings : Windows / PopUps
+            { "loc_close", "Close" },
 
             // Loc Strings : Test
             { "loc_test_dummy", "Test Dummy" },
@@ -102,6 +105,9 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             // Loc Strings : Account
             { "loc_register", "Registrarse" },
             { "loc_login", "Acceder" },
+
+            // Loc Strings : Windows / PopUps
+            { "loc_close", "Cerrar" },
 
             // Loc Strings : Test
             { "loc_test_dummy", "Muñeco de Pruebas" },
