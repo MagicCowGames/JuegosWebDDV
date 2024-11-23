@@ -35,7 +35,18 @@ public class AccountManager : SingletonPersistent<AccountManager>
 
     #region PublicMethods - Account Requests
 
+    // NOTE: All of the functions here can stand on their own without any custom callbacks, but an overload with a callbacks parameter exists to allow the
+    // callers to define their own callbacks in case they want something else to happen on the call site.
+    // TODO: Maybe the code for scene loading should be moved to each scene rather than it being here, since logging in could happen through a command
+    // or on other scenes, maybe even during init by using cookies, who knows!
+
     public void RegisterAccount(string name, string password)
+    {
+        var callbacks = new ConnectionManager.RequestCallbacks();
+        RegisterAccount(name, password, callbacks);
+    }
+
+    public void RegisterAccount(string name, string password, ConnectionManager.RequestCallbacks callbacks)
     {
         DebugManager.Instance?.Log("Submitting Request to Register Account...");
         var popUp = UIManager.Instance?.GetPopUpUIController();
@@ -52,7 +63,6 @@ public class AccountManager : SingletonPersistent<AccountManager>
             return;
         }
 
-        var callbacks = new ConnectionManager.RequestCallbacks();
         callbacks.OnSuccess += (ans) => {
             DebugManager.Instance?.Log($"Successfully created the account : {ans}");
             // TODO : Figure out how to handle errors in Unity where the received JSON doesn't actually match the requested class to deserialize to...
