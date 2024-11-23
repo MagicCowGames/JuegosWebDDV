@@ -42,13 +42,13 @@ public class AccountManager : SingletonPersistent<AccountManager>
 
         if (name.Length <= 0)
         {
-            popUp.Open("Validation Error!", MenuPopUpController.TextType.Raw, "The chosen name is not valid!", MenuPopUpController.TextType.Raw);
+            popUp.Open("Validation Error!", PopUpUIController.TextType.Raw, "The chosen name is not valid!", PopUpUIController.TextType.Raw);
             return;
         }
 
         if (password.Length <= 0)
         {
-            popUp.Open("Validation Error!", MenuPopUpController.TextType.Raw, "The chosen password is not valid!", MenuPopUpController.TextType.Raw);
+            popUp.Open("Validation Error!", PopUpUIController.TextType.Raw, "The chosen password is not valid!", PopUpUIController.TextType.Raw);
             return;
         }
 
