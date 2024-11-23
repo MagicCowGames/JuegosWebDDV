@@ -716,6 +716,7 @@ GameObject:
   - component: {fileID: 1832684335}
   - component: {fileID: 1832684337}
   - component: {fileID: 1832684336}
+  - component: {fileID: 1832684338}
   m_Layer: 0
   m_Name: AccountMenuTitle
   m_TagString: Untagged
@@ -762,7 +763,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Log into Account
+  m_text: Log Into Account
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -839,6 +840,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1832684334}
   m_CullTransparentMesh: 1
+--- !u!114 &1832684338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832684334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d353e772aff67664b9966fda159838b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localizationString: loc_login_account
 --- !u!1001 &6431028215006463396
 PrefabInstance:
   m_ObjectHideFlags: 0
