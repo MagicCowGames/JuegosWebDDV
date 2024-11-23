@@ -11,10 +11,15 @@ using System.Globalization;
 // NOTE : Maybe the console's backend should be a static class, cause right now the entire console system is handled by the UIController class, and it doesn't feel
 // right tbh. I mean, it works, and allows for infinitely many consoles to run their own logic and stuff, but after all, the logic is just the same everywhere for most
 // operations... idk, we'll see, for now this works great and actually allows the console printing to be pretty straight forward, so it might be best to leave it as is.
+
+// NOTE : Or, maybe we should have a CommandManager class that handles all of the commands logic globally, and then we can configure it there, add aliases, etc...
+// so then the ConsoleUIController instances are the ones that handle the logic of specific console windows and access the actual command logic through the manager.
+
 public class ConsoleUIController : UIController
 {
     #region Structs
 
+    // TODO : Clean this shit up since it's not really all that usefull... or maybe clean the rest of the code to adapt to it, cause it COULD be useful lol.
     public enum CmdErrorType
     {
         Default = 0,
@@ -84,6 +89,7 @@ public class ConsoleUIController : UIController
             new Cmd("cheats", "Enable or disable cheats", "<enabled>", 1, CmdCheats, false),
             new Cmd("lang", "Set the current language", "<language>", 1, CmdLang),
             new Cmd("langlist", "Display a list of all the available languages", "", 0, CmdLangList),
+            new Cmd("popmeup", "Display a popup on screen with a funny message", "", 0, CmdPopMeUp),
             // TODO : Add commands to get the current map name and the current language or something...
         };
         // TODO : Make an alias system of sorts, or maybe make it so that we can have a dict / list system to have multiple overloads for the same command
@@ -452,6 +458,13 @@ public class ConsoleUIController : UIController
         for (int i = 0; i < (int)LanguageSystem.Language.COUNT; ++i)
             CmdPrint($"{(LanguageSystem.Language)i} ");
         CmdPrintln("]");
+    }
+
+    private void CmdPopMeUp(string[] args, int startIndex)
+    {
+        var popUp = UIManager.Instance?.GetPopUpUIController();
+        popUp.SetTextLocalizationString("loc_popmeup");
+        popUp.OpenPopUp();
     }
 
     #endregion
