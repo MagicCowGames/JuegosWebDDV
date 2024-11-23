@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 214554549735535711}
   - component: {fileID: 5307635686122985890}
   m_Layer: 0
-  m_Name: MenuPopUpPrefab
+  m_Name: PopUpUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
