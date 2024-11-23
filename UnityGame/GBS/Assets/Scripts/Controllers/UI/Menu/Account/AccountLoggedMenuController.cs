@@ -12,8 +12,7 @@ public class AccountLoggedMenuController : UIController
     [SerializeField] private TMP_Text moneyText;
     [SerializeField] private TMP_Text scoreText;
 
-    private long money;
-    private long score;
+    private User userData;
 
     #endregion
 
@@ -54,8 +53,7 @@ public class AccountLoggedMenuController : UIController
 
     private void UpdateMenu()
     {
-        this.score = 0;
-        this.money = 0;
+        this.userData = new User();
         UpdateTexts(false);
         FetchAccountData();
     }
@@ -73,7 +71,7 @@ public class AccountLoggedMenuController : UIController
 
     private void UpdateUsernameText(bool useValues)
     {
-        string txt = useValues ? AccountManager.Instance.Account.name : "...";
+        string txt = useValues ? this.userData.name : "...";
         foreach (var text in this.usernameTexts)
             if (text != null)
                 text.text = txt;
@@ -83,14 +81,14 @@ public class AccountLoggedMenuController : UIController
     {
         if (this.moneyText != null)
         {
-            this.moneyText.text = useValues ? $"${this.money}" : "...";
+            this.moneyText.text = useValues ? $"${this.userData.money}" : "...";
         }
     }
     private void UpdateScoreText(bool useValues)
     {
         if (this.scoreText != null)
         {
-            this.scoreText.text = useValues ? $"{this.score} pts" : "...";
+            this.scoreText.text = useValues ? $"{this.userData.score} pts" : "...";
         }
     }
 
@@ -104,13 +102,17 @@ public class AccountLoggedMenuController : UIController
         var id = AccountManager.Instance.Account.id;
         var callbacks = new ConnectionManager.RequestCallbacks();
         callbacks.OnSuccess += (msg) => {
-            var ans = JsonUtility.FromJson<Dictionary<string, long>>(msg);
-            DebugManager.Instance?.Log($"SUCCESS!!! {ans}");
-            this.money = ans["money"];
-            this.score = ans["score"];
+            var user = JsonUtility.FromJson<User>(msg);
+            this.userData = user;
             UpdateTexts(true);
         };
-        ConnectionManager.Instance.MakeRequestToServer("GET", $"/score/{id}", callbacks);
+        callbacks.OnError += (err) => {
+            UpdateTexts(true);
+        };
+        callbacks.OnConnectionError += () => {
+            UpdateTexts(true);
+        };
+        ConnectionManager.Instance.MakeRequestToServer("GET", $"/users/{id}", callbacks);
     }
 
     #endregion
