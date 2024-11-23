@@ -164,7 +164,33 @@ public class AccountManager : SingletonPersistent<AccountManager>
     }
 
     public void DeleteAccount(string password, ConnectionManager.RequestCallbacks callbacks)
-    { }
+    {
+        DebugManager.Instance?.Log("Submitting Request Delete Account...");
+        var popUp = UIManager.Instance?.GetPopUpUIController();
+
+        if (password.Length <= 0)
+        {
+            popUp.Open("loc_error_validation_title", "loc_error_validation_message_password");
+            return;
+        }
+
+        callbacks.OnSuccess += (ans) => {
+            DebugManager.Instance?.Log($"Successfully deleted the account : {ans}");
+            LogOut();
+            SceneLoadingManager.Instance?.LoadSceneAccount();
+        };
+        callbacks.OnError += (err) => {
+            DebugManager.Instance?.Log($"Could not delete the account : {err}");
+            popUp.Open("loc_error_account_delete_title", "loc_error_account_delete_message");
+        };
+        callbacks.OnConnectionError += () => {
+            DebugManager.Instance?.Log("Connection Error");
+            popUp.Open("loc_error_connection_title", "loc_error_connection_message");
+        };
+
+        var id = this.Account.id;
+        ConnectionManager.Instance.MakeRequest("GET", ConnectionManager.Instance.ServerAddress.http, $"/users/delete/{id}/{password}", callbacks);
+    }
 
     public void ModifyAccount(string oldName, string oldPassword, string newName, string newPassword, ConnectionManager.RequestCallbacks callbacks)
     { }
