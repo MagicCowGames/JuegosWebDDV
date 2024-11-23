@@ -972,7 +972,7 @@ PrefabInstance:
     - target: {fileID: 6186827287426471974, guid: 4759e07936ede334b8e3421c4b870ef9, type: 3}
       propertyPath: onSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 552914334}
     - target: {fileID: 6186827287426471974, guid: 4759e07936ede334b8e3421c4b870ef9, type: 3}
       propertyPath: onSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -983,7 +983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6186827287426471974, guid: 4759e07936ede334b8e3421c4b870ef9, type: 3}
       propertyPath: onSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LoginMenuController, Assembly-CSharp
+      value: DeleteAccountMenuController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6186827287426471974, guid: 4759e07936ede334b8e3421c4b870ef9, type: 3}
       propertyPath: onSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
