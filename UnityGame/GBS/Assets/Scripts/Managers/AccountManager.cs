@@ -7,14 +7,21 @@ public class AccountManager : SingletonPersistent<AccountManager>
     #region Variables
 
     public Account UserAccount { get; private set; }
+    public bool IsLoggedIn { get { return this.UserAccount.IsLoggedIn; } }
 
     #endregion
 
     #region MonoBehaviour
 
+    public override void Awake()
+    {
+        base.Awake();
+        this.UserAccount = new Account(); // Initialize the user's account with an empty user account that is marked as not logged in.
+    }
+
     void Start()
     {
-
+        
     }
 
     void Update()
