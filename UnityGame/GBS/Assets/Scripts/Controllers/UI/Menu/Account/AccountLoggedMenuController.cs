@@ -40,6 +40,11 @@ public class AccountLoggedMenuController : UIController
         AccountManager.Instance?.LogOut();
     }
 
+    public void Button_DeleteAccount()
+    {
+        SceneLoadingManager.Instance?.LoadScene("MS_A_Delete");
+    }
+
     #endregion
 
     #region PrivateMethods
