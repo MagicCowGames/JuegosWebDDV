@@ -1189,6 +1189,7 @@ MonoBehaviour:
   tutorialScene: MenuScene_Tutorial
   inventoryScene: MenuScene_Inventory
   storeScene: MenuScene_Store
+  accountScene: MS_Account
 --- !u!114 &1820937350
 MonoBehaviour:
   m_ObjectHideFlags: 0
