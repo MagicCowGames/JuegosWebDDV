@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 61205357}
   - component: {fileID: 61205359}
   - component: {fileID: 61205358}
+  - component: {fileID: 61205360}
   m_Layer: 0
   m_Name: AccountMenuTitleShadow
   m_TagString: Untagged
@@ -257,6 +258,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61205356}
   m_CullTransparentMesh: 1
+--- !u!114 &61205360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61205356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d353e772aff67664b9966fda159838b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localizationString: loc_account
 --- !u!1 &204142076
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +282,7 @@ GameObject:
   - component: {fileID: 204142077}
   - component: {fileID: 204142079}
   - component: {fileID: 204142078}
+  - component: {fileID: 204142080}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -391,6 +406,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 204142076}
   m_CullTransparentMesh: 1
+--- !u!114 &204142080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204142076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d353e772aff67664b9966fda159838b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localizationString: loc_return
 --- !u!1 &432075896
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,6 +833,7 @@ GameObject:
   - component: {fileID: 1082769667}
   - component: {fileID: 1082769669}
   - component: {fileID: 1082769668}
+  - component: {fileID: 1082769670}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -928,6 +957,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1082769666}
   m_CullTransparentMesh: 1
+--- !u!114 &1082769670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082769666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d353e772aff67664b9966fda159838b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localizationString: loc_register
 --- !u!1 &1293881774
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,6 +1087,7 @@ GameObject:
   - component: {fileID: 1321102781}
   - component: {fileID: 1321102783}
   - component: {fileID: 1321102782}
+  - component: {fileID: 1321102784}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1168,6 +1211,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1321102780}
   m_CullTransparentMesh: 1
+--- !u!114 &1321102784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321102780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d353e772aff67664b9966fda159838b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localizationString: loc_login
 --- !u!1 &1624440835
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,6 +1441,7 @@ GameObject:
   - component: {fileID: 1832684335}
   - component: {fileID: 1832684337}
   - component: {fileID: 1832684336}
+  - component: {fileID: 1832684338}
   m_Layer: 0
   m_Name: AccountMenuTitle
   m_TagString: Untagged
@@ -1508,6 +1565,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1832684334}
   m_CullTransparentMesh: 1
+--- !u!114 &1832684338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832684334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d353e772aff67664b9966fda159838b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localizationString: loc_account
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
