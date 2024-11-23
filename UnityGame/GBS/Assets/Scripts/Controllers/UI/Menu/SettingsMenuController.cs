@@ -34,12 +34,12 @@ public class SettingsMenuController : UIController
 
     public void ButtonLanguageLeft()
     {
-        LanguageSystem.SetLanguage((int)LanguageSystem.GetLanguage() - 1);
+        SettingsManager.Instance?.SetLanguageDecrease();
     }
 
     public void ButtonLanguageRight()
     {
-        LanguageSystem.SetLanguage((int)LanguageSystem.GetLanguage() + 1);
+        SettingsManager.Instance?.SetLanguageIncrease();
     }
 
     public void ButtonReturn()
