@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
+[ExecuteInEditMode]
 public class ButtonUIController : MonoBehaviour
 {
     #region Variables
