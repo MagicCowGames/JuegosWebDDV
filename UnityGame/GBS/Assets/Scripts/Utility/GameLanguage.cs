@@ -67,6 +67,7 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             // Loc Strings : Account
             { "loc_register", "Register" },
             { "loc_login", "Login" },
+            { "loc_logout", "Log Out" },
 
             // Loc Strings : Errors
             { "loc_error_network_title", "Network Error" },
@@ -133,6 +134,7 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             // Loc Strings : Account
             { "loc_register", "Registrarse" },
             { "loc_login", "Acceder" },
+            { "loc_logout", "Salir" },
 
             // Loc Strings : Errors
             { "loc_error_network_title", "Error de Red" },
