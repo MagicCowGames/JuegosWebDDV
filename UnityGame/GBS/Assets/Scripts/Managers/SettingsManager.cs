@@ -6,7 +6,7 @@ public class SettingsManager : SingletonPersistent<SettingsManager>
 {
     #region Variables
 
-    UserSettings Settings { get; set; }
+    public UserSettings Settings { get; set; }
 
     #endregion
 
