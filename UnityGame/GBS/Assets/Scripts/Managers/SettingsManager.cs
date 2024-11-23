@@ -5,6 +5,9 @@ using UnityEngine;
 public class SettingsManager : SingletonPersistent<SettingsManager>
 {
     #region Variables
+
+    UserSettings Settings { get; set; }
+
     #endregion
 
     #region MonoBehaviour
