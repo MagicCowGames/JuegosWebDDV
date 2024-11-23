@@ -12,6 +12,8 @@ public class LocalizedTextController : MonoBehaviour
 
     LanguageSystem.Language currentLanguage; // The language this localized text currently has
 
+    public string LocalizationString { get { return this.localizationString; } set { this.localizationString = value; UpdateLocalizedText(); } }
+
     #endregion
 
     #region MonoBehaviour
