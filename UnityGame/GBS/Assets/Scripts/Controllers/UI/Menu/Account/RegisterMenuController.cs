@@ -42,13 +42,14 @@ public class RegisterMenuController : MonoBehaviour
         var callbacks = new ConnectionManager.RequestCallbacks();
         callbacks.OnSuccess = (ans) => {
             DebugManager.Instance?.Log($"Successfully created the account : {ans}");
+            SceneLoadingManager.Instance?.LoadSceneAccount();
         };
         callbacks.OnError = (err) => {
             DebugManager.Instance?.Log($"Could not create the account : {err}");
         };
         callbacks.OnConnectionError = () => {
             DebugManager.Instance?.Log("Connection Error");
-            UIManager.Instance.GetPopUpUIController().OpenLoc("loc_connection_error");
+            UIManager.Instance?.GetPopUpUIController().OpenLoc("loc_connection_error");
         };
         AccountManager.Instance?.RegisterAccount(name, password, callbacks);
     }
