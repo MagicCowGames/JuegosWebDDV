@@ -35,6 +35,7 @@ public class ButtonUIController : MonoBehaviour, IComponentValidator
     [SerializeField] private TMP_Text text;
     [SerializeField] private TMP_Text textShadow;
     [SerializeField] private LocalizedTextController localizedTextController;
+    [SerializeField] private LocalizedTextController localizedTextControllerShadow;
 
     // TODO : Move this to some sort of global sprite manager so that we don't have a gazillion copies of this data lying around.
     [Header("Data - Button")]
@@ -84,7 +85,8 @@ public class ButtonUIController : MonoBehaviour, IComponentValidator
             this.buttonShadow != null &&
             this.text != null &&
             this.textShadow != null &&
-            this.localizedTextController != null
+            this.localizedTextController != null &&
+            this.localizedTextControllerShadow != null
             ;
     }
 
@@ -115,6 +117,7 @@ public class ButtonUIController : MonoBehaviour, IComponentValidator
     private void UpdateText()
     {
         this.localizedTextController.LocalizationString = this.localizationString;
+        this.localizedTextControllerShadow.LocalizationString = this.localizationString;
         this.textShadow.gameObject.SetActive(this.textHasShadow);
     }
 
