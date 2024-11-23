@@ -61,6 +61,13 @@ public class PopUpUIController : UIController
         Open();
     }
 
+    public void Open(string titleStr, string bodyStr, TextType type = TextType.Localized)
+    {
+        SetTitle(titleStr, type);
+        SetMessage(bodyStr, type);
+        Open();
+    }
+
     public void SetTitle(string str, TextType type)
     {
         SetText_Internal(this.titleText, this.titleController, str, type);
