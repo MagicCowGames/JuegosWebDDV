@@ -6,7 +6,9 @@ public class SettingsManager : SingletonPersistent<SettingsManager>
 {
     #region Variables
 
-    public UserSettings Settings { get; set; }
+    private UserSettings settings;
+
+    public UserSettings Settings { get { return this.settings; } set { this.settings = value; UpdateSettings(); } }
 
     #endregion
 
@@ -63,5 +65,12 @@ public class SettingsManager : SingletonPersistent<SettingsManager>
     #endregion
 
     #region PrivateMethods
+
+    private void UpdateSettings()
+    {
+        SetLanguage(this.settings.language);
+        // TODO : More stuff in the future...
+    }
+
     #endregion
 }
