@@ -8,6 +8,7 @@ public class MenuPopUpController : UIController
     #region Variables
 
     [Header("Menu PopUp Controller")]
+    [SerializeField] private LocalizedTextController localizedTextController;
     [SerializeField] private TMP_Text text;
     [SerializeField] private CanvasGroup canvasGroup;
 
@@ -29,26 +30,40 @@ public class MenuPopUpController : UIController
 
     #region PublicMethods
 
-    public void OpenPopUp()
+    public void Open()
     {
         this.canvasGroup.blocksRaycasts = true;
         this.UI_SetVisible(true);
     }
 
-    public void ClosePopUp()
+    public void Close()
     {
         this.canvasGroup.blocksRaycasts = false;
         this.UI_SetVisible(false);
     }
 
-    public void SetTextRawString(string str)
+    public void OpenRaw(string str)
     {
+        SetTextRaw(str);
+        Open();
+    }
+
+    public void OpenLoc(string loc)
+    {
+        SetTextLoc(loc);
+        Open();
+    }
+
+    public void SetTextRaw(string str)
+    {
+        this.localizedTextController.enabled = false;
         this.text.text = str;
     }
 
-    public void SetTextLocalizationString(string locString)
+    public void SetTextLoc(string loc)
     {
-        text.GetComponent<LocalizedTextController>().LocalizationString = locString;
+        this.localizedTextController.enabled = true;
+        this.localizedTextController.LocalizationString = loc;
     }
 
     #endregion
