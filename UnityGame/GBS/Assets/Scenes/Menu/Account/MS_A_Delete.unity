@@ -340,8 +340,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LoginMenuController, Assembly-CSharp
+      - m_Target: {fileID: 552914334}
+        m_TargetAssemblyTypeName: DeleteAccountMenuController, Assembly-CSharp
         m_MethodName: Button_Back
         m_Mode: 1
         m_Arguments:
