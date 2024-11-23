@@ -29,6 +29,7 @@ public class UIManager : Singleton<UIManager>, IManager
     [SerializeField] private PauseUIController pauseUIController;
     [SerializeField] private PlayerUIController playerUIController;
     [SerializeField] private DeathUIController deathUIController;
+    [SerializeField] private MenuPopUpController menuPopUpController;
 
     [Header("Generic UI Controllers")]
     [SerializeField] private List<UIControllerEntry> uiControllers;
@@ -39,7 +40,7 @@ public class UIManager : Singleton<UIManager>, IManager
 
     void Start()
     {
-        
+        this.menuPopUpController?.ClosePopUp();
     }
 
     void Update()
@@ -74,6 +75,11 @@ public class UIManager : Singleton<UIManager>, IManager
     public DeathUIController GetDeathUIController()
     {
         return this.deathUIController;
+    }
+
+    public MenuPopUpController GetPopUpUIController()
+    {
+        return this.menuPopUpController;
     }
 
     #endregion
