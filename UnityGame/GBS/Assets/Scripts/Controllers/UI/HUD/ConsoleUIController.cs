@@ -463,13 +463,13 @@ public class ConsoleUIController : UIController
 
     private void CmdPopMeUp(string[] args, int startIndex)
     {
-        UIManager.Instance?.GetPopUpUIController().OpenLoc("loc_popmeup");
+        UIManager.Instance?.GetPopUpUIController().Open("PopMeUp", MenuPopUpController.TextType.Raw, "loc_popmeup", MenuPopUpController.TextType.Localized);
     }
 
     private void CmdPopMeUp2(string[] args, int startIndex)
     {
         string msg = args[startIndex + 1];
-        UIManager.Instance?.GetPopUpUIController().OpenRaw(msg);
+        UIManager.Instance?.GetPopUpUIController().Open("PopMeUp2", MenuPopUpController.TextType.Raw, msg, MenuPopUpController.TextType.Raw);
     }
 
     #endregion
