@@ -33,10 +33,7 @@ public class Account
     public string password;
     public int score;
     public int money;
-
     public bool isLoggedIn;
-
-    public Settings settings;
 
     public Account()
     {
@@ -46,6 +43,5 @@ public class Account
         this.score = 0;
         this.money = 0;
         this.isLoggedIn = false;
-        this.settings = new Settings();
     }
 }
