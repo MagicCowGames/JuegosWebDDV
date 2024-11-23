@@ -26,7 +26,7 @@ public class Account
 */
 
 [System.Serializable]
-public class Account
+public class UserAccount
 {
     public long id;
     public string name;
@@ -35,7 +35,7 @@ public class Account
     public int money;
     public bool isLoggedIn;
 
-    public Account()
+    public UserAccount()
     {
         this.id = -1;
         this.name = "None";

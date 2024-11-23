@@ -6,8 +6,8 @@ public class AccountManager : SingletonPersistent<AccountManager>
 {
     #region Variables
 
-    public Account UserAccount { get; private set; }
-    public bool IsLoggedIn { get { return this.UserAccount.isLoggedIn; } }
+    public UserAccount Account { get; private set; }
+    public bool IsLoggedIn { get { return this.Account.isLoggedIn; } }
 
     #endregion
 
@@ -16,7 +16,7 @@ public class AccountManager : SingletonPersistent<AccountManager>
     public override void Awake()
     {
         base.Awake();
-        this.UserAccount = new Account(); // Initialize the user's account with an empty user account that is marked as not logged in.
+        this.Account = new UserAccount(); // Initialize the user's account with an empty user account that is marked as not logged in.
     }
 
     void Start()
@@ -67,8 +67,8 @@ public class AccountManager : SingletonPersistent<AccountManager>
         callbacks.OnSuccess += (ans) => {
             DebugManager.Instance?.Log($"Successfully created the account : {ans}");
             // TODO : Figure out how to handle errors in Unity where the received JSON doesn't actually match the requested class to deserialize to...
-            this.UserAccount = JsonUtility.FromJson<Account>(ans);
-            this.UserAccount.isLoggedIn = true;
+            this.Account = JsonUtility.FromJson<UserAccount>(ans);
+            this.Account.isLoggedIn = true;
             SceneLoadingManager.Instance?.LoadSceneAccount();
         };
         callbacks.OnError += (err) => {
@@ -108,8 +108,8 @@ public class AccountManager : SingletonPersistent<AccountManager>
 
         callbacks.OnSuccess += (ans) => {
             DebugManager.Instance?.Log($"Successfully logged into the account : {ans}");
-            this.UserAccount = JsonUtility.FromJson<Account>(ans);
-            this.UserAccount.isLoggedIn = true;
+            this.Account = JsonUtility.FromJson<UserAccount>(ans);
+            this.Account.isLoggedIn = true;
             SceneLoadingManager.Instance?.LoadSceneAccount();
         };
         callbacks.OnError += (err) => {
