@@ -44,6 +44,7 @@ public class SettingsMenuController : UIController
 
     public void ButtonReturn()
     {
+        SettingsManager.Instance.SaveSettings(); // Sends a message to the server to request saving the current settings.
         SceneLoadingManager.Instance?.LoadSceneMainMenu();
     }
 
