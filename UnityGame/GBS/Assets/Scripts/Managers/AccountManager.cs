@@ -31,6 +31,64 @@ public class AccountManager : SingletonPersistent<AccountManager>
 
     #endregion
 
+
+
+    #region PublicMethods - Account Requests
+
+    public void RegisterAccount(string name, string password)
+    {
+        DebugManager.Instance?.Log("Submitting Request to Register Account...");
+        var popUp = UIManager.Instance?.GetPopUpUIController();
+
+        if (name.Length <= 0)
+        {
+            popUp.OpenRaw("The chosen name is not valid!");
+            return;
+        }
+
+        if (password.Length <= 0)
+        {
+            popUp.OpenRaw("The chosen password is not valid!");
+            return;
+        }
+
+        var callbacks = new ConnectionManager.RequestCallbacks();
+        callbacks.OnSuccess += (ans) => {
+            DebugManager.Instance?.Log($"Successfully created the account : {ans}");
+            SceneLoadingManager.Instance?.LoadSceneAccount();
+        };
+        callbacks.OnError += (err) => {
+            DebugManager.Instance?.Log($"Could not create the account : {err}");
+            UIManager.Instance?.GetPopUpUIController().OpenLoc("loc_register_error");
+        };
+        callbacks.OnConnectionError += () => {
+            DebugManager.Instance?.Log("Connection Error");
+            UIManager.Instance?.GetPopUpUIController().OpenLoc("loc_connection_error");
+        };
+
+        ConnectionManager.Instance.MakeRequest("GET", ConnectionManager.Instance.ServerAddress.http, $"/users/add/{name}/{password}", callbacks);
+    }
+
+    public void RegisterAccount(string name, string password, ConnectionManager.RequestCallbacks callbacks)
+    {
+        ConnectionManager.Instance.MakeRequest("GET", ConnectionManager.Instance.ServerAddress.http, $"/users/add/{name}/{password}", callbacks);
+    }
+
+    public void AccessAccount(string name, string password, ConnectionManager.RequestCallbacks callbacks)
+    {
+        ConnectionManager.Instance.MakeRequest("GET", ConnectionManager.Instance.ServerAddress.http, $"/users/login/{name}/{password}", callbacks);
+    }
+
+    public void DeleteAccount(string name, string password, ConnectionManager.RequestCallbacks callbacks)
+    { }
+
+    public void ModifyAccount(string oldName, string oldPassword, string newName, string newPassword, ConnectionManager.RequestCallbacks callbacks)
+    { }
+
+    #endregion
+
+    // Discarded old code
+    /*
     #region PublicMethods - Account Requests
 
     public void RegisterAccount(string name, string password, ConnectionManager.RequestCallbacks callbacks)
@@ -57,6 +115,7 @@ public class AccountManager : SingletonPersistent<AccountManager>
     { }
 
     #endregion
+    */
 
     #region PrivateMethods
     #endregion
