@@ -151,6 +151,12 @@ public class AccountManager : SingletonPersistent<AccountManager>
         ConnectionManager.Instance.MakeRequest("GET", ConnectionManager.Instance.ServerAddress.http, $"/users/login/{name}/{password}", callbacks);
     }
 
+    public void LogOut()
+    {
+        this.Account = new UserAccount();
+        SceneLoadingManager.Instance.LoadSceneAccount();
+    }
+
     public void DeleteAccount(string name, string password, ConnectionManager.RequestCallbacks callbacks)
     { }
 
