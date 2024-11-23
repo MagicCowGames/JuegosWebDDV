@@ -300,6 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasReference: {fileID: 8271029871534919466}
+  localizedTextController: {fileID: 7224610094664747672}
   text: {fileID: 6603855965387685027}
   canvasGroup: {fileID: 4727729951584777760}
 --- !u!1 &4332765231097506313
@@ -603,7 +604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 81342078999521495, guid: 130170b713bac274c8510c538ae4fb9c, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClosePopUp
+      value: Close
       objectReference: {fileID: 0}
     - target: {fileID: 81342078999521495, guid: 130170b713bac274c8510c538ae4fb9c, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -655,7 +656,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4802694978557227743, guid: 130170b713bac274c8510c538ae4fb9c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClosePopUp
+      value: Close
       objectReference: {fileID: 0}
     - target: {fileID: 4802694978557227743, guid: 130170b713bac274c8510c538ae4fb9c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
