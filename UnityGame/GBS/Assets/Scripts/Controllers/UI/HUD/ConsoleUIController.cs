@@ -449,7 +449,7 @@ public class ConsoleUIController : UIController
     private void CmdLang(string[] args, int startIndex)
     {
         var arg = args[startIndex + 1];
-        LanguageSystem.SetLanguage(arg.ToLower());
+        SettingsManager.Instance?.SetLanguage(arg.ToLower());
         CmdPrintln($"Language set to \"{LanguageSystem.GetLanguage()}\"");
     }
 
