@@ -9,6 +9,8 @@ public class AccountLoggedMenuController : UIController
 
     [Header("Account Logged Menu Controller")]
     [SerializeField] private TMP_Text[] usernameTexts;
+    [SerializeField] private TMP_Text moneyText;
+    [SerializeField] private TMP_Text scoreText;
 
     #endregion
 
@@ -16,7 +18,7 @@ public class AccountLoggedMenuController : UIController
 
     void Start()
     {
-        UpdateUsernameTexts();
+        UpdateTexts();
     }
 
     void Update()
@@ -42,11 +44,29 @@ public class AccountLoggedMenuController : UIController
 
     #region PrivateMethods
 
-    private void UpdateUsernameTexts()
+    private void UpdateTexts()
+    {
+        UpdateUsernameText();
+        UpdateMoneyText();
+        UpdateScoreText();
+    }
+
+    private void UpdateUsernameText()
     {
         foreach (var text in this.usernameTexts)
             if (text != null)
                 text.text = AccountManager.Instance.Account.name;
+    }
+
+    private void UpdateMoneyText()
+    {
+        if (this.moneyText != null)
+            this.moneyText.text = $"${AccountManager.Instance.Account.money}";
+    }
+    private void UpdateScoreText()
+    {
+        if (this.moneyText != null)
+            this.moneyText.text = $"{AccountManager.Instance.Account.score} pts";
     }
 
     #endregion
