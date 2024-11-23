@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Settings
+public class UserSettings
 {
     [System.Serializable]
     public class Color3f
@@ -24,7 +24,7 @@ public class Settings
     public Color3f color;
     public float volume;
 
-    public Settings()
+    public UserSettings()
     {
         this.language = LanguageSystem.Language.English;
         this.color = new Color3f(1.0f, 0.0f, 0.0f);
