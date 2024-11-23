@@ -9,7 +9,7 @@ using UnityEngine.Events;
 // Maybe it's time to start using fucking namespaces, eh? Retard...
 
 [ExecuteInEditMode]
-public class ButtonUIController : MonoBehaviour
+public class ButtonUIController : MonoBehaviour, IComponentValidator
 {
     #region Variables
 
@@ -46,6 +46,9 @@ public class ButtonUIController : MonoBehaviour
 
     void OnValidate()
     {
+        if (!AllComponentsAreValid())
+            return;
+
         UpdateButton();
         UpdateText();
     }
@@ -53,6 +56,17 @@ public class ButtonUIController : MonoBehaviour
     #endregion
 
     #region PublicMethods
+
+    public bool AllComponentsAreValid()
+    {
+        return
+            this.button != null &&
+            this.buttonShadow != null &&
+            this.text != null &&
+            this.textShadow != null
+            ;
+    }
+
     #endregion
 
     #region PrivateMethods
