@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
+// TODO : Rename this class, since the UIController nomenclature is sort of reserved in this project for classes that actually inherit from the UIController class...
+// Maybe it's time to start using fucking namespaces, eh? Retard...
+
 [ExecuteInEditMode]
 public class ButtonUIController : MonoBehaviour
 {
@@ -17,9 +20,10 @@ public class ButtonUIController : MonoBehaviour
     [Header("Components - Text")]
     [SerializeField] private TMP_Text text;
     [SerializeField] private TMP_Text textShadow;
+    [SerializeField] private LocalizedTextController localizedTextController;
 
     [Header("Settings - Button")]
-    [SerializeField] private UnityEvent OnClick;
+    [SerializeField] private Button.ButtonClickedEvent onClick;
     [SerializeField] private bool buttonHasShadow;
 
     [Header("Settings - Text")]
@@ -40,11 +44,30 @@ public class ButtonUIController : MonoBehaviour
         
     }
 
+    void OnValidate()
+    {
+        UpdateButton();
+        UpdateText();
+    }
+
     #endregion
 
     #region PublicMethods
     #endregion
 
     #region PrivateMethods
+
+    private void UpdateButton()
+    {
+        this.button.onClick = this.onClick;
+        this.buttonShadow?.gameObject.SetActive(this.buttonHasShadow);
+    }
+
+    private void UpdateText()
+    {
+        this.localizedTextController.LocalizationString = this.localizationString;
+        this.textShadow?.gameObject.SetActive(this.textHasShadow);
+    }
+
     #endregion
 }
