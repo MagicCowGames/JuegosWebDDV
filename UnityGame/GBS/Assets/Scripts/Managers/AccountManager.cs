@@ -2,8 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO : Figure out how to handle errors in Unity where the received JSON doesn't actually match the requested class to deserialize to... lmao...
 public class AccountManager : SingletonPersistent<AccountManager>
 {
+    #region Classes - DTOs
+
+    [System.Serializable]
+    public class UserAndSettingsDTO
+    {
+        public UserAccount user;
+        public UserSettings settings;
+
+        public UserAndSettingsDTO()
+        {
+            this.user = new UserAccount();
+            this.settings = new UserSettings();
+        }
+    }
+
+    #endregion
+
     #region Variables
 
     public UserAccount Account { get; private set; }
@@ -66,9 +84,13 @@ public class AccountManager : SingletonPersistent<AccountManager>
 
         callbacks.OnSuccess += (ans) => {
             DebugManager.Instance?.Log($"Successfully created the account : {ans}");
-            // TODO : Figure out how to handle errors in Unity where the received JSON doesn't actually match the requested class to deserialize to...
-            this.Account = JsonUtility.FromJson<UserAccount>(ans);
+
+            var packet = JsonUtility.FromJson<UserAndSettingsDTO>(ans);
+
+            this.Account = packet.user;
             this.Account.isLoggedIn = true;
+            SettingsManager.Instance.Settings = packet.settings;
+
             SceneLoadingManager.Instance?.LoadSceneAccount();
         };
         callbacks.OnError += (err) => {
@@ -108,8 +130,13 @@ public class AccountManager : SingletonPersistent<AccountManager>
 
         callbacks.OnSuccess += (ans) => {
             DebugManager.Instance?.Log($"Successfully logged into the account : {ans}");
-            this.Account = JsonUtility.FromJson<UserAccount>(ans);
+
+            var packet = JsonUtility.FromJson<UserAndSettingsDTO>(ans);
+
+            this.Account = packet.user;
             this.Account.isLoggedIn = true;
+            SettingsManager.Instance.Settings = packet.settings;
+
             SceneLoadingManager.Instance?.LoadSceneAccount();
         };
         callbacks.OnError += (err) => {
