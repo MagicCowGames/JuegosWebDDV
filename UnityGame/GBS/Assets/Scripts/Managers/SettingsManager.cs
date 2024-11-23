@@ -22,9 +22,17 @@ public class SettingsManager : SingletonPersistent<SettingsManager>
     #endregion
 
     #region PublicMethods
+
+    // Updates the settings on the web server. This used to be named "UpdateUserAccountSettings()", but SaveSettings() is shorter, faster to type
+    // and easier to remember, so yeah lol.
+    public void SaveSettings()
+    {
+
+    }
+
     #endregion
 
-    #region PublicMethods - Language Settings
+    #region PublicMethods - Settings - Language
 
     public void SetLanguage(string language)
     {
@@ -46,6 +54,9 @@ public class SettingsManager : SingletonPersistent<SettingsManager>
         LanguageSystem.SetLanguage((int)LanguageSystem.GetLanguage() - 1);
     }
 
+    #endregion
+
+    #region PublicMethods - Settings - Other
     #endregion
 
     #region PrivateMethods
