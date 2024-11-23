@@ -90,7 +90,7 @@ public class ConsoleUIController : UIController
             new Cmd("lang", "Set the current language", "<language>", 1, CmdLang),
             new Cmd("langlist", "Display a list of all the available languages", "", 0, CmdLangList),
             new Cmd("popmeup", "Display a popup on screen with a funny message", "", 0, CmdPopMeUp),
-            new Cmd("popmeup2", "Display a popup on screen with the specified message", "<message>", 1, CmdPopMeUp2),
+            new Cmd("popmeup2", "Display a popup on screen with the specified title and message", "<title> <message>", 2, CmdPopMeUp2),
             // TODO : Add commands to get the current map name and the current language or something...
         };
         // TODO : Make an alias system of sorts, or maybe make it so that we can have a dict / list system to have multiple overloads for the same command
@@ -468,8 +468,9 @@ public class ConsoleUIController : UIController
 
     private void CmdPopMeUp2(string[] args, int startIndex)
     {
-        string msg = args[startIndex + 1];
-        UIManager.Instance?.GetPopUpUIController().Open("PopMeUp2", MenuPopUpController.TextType.Raw, msg, MenuPopUpController.TextType.Raw);
+        string title = args[startIndex + 1];
+        string msg = args[startIndex + 2];
+        UIManager.Instance?.GetPopUpUIController().Open(title, MenuPopUpController.TextType.Raw, msg, MenuPopUpController.TextType.Raw);
     }
 
     #endregion
