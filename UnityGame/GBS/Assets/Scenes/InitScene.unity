@@ -727,6 +727,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0883d70e4cab475408b86448828bd2c6, type: 3}
+--- !u!114 &1242412652 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5307635686122985890, guid: 306d3db259b0e9c4ab15fa7bac1dbb31, type: 3}
+  m_PrefabInstance: {fileID: 115320419}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf55b6a426d99b4b8a3de634f797358, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1416452212
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,6 +1128,7 @@ MonoBehaviour:
   pauseUIController: {fileID: 1641337307}
   playerUIController: {fileID: 2095767823}
   deathUIController: {fileID: 1524051893}
+  menuPopUpController: {fileID: 1242412652}
   uiControllers: []
 --- !u!114 &1820937346
 MonoBehaviour:
