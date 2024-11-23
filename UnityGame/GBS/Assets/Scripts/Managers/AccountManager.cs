@@ -72,11 +72,6 @@ public class AccountManager : SingletonPersistent<AccountManager>
         ConnectionManager.Instance.MakeRequest("GET", ConnectionManager.Instance.ServerAddress.http, $"/users/add/{name}/{password}", callbacks);
     }
 
-    public void RegisterAccount(string name, string password, ConnectionManager.RequestCallbacks callbacks)
-    {
-        ConnectionManager.Instance.MakeRequest("GET", ConnectionManager.Instance.ServerAddress.http, $"/users/add/{name}/{password}", callbacks);
-    }
-
     public void AccessAccount(string name, string password, ConnectionManager.RequestCallbacks callbacks)
     {
         ConnectionManager.Instance.MakeRequest("GET", ConnectionManager.Instance.ServerAddress.http, $"/users/login/{name}/{password}", callbacks);
