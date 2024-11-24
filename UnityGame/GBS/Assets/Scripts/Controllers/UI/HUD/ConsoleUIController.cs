@@ -91,6 +91,7 @@ public class ConsoleUIController : UIController
             new Cmd("langlist", "Display a list of all the available languages", "", 0, CmdLangList),
             new Cmd("popmeup", "Display a popup on screen with a funny message", "", 0, CmdPopMeUp),
             new Cmd("popmeup2", "Display a popup on screen with the specified title and message", "<title> <message>", 2, CmdPopMeUp2),
+            new Cmd("timescale", "Change the game's timescale", "<scale>", 1, CmdTimeScale),
             // TODO : Add commands to get the current map name and the current language or something...
         };
         // TODO : Make an alias system of sorts, or maybe make it so that we can have a dict / list system to have multiple overloads for the same command
@@ -472,6 +473,13 @@ public class ConsoleUIController : UIController
         string title = args[startIndex + 1];
         string msg = args[startIndex + 2];
         UIManager.Instance?.GetPopUpUIController().Open(title, PopUpUIController.TextType.Raw, msg, PopUpUIController.TextType.Raw);
+    }
+
+    private void CmdTimeScale(string[] args, int startIndex)
+    {
+        string arg = args[startIndex + 1];
+        float scale = CmdParseFloat(arg);
+        Time.timeScale = scale;
     }
 
     #endregion
