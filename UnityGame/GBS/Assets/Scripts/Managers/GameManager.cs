@@ -26,6 +26,14 @@ public class GameManager : SingletonPersistent<GameManager>
     #endregion
 
     #region PublicMethods
+
+    // TODO : You gotta Polish that Finish screen! damn these jokes suck... just fix this shit lol, just make it look good...
+    public void FinishGame()
+    {
+        PlayerDataManager.Instance.GetPlayerHealth().HealthMin = 1.0f; // Basically, make the player immortal so that they can't die during the victory screen.
+        // UIManager.Instance.GetFinishUIController();
+    }
+
     #endregion
 
     #region PrivateMethods
