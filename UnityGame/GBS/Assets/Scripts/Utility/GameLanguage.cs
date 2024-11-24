@@ -101,6 +101,9 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_test_pickup_coins", "Grab the Coins" },
             { "loc_test_dummy_spawn", "Step on the pressure plate to spawn a dummy" },
 
+            // Loc Strings : Tutorial
+            { "loc_tutorial_message", "Welcome to the training room! Here, aspiring wizards such as yourself can practice with their spells and learn to spell like a real wizard. Take a look around and explore to learn how to use your magic." },
+
             // Loc Strings : Points and Currency
             { "loc_experience", "Experience" },
             { "loc_points", "Points" },
@@ -190,6 +193,9 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_test_damage_area", "Area de Daño" },
             { "loc_test_pickup_coins", "Recolecta las Monedas" },
             { "loc_test_dummy_spawn", "Pisa la placa de presión para spawner un muñeco" },
+
+            // Loc Strings : Tutorial
+            { "loc_tutorial_message", "¡Bienvenido a la sala de entrenamiento! Aquí, los aspirantes a mago pueden practicar sus conjuros y aprender a conjurar como verdaderos hechiceros. Explora y aprende a usar tu magia." }, // This translation was kinda butchered due fact that the tutorial screen did not have enough space to display it... FUCK.
 
             // Loc Strings : Points and Currency
             { "loc_experience", "Experiencia" },
