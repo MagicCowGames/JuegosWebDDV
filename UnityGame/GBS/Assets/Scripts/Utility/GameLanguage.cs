@@ -211,7 +211,7 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             
             // Loc Strings : Store
             { "loc_buy", "Comprar" },
-            { "loc_inspect", "Inspeccionar" },
+            { "loc_inspect", "Revisar" }, // FUCK ME The OG did not fit within the button's size :(
 
             // Loc Strings : WIP
             { "loc_wip", "WIP"},
