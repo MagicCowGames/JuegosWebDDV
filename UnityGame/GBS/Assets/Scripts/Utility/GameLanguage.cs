@@ -59,6 +59,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_login_account", "Log Into Account" },
             { "loc_score", "Score" },
             { "loc_scoreboard", "Scoreboard" },
+            { "loc_victory", "Victory!" },
+            { "loc_demo_thanks", "Thank you for playing the \"<color=#FF0000>Wizard's Death Wish</color>\" demo!\r\nStay tuned for more updates!" },
 
             // Loc Strings : Actions (wtf is this name?)
             { "loc_use", "Use" },
@@ -134,6 +136,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_login_account", "Acceder a Cuenta" },
             { "loc_score", "Puntuación" },
             { "loc_scoreboard", "Tabla de Puntuación" },
+            { "loc_victory", "¡Victoria!" },
+            { "loc_demo_thanks", "¡Gracias por jugar la demo de \"<color=#FF0000>Wizard's Death Wish</color>\"!\r\n¡Estad atentos para más actualizaciones!" },
 
             // Loc Strings : Actions (wtf is this name?)
             { "loc_use", "Usar" },
