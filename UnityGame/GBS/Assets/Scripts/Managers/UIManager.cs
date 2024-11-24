@@ -30,6 +30,7 @@ public class UIManager : Singleton<UIManager>, IManager
     [SerializeField] private PlayerUIController playerUIController;
     [SerializeField] private DeathUIController deathUIController;
     [SerializeField] private PopUpUIController popUpUIController;
+    [SerializeField] private FinishUIController finishUIController;
 
     [Header("Generic UI Controllers")]
     [SerializeField] private List<UIControllerEntry> uiControllers;
@@ -80,6 +81,11 @@ public class UIManager : Singleton<UIManager>, IManager
     public PopUpUIController GetPopUpUIController()
     {
         return this.popUpUIController;
+    }
+
+    public FinishUIController GetFinishUIController()
+    {
+        return this.finishUIController;
     }
 
     #endregion
