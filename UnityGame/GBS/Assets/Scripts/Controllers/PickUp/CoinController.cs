@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // NOTE : This should have been named MoneyPickupController or some shit tbh.
+// NOTE : In the future, this should maybe inherit from a PickUp class, and the "pouch" class should inherit from a "Picker" class or some shit like that.
 [ExecuteInEditMode]
 public class CoinController : MonoBehaviour
 {
