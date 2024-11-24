@@ -53,4 +53,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game/Survival/gs_s1_m1_prison_arena.unity
     guid: a3e00e2533b4f58448961acfcbd253d6
+  - enabled: 1
+    path: Assets/Scenes/Game/Tutorial/TutorialMap.unity
+    guid: 8dcefe90370615b4388471cd404f8245
   m_configObjects: {}
