@@ -106,10 +106,7 @@ public class CoinController : MonoBehaviour
         var money = other.GetComponent<MoneyController>();
         if (money == null)
             return;
-        // NOTE : Again, this thing is disabled because it's easier to write using the GameManager as of now, but in the future it has to be rewritten to use
-        // this system again!!!
-        // money.Money += this.valueTotal;
-        GameManager.Instance.Money += this.valueTotal;
+        money.Money += this.valueTotal;
         Destroy(this.gameObject); // Maybe do some pooling or some shit in the future?
     }
 
