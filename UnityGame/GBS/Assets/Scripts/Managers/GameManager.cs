@@ -33,6 +33,7 @@ public class GameManager : Singleton<GameManager>
         PlayerDataManager.Instance.GetPlayerHealth().HealthMin = 1.0f; // Basically, make the player immortal so that they can't die during the victory screen.
         UIManager.Instance.GetFinishUIController().UI_SetVisible(true); // Display the finish UI
         UIManager.Instance.GetPlayerUIController().UI_SetVisible(false); // Hide the player's UI so taht we don't see the scores twice (they are also displayed on the finish UI).
+        // TODO : Update score
     }
 
     #endregion
