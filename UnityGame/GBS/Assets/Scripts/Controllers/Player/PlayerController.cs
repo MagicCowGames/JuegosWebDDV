@@ -162,6 +162,7 @@ public class PlayerController : MonoBehaviour
     {
         GameUtility.SetCanPause(true); // This is a fucking hack tho
         UIManager.Instance?.GetDeathUIController().UI_SetVisible(false);
+        UIManager.Instance?.GetFinishUIController().UI_SetVisible(false);
 
         // Other Events
         this.GetComponent<HealthController>().OnValueChanged += HealthUpdated;
