@@ -15,6 +15,7 @@ public class PlayerDataManager : SingletonPersistent<PlayerDataManager>
     private HealthController healthController;
     private SpellCasterController spellCasterController;
     private MoneyController moneyController;
+    private ScoreController scoreController;
 
     #endregion
 
@@ -41,6 +42,9 @@ public class PlayerDataManager : SingletonPersistent<PlayerDataManager>
         this.healthController = reference.GetComponent<HealthController>();
         this.spellCasterController = reference.GetComponentInChildren<SpellCasterController>(); // Shitty, should just add a getter on the player controller...
         this.moneyController = reference.GetComponentInChildren<MoneyController>(); // Double shitty. And dumb. No time to fix now. Deadlines suck ass.
+        this.scoreController = reference.GetComponentInChildren<ScoreController>(); // Triple shitty. And extra fucking dumb. No time to fix now either. Deadlines suck ass... again!!!
+
+        // It's lovely to see how shit carries over throughout the months... FUCK MY LIFE.
     }
 
     public PlayerController GetPlayer()
@@ -61,6 +65,11 @@ public class PlayerDataManager : SingletonPersistent<PlayerDataManager>
     public MoneyController GetPlayerMoney()
     {
         return this.moneyController;
+    }
+
+    public ScoreController GetPlayerScore()
+    {
+        return this.scoreController;
     }
 
     #endregion
