@@ -69,6 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinCollider: {fileID: 7910820559242932376}
   coinMesh: {fileID: 0}
+  coinPickUpClip: {fileID: 8300000, guid: 653592f2ed008a242bc43c3a14b6b525, type: 3}
   coinType: 0
   valueType: 0
   valueBase: 5
