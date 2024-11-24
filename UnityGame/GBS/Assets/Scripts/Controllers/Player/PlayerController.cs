@@ -161,8 +161,12 @@ public class PlayerController : MonoBehaviour
     private void RegisterEvents()
     {
         GameUtility.SetCanPause(true); // This is a fucking hack tho
+
+        // Fucking hack to make UIs visible and invisible, should probably be done somewhere else
+        // TODO : Clean this crap up please.
         UIManager.Instance?.GetDeathUIController().UI_SetVisible(false);
         UIManager.Instance?.GetFinishUIController().UI_SetVisible(false);
+        UIManager.Instance?.GetPlayerUIController().UI_SetVisible(true);
 
         // Other Events
         this.GetComponent<HealthController>().OnValueChanged += HealthUpdated;
