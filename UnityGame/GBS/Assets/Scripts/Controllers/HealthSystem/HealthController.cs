@@ -11,6 +11,8 @@ public class HealthController : MonoBehaviour
     [SerializeField] private float healthMax;
     [SerializeField] private float healthMin;
 
+    private bool hasDied;
+
     public float Health {
         get
         {
@@ -22,8 +24,16 @@ public class HealthController : MonoBehaviour
             this.health = Mathf.Clamp(value, this.healthMin, this.healthMax);
             this.OnValueChanged?.Invoke(oldValue, this.health);
 
-            if (this.health <= this.healthMin)
+            if (this.health > 0.0f)
+            {
+                this.hasDied = false;
+            }
+            else
+            if (!this.hasDied && this.health <= this.healthMin)
+            {
                 this.OnDeath?.Invoke();
+                this.hasDied = true;
+            }
         }
     }
 
@@ -36,6 +46,11 @@ public class HealthController : MonoBehaviour
     #endregion
 
     #region MonoBehaviour
+
+    void Awake()
+    {
+        this.hasDied = false;
+    }
 
     void Start()
     {
