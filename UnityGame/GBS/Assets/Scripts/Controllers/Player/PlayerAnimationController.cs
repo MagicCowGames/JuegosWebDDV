@@ -62,11 +62,19 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void UpdateAnimation_Walk(float delta)
     {
-        var vec = this.playerController.GetCurrentVelocity();
+        var vec = this.playerController.GetCurrentVelocity(); /* this should be this.controller.velocity, but Unity can't hanlde this shit... */
+        var forward = this.playerController.GetMeshTransform().forward;
+        var speed = this.playerController.GetWalkSpeed();
+
+        DebugManager.Instance.Log($"vec = {vec}, forward = {forward}, speed = {speed}");
 
         // Update Forward Movement value.
-        float newForwardMovementValue = (Vector3.Dot(/*this.controller.velocity*/vec, this.playerController.GetMeshTransform().forward) / this.playerController.GetWalkSpeed()) * 2.0f; // we map the value to [-1,1], then to [-2,2]. And since the player can't walk backward in this game, then it's kinda as if we mapped it to [0,2]...
+        float newForwardMovementValue = (Vector3.Dot(vec, forward) / speed) * 2.0f; // we map the value to [-1,1], then to [-2,2]. And since the player can't walk backward in this game, then it's kinda as if we mapped it to [0,2]...
         this.forwardMovementValue = AnimationLerpFloat(this.forwardMovementValue, newForwardMovementValue, delta, this.forwardMovementUpdateSpeed);
+
+        // This patch can suck my dick, it's trash and it only exists because Unity's animator introduces NaN when timescale is changed, so pause fucks the universe over for some fucking unknown reason.
+        if (float.IsNaN(this.forwardMovementValue))
+            this.forwardMovementValue = animator.GetFloat(this.forwardMovementName);
 
         animator.SetFloat(this.forwardMovementName, this.forwardMovementValue);
 
