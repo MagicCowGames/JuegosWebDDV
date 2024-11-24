@@ -117,7 +117,10 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_wip", "WIP"},
             { "loc_wip_title", "Work In Progress" },
             { "loc_wip_message", "This feature is a work in progress and is yet not finished. Stay tuned for more updates." },
-            { "loc_coming_soon", "COMING SOON!" }
+            { "loc_coming_soon", "COMING SOON!" },
+
+            // Loc Strings : Scoreboard
+            { "loc_top_10", "Top 10" }
         } },
         { Language.Spanish, new Dictionary<string, string> {
             // Loc Strings : Generic
@@ -204,7 +207,10 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_wip", "WIP"},
             { "loc_wip_title", "Trabajo en Progreso" },
             { "loc_wip_message", "Esta caracteristica está en proceso de creación y no está terminada todavía. Esté atento a más actualizaciones." },
-            { "loc_coming_soon", "¡PRÓXIMAMENTE!" }
+            { "loc_coming_soon", "¡PRÓXIMAMENTE!" },
+
+            // Loc Strings : Scoreboard
+            { "loc_top_10", "Top 10" }
         } }
     };
 
