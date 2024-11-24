@@ -40,7 +40,10 @@ public class CoinController : MonoBehaviour
 
     [Header("Coin Components")]
     [SerializeField] private SphereCollider coinCollider;
-    [SerializeField] private Mesh coinMesh;
+    [SerializeField] private Mesh coinMesh; // TODO : Fix this shit with mesh filter and all that jazz...
+    [SerializeField] private AudioClip coinPickUpClip; // TODO : This would be a static, but static variables cannot be edited from the inspector, so in the future, make a fucking SoundManager or AudioClipManager or whatever the fuck and store all clips there.
+
+    [Header("Coin Configuration")]
     [SerializeField] private CoinType coinType;
     [SerializeField] private ValueType valueType;
     [SerializeField] private int valueBase;
@@ -93,6 +96,15 @@ public class CoinController : MonoBehaviour
     #endregion
 
     #region PrivateMethods
+
+    // TODO : Make this into a function in that one PickUp parent class you said you'd implement in the future, ok?
+    // Also maybe make an EnablePickup() method and that way we can just not despawn the pickups and we can reuse them? idk,
+    // whatever, that's a problem for future me to deal with.
+    private void DisablePickup()
+    {
+        Destroy(this.gameObject); // Maybe do some pooling or some shit in the future?
+    }
+
     #endregion
 
     #region Collisions
@@ -108,7 +120,15 @@ public class CoinController : MonoBehaviour
         if (money == null)
             return;
         money.Money += this.valueTotal;
-        Destroy(this.gameObject); // Maybe do some pooling or some shit in the future?
+
+        // NOTE : This is a patch because the audio listener is on the camera rather than the player...
+        var pos = CameraManager.Instance.GetActiveCamera().transform.position;
+        var dir = CameraManager.Instance.GetActiveCamera().transform.forward;
+        var targetPos = pos + dir * 5.0f;
+
+        AudioSource.PlayClipAtPoint(coinPickUpClip, targetPos/*this.transform.position*/);
+        
+        DisablePickup();
     }
 
     #endregion
