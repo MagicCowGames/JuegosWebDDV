@@ -135,14 +135,14 @@ public class PlayerUIController : UIController, IComponentValidator
         // NOTE : Old implementation that used the player's money component, this has now been changed to use the global scores system from the GameManager class.
         // If I ever implement Multiplayer, this old system is the correct way to go.
         // string str = $"${PlayerDataManager.Instance.GetPlayerMoney().Money}";
-        string str = $"${GameManager.Instance.Money}";
+        string str = $"${PlayerDataManager.Instance.GetPlayerMoney().Money}";
         this.moneyTextShadow.text = str;
         this.moneyText.text = str;
     }
 
     private void UpdateScoreDisplay()
     {
-        string str = $"{GameManager.Instance.Score} pts";
+        string str = $"{PlayerDataManager.Instance.GetPlayerScore().Score} pts";
         this.scoreTextShadow.text = str;
         this.scoreText.text = str;
     }
@@ -176,8 +176,9 @@ public class PlayerUIController : UIController, IComponentValidator
             PlayerDataManager.Instance != null &&
             PlayerDataManager.Instance.GetPlayerHealth() != null &&
             PlayerDataManager.Instance.GetPlayerSpellCaster() != null &&
-            // PlayerDataManager.Instance.GetMoneyController() != null && etc...
-            GameManager.Instance != null &&
+            PlayerDataManager.Instance.GetPlayerMoney() != null &&
+            PlayerDataManager.Instance.GetPlayerScore() != null &&
+            // GameManager.Instance != null &&
             this.moneyTextShadow != null &&
             this.moneyText != null &&
             this.scoreTextShadow != null &&
