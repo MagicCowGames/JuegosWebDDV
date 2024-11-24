@@ -6,8 +6,10 @@ public class GameManager : Singleton<GameManager>
 {
     #region Variables
 
+    /*
     public int Score { get; set; }
     public int Money { get; set; }
+    */
 
     #endregion
 
@@ -38,8 +40,8 @@ public class GameManager : Singleton<GameManager>
         UIManager.Instance.GetPlayerUIController().UI_SetVisible(false); // Hide the player's UI so taht we don't see the scores twice (they are also displayed on the finish UI).
 
         //Update score and money values on the server
-        AccountManager.Instance.UpdateScore(this.Score);
-        AccountManager.Instance.UpdateMoney(this.Money);
+        AccountManager.Instance.UpdateScore(PlayerDataManager.Instance.GetPlayerScore().Score);
+        AccountManager.Instance.UpdateMoney(PlayerDataManager.Instance.GetPlayerMoney().Money);
     }
 
     #endregion
