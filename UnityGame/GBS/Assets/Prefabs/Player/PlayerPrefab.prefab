@@ -380,6 +380,7 @@ GameObject:
   - component: {fileID: 5165320198455412615}
   - component: {fileID: 2132709503834204316}
   - component: {fileID: 4671014162685389885}
+  - component: {fileID: 5273888175177943651}
   - component: {fileID: 8245531900285691232}
   m_Layer: 0
   m_Name: PlayerPrefab
@@ -481,6 +482,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   money: 0
+--- !u!114 &5273888175177943651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7547504269008325229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a15a877c52fb15c4a9cdd26be43d9c3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
 --- !u!114 &8245531900285691232
 MonoBehaviour:
   m_ObjectHideFlags: 0
