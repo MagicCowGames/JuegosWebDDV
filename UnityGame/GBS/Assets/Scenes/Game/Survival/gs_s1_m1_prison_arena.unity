@@ -10898,7 +10898,7 @@ Transform:
   m_GameObject: {fileID: 1175453198}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.9495745, y: 7.537338, z: -2.0007336}
+  m_LocalPosition: {x: -3.9495745, y: 7.537338, z: -17.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -20013,7 +20013,7 @@ GameObject:
   - component: {fileID: 2125198944}
   - component: {fileID: 2125198945}
   m_Layer: 2
-  m_Name: GameObject
+  m_Name: FinishTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20028,7 +20028,7 @@ Transform:
   m_GameObject: {fileID: 2125198942}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -41.2, y: -4.57, z: -21.29}
+  m_LocalPosition: {x: 3.6, y: -4.57, z: 16.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
