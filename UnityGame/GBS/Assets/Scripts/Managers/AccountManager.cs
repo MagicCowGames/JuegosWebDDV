@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 // TODO : Figure out how to handle errors in Unity where the received JSON doesn't actually match the requested class to deserialize to... lmao...
 public class AccountManager : SingletonPersistent<AccountManager>
@@ -194,6 +195,24 @@ public class AccountManager : SingletonPersistent<AccountManager>
 
     public void ModifyAccount(string oldName, string oldPassword, string newName, string newPassword, ConnectionManager.RequestCallbacks callbacks)
     { }
+
+    #endregion
+
+    #region PublicMethods - OtherRequests
+
+    public void UpdateScore(int score)
+    {
+        if (!this.IsLoggedIn)
+            return;
+        ConnectionManager.Instance.MakeRequestToServer("GET", $"score/add/{this.Account.id}/{score}");
+    }
+
+    public void UpdateMoney(int money)
+    {
+        if (!this.IsLoggedIn)
+            return;
+        ConnectionManager.Instance.MakeRequestToServer("GET", $"money/add/{this.Account.id}/{money}");
+    }
 
     #endregion
 
