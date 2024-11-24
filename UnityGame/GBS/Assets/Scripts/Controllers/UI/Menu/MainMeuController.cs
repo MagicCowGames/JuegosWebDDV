@@ -33,7 +33,7 @@ public class MainMeuController : MonoBehaviour
 
     public void LoadGame()
     {
-        SceneLoadingManager.Instance?.LoadScene("GS_PrisonCell");
+        SceneLoadingManager.Instance?.LoadScene(/*"GS_PrisonCell"*/ "gs_s1_m1_prison_arena");
     }
 
     public void LoadAccountMenu()
