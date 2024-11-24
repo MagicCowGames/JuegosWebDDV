@@ -107,7 +107,11 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_money", "Money" },
 
             // Loc Strings : Funny
-            { "loc_popmeup", "Vlad is not a vampire" }
+            { "loc_popmeup", "Vlad is not a vampire" },
+
+            // Loc Strings : Store
+            { "loc_buy", "Buy" },
+            { "loc_inspect", "Inspect" }
         } },
         { Language.Spanish, new Dictionary<string, string> {
             // Loc Strings : Generic
@@ -184,7 +188,11 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_money", "Dinero" },
 
             // Loc Strings : Funny
-            { "loc_popmeup", "Vlad no es un vampiro" }
+            { "loc_popmeup", "Vlad no es un vampiro" },
+            
+            // Loc Strings : Store
+            { "loc_buy", "Buy" },
+            { "loc_inspect", "Inspect" }
         } }
     };
 
