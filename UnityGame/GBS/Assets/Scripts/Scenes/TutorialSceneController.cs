@@ -11,7 +11,7 @@ public class TutorialSceneController : MonoBehaviour
 
     void Start()
     {
-        
+        UIManager.Instance?.GetPopUpUIController().Open("loc_tutorial", "loc_tutorial_message");
     }
 
     void Update()
