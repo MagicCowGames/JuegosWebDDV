@@ -30,6 +30,11 @@ public class InventoryMenuController : MonoBehaviour
         SceneLoadingManager.Instance?.LoadSceneMainMenu();
     }
 
+    public void Button_WIP()
+    {
+        UIManager.Instance.GetPopUpUIController().Open("loc_wip_title", "loc_wip_message");
+    }
+
     #endregion
 
     #region PrivateMethods
