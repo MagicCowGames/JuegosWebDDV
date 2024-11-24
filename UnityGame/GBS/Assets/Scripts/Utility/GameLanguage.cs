@@ -111,7 +111,13 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
 
             // Loc Strings : Store
             { "loc_buy", "Buy" },
-            { "loc_inspect", "Inspect" }
+            { "loc_inspect", "Inspect" },
+
+            // Loc Strings : WIP
+            { "loc_wip", "WIP"},
+            { "loc_wip_title", "Work In Progress" },
+            { "loc_wip_message", "This feature is a work in progress and is yet not finished. Stay tuned for more updates." },
+            { "loc_coming_soon", "Coming Soon" }
         } },
         { Language.Spanish, new Dictionary<string, string> {
             // Loc Strings : Generic
@@ -191,8 +197,14 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_popmeup", "Vlad no es un vampiro" },
             
             // Loc Strings : Store
-            { "loc_buy", "Buy" },
-            { "loc_inspect", "Inspect" }
+            { "loc_buy", "Comprar" },
+            { "loc_inspect", "Inspeccionar" },
+
+            // Loc Strings : WIP
+            { "loc_wip", "WIP"},
+            { "loc_wip_title", "Trabajo en Progreso" },
+            { "loc_wip_message", "Esta caracteristica está en proceso de creación y no está terminada todavía. Esté atento a más actualizaciones." },
+            { "loc_coming_soon", "Próximamente" }
         } }
     };
 
