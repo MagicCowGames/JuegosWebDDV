@@ -44,6 +44,8 @@ public class TestDummyController : MonoBehaviour
         this.healthController.OnDeath += HandleDeath;
         this.healthController.OnValueChanged += HandleDamaged;
 
+        this.healthController.OnDeath += () => { GameManager.Instance.Score += 150; };
+
         this.agent.updatePosition = true;
         this.agent.updateRotation = true;
 
