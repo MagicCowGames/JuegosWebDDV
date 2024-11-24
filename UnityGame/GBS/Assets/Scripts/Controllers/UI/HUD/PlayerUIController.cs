@@ -14,8 +14,13 @@ public class PlayerUIController : UIController, IComponentValidator
     [SerializeField] private Image[] elementQueueImages;
     [SerializeField] private Image healthBar;
 
-    [SerializeField] private TMP_Text moneyTextBack;
+    [Header("Text Components - Money")]
+    [SerializeField] private TMP_Text moneyTextShadow;
     [SerializeField] private TMP_Text moneyText;
+
+    [Header("Text Components - Score")]
+    [SerializeField] private TMP_Text scoreTextShadow;
+    [SerializeField] private TMP_Text scoreText;
 
     #endregion
 
@@ -32,14 +37,17 @@ public class PlayerUIController : UIController, IComponentValidator
         if (!AllComponentsAreValid())
             return;
 
+        float delta = Time.deltaTime;
+
         // Updating this stuff every single frame is not ideal, and some of this used to be updated through events, but this is much less of a hassle,
         // It doesn't even have a performance impact and at least we make sure that there are no stupid edge cases caused by late night brain-fart coding.
         // Yes, sad, I know, but it is what it is.
         // Also, fuck coroutines.
-        UpdateHealthBar(Time.deltaTime);
+        UpdateHealthBar(delta);
         UpdateElementDisplay();
         UpdateFormDisplay();
-        UpdateMoneyDisplay(Time.deltaTime);
+        UpdateMoneyDisplay();
+        UpdateScoreDisplay();
     }
 
     #endregion
@@ -118,11 +126,25 @@ public class PlayerUIController : UIController, IComponentValidator
         this.formImage.sprite = img;
     }
 
-    private void UpdateMoneyDisplay(float delta)
+    #endregion
+
+    #region PrivateMethods - Update Score and Money
+
+    private void UpdateMoneyDisplay()
     {
-        string str = $"${PlayerDataManager.Instance.GetPlayerMoney().Money}";
-        this.moneyTextBack.text = str;
+        // NOTE : Old implementation that used the player's money component, this has now been changed to use the global scores system from the GameManager class.
+        // If I ever implement Multiplayer, this old system is the correct way to go.
+        // string str = $"${PlayerDataManager.Instance.GetPlayerMoney().Money}";
+        string str = $"${GameManager.Instance.Money}";
+        this.moneyTextShadow.text = str;
         this.moneyText.text = str;
+    }
+
+    private void UpdateScoreDisplay()
+    {
+        string str = $"{GameManager.Instance.Score} pts";
+        this.scoreTextShadow.text = str;
+        this.scoreText.text = str;
     }
 
     #endregion
@@ -131,17 +153,20 @@ public class PlayerUIController : UIController, IComponentValidator
 
     // NOTE : It's better to check for null for all required components once every frame rather than multiple times, which is why
     // the null checking code from each update function has been removed.
-    
+
     // For example, keeping each update method's own null checking would lead to needing to check for PlayerDataManager's instance to be null
     // more than once every frame, and that's just dumb.
-    
+
     // In short : we just check for all of the needs of all update methods in this function right here and call it a day. If any of them fails, we bail.
-    
+
     // The only downside is that now we can't partially update UI by allowing some parts to update while bailing on others. Now we either update all or fuck off.
-    
-    // Yes, it looks like a dumb micro optimization, but the point is not just the performance(an extra null check is basically free), the point is deduplicating
+
+    // Yes, it looks like a dumb micro optimization, but the point is not just the performance (an extra null check is basically free), the point is deduplicating
     // code and reduing points of failure, as well as making maintanance easier.
-    
+
+    // NOTE : Yes, I know, checking for null for so many components every single frame sucks dick big time, but that's the way things are right now... need more time
+    // to actually code things the right way, but deadlines are deadlines.
+
     public bool AllComponentsAreValid()
     {
         return
@@ -151,8 +176,12 @@ public class PlayerUIController : UIController, IComponentValidator
             PlayerDataManager.Instance != null &&
             PlayerDataManager.Instance.GetPlayerHealth() != null &&
             PlayerDataManager.Instance.GetPlayerSpellCaster() != null &&
-            this.moneyTextBack != null &&
-            this.moneyText != null
+            // PlayerDataManager.Instance.GetMoneyController() != null && etc...
+            GameManager.Instance != null &&
+            this.moneyTextShadow != null &&
+            this.moneyText != null &&
+            this.scoreTextShadow != null &&
+            this.scoreText != null
             ;
     }
 
