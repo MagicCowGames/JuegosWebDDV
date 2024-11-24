@@ -9,7 +9,7 @@ public class TestDummySpawnerController : MonoBehaviour
     #region Variables
 
     [SerializeField] private GameObject dummyPrefab;
-    [SerializeField] private Transform spawnTransform;
+    [SerializeField] private Transform[] spawnTransforms;
 
     #endregion
 
@@ -29,11 +29,17 @@ public class TestDummySpawnerController : MonoBehaviour
 
     #region PublicMethods
 
-    public void SpawnDummy()
+    public void SpawnDummy(Transform spawnTransform)
     {
-        var obj = ObjectSpawner.Spawn(this.dummyPrefab, this.spawnTransform);
+        var obj = ObjectSpawner.Spawn(this.dummyPrefab, spawnTransform);
         var dummy = obj.GetComponent<TestDummyController>();
         dummy.CanDie = true;
+    }
+
+    public void SpawnDummies()
+    {
+        foreach (var transform in this.spawnTransforms)
+            SpawnDummy(transform);
     }
 
     #endregion
