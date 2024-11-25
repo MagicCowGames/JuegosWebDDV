@@ -6,6 +6,8 @@ public class GameManager : Singleton<GameManager>
 {
     #region Variables
 
+    [SerializeField] private string musicName;
+
     /*
     public int Score { get; set; }
     public int Money { get; set; }
@@ -17,7 +19,7 @@ public class GameManager : Singleton<GameManager>
 
     void Start()
     {
-        
+        SoundManager.Instance?.PlayMusic(this.musicName);
     }
 
     void Update()
