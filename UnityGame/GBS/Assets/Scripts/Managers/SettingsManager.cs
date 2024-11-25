@@ -44,8 +44,7 @@ public class SettingsManager : SingletonPersistent<SettingsManager>
         var password = AccountManager.Instance.Account.password;
         var settingsStr = JsonUtility.ToJson(this.Settings);
 
-        string msg = $"/users/update/settings/{id}/{password}/{settingsStr}";
-        ConnectionManager.Instance.MakeRequest("GET", ConnectionManager.Instance.ServerAddress.http, msg);
+        ConnectionManager.Instance.MakeRequestToServer("GET", $"/users/update/settings/{id}/{password}/{settingsStr}");
     }
 
     #endregion
