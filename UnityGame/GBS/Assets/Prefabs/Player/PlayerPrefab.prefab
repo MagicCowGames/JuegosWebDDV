@@ -510,6 +510,7 @@ MonoBehaviour:
   controller: {fileID: 8574623358394360817}
   playerController: {fileID: 5165320198455412615}
   spellCasterController: {fileID: 5337233691746038891}
+  healthController: {fileID: 2132709503834204316}
   animator: {fileID: 1547275497802542496}
   forwardMovementName: ForwardMovement
   forwardMovementValue: 0
