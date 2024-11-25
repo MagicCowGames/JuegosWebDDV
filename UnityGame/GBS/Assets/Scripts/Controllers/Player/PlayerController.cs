@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private CharacterController characterController;
+    [SerializeField] private HealthController healthController;
 
     [Header("Transform")]
     [SerializeField] private Transform playerTransform;
@@ -129,6 +130,9 @@ public class PlayerController : MonoBehaviour
 
     private void UpdatePositionWalk(float delta)
     {
+        // Can't walk if we're dead!
+        if (this.healthController.IsDead())
+            return;
         // Can't walk while we're casting!
         if (this.spellCasterController.GetIsCasting())
             return;
@@ -144,6 +148,9 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateRotation(float delta)
     {
+        // Can't look around if we're dead!
+        if (this.healthController.IsDead())
+            return;
         // Rotate slower while we're casting to prevent beams from being insanely OP sniper lasers and to give them a little bit of extra eye-candy and a more weighted feel.
         if (this.spellCasterController.GetIsCasting())
             this.meshTransform.rotation = Quaternion.Lerp(this.meshTransform.rotation, targetRotation, delta * this.rotationSpeed);
@@ -169,7 +176,7 @@ public class PlayerController : MonoBehaviour
         UIManager.Instance?.GetPlayerUIController().UI_SetVisible(true);
 
         // Other Events
-        this.GetComponent<HealthController>().OnValueChanged += HealthUpdated;
+        this.healthController.OnDeath += HandleDeath;
 
         // User Input Events
         if (InputManager.Instance == null)
@@ -188,7 +195,7 @@ public class PlayerController : MonoBehaviour
         GameUtility.SetCanPause(false); // Same, fucking hack, need to find a cleaner way to do this shit.
 
         // Other Events
-        this.GetComponent<HealthController>().OnValueChanged -= HealthUpdated;
+        this.healthController.OnDeath -= HandleDeath;
 
         // User Input Events
         if (InputManager.Instance == null)
@@ -250,6 +257,7 @@ public class PlayerController : MonoBehaviour
 
     #region Other Events
 
+    // NOTE : Deprecated for now. Could be used to add stagger animations when taking damage or something like that.
     private void HealthUpdated(float oldValue, float newValue)
     {
         if (newValue <= 0.0f)
@@ -257,6 +265,18 @@ public class PlayerController : MonoBehaviour
             GameUtility.SetCanPause(false);
             UIManager.Instance.GetDeathUIController().UI_SetVisible(true);
         }
+    }
+
+    private void HandleDeath()
+    {
+        StartCoroutine("HandleDeathCoroutine");
+    }
+
+    private IEnumerator HandleDeathCoroutine()
+    {
+        GameUtility.SetCanPause(false); // We set the can pause to false before waiting for 2 seconds because that wait time is in real time, it does not account for time scale, which is what we use for pausing.
+        yield return new WaitForSeconds(2.0f);
+        UIManager.Instance.GetDeathUIController().UI_SetVisible(true);
     }
 
     #endregion

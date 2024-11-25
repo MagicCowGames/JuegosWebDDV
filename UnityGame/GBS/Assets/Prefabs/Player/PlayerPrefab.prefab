@@ -447,6 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 8574623358394360817}
+  healthController: {fileID: 2132709503834204316}
   playerTransform: {fileID: 2702904779677947871}
   meshTransform: {fileID: 1559667174321670356}
   cameraSocket: {fileID: 73816274605944134}
