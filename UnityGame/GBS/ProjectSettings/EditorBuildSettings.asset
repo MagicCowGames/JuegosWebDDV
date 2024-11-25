@@ -33,7 +33,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu/Account/MS_A_Delete.unity
     guid: 2899d2054da9fdf49805875349daf7ee
   - enabled: 1
-    path: Assets/Scenes/Menu/MenuScene_Settings.unity
+    path: Assets/Scenes/Menu/Settings/MenuScene_Settings.unity
     guid: 61e40eb2be5f76f469b877ac87a5a5e4
   - enabled: 1
     path: Assets/Scenes/Menu/MenuScene_Tutorial.unity
