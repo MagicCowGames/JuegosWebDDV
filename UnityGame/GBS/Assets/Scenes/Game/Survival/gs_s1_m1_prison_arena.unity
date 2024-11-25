@@ -8543,6 +8543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df46235fb701e744fbe133b5ac3df42e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicName: gameplay1
 --- !u!4 &593860327
 Transform:
   m_ObjectHideFlags: 0
