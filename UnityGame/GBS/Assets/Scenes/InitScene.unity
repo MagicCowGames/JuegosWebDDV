@@ -1629,7 +1629,11 @@ MonoBehaviour:
   effectsVolume: 0
   musicVolume: 0
   voiceVolume: 0
-  musicTracks: []
+  musicTracks:
+  - name: main
+    clip: {fileID: 8300000, guid: c3c446042d9a47342ab05cf492f4cb81, type: 3}
+  - name: death
+    clip: {fileID: 8300000, guid: e629e9bb4adeabb4381608167abebd67, type: 3}
 --- !u!1001 &1881615478
 PrefabInstance:
   m_ObjectHideFlags: 0
