@@ -1634,6 +1634,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: c3c446042d9a47342ab05cf492f4cb81, type: 3}
   - name: death
     clip: {fileID: 8300000, guid: e629e9bb4adeabb4381608167abebd67, type: 3}
+  - name: gameplay1
+    clip: {fileID: 8300000, guid: 70cde828377c5d542999b961072c76fe, type: 3}
 --- !u!1001 &1881615478
 PrefabInstance:
   m_ObjectHideFlags: 0
