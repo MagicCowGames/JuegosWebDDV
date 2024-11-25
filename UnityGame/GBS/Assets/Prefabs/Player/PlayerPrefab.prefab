@@ -455,6 +455,7 @@ MonoBehaviour:
   walkSpeed: 10
   rotationSpeed: 1
   spellCasterController: {fileID: 5337233691746038891}
+  deathSound: {fileID: 8300000, guid: b8d8c67774cde6e4ca7ff72baa8f2665, type: 3}
 --- !u!114 &2132709503834204316
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour
     [Header("Weapon Settings")]
     [SerializeField] private SpellCasterController spellCasterController;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip deathSound; // TODO : Again, add this to some sound manager or some shit...
+
     private Vector3 gravityVector;
 
     private Vector3 currentVelocity = Vector3.zero;
@@ -275,6 +278,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator HandleDeathCoroutine()
     {
         GameUtility.SetCanPause(false); // We set the can pause to false before waiting for 2 seconds because that wait time is in real time, it does not account for time scale, which is what we use for pausing.
+        AudioSource.PlayClipAtPoint(this.deathSound, CameraManager.Instance.GetActiveCamera().transform.position + CameraManager.Instance.GetActiveCamera().transform.forward * 3.0f);
         yield return new WaitForSeconds(2.0f);
         UIManager.Instance.GetDeathUIController().UI_SetVisible(true);
     }
