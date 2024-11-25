@@ -38,6 +38,8 @@ public class SoundManager : SingletonPersistent<SoundManager>
     [Header("Music Tracks")] // The audio clips used for music.
     [SerializeField] private MusicTrack[] musicTracks;
 
+    private string currentMusicName;
+
     #endregion
 
     #region MonoBehaviour
@@ -65,23 +67,21 @@ public class SoundManager : SingletonPersistent<SoundManager>
                 this.musicSource.loop = loop;
                 this.musicSource.clip = track.clip;
                 this.musicSource.Play();
+                this.currentMusicName = track.name;
                 return;
             }
-        }
-    }
-
-    public void PlayMusic(bool loop = true)
-    {
-        if (this.musicSource.clip != null)
-        {
-            this.musicSource.loop = loop;
-            this.musicSource.Play();
         }
     }
 
     public void StopMusic()
     {
         this.musicSource.Stop();
+        this.currentMusicName = "";
+    }
+
+    public bool IsPlayingMusic(string name)
+    {
+        return name == this.currentMusicName;
     }
 
     #endregion
