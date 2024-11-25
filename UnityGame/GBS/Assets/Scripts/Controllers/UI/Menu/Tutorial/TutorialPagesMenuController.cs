@@ -30,16 +30,6 @@ public class TutorialPagesMenuController : MonoBehaviour
         SceneLoadingManager.Instance?.LoadSceneMainMenu();
     }
 
-    public void Button_TutorialMenu()
-    {
-        SceneLoadingManager.Instance?.LoadScene("MenuScene_Tutorial_Pages");
-    }
-
-    public void Button_TutorialLevel()
-    {
-        SceneLoadingManager.Instance?.LoadScene("TutorialMap");
-    }
-
     #endregion
 
     #region PrivateMethods
