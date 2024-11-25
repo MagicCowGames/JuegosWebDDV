@@ -37,6 +37,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_language_name", "English" },
             { "loc_default", "Default" },
             { "loc_default_text", "Default Text"},
+            { "loc_next", "Next" },
+            { "loc_previous", "Previous" },
             
             // Loc Strings : Menu
             { "loc_play", "Play"},
@@ -138,6 +140,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_language_name", "Español" },
             { "loc_default", "Por defecto" },
             { "loc_default_text", "Texto por Defecto" },
+            { "loc_next", "Siguiente" },
+            { "loc_previous", "Anterior" },
             
             // Loc Strings : Menu
             { "loc_play", "Jugar" },
