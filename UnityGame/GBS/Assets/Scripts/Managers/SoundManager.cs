@@ -56,12 +56,13 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     #region PublicMethods
 
-    public void PlayMusic(string name)
+    public void PlayMusic(string name, bool loop = true)
     {
         foreach (var track in this.musicTracks)
         {
             if (track.name == name)
             {
+                this.musicSource.loop = loop;
                 this.musicSource.clip = track.clip;
                 this.musicSource.Play();
                 return;
@@ -69,9 +70,13 @@ public class SoundManager : SingletonPersistent<SoundManager>
         }
     }
 
-    public void PlayMusic()
+    public void PlayMusic(bool loop = true)
     {
-        this.musicSource.Play();
+        if (this.musicSource.clip != null)
+        {
+            this.musicSource.loop = loop;
+            this.musicSource.Play();
+        }
     }
 
     public void StopMusic()
