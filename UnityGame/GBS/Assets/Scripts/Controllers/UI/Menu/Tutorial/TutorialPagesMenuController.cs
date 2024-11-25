@@ -27,7 +27,7 @@ public class TutorialPagesMenuController : MonoBehaviour
 
     public void ReturnToMenu()
     {
-        SceneLoadingManager.Instance?.LoadSceneMainMenu();
+        SceneLoadingManager.Instance?.LoadSceneTutorial();
     }
 
     #endregion
