@@ -36,6 +36,7 @@ public class MainMeuController : MonoBehaviour
 
     public void LoadGame()
     {
+        SoundManager.Instance?.StopMusic();
         SceneLoadingManager.Instance?.LoadScene(/*"GS_PrisonCell"*/ "gs_s1_m1_prison_arena");
     }
 
