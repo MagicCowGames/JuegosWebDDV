@@ -41,11 +41,9 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             // Loc Strings : Menu
             { "loc_play", "Play"},
             { "loc_account", "Account" },
-            { "loc_settings", "Settings" },
             { "loc_credits", "Credits" },
             { "loc_return", "Return" },
             { "loc_language", "Language" },
-            { "loc_setting_language", "Choose Language" },
             { "loc_tutorial", "Tutorial" },
             { "loc_pause", "Pause" },
             { "loc_paused", "Paused" },
@@ -61,6 +59,12 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_scoreboard", "Scoreboard" },
             { "loc_victory", "Victory!" },
             { "loc_demo_thanks", "Thank you for playing the \"<color=#FF0000>Wizard's Death Wish</color>\" demo!\r\nStay tuned for more updates!" },
+
+            // Loc Strings : Settings
+            { "loc_settings", "Settings" },
+            { "loc_settings_language", "Choose Language" },
+            { "loc_settings_info_ui", "Display FPS" },
+            { "loc_settings_console", "Enable Console" },
 
             // Loc Strings : Actions (wtf is this name?)
             { "loc_use", "Use" },
@@ -136,11 +140,9 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             // Loc Strings : Menu
             { "loc_play", "Jugar" },
             { "loc_account", "Cuenta" },
-            { "loc_settings", "Opciones" }, // This used to be "Configuración", my beloved </3 :( but the fucking thing was too large to fit on the UI buttons. Oh well, too bad!
             { "loc_credits", "Créditos" },
             { "loc_return", "Volver" },
             { "loc_language", "Lenguaje" },
-            { "loc_setting_language", "Seleccionar Idioma" },
             { "loc_tutorial", "Tutorial" },
             { "loc_pause", "Pausar" },
             { "loc_paused", "Pausado" },
@@ -156,6 +158,12 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_scoreboard", "Tabla de Puntuación" },
             { "loc_victory", "¡Victoria!" },
             { "loc_demo_thanks", "¡Gracias por jugar la demo de \"<color=#FF0000>Wizard's Death Wish</color>\"!\r\n¡Estad atentos para más actualizaciones!" },
+
+            // Loc Strings : Settings
+            { "loc_settings", "Opciones" }, // This used to be "Configuración", my beloved </3 :( but the fucking thing was too large to fit on the UI buttons. Oh well, too bad!
+            { "loc_settings_language", "Seleccionar Idioma" },
+            { "loc_settings_info_ui", "Mostrar FPS" },
+            { "loc_settings_console", "Habilitar Consola" },
 
             // Loc Strings : Actions (wtf is this name?)
             { "loc_use", "Usar" },
