@@ -103,7 +103,7 @@ public class AccountManager : SingletonPersistent<AccountManager>
             popUp.Open("loc_error_connection_title", "loc_error_connection_message");
         };
 
-        ConnectionManager.Instance.MakeRequest("GET", ConnectionManager.Instance.ServerAddress.http, $"/users/add/{name}/{password}", callbacks);
+        ConnectionManager.Instance.MakeRequestToServer("GET", $"/users/add/{name}/{password}", callbacks);
     }
 
     public void AccessAccount(string name, string password)
@@ -149,7 +149,7 @@ public class AccountManager : SingletonPersistent<AccountManager>
             popUp.Open("loc_error_connection_title", "loc_error_connection_message");
         };
 
-        ConnectionManager.Instance.MakeRequest("GET", ConnectionManager.Instance.ServerAddress.http, $"/users/login/{name}/{password}", callbacks);
+        ConnectionManager.Instance.MakeRequestToServer("GET", $"/users/login/{name}/{password}", callbacks);
     }
 
     public void LogOut()
@@ -190,7 +190,7 @@ public class AccountManager : SingletonPersistent<AccountManager>
         };
 
         var id = this.Account.id;
-        ConnectionManager.Instance.MakeRequest("GET", ConnectionManager.Instance.ServerAddress.http, $"/users/delete/{id}/{password}", callbacks);
+        ConnectionManager.Instance.MakeRequestToServer("GET", $"/users/delete/{id}/{password}", callbacks);
     }
 
     public void ModifyAccount(string oldName, string oldPassword, string newName, string newPassword, ConnectionManager.RequestCallbacks callbacks)
