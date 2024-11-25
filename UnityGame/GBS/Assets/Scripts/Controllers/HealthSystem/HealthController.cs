@@ -27,12 +27,13 @@ public class HealthController : MonoBehaviour
             if (this.health > 0.0f)
             {
                 this.hasDied = false;
+                this.OnRevive?.Invoke();
             }
             else
             if (!this.hasDied && this.health <= this.healthMin)
             {
-                this.OnDeath?.Invoke();
                 this.hasDied = true;
+                this.OnDeath?.Invoke();
             }
         }
     }
@@ -42,6 +43,7 @@ public class HealthController : MonoBehaviour
 
     public Action<float, float> OnValueChanged;
     public Action OnDeath;
+    public Action OnRevive;
 
     #endregion
 
@@ -79,7 +81,12 @@ public class HealthController : MonoBehaviour
     public bool IsAlive()
     {
         // har har har such a smart function!!! Yes, I know, this is indeed a real thing, leave me alone...
-        return this.health > 0.0f;
+        return this.health > this.healthMin;
+    }
+
+    public bool IsDead()
+    {
+        return this.Health <= this.healthMin;
     }
 
     public void ForceSetHealth(float value)
