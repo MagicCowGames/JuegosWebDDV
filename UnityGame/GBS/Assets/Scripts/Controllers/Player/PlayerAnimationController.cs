@@ -13,6 +13,7 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] private CharacterController controller;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private SpellCasterController spellCasterController;
+    [SerializeField] private HealthController healthController;
 
     [Header("Animation Controller")]
     [SerializeField] private Animator animator;
@@ -51,7 +52,8 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void Init()
     {
-
+        this.healthController.OnDeath += () => { this.animator?.Play("Base Layer.Death"); };
+        this.healthController.OnRevive += () => { this.animator?.Play("Base Layer.Motion"); }; // TODO : Create revive animation and in the animator state machine make a transition to motion once it's done playing the revive anim.
     }
 
     private void UpdateAnimation(float delta)
