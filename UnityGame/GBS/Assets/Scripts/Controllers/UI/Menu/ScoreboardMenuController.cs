@@ -69,7 +69,13 @@ public class ScoreboardMenuController : MonoBehaviour
             SetEntriesEmpty("N/A");
             SetEntries(list);
         };
-        ConnectionManager.Instance.MakeRequestToServer("GET", $"/score/descending/slice/0/{len}", callbacks);
+        callbacks.OnError += (err) => {
+            DebugManager.Instance?.Log($"err = {err}");
+        };
+        callbacks.OnConnectionError += () => {
+            DebugManager.Instance?.Log("Connection Error");
+        };
+        ConnectionManager.Instance.MakeRequestToServer("GET", $"/score/descending/slice/0/10", callbacks);
     }
 
     #endregion
