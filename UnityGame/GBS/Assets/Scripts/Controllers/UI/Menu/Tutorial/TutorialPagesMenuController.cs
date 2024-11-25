@@ -25,10 +25,16 @@ public class TutorialPagesMenuController : MonoBehaviour
 
     #region PublicMethods
 
-    public void ReturnToMenu()
+    public void Button_Return()
     {
         SceneLoadingManager.Instance?.LoadSceneTutorial();
     }
+
+    public void Button_Next()
+    { }
+
+    public void Button_Previous()
+    { }
 
     #endregion
 
