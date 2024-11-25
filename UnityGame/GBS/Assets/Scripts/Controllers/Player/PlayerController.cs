@@ -281,6 +281,7 @@ public class PlayerController : MonoBehaviour
         AudioSource.PlayClipAtPoint(this.deathSound, CameraManager.Instance.GetActiveCamera().transform.position + CameraManager.Instance.GetActiveCamera().transform.forward * 3.0f);
         yield return new WaitForSeconds(2.0f);
         UIManager.Instance.GetDeathUIController().UI_SetVisible(true);
+        SoundManager.Instance.PlayMusic("death", false);
     }
 
     #endregion
