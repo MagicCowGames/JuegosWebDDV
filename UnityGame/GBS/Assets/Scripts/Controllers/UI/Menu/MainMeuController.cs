@@ -14,7 +14,10 @@ public class MainMeuController : MonoBehaviour
 
     void Start()
     {
-        
+        // Play the main menu music each time we go back to the main menu, but don't start playing it again if we're already playing this theme to prevent
+        // cuts in audio when moving from a sub-menu back to main menu.
+        if (!SoundManager.Instance.IsPlayingMusic("main"))
+            SoundManager.Instance?.PlayMusic("main");
     }
 
     void Update()
