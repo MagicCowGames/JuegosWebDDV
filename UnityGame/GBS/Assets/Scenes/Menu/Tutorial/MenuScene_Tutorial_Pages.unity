@@ -207,8 +207,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2049583494}
-        m_TargetAssemblyTypeName: TutorialMenuController, Assembly-CSharp
-        m_MethodName: ReturnToMenu
+        m_TargetAssemblyTypeName: TutorialPagesMenuController, Assembly-CSharp
+        m_MethodName: Button_Previous
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -634,7 +634,7 @@ GameObject:
   - component: {fileID: 1299315534}
   - component: {fileID: 1299315533}
   m_Layer: 0
-  m_Name: ReturnButton
+  m_Name: Button_Return
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -705,8 +705,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2049583494}
-        m_TargetAssemblyTypeName: TutorialMenuController, Assembly-CSharp
-        m_MethodName: ReturnToMenu
+        m_TargetAssemblyTypeName: TutorialPagesMenuController, Assembly-CSharp
+        m_MethodName: Button_Return
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1078,8 +1078,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2049583494}
-        m_TargetAssemblyTypeName: TutorialMenuController, Assembly-CSharp
-        m_MethodName: ReturnToMenu
+        m_TargetAssemblyTypeName: TutorialPagesMenuController, Assembly-CSharp
+        m_MethodName: Button_Next
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1169,7 +1169,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2049583492}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ba813920e4f24d4885eb463cc33a065, type: 3}
+  m_Script: {fileID: 11500000, guid: 548d1c85bbc6fe547b3e2da8635cba96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2124717924
