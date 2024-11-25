@@ -109,6 +109,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             // Loc Strings : Tutorial
             { "loc_tutorial_message_0", "Welcome to the training room! Here, aspiring wizards such as yourself can practice with their spells and learn to spell like a real wizard. Take a look around and explore to learn how to use your magic." },
             { "loc_tutorial_message_1", "Explore the area ahead. There are plenty of things to do. When you are done training, pause and go to the menu. Beware of evil ghosts!" },
+            { "loc_tutorial_menu", "Read Tutorial" },
+            { "loc_tutorial_map", "Play Tutorial" },
 
             // Loc Strings : Points and Currency
             { "loc_experience", "Experience" },
@@ -208,6 +210,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             // Loc Strings : Tutorial
             { "loc_tutorial_message_0", "¡Bienvenido a la sala de entrenamiento! Aquí, los aspirantes a mago pueden practicar sus conjuros y aprender a conjurar como verdaderos hechiceros. Explora y aprende a usar tu magia." }, // This translation was kinda butchered due fact that the tutorial screen did not have enough space to display it... FUCK.
             { "loc_tutorial_message_1", "Explora el área. Hay muchas cosas por hacer. Cuando hayas terminado de entrenar, pausa y vuelve al menú. ¡Cuidado con los fantasmas malignos!" },
+            { "loc_tutorial_menu", "Leer Tutorial" },
+            { "loc_tutorial_map", "Jugar Tutorial" },
 
             // Loc Strings : Points and Currency
             { "loc_experience", "Experiencia" },
