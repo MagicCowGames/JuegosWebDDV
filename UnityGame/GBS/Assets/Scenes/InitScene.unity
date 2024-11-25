@@ -1440,7 +1440,7 @@ MonoBehaviour:
   serverPort: 27015
   fetchLocation: https://raw.githubusercontent.com/MagicCowGames/MagicCowGamesFiles/refs/heads/main/data/addresses.json
   gameNameString: wdw
-  fetchAddress: 0
+  fetchAddress: 1
 --- !u!114 &1820937354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1468,7 +1468,7 @@ MonoBehaviour:
   versionData:
     major: 1
     minor: 0
-    patch: 1
+    patch: 2
     type: 1
     name: 
 --- !u!114 &1820937356
