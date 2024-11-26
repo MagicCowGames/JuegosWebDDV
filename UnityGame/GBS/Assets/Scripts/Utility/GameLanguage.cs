@@ -150,6 +150,7 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_tut_pages_30", "Ice" },
             { "loc_tut_pages_31", "Opposites" },
             { "loc_tut_pages_32", "Opposite elements cancel eachother out." },
+            { "loc_tut_pages_33", "Examples" },
 
             // Loc Strings : Points and Currency
             { "loc_experience", "Experience" },
@@ -290,6 +291,7 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_tut_pages_30", "Hielo" },
             { "loc_tut_pages_31", "Opuestos" },
             { "loc_tut_pages_32", "Los elementos opuestos se cancelan." },
+            { "loc_tut_pages_33", "Ejemplos" },
 
             // Loc Strings : Points and Currency
             { "loc_experience", "Experiencia" },
