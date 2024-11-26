@@ -3535,6 +3535,7 @@ GameObject:
   - component: {fileID: 780461013}
   - component: {fileID: 780461015}
   - component: {fileID: 780461014}
+  - component: {fileID: 780461016}
   m_Layer: 0
   m_Name: Title
   m_TagString: Untagged
@@ -3581,7 +3582,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Opuestos
+  m_text: Opposites
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3658,6 +3659,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 780461012}
   m_CullTransparentMesh: 1
+--- !u!114 &780461016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780461012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d353e772aff67664b9966fda159838b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localizationString: loc_tut_pages_31
 --- !u!1 &832262121
 GameObject:
   m_ObjectHideFlags: 0
@@ -8366,6 +8380,7 @@ GameObject:
   - component: {fileID: 1715969372}
   - component: {fileID: 1715969374}
   - component: {fileID: 1715969373}
+  - component: {fileID: 1715969375}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -8412,7 +8427,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Los elementos opuestos se cancelan.
+  m_text: Opposite elements cancel eachother out.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8489,6 +8504,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1715969371}
   m_CullTransparentMesh: 1
+--- !u!114 &1715969375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715969371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d353e772aff67664b9966fda159838b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localizationString: loc_tut_pages_32
 --- !u!1 &1737577190
 GameObject:
   m_ObjectHideFlags: 0
