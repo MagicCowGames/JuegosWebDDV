@@ -144,6 +144,10 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_tut_pages_24", "You can combine up to 5 elements.\r\nEach element has a different effect." },
             { "loc_tut_pages_25", "Empty queue" },
             { "loc_tut_pages_26", "Filled queue" },
+            { "loc_tut_pages_27", "Combinations" },
+            { "loc_tut_pages_28", "There are subelements that can be obtained by combining other elements." },
+            { "loc_tut_pages_29", "Steam" },
+            { "loc_tut_pages_30", "Ice" },
 
             // Loc Strings : Points and Currency
             { "loc_experience", "Experience" },
@@ -278,6 +282,10 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_tut_pages_24", "Puedes combinar hasta 5 elementos.\r\nCada elemento tiene un efecto diferente." },
             { "loc_tut_pages_25", "Caja vacía" },
             { "loc_tut_pages_26", "Caja llena" },
+            { "loc_tut_pages_27", "Combinaciones" },
+            { "loc_tut_pages_28", "Existen subelementos que pueden ser creados al combinar otros elementos." },
+            { "loc_tut_pages_29", "Vapor" },
+            { "loc_tut_pages_30", "Hielo" },
 
             // Loc Strings : Points and Currency
             { "loc_experience", "Experiencia" },
