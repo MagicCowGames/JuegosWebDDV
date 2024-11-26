@@ -11,6 +11,7 @@ public class TutorialSceneController : MonoBehaviour
 
     void Start()
     {
+        SoundManager.Instance?.PlayMusic("gameplay1");
         UIManager.Instance?.GetPopUpUIController().Open("loc_tutorial", "loc_tutorial_message_0");
     }
 
