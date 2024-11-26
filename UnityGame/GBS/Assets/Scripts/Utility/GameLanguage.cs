@@ -121,6 +121,15 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_tut_pages_1", "The mouse is used to move and cast spells.\r\nThe mouse pointer determines the aiming direction." },
             { "loc_tut_pages_2", "RMB\r\nMovement" },
             { "loc_tut_pages_3", "LMB\r\nCast Spell" },
+            { "loc_tut_pages_4", "Elements" },
+            { "loc_tut_pages_5", "The elements determine the effects of the spell.\r\nA spell can combine multiple elements." },
+            { "loc_tut_pages_6", "Q : Water" },
+            { "loc_tut_pages_7", "F : Fire" },
+            { "loc_tut_pages_8", "R : Cold" },
+            { "loc_tut_pages_9", "A : Electricity" },
+            { "loc_tut_pages_10", "W : Healing" },
+            { "loc_tut_pages_11", "D : Earth" },
+            { "loc_tut_pages_12", "S : Death" },
 
             // Loc Strings : Points and Currency
             { "loc_experience", "Experience" },
@@ -232,6 +241,15 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_tut_pages_1", "El ratón es utilizado para desplazarse y lanzar conjuros.\r\nEl puntero determina la dirección en la que mira el jugador." },
             { "loc_tut_pages_2", "RMB\r\nDesplazamiento" },
             { "loc_tut_pages_3", "LMB\r\nLanzar Conjuro" },
+            { "loc_tut_pages_4", "Elementos" },
+            { "loc_tut_pages_5", "Los elementos determinan los efectos del conjuro.\r\nUn conjuro puede combinar múltiples elementos." },
+            { "loc_tut_pages_6", "Q : Agua" },
+            { "loc_tut_pages_7", "F : Fuego" },
+            { "loc_tut_pages_8", "R : Frío" },
+            { "loc_tut_pages_9", "A : Electricidad" },
+            { "loc_tut_pages_10", "W : Curación" },
+            { "loc_tut_pages_11", "D : Tierra" },
+            { "loc_tut_pages_12", "S : Muerte" },
 
             // Loc Strings : Points and Currency
             { "loc_experience", "Experiencia" },
