@@ -187,8 +187,11 @@ public class InputManager : Singleton<InputManager>
 
         // NOTE : Legacy input
         // TODO : Remove in the future?
+        // NOTE : Removed because of beta testing in class lolololo
+        /*
         if (Input.GetKeyDown(KeyCode.E))
             SetForm(Form.Shield);
+        */
     }
 
     private void UIK_Other()
