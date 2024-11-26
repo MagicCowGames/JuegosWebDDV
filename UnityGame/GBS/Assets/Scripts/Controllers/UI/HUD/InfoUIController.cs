@@ -13,6 +13,8 @@ public class InfoUIController : UIController
 
     [Header("Info UI Configuration")]
     [SerializeField] private float fpsUpdateTime = 0.4f;
+    [SerializeField] private bool displayVersion = true;
+    [SerializeField] private bool displayFPS = false;
 
     private float accumulatedTime = 0.0f;
     private int accumulatedFrames = 0;
@@ -39,6 +41,7 @@ public class InfoUIController : UIController
     void Update()
     {
         this.UpdateFps(Time.unscaledDeltaTime);
+        this.UpdateVisibility();
     }
 
     #endregion
@@ -74,6 +77,12 @@ public class InfoUIController : UIController
     {
         string str = $"Version {version.major}.{version.minor}.{version.patch} - {version.type}{(version.name.Trim().Length > 0 ? $" - {version.name}" : "")}";
         this.versionText.text = str;
+    }
+
+    private void UpdateVisibility()
+    {
+        this.fpsText.gameObject.SetActive(this.displayFPS);
+        this.versionText.gameObject.SetActive(this.displayVersion);
     }
 
     #endregion
