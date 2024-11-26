@@ -108,13 +108,19 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_test_dummy_spawn", "Step on the pressure plate to spawn a dummy" },
             { "loc_test_ghost_spawn", "Step on the pressure plate to spawn a ghost" },
 
-            // Loc Strings : Tutorial
+            // Loc Strings : Tutorial Level
             { "loc_tutorial_message_0", "Welcome to the training room! Here, aspiring wizards such as yourself can practice with their spells and learn to spell like a real wizard. Take a look around and explore to learn how to use your magic." },
             { "loc_tutorial_message_1", "Explore the area ahead. There are plenty of things to do. When you are done training, pause and go to the menu. Beware of evil ghosts!" },
+            
+            // Loc Strings : Tutorial Menu
             { "loc_tutorial_menu", "Read Tutorial" },
             { "loc_tutorial_map", "Play Tutorial" },
-            { "loc_tutorial_page_0_title", "Controls" },
-            { "loc_tutorial_page_0_msg_0", "" },
+
+            // Loc Strings : Tutorial Pages
+            { "loc_tut_pages_0", "Controls" },
+            { "loc_tut_pages_1", "The mouse is used to move and cast spells.\r\nThe mouse pointer determines the aiming direction." },
+            { "loc_tut_pages_2", "RMB\r\nMovement" },
+            { "loc_tut_pages_3", "LMB\r\nCast Spell" },
 
             // Loc Strings : Points and Currency
             { "loc_experience", "Experience" },
@@ -213,13 +219,19 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_test_dummy_spawn", "Pisa la placa de presión para spawner un muñeco" },
             { "loc_test_ghost_spawn", "Pisa la placa de presión para spawner un fantasma" },
 
-            // Loc Strings : Tutorial
+            // Loc Strings : Tutorial Level
             { "loc_tutorial_message_0", "¡Bienvenido a la sala de entrenamiento! Aquí, los aspirantes a mago pueden practicar sus conjuros y aprender a conjurar como verdaderos hechiceros. Explora y aprende a usar tu magia." }, // This translation was kinda butchered due fact that the tutorial screen did not have enough space to display it... FUCK.
             { "loc_tutorial_message_1", "Explora el área. Hay muchas cosas por hacer. Cuando hayas terminado de entrenar, pausa y vuelve al menú. ¡Cuidado con los fantasmas malignos!" },
+            
+            // Loc Strings : Tutorial Menu
             { "loc_tutorial_menu", "Leer Tutorial" },
             { "loc_tutorial_map", "Jugar Tutorial" },
-            { "loc_tutorial_page_0_title", "Controles" },
-            { "loc_tutorial_page_0_msg_0", "" },
+            
+            // Loc Strings : Tutorial Pages
+            { "loc_tut_pages_0", "Controles" },
+            { "loc_tut_pages_1", "El ratón es utilizado para desplazarse y lanzar conjuros.\r\nEl puntero determina la dirección en la que mira el jugador." },
+            { "loc_tut_pages_2", "RMB\r\nDesplazamiento" },
+            { "loc_tut_pages_3", "LMB\r\nLanzar Conjuro" },
 
             // Loc Strings : Points and Currency
             { "loc_experience", "Experiencia" },
