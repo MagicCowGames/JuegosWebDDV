@@ -130,6 +130,11 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_tut_pages_10", "W : Healing" },
             { "loc_tut_pages_11", "D : Earth" },
             { "loc_tut_pages_12", "S : Death" },
+            { "loc_tut_pages_13", "Forms" },
+            { "loc_tut_pages_14", "The form determines the physical manifestation of the spell" },
+            { "loc_tut_pages_15", "1 : Projectile" },
+            { "loc_tut_pages_16", "2 : Beam" },
+            { "loc_tut_pages_17", "3 : Shield" },
 
             // Loc Strings : Points and Currency
             { "loc_experience", "Experience" },
@@ -250,6 +255,11 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_tut_pages_10", "W : Curación" },
             { "loc_tut_pages_11", "D : Tierra" },
             { "loc_tut_pages_12", "S : Muerte" },
+            { "loc_tut_pages_13", "Formas" },
+            { "loc_tut_pages_14", "La forma determina la manifestación física del conjuro" },
+            { "loc_tut_pages_15", "1 : Proyectil" },
+            { "loc_tut_pages_16", "2 : Rayo" },
+            { "loc_tut_pages_17", "3 : Escudo" },
 
             // Loc Strings : Points and Currency
             { "loc_experience", "Experiencia" },
