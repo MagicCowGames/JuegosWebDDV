@@ -135,11 +135,15 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_tut_pages_15", "1 : Projectile" },
             { "loc_tut_pages_16", "2 : Beam" },
             { "loc_tut_pages_17", "3 : Shield" },
-            { "loc_tut_pages_18", "Elemental Queue" },
-            { "loc_tut_pages_19", "The elemental queue is used to create spells. First choose a form. Then combine the elements." },
+            { "loc_tut_pages_18", "Element Queue" },
+            { "loc_tut_pages_19", "The element queue is used to create spells. First choose the form. Then combine the elements." },
             { "loc_tut_pages_20", "Form" },
             { "loc_tut_pages_21", "Elements" },
             { "loc_tut_pages_22", "Spell" },
+            { "loc_tut_pages_23", "Element Queue" },
+            { "loc_tut_pages_24", "You can combine up to 5 elements.\r\nEach element has a different effect." },
+            { "loc_tut_pages_25", "Empty queue" },
+            { "loc_tut_pages_26", "Filled queue" },
 
             // Loc Strings : Points and Currency
             { "loc_experience", "Experience" },
@@ -270,6 +274,10 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_tut_pages_20", "Forma" },
             { "loc_tut_pages_21", "Elementos" },
             { "loc_tut_pages_22", "Conjuro" },
+            { "loc_tut_pages_23", "Caja de Hechizos" },
+            { "loc_tut_pages_24", "Puedes combinar hasta 5 elementos.\r\nCada elemento tiene un efecto diferente." },
+            { "loc_tut_pages_25", "Caja vacía" },
+            { "loc_tut_pages_26", "Caja llena" },
 
             // Loc Strings : Points and Currency
             { "loc_experience", "Experiencia" },

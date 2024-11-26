@@ -1820,6 +1820,7 @@ GameObject:
   - component: {fileID: 328232633}
   - component: {fileID: 328232635}
   - component: {fileID: 328232634}
+  - component: {fileID: 328232636}
   m_Layer: 0
   m_Name: Text (5)
   m_TagString: Untagged
@@ -1866,7 +1867,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Caja llena
+  m_text: Filled queue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1943,6 +1944,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 328232632}
   m_CullTransparentMesh: 1
+--- !u!114 &328232636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328232632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d353e772aff67664b9966fda159838b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localizationString: loc_tut_pages_26
 --- !u!1 &347388111
 GameObject:
   m_ObjectHideFlags: 0
@@ -2090,6 +2104,7 @@ GameObject:
   - component: {fileID: 349590918}
   - component: {fileID: 349590920}
   - component: {fileID: 349590919}
+  - component: {fileID: 349590921}
   m_Layer: 0
   m_Name: Text (4)
   m_TagString: Untagged
@@ -2136,7 +2151,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Caja vac\xEDa"
+  m_text: Empty queue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2213,6 +2228,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349590917}
   m_CullTransparentMesh: 1
+--- !u!114 &349590921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349590917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d353e772aff67664b9966fda159838b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localizationString: loc_tut_pages_25
 --- !u!1001 &351923272
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4763,7 +4791,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Elemental Queue
+  m_text: Element Queue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6584,6 +6612,7 @@ GameObject:
   - component: {fileID: 1404646425}
   - component: {fileID: 1404646427}
   - component: {fileID: 1404646426}
+  - component: {fileID: 1404646428}
   m_Layer: 0
   m_Name: Title
   m_TagString: Untagged
@@ -6630,7 +6659,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Caja de Hechizos
+  m_text: Element Queue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6707,6 +6736,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1404646424}
   m_CullTransparentMesh: 1
+--- !u!114 &1404646428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404646424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d353e772aff67664b9966fda159838b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localizationString: loc_tut_pages_23
 --- !u!1 &1463621849
 GameObject:
   m_ObjectHideFlags: 0
@@ -7016,6 +7058,7 @@ GameObject:
   - component: {fileID: 1567654769}
   - component: {fileID: 1567654771}
   - component: {fileID: 1567654770}
+  - component: {fileID: 1567654772}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -7062,10 +7105,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Puedes combinar hasta 5 elementos.
+  m_text: 'You can combine up to 5 elements.
 
-    Cada elemento tiene un efecto
-    diferente.'
+    Each element has a different effect.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7142,6 +7184,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1567654768}
   m_CullTransparentMesh: 1
+--- !u!114 &1567654772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567654768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d353e772aff67664b9966fda159838b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localizationString: loc_tut_pages_24
 --- !u!1 &1571107657
 GameObject:
   m_ObjectHideFlags: 0
@@ -9665,7 +9720,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The elemental queue is used to create spells. First choose a form. Then
+  m_text: The element queue is used to create spells. First choose the form. Then
     combine the elements.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
