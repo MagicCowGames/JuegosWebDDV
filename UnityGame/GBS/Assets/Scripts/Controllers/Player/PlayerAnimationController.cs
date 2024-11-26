@@ -53,7 +53,8 @@ public class PlayerAnimationController : MonoBehaviour
     private void Init()
     {
         this.healthController.OnDeath += () => { this.animator?.Play("Base Layer.Death"); };
-        this.healthController.OnRevive += () => { this.animator?.Play("Base Layer.Motion"); }; // TODO : Create revive animation and in the animator state machine make a transition to motion once it's done playing the revive anim.
+        // NOTE : Temporarily disabled because otherwise the animation will get fucked if the player dies while they are being healed.
+        // this.healthController.OnRevive += () => { this.animator?.Play("Base Layer.Revive"); }; // TODO : Create revive animation and in the animator state machine make a transition to motion once it's done playing the revive anim.
     }
 
     private void UpdateAnimation(float delta)
