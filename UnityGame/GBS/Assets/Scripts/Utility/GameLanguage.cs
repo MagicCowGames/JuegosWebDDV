@@ -135,6 +135,11 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_tut_pages_15", "1 : Projectile" },
             { "loc_tut_pages_16", "2 : Beam" },
             { "loc_tut_pages_17", "3 : Shield" },
+            { "loc_tut_pages_18", "Elemental Queue" },
+            { "loc_tut_pages_19", "The elemental queue is used to create spells. First choose a form. Then combine the elements." },
+            { "loc_tut_pages_20", "Form" },
+            { "loc_tut_pages_21", "Elements" },
+            { "loc_tut_pages_22", "Spell" },
 
             // Loc Strings : Points and Currency
             { "loc_experience", "Experience" },
@@ -260,6 +265,11 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_tut_pages_15", "1 : Proyectil" },
             { "loc_tut_pages_16", "2 : Rayo" },
             { "loc_tut_pages_17", "3 : Escudo" },
+            { "loc_tut_pages_18", "Caja de Hechizos" },
+            { "loc_tut_pages_19", "La caja de hechizos sirve para crear conjuros. Primero se selecciona la forma. Luego se combinan elementos." },
+            { "loc_tut_pages_20", "Forma" },
+            { "loc_tut_pages_21", "Elementos" },
+            { "loc_tut_pages_22", "Conjuro" },
 
             // Loc Strings : Points and Currency
             { "loc_experience", "Experiencia" },
