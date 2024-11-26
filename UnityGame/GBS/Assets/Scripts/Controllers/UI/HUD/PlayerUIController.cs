@@ -142,7 +142,7 @@ public class PlayerUIController : UIController, IComponentValidator
 
     private void UpdateScoreDisplay()
     {
-        string str = $"{PlayerDataManager.Instance.GetPlayerScore().Score} pts";
+        string str = $" {PlayerDataManager.Instance.GetPlayerScore().Score}";
         this.scoreTextShadow.text = str;
         this.scoreText.text = str;
     }
