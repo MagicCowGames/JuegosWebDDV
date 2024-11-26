@@ -113,6 +113,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_tutorial_message_1", "Explore the area ahead. There are plenty of things to do. When you are done training, pause and go to the menu. Beware of evil ghosts!" },
             { "loc_tutorial_menu", "Read Tutorial" },
             { "loc_tutorial_map", "Play Tutorial" },
+            { "loc_tutorial_page_0_title", "Controls" },
+            { "loc_tutorial_page_0_msg_0", "" },
 
             // Loc Strings : Points and Currency
             { "loc_experience", "Experience" },
@@ -216,6 +218,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_tutorial_message_1", "Explora el área. Hay muchas cosas por hacer. Cuando hayas terminado de entrenar, pausa y vuelve al menú. ¡Cuidado con los fantasmas malignos!" },
             { "loc_tutorial_menu", "Leer Tutorial" },
             { "loc_tutorial_map", "Jugar Tutorial" },
+            { "loc_tutorial_page_0_title", "Controles" },
+            { "loc_tutorial_page_0_msg_0", "" },
 
             // Loc Strings : Points and Currency
             { "loc_experience", "Experiencia" },
