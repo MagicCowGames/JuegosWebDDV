@@ -50,6 +50,7 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
 
     private Form form;
     private ElementQueue elementQueue;
+    private Form formTemp; // This one has a funny story... about beams.... and beams... A temporary / "internal" copy of the form used to handle spells after the spell has been executed. For example, if we used a single form var, then a bug would happen where changing the form while casting a beam spell would cause the handle stop casting function for beam form to not be executed, which leaves an infinitely running beam in front of the player XD
     private ElementQueue elementQueueTemp; // A temporary / "internal" copy of the element queue used to handle spells after the queue has been cleared.
     private bool isCasting;
 
@@ -162,6 +163,9 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
         this.elementQueueTemp = new ElementQueue(this.elementQueue); // This copy kinda hurts my soul... :( won't anyone think of the performance and the memory fragmentation??? lmao...
         this.elementQueue.Clear();
 
+        // Update the temporary form by making a copy of the original one.
+        this.formTemp = this.form;
+
         HandleStartCasting();
     }
     public void StopCasting()
@@ -222,8 +226,8 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
 
     public void HandleStartCasting()
     {
-        DebugManager.Instance?.Log($"HandleStartCasting() with form \"{this.form}\"");
-        switch (this.form)
+        DebugManager.Instance?.Log($"HandleStartCasting() with form \"{this.formTemp}\"");
+        switch (this.formTemp)
         {
             default:
             case Form.Projectile:
@@ -239,8 +243,8 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
     }
     public void HandleStopCasting()
     {
-        DebugManager.Instance?.Log($"HandleStopCasting() with form \"{this.form}\"");
-        switch (this.form)
+        DebugManager.Instance?.Log($"HandleStopCasting() with form \"{this.formTemp}\"");
+        switch (this.formTemp)
         {
             default:
             case Form.Projectile:
