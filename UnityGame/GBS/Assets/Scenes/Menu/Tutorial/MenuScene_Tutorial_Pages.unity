@@ -10225,10 +10225,14 @@ MonoBehaviour:
   buttonBack: {fileID: 281295843}
   buttonNext: {fileID: 1989489266}
   pages:
-  - {fileID: 386631599}
   - {fileID: 1080066796}
+  - {fileID: 386631599}
+  - {fileID: 1792965219}
   - {fileID: 1938391021}
+  - {fileID: 670874276}
   - {fileID: 1323709295}
+  - {fileID: 1963118372}
+  - {fileID: 372428305}
 --- !u!1 &2052202553
 GameObject:
   m_ObjectHideFlags: 0
