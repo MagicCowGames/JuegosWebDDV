@@ -68,6 +68,13 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_settings_choose_language", "Choose Language" },
             { "loc_settings_info_ui", "Display FPS" },
             { "loc_settings_console", "Enable Console" },
+            { "loc_settings_quality", "Quality" },
+            { "loc_settings_quality_0", "Very Low" },
+            { "loc_settings_quality_1", "Low" },
+            { "loc_settings_quality_2", "Medium" },
+            { "loc_settings_quality_3", "High" },
+            { "loc_settings_quality_4", "Very High" },
+            { "loc_settings_quality_5", "Ultra" },
 
             // Loc Strings : Actions (wtf is this name?)
             { "loc_use", "Use" },
@@ -210,6 +217,13 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_Settings_choose_language", "Seleccionar Idioma" },
             { "loc_settings_info_ui", "Mostrar FPS" },
             { "loc_settings_console", "Habilitar Consola" },
+            { "loc_settings_quality", "Quality" },
+            { "loc_settings_quality_0", "Very Low" },
+            { "loc_settings_quality_1", "Low" },
+            { "loc_settings_quality_2", "Medium" },
+            { "loc_settings_quality_3", "High" },
+            { "loc_settings_quality_4", "Very High" },
+            { "loc_settings_quality_5", "Ultra" },
 
             // Loc Strings : Actions (wtf is this name?)
             { "loc_use", "Usar" },
