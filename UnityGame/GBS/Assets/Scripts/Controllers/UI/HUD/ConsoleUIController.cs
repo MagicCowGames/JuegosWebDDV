@@ -92,6 +92,7 @@ public class ConsoleUIController : UIController
             new Cmd("popmeup", "Display a popup on screen with a funny message", "", 0, CmdPopMeUp),
             new Cmd("popmeup2", "Display a popup on screen with the specified title and message", "<title> <message>", 2, CmdPopMeUp2),
             new Cmd("timescale", "Change the game's timescale", "<scale>", 1, CmdTimeScale),
+            new Cmd("showfps", "Change the visibility of the FPS display", "<display>", 1, CmdShowFps),
             // TODO : Add commands to get the current map name and the current language or something...
         };
         // TODO : Make an alias system of sorts, or maybe make it so that we can have a dict / list system to have multiple overloads for the same command
@@ -480,6 +481,13 @@ public class ConsoleUIController : UIController
         string arg = args[startIndex + 1];
         float scale = CmdParseFloat(arg);
         Time.timeScale = scale;
+    }
+
+    private void CmdShowFps(string[] args, int startIndex)
+    {
+        string arg = args[startIndex + 1];
+        bool show = CmdParseBool(arg);
+        UIManager.Instance.GetInfoUI().DisplayFPS = show;
     }
 
     #endregion
