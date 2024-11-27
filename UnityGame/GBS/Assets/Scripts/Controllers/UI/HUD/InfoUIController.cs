@@ -21,6 +21,9 @@ public class InfoUIController : UIController
 
     private float fps = 0.0f;
 
+    public bool DisplayVersion { get { return this.displayVersion; } set { this.displayVersion = value; } }
+    public bool DisplayFPS { get { return this.displayFPS; } set { this.displayFPS = value; } }
+
     #endregion
 
     #region MonoBehaviour
