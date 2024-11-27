@@ -217,12 +217,12 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_Settings_choose_language", "Seleccionar Idioma" },
             { "loc_settings_info_ui", "Mostrar FPS" },
             { "loc_settings_console", "Habilitar Consola" },
-            { "loc_settings_quality", "Quality" },
-            { "loc_settings_quality_0", "Very Low" },
-            { "loc_settings_quality_1", "Low" },
-            { "loc_settings_quality_2", "Medium" },
-            { "loc_settings_quality_3", "High" },
-            { "loc_settings_quality_4", "Very High" },
+            { "loc_settings_quality", "Calidad" },
+            { "loc_settings_quality_0", "Muy Bajo" },
+            { "loc_settings_quality_1", "Bajo" },
+            { "loc_settings_quality_2", "Medio" },
+            { "loc_settings_quality_3", "Alto" },
+            { "loc_settings_quality_4", "Muy Alto" },
             { "loc_settings_quality_5", "Ultra" },
 
             // Loc Strings : Actions (wtf is this name?)
