@@ -14,6 +14,9 @@ public class SettingsMenuController : UIController
     [SerializeField] private Button buttonLanguageLeft;
     [SerializeField] private Button buttonLanguageRight;
 
+    [Header("Settings - Quality")]
+    [SerializeField] private TMP_Text qualityText;
+
     #endregion
 
     #region MonoBehaviour
@@ -25,7 +28,15 @@ public class SettingsMenuController : UIController
 
     void Update()
     {
-        
+        var names = QualitySettings.names;
+
+        /*
+        foreach (var name in names)
+            DebugManager.Instance.Log($"name = {name}");
+        */
+
+        var level = QualitySettings.GetQualityLevel();
+        this.qualityText.text = $"{level}";
     }
 
     #endregion
@@ -57,7 +68,9 @@ public class SettingsMenuController : UIController
     #region PublicMethods - Graphics Quality
 
     public void ButtonQualityLeft()
-    { }
+    {
+
+    }
 
     public void ButtonQualityRight()
     { }
