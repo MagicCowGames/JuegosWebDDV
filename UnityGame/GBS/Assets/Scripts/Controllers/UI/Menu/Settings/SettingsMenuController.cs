@@ -8,13 +8,6 @@ using UnityEngine.UI;
 public class SettingsMenuController : UIController
 {
     #region Variables
-
-    [Header("Settings - Language")]
-    [SerializeField] private TMP_Text languageText; // The currently selected language.
-
-    [Header("Settings - Quality")]
-    [SerializeField] private TMP_Text qualityText;
-
     #endregion
 
     #region MonoBehaviour
