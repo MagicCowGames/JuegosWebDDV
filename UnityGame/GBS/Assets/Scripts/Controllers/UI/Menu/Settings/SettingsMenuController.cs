@@ -47,31 +47,15 @@ public class SettingsMenuController : UIController
         SceneLoadingManager.Instance?.LoadSceneMainMenu();
     }
 
-    #endregion
-
-    #region PublicMethods - Language
-
-    public void ButtonLanguageLeft()
+    public void ButtonLanguage()
     {
-        SettingsManager.Instance?.SetLanguageDecrease();
+        SceneLoadingManager.Instance?.LoadScene("MenuScene_Settings_Language");
     }
 
-    public void ButtonLanguageRight()
+    public void ButtonQuality()
     {
-        SettingsManager.Instance?.SetLanguageIncrease();
+        SceneLoadingManager.Instance?.LoadScene("MenuScene_Settings_Quality");
     }
-
-    #endregion
-
-    #region PublicMethods - Graphics Quality
-
-    public void ButtonQualityLeft()
-    {
-
-    }
-
-    public void ButtonQualityRight()
-    { }
 
     #endregion
 
