@@ -64,7 +64,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
 
             // Loc Strings : Settings
             { "loc_settings", "Settings" },
-            { "loc_settings_language", "Choose Language" },
+            { "loc_settings_language", "Language" },
+            { "loc_settings_choose_language", "Choose Language" },
             { "loc_settings_info_ui", "Display FPS" },
             { "loc_settings_console", "Enable Console" },
 
@@ -205,7 +206,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
 
             // Loc Strings : Settings
             { "loc_settings", "Opciones" }, // This used to be "Configuración", my beloved </3 :( but the fucking thing was too large to fit on the UI buttons. Oh well, too bad!
-            { "loc_settings_language", "Seleccionar Idioma" },
+            { "loc_settings_language", "Idioma" },
+            { "loc_Settings_choose_language", "Seleccionar Idioma" },
             { "loc_settings_info_ui", "Mostrar FPS" },
             { "loc_settings_console", "Habilitar Consola" },
 
