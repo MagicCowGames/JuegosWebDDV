@@ -11,8 +11,6 @@ public class SettingsMenuController : UIController
 
     [Header("Settings - Language")]
     [SerializeField] private TMP_Text languageText; // The currently selected language.
-    [SerializeField] private Button buttonLanguageLeft;
-    [SerializeField] private Button buttonLanguageRight;
 
     [Header("Settings - Quality")]
     [SerializeField] private TMP_Text qualityText;
