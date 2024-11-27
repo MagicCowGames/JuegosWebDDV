@@ -36,6 +36,11 @@ public class SettingsLanguageMenuController : MonoBehaviour
         LanguageSystem.SetLanguage(LanguageSystem.Language.Spanish);
     }
 
+    public void Button_Return()
+    {
+        SceneLoadingManager.Instance?.LoadSceneSettings();
+    }
+
     #endregion
 
     #region PrivateMethods

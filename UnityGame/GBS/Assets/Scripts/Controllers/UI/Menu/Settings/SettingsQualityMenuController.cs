@@ -30,6 +30,11 @@ public class SettingsQualityMenuController : MonoBehaviour
     public void SetQualityVeryHigh() { SetQualityInternal(4); }
     public void SetQualityUltra() { SetQualityInternal(5); }
 
+    public void Button_Return()
+    {
+        SceneLoadingManager.Instance?.LoadSceneSettings();
+    }
+
     #endregion
 
     #region PrivateMethods
