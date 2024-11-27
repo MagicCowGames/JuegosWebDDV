@@ -59,4 +59,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu/Tutorial/MenuScene_Tutorial_Pages.unity
     guid: 97ecfc4a9e7c37d4ea690e4a53c92f6e
+  - enabled: 1
+    path: Assets/Scenes/Menu/Settings/MenuScene_Settings_Language.unity
+    guid: 66b0f3a3662d5a940a8cfa237238cc76
+  - enabled: 1
+    path: Assets/Scenes/Menu/Settings/MenuScene_Settings_Quality.unity
+    guid: c0c9d059e7e0ff644ab348c6e0e9bc96
   m_configObjects: {}
