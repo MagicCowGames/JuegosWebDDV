@@ -19,15 +19,7 @@ public class SettingsMenuController : UIController
 
     void Update()
     {
-        var names = QualitySettings.names;
 
-        /*
-        foreach (var name in names)
-            DebugManager.Instance.Log($"name = {name}");
-        */
-
-        var level = QualitySettings.GetQualityLevel();
-        this.qualityText.text = $"{level}";
     }
 
     #endregion
