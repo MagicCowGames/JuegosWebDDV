@@ -32,6 +32,16 @@ public class SettingsMenuController : UIController
 
     #region PublicMethods
 
+    public void ButtonReturn()
+    {
+        SettingsManager.Instance.SaveSettings(); // Sends a message to the server to request saving the current settings.
+        SceneLoadingManager.Instance?.LoadSceneMainMenu();
+    }
+
+    #endregion
+
+    #region PublicMethods - Language
+
     public void ButtonLanguageLeft()
     {
         SettingsManager.Instance?.SetLanguageDecrease();
@@ -42,11 +52,15 @@ public class SettingsMenuController : UIController
         SettingsManager.Instance?.SetLanguageIncrease();
     }
 
-    public void ButtonReturn()
-    {
-        SettingsManager.Instance.SaveSettings(); // Sends a message to the server to request saving the current settings.
-        SceneLoadingManager.Instance?.LoadSceneMainMenu();
-    }
+    #endregion
+
+    #region PublicMethods - Graphics Quality
+
+    public void ButtonQualityLeft()
+    { }
+
+    public void ButtonQualityRight()
+    { }
 
     #endregion
 
