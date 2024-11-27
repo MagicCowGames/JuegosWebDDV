@@ -33,14 +33,23 @@ public class InitSceneController : UIController
     {
         #region Settings - Debug
         // NOTE : This part of the code that is dedicated to the DebugManager's debug enabled mode should always work since, unlike other systems, the DebugManager
-        // is initialized on Awake(), and this Init() method runs on Start().
+        // is initialized on Awake(), and this Init() method runs on Start(), so the order in which the calls to Start() are made on the scene should not matter.
 #if UNITY_EDITOR
-        // If compiling the editor build, always set debug to true.
-        DebugManager.Instance?.SetDebugEnabled(true);
+        // If compiling the editor build, always set as default:
+        // - Set Debug Display to TRUE.
+        // - Set FPS Display to TRUE.
+        
+        DebugManager.Instance.SetDebugEnabled(true);
+        UIManager.Instance.GetInfoUI().DisplayFPS = true;
 #else
-        // If compiling the release build, always set debug to false by default.
-        // Just to make sure that I don't forget to set the debug to false at some point in the inspector panel before making a release build.
-        DebugManager.Instance?.SetDebugEnabled(false);
+        // If compiling the release build, always set as default:
+        // - Set Debug Display to FALSE.
+        // - Set FPS Display to FALSE.
+        
+        DebugManager.Instance.SetDebugEnabled(false);
+        UIManager.Instance.GetInfoUI().DisplayFPS = false;
+
+        // This is done just to make sure that I don't forget to set the debug to false at some point in the inspector panel before making a release build.
 #endif
         #endregion
 
