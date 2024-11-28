@@ -1436,7 +1436,7 @@ GameObject:
   - component: {fileID: 2049583493}
   - component: {fileID: 2049583494}
   m_Layer: 0
-  m_Name: SettingsLanguageUI
+  m_Name: SettingsExtraUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
