@@ -27,6 +27,7 @@ public class TriggerController : MonoBehaviour
     [SerializeField] private bool triggerOnAreaEnter;
     [SerializeField] private bool triggerOnAreaExit;
     [SerializeField] private bool triggerOnAreaStay;
+    // [SerializeField] private bool triggerOnInteract; // Determines if the player can trigger this through interactions.
 
     [Header("Trigger Entities")] // The type of entities that can activate this trigger
     [SerializeField] private bool triggeredByPlayer = true;
@@ -53,6 +54,13 @@ public class TriggerController : MonoBehaviour
     {
         
     }
+
+    /*
+    void OnMouseEnter()
+    {
+        
+    }
+    */
 
     #endregion
 
