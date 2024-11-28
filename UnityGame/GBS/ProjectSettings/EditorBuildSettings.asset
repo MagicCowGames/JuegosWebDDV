@@ -65,4 +65,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu/Settings/MenuScene_Settings_Quality.unity
     guid: c0c9d059e7e0ff644ab348c6e0e9bc96
+  - enabled: 1
+    path: Assets/Scenes/Menu/Settings/MenuScene_Settings_Extra.unity
+    guid: 589b4da94948ce14fa24691d636d05f6
   m_configObjects: {}
