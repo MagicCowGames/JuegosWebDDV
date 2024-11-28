@@ -42,6 +42,11 @@ public class SettingsMenuController : UIController
         SceneLoadingManager.Instance?.LoadScene("MenuScene_Settings_Quality");
     }
 
+    public void ButtonExtra()
+    {
+        SceneLoadingManager.Instance?.LoadScene("MenuScene_Settings_Extra");
+    }
+
     #endregion
 
     #region PrivateMethods
