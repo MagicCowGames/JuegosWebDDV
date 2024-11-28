@@ -355,7 +355,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2049583494}
+        m_TargetAssemblyTypeName: SettingsExtraMenuController, Assembly-CSharp
+        m_MethodName: SetVersionEnabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &342874227
 GameObject:
@@ -1169,7 +1181,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2049583494}
-        m_TargetAssemblyTypeName: SettingsLanguageMenuController, Assembly-CSharp
+        m_TargetAssemblyTypeName: SettingsExtraMenuController, Assembly-CSharp
         m_MethodName: Button_Return
         m_Mode: 1
         m_Arguments:
@@ -1302,7 +1314,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2049583494}
+        m_TargetAssemblyTypeName: SettingsExtraMenuController, Assembly-CSharp
+        m_MethodName: SetFpsEnabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1429643374
 GameObject:
@@ -1524,7 +1548,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2049583494}
+        m_TargetAssemblyTypeName: SettingsExtraMenuController, Assembly-CSharp
+        m_MethodName: SetConsoleEnabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1775212501
 GameObject:
@@ -2022,7 +2058,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2049583492}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6751f34e214c3647a6c4adf96a94565, type: 3}
+  m_Script: {fileID: 11500000, guid: 715d851200bd43e4893288b4952f25a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2124717924
