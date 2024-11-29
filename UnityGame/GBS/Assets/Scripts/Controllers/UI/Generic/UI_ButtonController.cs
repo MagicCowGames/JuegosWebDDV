@@ -100,6 +100,9 @@ public class UI_ButtonController : MonoBehaviour, IComponentValidator
     private void UpdateButton()
     {
         this.button.onClick = this.onClick;
+        this.button.onClick.AddListener(() => {
+            SoundManager.Instance?.PlayClickSound();
+        });
         this.buttonShadow.gameObject.SetActive(this.buttonHasShadow);
 
         Sprite chosen;
