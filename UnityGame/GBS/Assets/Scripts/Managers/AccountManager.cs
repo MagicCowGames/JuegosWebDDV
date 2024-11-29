@@ -86,11 +86,18 @@ public class AccountManager : SingletonPersistent<AccountManager>
         callbacks.OnSuccess += (ans) => {
             DebugManager.Instance?.Log($"Successfully created the account : {ans}");
 
+            /*
             var packet = JsonUtility.FromJson<UserAndSettingsDTO>(ans);
 
             this.Account = packet.user;
             this.Account.isLoggedIn = true;
             SettingsManager.Instance.Settings = packet.settings;
+            */
+
+            this.Account = JsonUtility.FromJson<UserAccount>(ans);
+            this.Account.isLoggedIn = true;
+
+            SettingsManager.Instance.LoadSettings();
 
             SceneLoadingManager.Instance?.LoadSceneAccount();
         };
@@ -132,11 +139,18 @@ public class AccountManager : SingletonPersistent<AccountManager>
         callbacks.OnSuccess += (ans) => {
             DebugManager.Instance?.Log($"Successfully logged into the account : {ans}");
 
+            /*
             var packet = JsonUtility.FromJson<UserAndSettingsDTO>(ans);
 
             this.Account = packet.user;
             this.Account.isLoggedIn = true;
             SettingsManager.Instance.Settings = packet.settings;
+            */
+
+            this.Account = JsonUtility.FromJson<UserAccount>(ans);
+            this.Account.isLoggedIn = true;
+
+            SettingsManager.Instance.LoadSettings();
 
             SceneLoadingManager.Instance?.LoadSceneAccount();
         };
