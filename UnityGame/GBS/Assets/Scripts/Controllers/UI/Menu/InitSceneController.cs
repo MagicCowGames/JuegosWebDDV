@@ -38,16 +38,20 @@ public class InitSceneController : UIController
         // If compiling the editor build, always set as default:
         // - Set Debug Display to TRUE.
         // - Set FPS Display to TRUE.
+        // - Set Console Enabled to TRUE.
         
         DebugManager.Instance.SetDebugEnabled(true);
         UIManager.Instance.GetInfoUI().DisplayFPS = true;
+        UIManager.Instance.GetConsoleUI().ConsoleEnabled = true;
 #else
         // If compiling the release build, always set as default:
         // - Set Debug Display to FALSE.
         // - Set FPS Display to FALSE.
+        // - Set Console Enabled to FALSE.
         
         DebugManager.Instance.SetDebugEnabled(false);
         UIManager.Instance.GetInfoUI().DisplayFPS = false;
+        UIManager.Instance.GetConsoleUI().ConsoleEnabled = false;
 
         // This is done just to make sure that I don't forget to set the debug to false at some point in the inspector panel before making a release build.
 #endif
