@@ -39,7 +39,6 @@ public class SettingsExtraMenuController : MonoBehaviour
 
     public void SetConsoleEnabled(bool enabled)
     {
-        DebugManager.Instance?.Log($"enabled from button = {enabled}");
         UIManager.Instance.GetConsoleUI().ConsoleEnabled = enabled;
     }
 
