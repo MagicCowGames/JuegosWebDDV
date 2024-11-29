@@ -461,8 +461,8 @@ public class ConsoleUIController : UIController
     private void CmdLang(string[] args, int startIndex)
     {
         var arg = args[startIndex + 1];
-        SettingsManager.Instance?.SetLanguage(arg.ToLower());
-        SettingsManager.Instance?.SaveSettings(); // NOTE : Cmds ALWAYS save commands on execution because it's easier to implement like that, unlike the settings menu which saves it in a single packet when the user leaves the menu.
+        LanguageSystem.SetLanguage(arg);
+        SettingsManager.Instance.SaveSettings(); // NOTE : Cmds ALWAYS save commands on execution because it's easier to implement like that, unlike the settings menu which saves it in a single packet when the user leaves the menu.
         CmdPrintln($"Language set to \"{LanguageSystem.GetLanguage()}\"");
     }
 
