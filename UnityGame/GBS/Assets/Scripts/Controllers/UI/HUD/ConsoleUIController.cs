@@ -97,6 +97,7 @@ public class ConsoleUIController : UIController
             new Cmd("popmeup2", "Display a popup on screen with the specified title and message", "<title> <message>", 2, CmdPopMeUp2),
             new Cmd("timescale", "Change the game's timescale", "<scale>", 1, CmdTimeScale),
             new Cmd("showfps", "Change the visibility of the FPS display", "<display>", 1, CmdShowFps),
+            new Cmd("gtfo", "Instantly finish the current level", "", 0, CmdGtfo, true),
             // TODO : Add commands to get the current map name and the current language or something...
         };
         // TODO : Make an alias system of sorts, or maybe make it so that we can have a dict / list system to have multiple overloads for the same command
@@ -216,8 +217,10 @@ public class ConsoleUIController : UIController
                 int expectedArgs = cmd.numArguments;
                 if (foundArgs == expectedArgs)
                 {
-                    // The start index corresponds to the one of the base command itself, so args[startIndex + 1] is the first argument for this command.
-                    cmd.function(args, 0);
+                    if (!cmd.isCheat || (cmd.isCheat && this.cheatsEnabled))
+                        cmd.function(args, 0); // The start index corresponds to the one of the base command itself, so args[startIndex + 1] is the first argument for this command.
+                    else
+                        CmdErrorCheats();
                 }
                 else
                 {
@@ -340,12 +343,6 @@ public class ConsoleUIController : UIController
 
     private void CmdDelete(string[] args, int startIndex)
     {
-        if (!this.cheatsEnabled)
-        {
-            CmdErrorCheats();
-            return;
-        }
-
         string name = args[startIndex + 1];
         var obj = GameObject.Find(name);
         
@@ -401,12 +398,6 @@ public class ConsoleUIController : UIController
 
     private void CmdSetHealth(string[] args, int startIndex)
     {
-        if (!this.cheatsEnabled)
-        {
-            CmdErrorCheats();
-            return;
-        }
-
         string arg = args[startIndex + 1];
         float hp = CmdParseFloat(arg);
         PlayerDataManager.Instance?.GetPlayerHealth()?.ForceSetHealth(hp);
@@ -414,12 +405,6 @@ public class ConsoleUIController : UIController
 
     private void CmdHeal(string[] args, int startIndex)
     {
-        if (!this.cheatsEnabled)
-        {
-            CmdErrorCheats();
-            return;
-        }
-
         PlayerDataManager.Instance?.GetPlayerHealth()?.Heal();
     }
 
@@ -498,6 +483,11 @@ public class ConsoleUIController : UIController
         string arg = args[startIndex + 1];
         bool show = CmdParseBool(arg);
         UIManager.Instance.GetInfoUI().DisplayFPS = show;
+    }
+
+    private void CmdGtfo(string[] args, int startIndex)
+    {
+        GameManager.Instance?.FinishGame();
     }
 
     #endregion
