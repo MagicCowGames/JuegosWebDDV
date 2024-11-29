@@ -60,6 +60,10 @@ public class ConsoleUIController : UIController
     private Cmd[] commands;
 
     private bool cheatsEnabled = false; // TODO : Move this to a game data manager so that it can be globally accessed. Maybe also move the stuff in GameUtility for pausing to said manager. Obviously make its name clearly different enough from the GameManager, which should be the one in charge of managing matches, or at least that's the plan for now. Also, having a single CheatManager just for this purpose sounds too far fetched, but maybe makes sense once you factor in all the code required to make sure that cheats have not been enabled when passing data to the scoreboard server, etc...
+    private bool consoleEnabled = false;
+
+    public bool CheatsEnabled { get { return this.cheatsEnabled; } set { this.cheatsEnabled = value; } }
+    public bool ConsoleEnabled { get { return this.consoleEnabled; } set { this.consoleEnabled = value; } }
 
     #endregion
 
@@ -155,7 +159,7 @@ public class ConsoleUIController : UIController
 
     private void SwitchConsole()
     {
-        SetConsoleOpen(!GetConsoleOpen());
+        SetConsoleOpen(this.consoleEnabled ? !GetConsoleOpen() : false);
     }
 
     private void SelectConsoleInputField()
@@ -174,9 +178,15 @@ public class ConsoleUIController : UIController
         // When the console is closed, the input field is flushed, thus it would run the command string "º"
         // This is why we set the text field to an empty string before closing or opening the console.
         this.consoleInputField.text = "";
-        this.UI_SetVisible(!this.UI_GetVisible());
-
-        this.SelectConsoleInputField(); // always select the input field when the console is opened to make it faster to type in commands.
+        if (isOpen)
+        {
+            this.UI_SetVisible(true);
+            this.SelectConsoleInputField(); // always select the input field when the console is opened to make it faster to type in commands.
+        }
+        else
+        {
+            this.UI_SetVisible(false);
+        }
     }
 
     private bool GetConsoleOpen()
