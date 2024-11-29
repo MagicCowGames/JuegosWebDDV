@@ -24,7 +24,10 @@ public class SoundManager : SingletonPersistent<SoundManager>
     #region Variables
 
     [Header("Components")]
-    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioSource musicSource; // Audio source for music.
+    [SerializeField] private AudioSource uiSource; // Audio source for UI related sounds.
+
+    // NOTE : More complex music system ahead.
     // One sound will be the one currently playing, the other will be used for fading into the next music track.
     // For now, this is disabled for simplicity.
     // [SerializeField] private AudioSource audioSourceMusic1;
@@ -37,6 +40,9 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     [Header("Music Tracks")] // The audio clips used for music.
     [SerializeField] private MusicTrack[] musicTracks;
+
+    [Header("UI Audio Clips")]
+    [SerializeField] private AudioClip clickClip;
 
     private string currentMusicName;
 
@@ -56,7 +62,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     #endregion
 
-    #region PublicMethods
+    #region PublicMethods - Music
 
     public void PlayMusic(string name, bool loop = true)
     {
@@ -82,6 +88,15 @@ public class SoundManager : SingletonPersistent<SoundManager>
     public bool IsPlayingMusic(string name)
     {
         return name == this.currentMusicName;
+    }
+
+    #endregion
+
+    #region PublicMethods - UI
+
+    public void PlayClickSound()
+    {
+        this.uiSource.PlayOneShot(this.clickClip);
     }
 
     #endregion
