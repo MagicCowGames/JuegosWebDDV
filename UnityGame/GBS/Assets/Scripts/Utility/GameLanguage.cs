@@ -395,6 +395,21 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
         return currentLanguage;
     }
 
+    public static Language GetLanguageFromString(string language)
+    {
+        if (language != null)
+        {
+            foreach (var lang in languageStrings)
+            {
+                if (lang.Value.Contains(language))
+                {
+                    return lang.Key;
+                }
+            }
+        }
+        return Language.English; // Defaults to returning English in case the language is not found.
+    }
+
     #endregion
 
     #region PrivateMethods
