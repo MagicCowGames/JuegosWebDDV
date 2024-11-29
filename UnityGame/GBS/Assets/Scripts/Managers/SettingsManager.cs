@@ -8,15 +8,22 @@ using UnityEngine;
 // NOTE : Maybe it would make more sense if users had access to a save settings and a load settings buttons in the logged-in account screen rather than this being
 // handled automatically, but it's also a pretty nice feature to have...
 
+// NOTE : This could actually probably be a static class rather than a singleton... it does not require any sort of config that has to be performed on the
+// inspector panel, so it's kinda pointless to make this a singleton.
 public class SettingsManager : SingletonPersistent<SettingsManager>
 {
     #region Variables
 
-    public UserSettings Settings { get { return GetSettings(); } set { SetSettings(value); } }
+    private UserSettings settings;
+
+    public UserSettings Settings { get { return this.settings; } set { this.settings = value; } }
 
     #endregion
 
     #region MonoBehaviour
+
+    // TODO : Maybe should move the init scene #if UNITY_EDITOR logic here? or maybe not, not sure. We'll see what makes more sense in the long run.
+    // If we made this change, then this class would start to make sense as a singleton, as it would require having some sort of initialization logic...
 
     void Start()
     {
@@ -32,7 +39,20 @@ public class SettingsManager : SingletonPersistent<SettingsManager>
 
     #region PublicMethods
 
-    // Updates the settings on the web server.
+    // Update the settings on all of the systems that make use of them.
+    // NOTE : Calling this is kind of a bad idea if you are going to update only one single setting, since internally this forces all settings to update,
+    // and that can be kinda heavy for graphics-related settings.
+    public void UpdateSettings()
+    {
+        UpdateSettings_Graphics();
+        UpdateSettings_Language();
+        UpdateSettings_Sound();
+        UpdateSettings_Extra();
+        UpdateSettings_Cosmetic();
+    }
+
+    // Saves the settings (persistence)
+    // In local builds, this should save data to the disk (not yet implemented). On WebGL builds, it updates the settings on the web server.
     // This used to be named "UpdateUserAccountSettings()", but SaveSettings() is shorter, faster to type and easier to remember, so yeah lol.
     public void SaveSettings()
     {
@@ -47,49 +67,38 @@ public class SettingsManager : SingletonPersistent<SettingsManager>
         ConnectionManager.Instance.MakeRequestToServer("GET", $"/users/update/settings/{id}/{password}/{settingsStr}");
     }
 
-    #endregion
+    // TODO : Make a LoadSettings() function and move the settings loading code from the other classes to here. That way, under the hood, this could all be
+    // replaced with simpler code to actually just save data to files on the disk when making builds other than WebGL.
 
-    #region PublicMethods - Settings - Language
-
-    public void SetLanguage(string language)
-    {
-        LanguageSystem.SetLanguage(language);
-    }
-
-    public void SetLanguage(LanguageSystem.Language language)
-    {
-        LanguageSystem.SetLanguage(language);
-    }
-
-    public void SetLanguageIncrease()
-    {
-        LanguageSystem.SetLanguage((int)LanguageSystem.GetLanguage() + 1);
-    }
-
-    public void SetLanguageDecrease()
-    {
-        LanguageSystem.SetLanguage((int)LanguageSystem.GetLanguage() - 1);
-    }
-
-    #endregion
-
-    #region PublicMethods - Settings - Other
     #endregion
 
     #region PrivateMethods
 
-    // Generates the settings DTO that will be used for network serialization
-    private UserSettings GetSettings()
+    private void UpdateSettings_Graphics()
     {
-        var settings = new UserSettings();
-        settings.language = LanguageSystem.GetLanguage();
-        return settings;
+        QualitySettings.SetQualityLevel(this.settings.graphicsSettings.quality);
     }
 
-    // Take an input UserSettings DTO and load the data into the actual classes that contain the real data for these settings
-    private void SetSettings(UserSettings settings)
+    private void UpdateSettings_Language()
     {
-        LanguageSystem.SetLanguage(settings.language);
+        LanguageSystem.SetLanguage(this.settings.languageSettings.language);
+    }
+
+    private void UpdateSettings_Sound()
+    {
+        // TODO : Implement
+    }
+
+    private void UpdateSettings_Extra()
+    {
+        UIManager.Instance.GetInfoUI().DisplayFPS = this.settings.extraSettings.displayFps;
+        UIManager.Instance.GetInfoUI().DisplayVersion = this.settings.extraSettings.displayVersion;
+        UIManager.Instance.GetConsoleUI().ConsoleEnabled = this.settings.extraSettings.consoleEnabled;
+    }
+
+    private void UpdateSettings_Cosmetic()
+    {
+        // TODO : Implement
     }
 
     #endregion
