@@ -98,6 +98,7 @@ public class ConsoleUIController : UIController
             new Cmd("timescale", "Change the game's timescale", "<scale>", 1, CmdTimeScale),
             new Cmd("showfps", "Change the visibility of the FPS display", "<display>", 1, CmdShowFps),
             new Cmd("gtfo", "Instantly finish the current level", "", 0, CmdGtfo, true),
+            new Cmd("mkreq", "Make an HTTP request", "<type> <url> <message>", 3, CmdMkReq)
             // TODO : Add commands to get the current map name and the current language or something...
         };
         // TODO : Make an alias system of sorts, or maybe make it so that we can have a dict / list system to have multiple overloads for the same command
@@ -488,6 +489,34 @@ public class ConsoleUIController : UIController
     private void CmdGtfo(string[] args, int startIndex)
     {
         GameManager.Instance?.FinishGame();
+    }
+
+    private void CmdMkReq(string[] args, int startIndex)
+    {
+        string type = args[startIndex + 1];
+        string url = args[startIndex + 2];
+        string message = args[startIndex + 3];
+        
+        var callbacks = new ConnectionManager.RequestCallbacks(
+            // OnSuccess
+            (ans) => {
+                CmdPrintln("OnSuccess");
+            },
+            // OnError
+            (err) => {
+                CmdPrintln("OnError");
+            },
+            // OnConnectionSuccess
+            () => {
+                CmdPrintln("OnConnectionSuccess");
+            },
+            // OnConnectionError
+            () => {
+                CmdPrintln("OnConnectionError");
+            }
+        );
+
+        ConnectionManager.Instance.MakeRequest(type, url, message, callbacks);
     }
 
     #endregion
