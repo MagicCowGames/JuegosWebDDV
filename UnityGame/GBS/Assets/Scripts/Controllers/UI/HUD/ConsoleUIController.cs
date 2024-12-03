@@ -500,19 +500,19 @@ public class ConsoleUIController : UIController
         var callbacks = new ConnectionManager.RequestCallbacks(
             // OnSuccess
             (ans) => {
-                CmdPrintln("OnSuccess");
+                CmdPrintln($"OnSuccess : {ans}");
             },
             // OnError
             (err) => {
-                CmdPrintln("OnError");
+                CmdPrintln($"OnError : {err}");
             },
             // OnConnectionSuccess
             () => {
-                CmdPrintln("OnConnectionSuccess");
+                CmdPrintln("OnConnectionSuccess : Successfully connected");
             },
             // OnConnectionError
             () => {
-                CmdPrintln("OnConnectionError");
+                CmdPrintln("OnConnectionError : Could not connect");
             }
         );
 
