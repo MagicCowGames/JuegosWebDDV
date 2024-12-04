@@ -64,7 +64,7 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
     // TODO : Merge the logic of this function with the LoadScene() one, or find a more consistent naming convention...
     public void TransitionToScene(string name)
     {
-        StartCoroutine(TransitionToSceneInternal(name, 1.5f));
+        StartCoroutine(TransitionToSceneInternal(name, 0.5f, 1.5f));
     }
 
     #endregion
@@ -124,12 +124,12 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
         UIManager.Instance?.ResetManager();
     }
 
-    private IEnumerator TransitionToSceneInternal(string name, float duration)
+    private IEnumerator TransitionToSceneInternal(string name, float enterDuration, float exitDuration)
     {
-        UIManager.Instance.GetFadeUIController().FadeOut(duration);
-        yield return new WaitForSeconds(duration);
+        UIManager.Instance.GetFadeUIController().FadeOut(enterDuration);
+        yield return new WaitForSeconds(enterDuration);
         LoadScene(name);
-        UIManager.Instance.GetFadeUIController().FadeIn(duration);
+        UIManager.Instance.GetFadeUIController().FadeIn(exitDuration);
     }
 
     #endregion
