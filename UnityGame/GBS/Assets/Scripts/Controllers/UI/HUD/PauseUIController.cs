@@ -36,8 +36,9 @@ public class PauseUIController : UIController
 
     public void Button_ReturnToMenu()
     {
-        GameUtility.Resume(); // Resume before loading main menu
-        SceneLoadingManager.Instance?.LoadSceneMainMenu();
+        // NOTE : With the new loading code, resuming is done automatically so we no longer need to call this by hand.
+        // GameUtility.Resume(); // Resume before loading main menu
+        SceneLoadingManager.Instance?.LoadSceneWithTransition(SceneLoadingManager.Instance.MainMenuScene);
     }
 
     #endregion
