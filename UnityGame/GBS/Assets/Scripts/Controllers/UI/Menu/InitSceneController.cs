@@ -68,7 +68,7 @@ public class InitSceneController : UIController
         #region Settings - Fading
 
         // Fade In when loading into the main menu scene.
-        UIManager.Instance.GetFadeUIController().FadeIn();
+        UIManager.Instance.GetFadeUIController().FadeIn(0.5f);
 
         #endregion
     }
