@@ -59,6 +59,14 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
         // SceneManager.SetActiveScene(SceneManager.GetSceneByName(name));
     }
 
+    // NOTE : This could be modified to make use of events through the fade function on the fade UI controller itself rather than a coroutine, but it is what it is.
+    // No need to change what works...
+    // TODO : Merge the logic of this function with the LoadScene() one, or find a more consistent naming convention...
+    public void TransitionToScene(string name)
+    {
+        StartCoroutine(TransitionToSceneInternal(name, 1.5f));
+    }
+
     #endregion
 
     #region PublicMethods - Specific Scenes
@@ -114,6 +122,14 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
     {
         CameraManager.Instance?.ResetManager();
         UIManager.Instance?.ResetManager();
+    }
+
+    private IEnumerator TransitionToSceneInternal(string name, float duration)
+    {
+        UIManager.Instance.GetFadeUIController().FadeOut(duration);
+        yield return new WaitForSeconds(duration);
+        LoadScene(name);
+        UIManager.Instance.GetFadeUIController().FadeIn(duration);
     }
 
     #endregion
