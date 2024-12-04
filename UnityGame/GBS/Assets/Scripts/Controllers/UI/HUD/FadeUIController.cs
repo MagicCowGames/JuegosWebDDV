@@ -57,14 +57,19 @@ public class FadeUIController : UIController
 
     #region PublicMethods - Image
 
-    private void SetColor(Color color)
+    public void SetColor(Color color)
     {
         this.backgroundImage.color = color;
     }
 
-    private void SetImage(Sprite image)
+    public void SetImage(Sprite image)
     {
         this.backgroundImage.sprite = image;
+    }
+
+    public void SetOpacity(float opacity)
+    {
+        this.canvasGroup.alpha = opacity;
     }
 
     #endregion
