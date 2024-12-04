@@ -157,7 +157,7 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
     private IEnumerator TransitionToSceneInternal(string name, float enterDuration, float exitDuration)
     {
         UIManager.Instance.GetFadeUIController().FadeOut(enterDuration);
-        yield return new WaitForSeconds(enterDuration);
+        yield return new WaitForSecondsRealtime(enterDuration); // NOTE : The old implementation used the call WaitForSeconds(enterDuration), which actually uses scaled delta time and made it impossible to load levels with transitions while the game was paused, since the pause sets the time scale to 0.
         LoadScene(name);
         UIManager.Instance.GetFadeUIController().FadeIn(exitDuration);
     }
