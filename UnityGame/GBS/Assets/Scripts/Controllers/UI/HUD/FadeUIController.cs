@@ -38,9 +38,9 @@ public class FadeUIController : UIController
 
     public void Fade(float targetOpacity, float duration = 1.5f)
     {
-        this.targetOpacity = targetOpacity;
-        float distance = targetOpacity - this.backgroundImage.color.a;
-        this.lerpSpeed = distance / duration;
+        this.targetOpacity = Mathf.Clamp01(targetOpacity);
+        float difference = Mathf.Abs(targetOpacity - this.canvasGroup.alpha);
+        this.lerpSpeed = difference / duration;
     }
 
     public void FadeIn(float duration = 1.5f)
