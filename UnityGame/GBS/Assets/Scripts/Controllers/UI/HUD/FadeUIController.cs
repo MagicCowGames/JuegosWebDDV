@@ -21,9 +21,14 @@ public class FadeUIController : UIController
 
     #region MonoBehaviour
 
-    void Start()
+    void Awake()
     {
         Init();
+    }
+
+    void Start()
+    {
+
     }
 
     void Update()
@@ -39,7 +44,7 @@ public class FadeUIController : UIController
     public void Fade(float targetOpacity, float duration = 1.5f)
     {
         this.targetOpacity = Mathf.Clamp01(targetOpacity);
-        float difference = Mathf.Abs(targetOpacity - this.canvasGroup.alpha);
+        float difference = targetOpacity - this.canvasGroup.alpha;
         this.lerpSpeed = difference / duration;
     }
 
@@ -84,7 +89,7 @@ public class FadeUIController : UIController
 
     private void UpdateFade(float delta)
     {
-        this.canvasGroup.alpha = Mathf.Lerp(this.canvasGroup.alpha, this.targetOpacity, delta * this.lerpSpeed);
+        this.canvasGroup.alpha = Mathf.Clamp01(this.canvasGroup.alpha + (delta * this.lerpSpeed)); // No lerping, just constant speed change to keep transition durations consistent with framerate.
     }
 
     #endregion
