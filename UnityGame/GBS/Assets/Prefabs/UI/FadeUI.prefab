@@ -97,6 +97,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3556885788519514063}
+  - component: {fileID: 6861793447211595976}
   m_Layer: 0
   m_Name: FadeUI
   m_TagString: Untagged
@@ -120,6 +121,21 @@ Transform:
   - {fileID: 6778348925679375166}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6861793447211595976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4212689012766673698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2ea69d1764f4e4ea97e0286a1c7f6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasReference: {fileID: 8271029871534919466}
+  canvasGroup: {fileID: 3517338115699856995}
+  backgroundImage: {fileID: 7303118532833061151}
 --- !u!1 &4332765231097506313
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,6 +148,7 @@ GameObject:
   - component: {fileID: 8271029871534919466}
   - component: {fileID: 8753723180961093672}
   - component: {fileID: 2448151975981616330}
+  - component: {fileID: 3517338115699856995}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -222,3 +239,15 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &3517338115699856995
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4332765231097506313}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
