@@ -73,6 +73,9 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
         // This call is now disabled because it is not really needed as of now, as it would only make sense if we were to load multiple scenes at a time,
         // but we're only using LoadSceneMode.Single so fuck it.
         // SceneManager.SetActiveScene(SceneManager.GetSceneByName(name));
+
+        // Always unpause when the scene finishes loading to prevent issues
+        GameUtility.Resume();
     }
 
     // NOTE : This could be modified to make use of events through the fade function on the fade UI controller itself rather than a coroutine, but it is what it is.
