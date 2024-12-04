@@ -75,7 +75,8 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
         // SceneManager.SetActiveScene(SceneManager.GetSceneByName(name));
 
         // Always unpause when the scene finishes loading to prevent issues
-        GameUtility.Resume();
+        if(GameUtility.GetPaused())
+            GameUtility.Resume();
     }
 
     // NOTE : This could be modified to make use of events through the fade function on the fade UI controller itself rather than a coroutine, but it is what it is.
