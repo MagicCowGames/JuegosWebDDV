@@ -31,6 +31,19 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
 
     #endregion
 
+    #region Properties
+
+    public string MainMenuScene { get { return this.mainMenuScene; } }
+    public string CreditsScene { get { return this.creditsScene; } }
+    public string SettingsScene { get { return this.settingsScene; } }
+    public string TutorialScene { get { return this.tutorialScene; } }
+    public string InventoryScene { get { return this.inventoryScene; } }
+    public string StoreScene { get { return this.storeScene; } }
+    public string AccountScene { get { return this.accountScene; } }
+    public string ScoreboardScene { get { return this.scoreboardScene; } }
+
+    #endregion
+
     #region MonoBehaviour
 
     void Start()
