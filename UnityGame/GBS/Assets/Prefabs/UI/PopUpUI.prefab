@@ -394,7 +394,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3556885788519514063}
-  - component: {fileID: 214554549735535711}
   - component: {fileID: 5307635686122985890}
   m_Layer: 0
   m_Name: PopUpUI
@@ -419,22 +418,6 @@ Transform:
   - {fileID: 6778348925679375166}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &214554549735535711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4212689012766673698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b22b1d3f40eac0f449c113ade68e0a36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvasReference: {fileID: 8271029871534919466}
-  backgroundImageNormal: {fileID: 0}
-  backgroundImageBlurry: {fileID: 0}
-  isBlurry: 0
 --- !u!114 &5307635686122985890
 MonoBehaviour:
   m_ObjectHideFlags: 0
