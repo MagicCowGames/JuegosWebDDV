@@ -37,7 +37,7 @@ public class TutorialSelectMenuController : MonoBehaviour
 
     public void Button_TutorialLevel()
     {
-        SceneLoadingManager.Instance?.TransitionToScene("TutorialMap");
+        SceneLoadingManager.Instance?.LoadSceneWithTransition("TutorialMap");
     }
 
     #endregion
