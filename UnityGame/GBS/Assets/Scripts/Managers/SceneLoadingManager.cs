@@ -42,6 +42,9 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
     public string AccountScene { get { return this.accountScene; } }
     public string ScoreboardScene { get { return this.scoreboardScene; } }
 
+
+    public string CurrentScene { get { return SceneManager.GetActiveScene().name; } }
+
     #endregion
 
     #region MonoBehaviour
@@ -75,7 +78,7 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
     // NOTE : This could be modified to make use of events through the fade function on the fade UI controller itself rather than a coroutine, but it is what it is.
     // No need to change what works...
     // TODO : Merge the logic of this function with the LoadScene() one, or find a more consistent naming convention...
-    public void TransitionToScene(string name)
+    public void LoadSceneWithTransition(string name)
     {
         StartCoroutine(TransitionToSceneInternal(name, 0.5f, 1.5f));
     }
@@ -122,6 +125,20 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
     public void LoadSceneScoreboard()
     {
         LoadScene(this.scoreboardScene);
+    }
+
+    #endregion
+
+    #region PublicMethods - Reload Scenes
+
+    public void ReloadScene()
+    {
+        LoadScene(CurrentScene);
+    }
+
+    public void ReloadSceneWithTransition()
+    {
+        LoadSceneWithTransition(CurrentScene);
     }
 
     #endregion
