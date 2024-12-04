@@ -33,7 +33,7 @@ public class FadeUIController : UIController
 
     void Update()
     {
-        float delta = Time.deltaTime;
+        float delta = Time.unscaledDeltaTime;
         UpdateFade(delta);
     }
 
