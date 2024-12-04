@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseUIController : UIController
 {
@@ -26,6 +27,11 @@ public class PauseUIController : UIController
     public void Button_Resume()
     {
         GameUtility.Resume();
+    }
+
+    public void Button_Retry()
+    {
+        SceneLoadingManager.Instance?.ReloadSceneWithTransition();
     }
 
     public void Button_ReturnToMenu()
