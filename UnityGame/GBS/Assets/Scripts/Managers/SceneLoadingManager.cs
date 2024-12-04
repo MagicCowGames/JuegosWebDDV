@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// TODO : Unity the scene loading logic into a single function.
+// TODO : Modify the scene loading logic to allow multiple scenes to be loaded at the same time, as well as allowing a map Cmd that was run during a scene
+// transition to be executed, load the scene, and just forget the scene that was going to be opened with the scene transition... basically, as if the code was just "killed"
+// in the middle of its execution. This can only be achieved (AFAIK) if I refactor the code to no longer make use of a coroutine, or maybe adding some other extra check...
 public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
 {
     #region Variables
@@ -22,6 +26,8 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
     [SerializeField] private string storeScene;
     [SerializeField] private string accountScene;
     [SerializeField] private string scoreboardScene;
+
+    private bool isLoadingSceneWithTransition;
 
     // NOTE : Prefixes used in strings for scene names:
     /*
@@ -51,7 +57,7 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
 
     void Start()
     {
-        
+        this.isLoadingSceneWithTransition = false;
     }
 
     void Update()
@@ -84,6 +90,13 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
     // TODO : Merge the logic of this function with the LoadScene() one, or find a more consistent naming convention...
     public void LoadSceneWithTransition(string name)
     {
+        // Can't load multiple scenes at the same time, done to prevent race conditions...
+        // NOTE : This only exists precisely because of the capability to load scenes with transitions, which add a fucking delay to the loading call...
+        // An example of a problem that comes up is being able to pause, press quit, then quickly press retry... This check solves that issue.
+        // This also prevents the issue of some fucker just spamming the play button or return to menu button multiple times during the transition.
+        if (this.isLoadingSceneWithTransition)
+            return;
+
         StartCoroutine(TransitionToSceneInternal(name, 0.5f, 1.5f));
     }
 
@@ -160,10 +173,14 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
 
     private IEnumerator TransitionToSceneInternal(string name, float enterDuration, float exitDuration)
     {
+        this.isLoadingSceneWithTransition = true;
+
         UIManager.Instance.GetFadeUIController().FadeOut(enterDuration);
         yield return new WaitForSecondsRealtime(enterDuration); // NOTE : The old implementation used the call WaitForSeconds(enterDuration), which actually uses scaled delta time and made it impossible to load levels with transitions while the game was paused, since the pause sets the time scale to 0.
         LoadScene(name);
         UIManager.Instance.GetFadeUIController().FadeIn(exitDuration);
+
+        this.isLoadingSceneWithTransition = false;
     }
 
     #endregion
