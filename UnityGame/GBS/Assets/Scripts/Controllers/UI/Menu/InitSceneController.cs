@@ -64,6 +64,13 @@ public class InitSceneController : UIController
         Screen.orientation = ScreenOrientation.LandscapeLeft;
 
         #endregion
+
+        #region Settings - Fading
+
+        // Fade In when loading into the main menu scene.
+        UIManager.Instance.GetFadeUIController().FadeIn();
+
+        #endregion
     }
 
     private void LoadMainMenu()
