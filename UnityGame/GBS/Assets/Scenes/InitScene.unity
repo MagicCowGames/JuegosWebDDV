@@ -896,6 +896,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3556885788519514063, guid: 5fc4f56da3fd64647a70ae71473b42cc, type: 3}
   m_PrefabInstance: {fileID: 1012295153}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1012295155 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6861793447211595976, guid: 5fc4f56da3fd64647a70ae71473b42cc, type: 3}
+  m_PrefabInstance: {fileID: 1012295153}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2ea69d1764f4e4ea97e0286a1c7f6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1166269102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1399,6 +1410,7 @@ MonoBehaviour:
   deathUIController: {fileID: 1524051893}
   popUpUIController: {fileID: 1242412652}
   finishUIController: {fileID: 848093539}
+  fadeUIController: {fileID: 1012295155}
   uiControllers: []
 --- !u!114 &1820937346
 MonoBehaviour:
