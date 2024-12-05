@@ -65,12 +65,6 @@ public class InitSceneController : UIController
 
         #endregion
 
-        #region Settings - Fading
-
-        // Fade In when loading into the main menu scene.
-        UIManager.Instance.GetFadeUIController().FadeIn(0.5f);
-
-        #endregion
     }
 
     private void LoadMainMenu()
@@ -78,7 +72,8 @@ public class InitSceneController : UIController
         // NOTE : You don't have to worry about the manager instance not existing when calling this on the init scene, because we're calling it from Start(),
         // and the manager instance is created on Awake(), which means that the order in which the object calls are done by Unity does not matter, since
         // all of the Awake() stage calls will take place before all of the Start() calls.
-        SceneLoadingManager.Instance?.LoadSceneMainMenu();
+        SceneLoadingManager.Instance?.LoadSceneWithTransition(SceneLoadingManager.Instance.MainMenuScene);
+        // UIManager.Instance.GetFadeUIController().FadeIn(1.5f); // Fade In when loading into the main menu scene.
     }
 
 #endregion
