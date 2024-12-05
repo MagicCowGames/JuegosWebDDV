@@ -230,32 +230,6 @@ public class NPCController : MonoBehaviour
 
     #region PrivateMethods - FSM
 
-    // Old Implementation
-    /*
-    private void UpdateFSM(float delta)
-    {
-        switch (this.state)
-        {
-            case AIState.Idle:
-                this.forwardAxis = 0.0f;
-                if (this.Target != null)
-                    this.state = AIState.Chasing;
-                break;
-            case AIState.Wandering:
-                this.forwardAxis = 1.0f;
-                break;
-            case AIState.Chasing:
-                this.forwardAxis = 1.0f;
-                break;
-            case AIState.Fighting:
-                break;
-            default:
-                this.state = AIState.Idle;
-                break;
-        }
-    }
-    */
-
     private void UpdateFSM_Main(float delta)
     {
         switch (this.stateMain)
