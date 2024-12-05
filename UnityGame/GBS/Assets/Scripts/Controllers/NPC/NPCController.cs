@@ -20,7 +20,7 @@ public class NPCController : MonoBehaviour
     [SerializeField] private bool hasAi = false;
     [SerializeField] private bool canDie = false;
     [SerializeField] private float speed = 3.0f;
-    
+
     public bool CanDie { get { return this.canDie; } set { this.canDie = value; } }
     public Vector3 NavTarget { get; set; }
     public GameObject Target { get; set; }
@@ -29,11 +29,16 @@ public class NPCController : MonoBehaviour
 
     #endregion
 
-    #region Variables - AI State
+    #region Variables - AI Related
 
     private float forwardAxis = 0.0f;
 
-    private AIState state;
+
+    [SerializeField] private AIState_Main stateMain = AIState_Main.None;
+    [SerializeField] private AIState_Wandering stateWandering = AIState_Wandering.None;
+
+    private float idleTime = 0.0f;
+    private float wanderTime = 0.0f;
 
     #endregion
 
@@ -58,15 +63,17 @@ public class NPCController : MonoBehaviour
         float delta = Time.deltaTime;
 
         UpdateMovement(delta);
-        UpdateFSM(delta);
+        UpdateFSM_Main(delta);
         UpdatePathing();
-        
+
         // For now, just walk toward the selected target GameObject.
         if (this.Target != null)
         {
-            this.forwardAxis = 1.0f;
-            this.NavTarget = this.Target.transform.position;
+            // this.forwardAxis = 1.0f;
+            // this.NavTarget = this.Target.transform.position;
             // this.agent.destination = NavTarget;
+
+            
         }
 
         // Stop the actor from moving if they reach a distance that is less than or equal to the stopping distance of the NavMeshAgent component.
@@ -178,7 +185,7 @@ public class NPCController : MonoBehaviour
         // This crappy patchy solution allows Unity's built in nav mesh agent's rotation system to work and not shit its pants...
 
         #endregion
-        
+
         NavMeshHit hit;
         bool hasHit = NavMesh.SamplePosition(this.characterController.transform.position, out hit, 1.0f, NavMesh.AllAreas);
         if (hasHit && Vector3.Distance(this.agent.nextPosition, this.transform.position) > 2.0f)
@@ -200,19 +207,32 @@ public class NPCController : MonoBehaviour
         if (!this.hasAi)
             return;
 
+        /*
         if (this.Target == null)
             return;
+        */
 
         this.agent.destination = this.NavTarget;
+    }
+
+    // Returns the closest point to an input coordinate that is a valid point located within the nav mesh.
+    private Vector3 GetClosestNavPoint(Vector3 position)
+    {
+        Vector3 ans = transform.position;
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(position, out hit, 1000, NavMesh.AllAreas))
+            ans = hit.position;
+        return ans;
     }
 
     #endregion
 
     #region PrivateMethods - FSM
 
+    // Old Implementation
+    /*
     private void UpdateFSM(float delta)
     {
-        /*
         switch (this.state)
         {
             case AIState.Idle:
@@ -232,8 +252,71 @@ public class NPCController : MonoBehaviour
                 this.state = AIState.Idle;
                 break;
         }
-        */
     }
+    */
+
+    private void UpdateFSM_Main(float delta)
+    {
+        switch (this.stateMain)
+        {
+            case AIState_Main.None:
+            default:
+                this.stateMain = AIState_Main.Idle;
+                break;
+            case AIState_Main.Idle:
+                this.forwardAxis = 0.0f;
+                this.idleTime += delta;
+                if (this.idleTime >= 5.0f)
+                {
+                    this.idleTime = 0.0f;
+                    this.stateMain = AIState_Main.Wandering;
+                }
+                break;
+            case AIState_Main.Wandering:
+                this.forwardAxis = 1.0f;
+                UpdateFSM_Wandering(delta);
+                break;
+            case AIState_Main.Combat:
+                this.NavTarget = this.Target.transform.position;
+                UpdateFSM_Combat(delta);
+                break;
+        }
+    }
+
+    private void UpdateFSM_Wandering(float delta)
+    {
+        switch (this.stateWandering)
+        {
+            case AIState_Wandering.None:
+            default:
+                this.stateWandering = AIState_Wandering.SelectingTarget;
+                break;
+            case AIState_Wandering.SelectingTarget:
+                float rngX = Random.Range(-20, 20);
+                float rngY = Random.Range(-20, 20);
+                Vector3 vec = new Vector3(rngX, 0, rngY);
+                this.NavTarget = GetClosestNavPoint(this.transform.position + vec);
+                this.stateWandering = AIState_Wandering.MovingToTarget;
+                break;
+            case AIState_Wandering.MovingToTarget:
+                DebugManager.Instance?.DrawSphere(this.NavTarget, 2, Color.magenta);
+                this.wanderTime += delta;
+                float distance = Vector3.Distance(this.transform.position, this.NavTarget);
+                if (wanderTime > 5.0f || distance <= this.agent.stoppingDistance)
+                {
+                    this.stateWandering = AIState_Wandering.ArrivedToTarget;
+                    this.wanderTime = 0.0f;
+                }
+                break;
+            case AIState_Wandering.ArrivedToTarget:
+                this.stateWandering = AIState_Wandering.None;
+                this.stateMain = AIState_Main.Idle;
+                break;
+        }
+    }
+
+    private void UpdateFSM_Combat(float delta)
+    { }
 
     #endregion
 }
