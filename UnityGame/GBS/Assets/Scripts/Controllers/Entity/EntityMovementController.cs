@@ -6,13 +6,21 @@ public class EntityMovementController : MonoBehaviour
 {
     #region Variables
 
+    [SerializeField] private CharacterController characterController;
+
+    #endregion
+
+    #region Variables - Private
+
+    private Vector3 gravityVector;
+
     #endregion
 
     #region MonoBehaviour
 
     void Start()
     {
-        
+        Init();
     }
 
     void Update()
@@ -26,5 +34,11 @@ public class EntityMovementController : MonoBehaviour
     #endregion
 
     #region PrivateMethods
+
+    private void Init()
+    {
+        this.gravityVector = new Vector3(0.0f, -9.8f, 0.0f);
+    }
+
     #endregion
 }
