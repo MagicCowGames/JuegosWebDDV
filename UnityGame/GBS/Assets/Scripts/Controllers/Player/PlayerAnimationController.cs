@@ -5,6 +5,9 @@ using UnityEngine;
 // NOTE : In the future, we should take a PlayerMovementController or something like a velocity controller or whatever the fuck, that way we could just access the max
 // velocity values directly... right now we're going through the PlayerController reference, but we don't need everything about the PlayerController so yeah...
 // we're also polluting the PlayerController's code by adding so much extra stuff with new getters and shit.
+
+// TODO : Make player's code use the generic Entity classes in the future... or inherit from it.
+
 public class PlayerAnimationController : MonoBehaviour
 {
     #region Variables
