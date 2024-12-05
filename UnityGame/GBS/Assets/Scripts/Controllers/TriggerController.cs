@@ -86,7 +86,7 @@ public class TriggerController : MonoBehaviour
         var player = obj.GetComponent<PlayerController>();
         bool playerOk = this.triggeredByPlayer && player != null;
 
-        var dummy = obj.GetComponent<TestDummyController>();
+        var dummy = obj.GetComponent<NPCController>();
         bool dummyOk = this.triggeredByDummy && dummy != null;
 
         // TODO : Add support for other types of entities appart from the player by adding checks for other controller components

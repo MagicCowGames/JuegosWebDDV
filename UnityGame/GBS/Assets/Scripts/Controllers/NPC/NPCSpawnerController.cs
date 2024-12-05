@@ -4,7 +4,7 @@ using UnityEngine;
 
 // Trashy script, should be replaced with some generic entity spawner...
 // like an ObjectSpawnerController that works for using UnityEvents to trigger the internal static ObjectSpawner calls.
-public class TestDummySpawnerController : MonoBehaviour
+public class NPCSpawnerController : MonoBehaviour
 {
     #region Variables
 
@@ -32,7 +32,7 @@ public class TestDummySpawnerController : MonoBehaviour
     public void SpawnDummy(Transform spawnTransform)
     {
         var obj = ObjectSpawner.Spawn(this.dummyPrefab, spawnTransform);
-        var dummy = obj.GetComponent<TestDummyController>();
+        var dummy = obj.GetComponent<NPCController>();
         dummy.CanDie = true;
     }
 

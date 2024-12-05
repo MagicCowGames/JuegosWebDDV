@@ -11,7 +11,7 @@ using UnityEngine;
 public class PlayerAnimationController : MonoBehaviour
 {
     #region Variables
-
+    
     [Header("Components")]
     [SerializeField] private CharacterController controller;
     [SerializeField] private PlayerController playerController;

@@ -9,7 +9,7 @@ public class AISensorSystemController : MonoBehaviour
     #region Variables
 
     [Header("AI Controller")]
-    [SerializeField] private TestDummyController aiController; // TODO : Move this logic so that it is the AI controller itself that handles this detect method stuff. This class should be just like the sensor classes and notify the AI controller through a callback or event.
+    [SerializeField] private NPCController aiController; // TODO : Move this logic so that it is the AI controller itself that handles this detect method stuff. This class should be just like the sensor classes and notify the AI controller through a callback or event.
 
     [Header("Sensors")]
     [SerializeField] private AISensorBase[] sensors;
