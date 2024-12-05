@@ -97,7 +97,7 @@ public class SceneLoadingManager : SingletonPersistent<SceneLoadingManager>
         if (this.isLoadingSceneWithTransition)
             return;
 
-        StartCoroutine(TransitionToSceneInternal(name, 0.5f, 1.5f));
+        StartCoroutine(TransitionToSceneInternal(name, 0.2f, 0.5f));
     }
 
     #endregion
