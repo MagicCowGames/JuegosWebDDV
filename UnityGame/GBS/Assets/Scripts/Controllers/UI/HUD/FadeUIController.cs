@@ -35,6 +35,7 @@ public class FadeUIController : UIController
     {
         float delta = Time.unscaledDeltaTime;
         UpdateFade(delta);
+        UpdateHitDetection();
     }
 
     #endregion
@@ -90,6 +91,16 @@ public class FadeUIController : UIController
     private void UpdateFade(float delta)
     {
         this.canvasGroup.alpha = Mathf.Clamp01(this.canvasGroup.alpha + (delta * this.lerpSpeed)); // No lerping, just constant speed change to keep transition durations consistent with framerate.
+    }
+
+    // Disables the hit detection of the canvas group while the fading is taking place.
+    // Prevents the player from being able to press buttons while the screen is fading and fucking shit up.
+    // In short, a crappy hack... all in the name of adding eye candy to loading screens! FUCK!
+    private void UpdateHitDetection()
+    {
+        bool b = this.canvasGroup.alpha > 0.0f;
+        this.canvasGroup.interactable = b;
+        this.canvasGroup.blocksRaycasts = b;
     }
 
     #endregion
