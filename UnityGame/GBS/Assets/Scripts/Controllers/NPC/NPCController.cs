@@ -36,6 +36,7 @@ public class NPCController : MonoBehaviour
 
     [SerializeField] private AIState_Main stateMain = AIState_Main.None;
     [SerializeField] private AIState_Wandering stateWandering = AIState_Wandering.None;
+    [SerializeField] private AIState_Combat stateCombat = AIState_Combat.None;
 
     private float idleTime = 0.0f;
     private float wanderTime = 0.0f;
@@ -73,7 +74,7 @@ public class NPCController : MonoBehaviour
             // this.NavTarget = this.Target.transform.position;
             // this.agent.destination = NavTarget;
 
-            
+            this.stateMain = AIState_Main.Combat; // This should be set through an event only ONCE, but whatever... for now we do it this way lol...
         }
 
         // Stop the actor from moving if they reach a distance that is less than or equal to the stopping distance of the NavMeshAgent component.
@@ -316,7 +317,27 @@ public class NPCController : MonoBehaviour
     }
 
     private void UpdateFSM_Combat(float delta)
-    { }
+    {
+        switch (this.stateCombat)
+        {
+            case AIState_Combat.None:
+            default:
+                this.stateCombat = AIState_Combat.Chasing;
+                break;
+            case AIState_Combat.Chasing:
+                this.forwardAxis = 1.0f;
+                this.NavTarget = this.Target.transform.position;
+                break;
+            case AIState_Combat.Fighting:
+                // TODO : Implement more complex fighting logic with a custom FSM with distances based on whether this NPC can perform
+                // ranged attacks or not, distance to player, and other stuff like that, etc...
+                break;
+            case AIState_Combat.Retreating:
+                // TODO : Implement retreating logic
+                this.stateCombat = AIState_Combat.None; // And remove this remporary shit lol
+                break;
+        }
+    }
 
     #endregion
 }
