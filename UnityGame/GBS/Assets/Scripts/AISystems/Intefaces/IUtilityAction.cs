@@ -2,6 +2,7 @@
 // TODO : Should probably implement some kind of UtilitySystem controller class of sorts that handles updating the US automatically.
 public interface IUtilityAction
 {
+    public string Name { get; set; }
     public float Calculate(float delta);
     public void Execute(float delta);
     public void Update(float delta);
