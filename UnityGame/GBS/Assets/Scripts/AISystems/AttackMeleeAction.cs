@@ -41,13 +41,13 @@ public class AttackAction : IUtilityAction
 
         var distance = this.controller.DistanceToTarget;
 
-        if (distance > this.attackDistance || this.timeSinceLastAttack <= this.attackCooldown)
+        if (distance > this.attackDistance || this.timeSinceLastAttack <= this.attackCooldown || this.controller.spellCaster.GetIsCasting())
         {
             return 0.0f;
         }
         else
         {
-            return 1.0f;
+            return 0.6f;
         }
     }
 
