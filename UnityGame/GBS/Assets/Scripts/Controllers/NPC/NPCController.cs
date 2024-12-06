@@ -20,6 +20,7 @@ public class NPCController : MonoBehaviour
     [SerializeField] private bool hasAi = false;
     [SerializeField] private bool canDie = false;
     [SerializeField] private float speed = 3.0f;
+    [SerializeField] private float timeToDespawnOnDeath = 0.0f;
 
     [Header("Weapons Components")] // Weapons systems
     [SerializeField] public SpellCasterController spellCaster;
@@ -143,8 +144,9 @@ public class NPCController : MonoBehaviour
 
     private void HandleDeath()
     {
+        this.hasAi = false;
         if (this.canDie)
-            Destroy(this.gameObject);
+            Destroy(this.gameObject, this.timeToDespawnOnDeath);
     }
 
     private void HandleDamaged(float oldHealth, float newHealth)
