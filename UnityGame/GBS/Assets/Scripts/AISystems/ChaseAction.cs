@@ -8,9 +8,6 @@ public class ChaseAction : IUtilityAction
     #region Variables
 
     private NPCController controller;
-    private float chaseTime;
-    private float maxChaseTime;
-
 
     #endregion
 
@@ -27,18 +24,17 @@ public class ChaseAction : IUtilityAction
 
     public float Calculate(float delta)
     {
-        return GameMath.Sigmoid();
+        return 0.5f;
     }
 
     public void Execute(float delta)
     {
         this.controller.NavTarget = this.controller.Target.transform.position;
-        this.chaseTime += delta;
     }
 
-    public void Reset()
+    public void Update(float delta)
     {
-        this.chaseTime = 0.0f;
+
     }
 
     #endregion
