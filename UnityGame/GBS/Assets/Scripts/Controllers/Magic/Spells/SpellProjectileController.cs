@@ -10,6 +10,9 @@ public class SpellProjectileController : SpellBaseController
     [SerializeField] private Rigidbody rigidBody;
     [SerializeField] private float force;
     [SerializeField] private ParticleSystem elementParticles;
+    [SerializeField] private MeshFilter projectileMeshRock;
+    [SerializeField] private MeshFilter projectileMeshIceSpikes;
+    [SerializeField] private MeshFilter projectileMeshIceShard;
 
     public float Force { get { return this.force; } set { this.force = value; } }
 
@@ -41,6 +44,25 @@ public class SpellProjectileController : SpellBaseController
     {
         // TODO : Find non-deprecated alternative to do this.
         this.elementParticles.startColor = this.spellColor;
+
+        bool hasRock = this.elementsCounts[(int)Element.Earth] > 0;
+        bool hasIce = this.elementsCounts[(int)Element.Ice] > 0;
+
+        this.projectileMeshRock.gameObject.SetActive(false);
+        this.projectileMeshIceSpikes.gameObject.SetActive(false);
+        this.projectileMeshIceShard.gameObject.SetActive(false);
+
+        // Only display rock or ice according to whether the Earth and Ice elements are present or not.
+        if (hasRock && hasIce)
+        {
+            this.projectileMeshRock.gameObject.SetActive(true);
+            this.projectileMeshIceSpikes.gameObject.SetActive(true);
+        }
+        else
+        {
+            this.projectileMeshRock.gameObject.SetActive(hasRock);
+            this.projectileMeshIceShard.gameObject.SetActive(hasIce);
+        }
     }
 
     #endregion
