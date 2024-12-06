@@ -98,7 +98,8 @@ public class ConsoleUIController : UIController
             new Cmd("timescale", "Change the game's timescale", "<scale>", 1, CmdTimeScale),
             new Cmd("showfps", "Change the visibility of the FPS display", "<display>", 1, CmdShowFps),
             new Cmd("gtfo", "Instantly finish the current level", "", 0, CmdGtfo, true),
-            new Cmd("mkreq", "Make an HTTP request", "<type> <url> <message>", 3, CmdMkReq)
+            new Cmd("mkreq", "Make an HTTP request", "<type> <url> <message>", 3, CmdMkReq),
+            new Cmd("triggermeelmo", "Enable or disable player trigger activation", "<enabled>", 1, CmdTriggerMeElmo, true),
             // TODO : Add commands to get the current map name and the current language or something...
         };
         // TODO : Make an alias system of sorts, or maybe make it so that we can have a dict / list system to have multiple overloads for the same command
@@ -517,6 +518,14 @@ public class ConsoleUIController : UIController
         );
 
         ConnectionManager.Instance.MakeRequest(type, url, message, callbacks);
+    }
+
+    private void CmdTriggerMeElmo(string[] args, int startIndex)
+    {
+        string arg = args[startIndex + 1];
+        bool b = CmdParseBool(arg);
+        PlayerDataManager.Instance.GetPlayer().CanActivateTriggers = b;
+        CmdPrintln($"Trigger activation has been {(b ? CmdGetColorString("Enabled", Color.green) : CmdGetColorString("Disabled", Color.red))}!");
     }
 
     #endregion
