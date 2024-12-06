@@ -13,6 +13,8 @@ public class SpellBaseController : MonoBehaviour, ISpell
     [SerializeField] protected Color spellColor;
     [SerializeField] protected HealthModifierController healthModifierController;
 
+    protected GameObject owner;
+
     #endregion
 
     #region MonoBehaviour
@@ -105,6 +107,11 @@ public class SpellBaseController : MonoBehaviour, ISpell
 
         Color colorAns = new Color(r, g, b, 1.0f);
         SetSpellColor(colorAns);
+    }
+
+    public void SetOwner(GameObject obj)
+    {
+        this.owner = obj;
     }
 
     #endregion
