@@ -382,7 +382,7 @@ MonoBehaviour:
   canDie: 1
   speed: 6
   timeToDespawnOnDeath: 3
-  score: 150
+  score: 300
   spellCaster: {fileID: 4933429835869951161}
   stateMain: 0
   stateWandering: 0
