@@ -11,18 +11,19 @@ public class NPCController : MonoBehaviour
 {
     #region Variables
 
-    [Header("TestDummy Components")]
+    [Header("NPC Components")]
     [SerializeField] public HealthController healthController;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private NavMeshAgent agent;
 
-    [Header("TestDummy Config")]
+    [Header("NPC Config")]
     [SerializeField] private bool hasAi = false;
     [SerializeField] private bool canDie = false;
     [SerializeField] private float speed = 3.0f;
     [SerializeField] private float timeToDespawnOnDeath = 0.0f;
+    [SerializeField] private int score = 150;
 
-    [Header("Weapons Components")] // Weapons systems
+    [Header("NPC Weapons Components")] // Weapons systems
     [SerializeField] public SpellCasterController spellCaster;
 
     public bool CanDie { get { return this.canDie; } set { this.canDie = value; } }
@@ -35,6 +36,8 @@ public class NPCController : MonoBehaviour
 
     public float DistanceToNavTarget { get { return Vector3.Distance(this.transform.position, this.NavTarget); } }
     public float DistanceToTarget { get { return Vector3.Distance(this.transform.position, this.Target.transform.position); } }
+
+    private bool hasAwardedPlayer = false;
 
     #endregion
 
@@ -73,7 +76,7 @@ public class NPCController : MonoBehaviour
         this.healthController.OnDeath += HandleDeath;
         this.healthController.OnValueChanged += HandleDamaged;
 
-        this.healthController.OnDeath += () => { PlayerDataManager.Instance.GetPlayerScore().Score += 150; };
+        this.healthController.OnDeath += () => { GiveScore(); };
 
         this.agent.updatePosition = true;
         this.agent.updateRotation = true;
@@ -425,6 +428,18 @@ public class NPCController : MonoBehaviour
     {
         UpdateFSM_Main(delta);
         UpdatePathing();
+    }
+
+    #endregion
+
+    #region PrivateMethods - Score
+
+    private void GiveScore()
+    {
+        if (this.hasAwardedPlayer)
+            return;
+        PlayerDataManager.Instance.GetPlayerScore().Score += this.score;
+        this.hasAwardedPlayer = true;
     }
 
     #endregion
