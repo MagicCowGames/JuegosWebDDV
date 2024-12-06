@@ -12,7 +12,7 @@ public class NPCController : MonoBehaviour
     #region Variables
 
     [Header("TestDummy Components")]
-    [SerializeField] private HealthController healthController;
+    [SerializeField] public HealthController healthController;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private NavMeshAgent agent;
 
@@ -21,8 +21,13 @@ public class NPCController : MonoBehaviour
     [SerializeField] private bool canDie = false;
     [SerializeField] private float speed = 3.0f;
 
+    [Header("Weapons Components")] // Weapons systems
+    [SerializeField] private SpellCasterController spellCaster;
+
     public bool CanDie { get { return this.canDie; } set { this.canDie = value; } }
-    public Vector3 NavTarget { get; set; }
+
+    private Vector3 navTarget;
+    public Vector3 NavTarget { get { return this.navTarget; } set { this.navTarget = GetClosestNavPoint(value); } }
     public GameObject Target { get; set; }
 
     private Vector3 gravityVector = new Vector3(0.0f, -9.8f, 0.0f);
@@ -33,13 +38,15 @@ public class NPCController : MonoBehaviour
 
     private float forwardAxis = 0.0f;
 
-
+    [Header("AI States")]
     [SerializeField] private AIState_Main stateMain = AIState_Main.None;
     [SerializeField] private AIState_Wandering stateWandering = AIState_Wandering.None;
     [SerializeField] private AIState_Combat stateCombat = AIState_Combat.None;
 
     private float idleTime = 0.0f;
     private float wanderTime = 0.0f;
+
+    private float retreatTime = 0.0f;
 
     #endregion
 
@@ -270,7 +277,7 @@ public class NPCController : MonoBehaviour
                 float rngX = Random.Range(-20, 20);
                 float rngY = Random.Range(-20, 20);
                 Vector3 vec = new Vector3(rngX, 0, rngY);
-                this.NavTarget = GetClosestNavPoint(this.transform.position + vec);
+                this.NavTarget = this.transform.position + vec;
                 this.stateWandering = AIState_Wandering.MovingToTarget;
                 break;
             case AIState_Wandering.MovingToTarget:
@@ -292,6 +299,19 @@ public class NPCController : MonoBehaviour
 
     private void UpdateFSM_Combat(float delta)
     {
+        this.stateCombat = AIState_Combat.Chasing;
+
+        float distanceToTarget = Vector3.Distance(this.transform.position, this.Target.transform.position);
+        if (distanceToTarget <= 20.0f)
+        {
+            this.stateCombat = AIState_Combat.Fighting;
+        }
+
+        if (this.healthController.Health <= 10.0f && this.retreatTime < 5.0f)
+        {
+            this.stateCombat = AIState_Combat.Retreating;
+        }
+
         switch (this.stateCombat)
         {
             case AIState_Combat.None:
@@ -301,14 +321,17 @@ public class NPCController : MonoBehaviour
             case AIState_Combat.Chasing:
                 this.forwardAxis = 1.0f;
                 this.NavTarget = this.Target.transform.position;
+                
                 break;
             case AIState_Combat.Fighting:
                 // TODO : Implement more complex fighting logic with a custom FSM with distances based on whether this NPC can perform
                 // ranged attacks or not, distance to player, and other stuff like that, etc...
                 break;
             case AIState_Combat.Retreating:
-                // TODO : Implement retreating logic
-                this.stateCombat = AIState_Combat.None; // And remove this remporary shit lol
+                if (this.retreatTime >= 5.0f)
+                {
+                    this.retreatTime = 0.0f;
+                }
                 break;
         }
     }
