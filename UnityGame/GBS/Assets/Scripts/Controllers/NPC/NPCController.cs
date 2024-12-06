@@ -59,6 +59,12 @@ public class NPCController : MonoBehaviour
 
     #endregion
 
+    #region Variables - Velocity
+
+    public Vector3 Velocity { get; private set; } = Vector3.zero;
+
+    #endregion
+
     #region MonoBehaviour
 
     void Start()
@@ -168,6 +174,11 @@ public class NPCController : MonoBehaviour
 
     private void UpdateMovement(float delta)
     {
+        // Just like in the player's code, this is a fucking hack... in this case, the update order of the NPC prefabs has blessed us and the character
+        // controller's velocity value does work externally... but there is no guarantee that it will on the final build! so fuck that shit and let's do the
+        // same hack yet again...
+        this.Velocity = this.characterController.velocity;
+
         // AI independent movement
         UpdateMovementGravity(delta);
 
@@ -180,6 +191,8 @@ public class NPCController : MonoBehaviour
             return;
 
         UpdateMovementWalk(delta);
+
+        this.Velocity = this.characterController.velocity;
     }
 
     #endregion
