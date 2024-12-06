@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class FleeAction : IUtilityAction
 {
+    #region Properties
+
+    public string Name { get; set; } = "FleeAction";
+
+    #endregion
+
     #region Variables
 
     private NPCController controller;

@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class ChaseAction : IUtilityAction
 {
+    #region Properties
+
+    public string Name { get; set; } = "ChaseAction";
+
+    #endregion
+
     #region Variables
 
     private NPCController controller;

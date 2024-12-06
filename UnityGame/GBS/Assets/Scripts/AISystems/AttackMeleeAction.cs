@@ -6,6 +6,12 @@ using UnityEngine;
 // TODO : Merge logic with the regular attack action and just make it configurable with an enum or something.
 public class AttackAction : IUtilityAction
 {
+    #region Properties
+
+    public string Name { get; set; } = "AttackAction";
+
+    #endregion
+
     #region Variables
 
     private NPCController controller;
