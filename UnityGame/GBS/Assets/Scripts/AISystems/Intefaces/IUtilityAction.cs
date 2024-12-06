@@ -4,5 +4,5 @@ public interface IUtilityAction
 {
     public float Calculate(float delta);
     public void Execute(float delta);
-    public void Reset();
+    public void Update(float delta);
 }
