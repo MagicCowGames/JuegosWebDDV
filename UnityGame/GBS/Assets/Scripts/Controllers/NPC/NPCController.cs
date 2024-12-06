@@ -22,7 +22,7 @@ public class NPCController : MonoBehaviour
     [SerializeField] private float speed = 3.0f;
 
     [Header("Weapons Components")] // Weapons systems
-    [SerializeField] private SpellCasterController spellCaster;
+    [SerializeField] public SpellCasterController spellCaster;
 
     public bool CanDie { get { return this.canDie; } set { this.canDie = value; } }
 
@@ -74,7 +74,8 @@ public class NPCController : MonoBehaviour
         this.actions = new IUtilityAction[] {
             new ChaseAction(this),
             new FleeAction(this),
-            new AttackMeleeAction(this)
+            new AttackAction(this, new Element[]{Element.Fire, Element.Fire, Element.Earth}, Form.Projectile, 1.5f, 5.5f, 20.0f),
+            new AttackAction(this, new Element[]{Element.Fire, Element.Death, Element.Death}, Form.Beam, 3.0f, 10.5f, 40.0f)
         };
     }
 
@@ -119,7 +120,8 @@ public class NPCController : MonoBehaviour
     private IEnumerator StopAttackCoroutine(float castDuration)
     {
         yield return new WaitForSeconds(castDuration); // You think he was the Don? but you got the Fever!
-        this.spellCaster.StopCasting();
+        if(this.spellCaster.GetIsCasting())
+            this.spellCaster.StopCasting();
     }
 
     #endregion
