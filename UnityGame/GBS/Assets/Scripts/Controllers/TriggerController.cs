@@ -84,7 +84,7 @@ public class TriggerController : MonoBehaviour
     private bool CanTrigger(GameObject obj)
     {
         var player = obj.GetComponent<PlayerController>();
-        bool playerOk = this.triggeredByPlayer && player != null;
+        bool playerOk = this.triggeredByPlayer && player != null && player.CanActivateTriggers;
 
         var dummy = obj.GetComponent<NPCController>();
         bool dummyOk = this.triggeredByDummy && dummy != null;
