@@ -54,6 +54,8 @@ public class NPCController : MonoBehaviour
 
     IUtilityAction[] actions;
 
+    public bool isFleeing = false;
+
     #endregion
 
     #region MonoBehaviour
