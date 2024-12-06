@@ -97,6 +97,15 @@ public class NPCController : MonoBehaviour
     #endregion
 
     #region PublicMethods
+
+    public void AttackMelee()
+    {
+        this.spellCaster.AddElement(Element.Fire);
+        this.spellCaster.AddElement(Element.Fire);
+        this.spellCaster.SetForm(Form.Shield);
+        this.spellCaster.StartCasting();
+    }
+
     #endregion
 
     #region PrivateMethods
