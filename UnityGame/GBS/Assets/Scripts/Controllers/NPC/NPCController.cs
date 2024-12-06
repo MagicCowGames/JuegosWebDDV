@@ -158,6 +158,11 @@ public class NPCController : MonoBehaviour
         // AI dependent movement
         if (!this.hasAi)
             return;
+
+        // If the NPC is casting a spell, just like the player, it cannot move.
+        if (this.spellCaster.GetIsCasting())
+            return;
+
         UpdateMovementWalk(delta);
     }
 
