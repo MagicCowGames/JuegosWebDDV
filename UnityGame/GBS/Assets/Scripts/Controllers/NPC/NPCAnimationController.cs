@@ -13,6 +13,9 @@ public class NPCAnimationController : MonoBehaviour
     #region Variables
 
     [SerializeField] private NPCController npcController;
+    [SerializeField] private Animator animator;
+
+    private float animationShiftSpeed = 12.0f;
 
     #endregion
 
@@ -25,7 +28,9 @@ public class NPCAnimationController : MonoBehaviour
 
     void Update()
     {
-        DebugManager.Instance?.Log($"velocityNPC = {npcController.Velocity.magnitude}");
+        // DebugManager.Instance?.Log($"velocityNPC = {this.npcController.Velocity.magnitude}");
+        float delta = Time.deltaTime;
+        UpdateAnimation(delta);
     }
 
     #endregion
@@ -34,5 +39,41 @@ public class NPCAnimationController : MonoBehaviour
     #endregion
 
     #region PrivateMethods
+
+    private void UpdateAnimation(float delta)
+    {
+        // Temporarily disabled because NPCs are destroyed instantly when they die.
+        /*
+        if (this.npcController.healthController.Health <= 0.0f)
+        {
+            this.animator.Play("Base Layer.Death");
+            return;
+        }
+        */
+
+        if (this.npcController.spellCaster.GetIsCasting())
+        {
+            ChangeAnimationValueFloat("Casting", delta * this.animationShiftSpeed, -2, 2);
+        }
+        else
+        {
+            ChangeAnimationValueFloat("Casting", delta * this.animationShiftSpeed * -1.0f, -2, 2);
+        }
+
+        if (this.npcController.Velocity.magnitude > 0.0f)
+        {
+            ChangeAnimationValueFloat("ForwardMovement", delta * this.animationShiftSpeed, 0, 1);
+        }
+        else
+        {
+            ChangeAnimationValueFloat("ForwardMovement", delta * this.animationShiftSpeed * -1.0f, 0, 1);
+        }
+    }
+
+    private void ChangeAnimationValueFloat(string name, float amount, float min, float max)
+    {
+        this.animator.SetFloat(name, Mathf.Clamp(this.animator.GetFloat(name) + amount, min, max));
+    }
+
     #endregion
 }

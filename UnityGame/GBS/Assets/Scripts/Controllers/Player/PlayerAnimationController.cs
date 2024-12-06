@@ -42,6 +42,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     void Update()
     {
+        // DebugManager.Instance?.Log($"velocity = {controller.velocity}");
         float delta = Time.deltaTime;
         UpdateAnimation(delta);
     }
