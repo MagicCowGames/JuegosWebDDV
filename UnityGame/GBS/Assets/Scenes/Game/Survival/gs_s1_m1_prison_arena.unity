@@ -3803,6 +3803,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1048658849}
+        m_TargetAssemblyTypeName: NPCSpawnerController, Assembly-CSharp
+        m_MethodName: SpawnDummies
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   triggerOnAreaEnter: 1
   triggerOnAreaExit: 0
   triggerOnAreaStay: 0
@@ -9165,6 +9177,7 @@ Transform:
   - {fileID: 317237437}
   - {fileID: 2019663265}
   - {fileID: 1318850010}
+  - {fileID: 1048658850}
   - {fileID: 264547939}
   m_Father: {fileID: 1058810010}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16253,6 +16266,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026789561}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1048658848
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1048658850}
+  - component: {fileID: 1048658849}
+  m_Layer: 0
+  m_Name: spawn (11)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1048658849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048658848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5acca7e295b2fd244bd3c9d0259bed8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dummyPrefab: {fileID: 6979400288211159785, guid: 62c9820890254794e8f46d1ab9ffdcd5, type: 3}
+  spawnTransforms:
+  - {fileID: 1048658850}
+--- !u!4 &1048658850
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048658848}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.67644185, z: -0, w: 0.73649603}
+  m_LocalPosition: {x: 4.66, y: 0, z: -21.33}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 626369459}
+  m_LocalEulerAnglesHint: {x: 0, y: -85.132, z: 0}
 --- !u!1001 &1053345491
 PrefabInstance:
   m_ObjectHideFlags: 0
