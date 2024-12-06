@@ -55,6 +55,7 @@ public class NPCController : MonoBehaviour
     IUtilityAction[] actions;
 
     public bool isFleeing = false;
+    public bool hasLineOfSight = false;
 
     #endregion
 
@@ -76,7 +77,7 @@ public class NPCController : MonoBehaviour
         this.actions = new IUtilityAction[] {
             new ChaseAction(this),
             new FleeAction(this),
-            new AttackAction(this, new Element[]{Element.Fire, Element.Fire, Element.Earth}, Form.Projectile, 1.5f, 3.5f, 10.0f, 20.0f),
+            new AttackAction(this, new Element[]{Element.Fire, Element.Fire, Element.Earth}, Form.Projectile, 1.5f, 3.5f, 15.0f, 20.0f),
             new AttackAction(this, new Element[]{Element.Fire, Element.Death, Element.Death}, Form.Beam, 3.0f, 10.5f, 21.0f, 40.0f),
             new AttackAction(this, new Element[]{Element.Fire, Element.Fire}, Form.Projectile, 0.1f, 1.5f, 0.0f, 3.0f)
         };
