@@ -74,8 +74,9 @@ public class NPCController : MonoBehaviour
         this.actions = new IUtilityAction[] {
             new ChaseAction(this),
             new FleeAction(this),
-            new AttackAction(this, new Element[]{Element.Fire, Element.Fire, Element.Earth}, Form.Projectile, 1.5f, 5.5f, 20.0f),
-            new AttackAction(this, new Element[]{Element.Fire, Element.Death, Element.Death}, Form.Beam, 3.0f, 10.5f, 40.0f)
+            new AttackAction(this, new Element[]{Element.Fire, Element.Fire, Element.Earth}, Form.Projectile, 1.5f, 3.5f, 10.0f, 20.0f),
+            new AttackAction(this, new Element[]{Element.Fire, Element.Death, Element.Death}, Form.Beam, 3.0f, 10.5f, 21.0f, 40.0f),
+            new AttackAction(this, new Element[]{Element.Fire, Element.Fire}, Form.Projectile, 0.1f, 1.5f, 0.0f, 3.0f)
         };
     }
 
@@ -92,7 +93,7 @@ public class NPCController : MonoBehaviour
             // this.forwardAxis = 1.0f;
             // this.NavTarget = this.Target.transform.position;
             // this.agent.destination = NavTarget;
-
+            // DebugManager.Instance?.Log($"Distance = {this.DistanceToTarget}");
             this.stateMain = AIState_Main.Combat; // This should be set through an event only ONCE, but whatever... for now we do it this way lol...
         }
 
@@ -109,6 +110,9 @@ public class NPCController : MonoBehaviour
 
     public void Attack(Element[] elements, Form form, float castDuration)
     {
+        if (this.spellCaster.GetIsCasting())
+            return;
+
         // TODO : Use some kind of list of known spells or something...? or adjust the elements according to what the target uses, idk.
         this.spellCaster.AddElements(elements);
         this.spellCaster.SetForm(form);
@@ -381,6 +385,7 @@ public class NPCController : MonoBehaviour
         foreach (var action in this.actions)
         {
             var val = action.Calculate(delta);
+            // DebugManager.Instance?.Log($"{action.Name} : {val}");
             if (val > maxValue)
             {
                 maxValue = val;
