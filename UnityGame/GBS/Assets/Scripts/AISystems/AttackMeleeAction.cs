@@ -52,7 +52,7 @@ public class AttackMeleeAction : IUtilityAction
 
     public void Update(float delta)
     {
-        this.attackCooldown -= delta;
+        this.timeSinceLastAttack += delta;
     }
 
     #endregion
