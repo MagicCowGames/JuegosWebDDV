@@ -32,7 +32,8 @@ public class NPCController : MonoBehaviour
 
     private Vector3 gravityVector = new Vector3(0.0f, -9.8f, 0.0f);
 
-    public float DistanceToTarget { get { return Vector3.Distance(this.transform.position, this.NavTarget); } }
+    public float DistanceToNavTarget { get { return Vector3.Distance(this.transform.position, this.NavTarget); } }
+    public float DistanceToTarget { get { return Vector3.Distance(this.transform.position, this.Target.transform.position); } }
 
     #endregion
 
