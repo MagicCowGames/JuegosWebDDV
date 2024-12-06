@@ -777,7 +777,7 @@ GameObject:
   - component: {fileID: 7713064221824962987}
   - component: {fileID: 8043318680210230778}
   m_Layer: 0
-  m_Name: TestDummyPrefab
+  m_Name: GhostPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -842,6 +842,7 @@ MonoBehaviour:
   stateWandering: 0
   stateCombat: 0
   isFleeing: 0
+  hasLineOfSight: 0
 --- !u!195 &7713064221824962987
 NavMeshAgent:
   m_ObjectHideFlags: 0
