@@ -40,6 +40,7 @@ public class NPCController : MonoBehaviour
     #region Variables - AI Related
 
     private float forwardAxis = 0.0f;
+    public float ForwardAxis { get { return this.forwardAxis; } set { this.forwardAxis = value; } }
 
     [Header("AI States")]
     [SerializeField] private AIState_Main stateMain = AIState_Main.None;
@@ -82,8 +83,7 @@ public class NPCController : MonoBehaviour
         float delta = Time.deltaTime;
 
         UpdateMovement(delta);
-        UpdateFSM_Main(delta);
-        UpdatePathing();
+        UpdateAI(delta);
 
         // For now, just walk toward the selected target GameObject.
         if (this.Target != null)
@@ -280,8 +280,7 @@ public class NPCController : MonoBehaviour
                 UpdateFSM_Wandering(delta);
                 break;
             case AIState_Main.Combat:
-                this.NavTarget = this.Target.transform.position;
-                UpdateFSM_Combat(delta);
+                UpdateUtilitySystem(delta);
                 break;
         }
     }
@@ -355,6 +354,40 @@ public class NPCController : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    #endregion
+
+    #region PrivateMethods - US
+
+    private void UpdateUtilitySystem(float delta)
+    {
+        IUtilityAction chosenAction = null;
+        float maxValue = 0.0f;
+        foreach (var action in this.actions)
+        {
+            var val = action.Calculate(delta);
+            if (val > maxValue)
+            {
+                maxValue = val;
+                chosenAction = action;
+            }
+        }
+
+        foreach (var action in this.actions)
+            action.Update(delta);
+
+        chosenAction?.Execute(delta);
+    }
+
+    #endregion
+
+    #region PrivateMethods - AI State
+
+    private void UpdateAI(float delta)
+    {
+        UpdateFSM_Main(delta);
+        UpdatePathing();
     }
 
     #endregion
