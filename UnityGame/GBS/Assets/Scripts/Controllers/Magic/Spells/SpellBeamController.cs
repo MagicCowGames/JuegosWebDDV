@@ -17,6 +17,7 @@ public class SpellBeamController : SpellBaseController
     [SerializeField] private ParticleSystem particleStart;
     [SerializeField] private ParticleSystem particleEnd;
     [SerializeField] private CapsuleCollider capsuleCollider; // This capsule collider could be used both for beam collisions AND damage area. But maybe it makes more sense to only add a damage area at the target location, since that's technically the only possible contact point for a beam...
+    [SerializeField] private bool canMix = false;
 
     private float currentMaxDistance;
     private float distanceGrowthRate = 80.0f;
@@ -187,7 +188,8 @@ public class SpellBeamController : SpellBaseController
 
 
         // Handle collisions with other beams and child beam spawning
-        if (isContactingBeam)
+        // NOTE : Only allows generating child beams if both beam are allowed to mix
+        if (isContactingBeam && this.canMix && this.OtherBeam.canMix)
         {
             // Update the other beam's OtherBeam reference to this beam.
             // If this beam was colliding with another beam and now collides with this one, it means that this beam is colliding at an earlier point along
