@@ -51,6 +51,8 @@ public class NPCController : MonoBehaviour
 
     private float retreatTime = 0.0f;
 
+    IUtilityAction[] actions;
+
     #endregion
 
     #region MonoBehaviour
@@ -67,6 +69,12 @@ public class NPCController : MonoBehaviour
 
         this.Target = null;
         this.NavTarget = Vector3.zero;
+
+        this.actions = new IUtilityAction[] {
+            new ChaseAction(this),
+            new FleeAction(this),
+            new AttackMeleeAction(this)
+        };
     }
 
     void Update()
@@ -100,6 +108,7 @@ public class NPCController : MonoBehaviour
 
     public void AttackMelee()
     {
+        // TODO : Use some kind of list of known spells or something...? or adjust the elements according to what the target uses, idk.
         this.spellCaster.AddElement(Element.Fire);
         this.spellCaster.AddElement(Element.Fire);
         this.spellCaster.SetForm(Form.Shield);
