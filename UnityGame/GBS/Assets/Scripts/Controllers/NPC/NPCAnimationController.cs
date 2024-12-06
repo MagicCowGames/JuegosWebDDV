@@ -23,7 +23,7 @@ public class NPCAnimationController : MonoBehaviour
 
     void Start()
     {
-        
+        this.npcController.healthController.OnDeath += () => { this.animator.Play("Base Layer.Death"); };
     }
 
     void Update()
@@ -42,15 +42,6 @@ public class NPCAnimationController : MonoBehaviour
 
     private void UpdateAnimation(float delta)
     {
-        // Temporarily disabled because NPCs are destroyed instantly when they die.
-        /*
-        if (this.npcController.healthController.Health <= 0.0f)
-        {
-            this.animator.Play("Base Layer.Death");
-            return;
-        }
-        */
-
         if (this.npcController.spellCaster.GetIsCasting())
         {
             ChangeAnimationValueFloat("Casting", delta * this.animationShiftSpeed, -2, 2);
