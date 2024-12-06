@@ -111,7 +111,7 @@ public class NPCController : MonoBehaviour
         // TODO : Use some kind of list of known spells or something...? or adjust the elements according to what the target uses, idk.
         this.spellCaster.AddElement(Element.Fire);
         this.spellCaster.AddElement(Element.Fire);
-        this.spellCaster.SetForm(Form.Shield);
+        this.spellCaster.SetForm(Form.Beam);
         this.spellCaster.StartCasting();
     }
 
