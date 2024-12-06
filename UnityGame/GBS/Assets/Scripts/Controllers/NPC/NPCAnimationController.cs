@@ -12,7 +12,7 @@ public class NPCAnimationController : MonoBehaviour
 {
     #region Variables
 
-    [SerializeField] private CharacterController characterController;
+    [SerializeField] private NPCController npcController;
 
     #endregion
 
@@ -25,7 +25,7 @@ public class NPCAnimationController : MonoBehaviour
 
     void Update()
     {
-        DebugManager.Instance?.Log($"velocity = {characterController.velocity}");
+        DebugManager.Instance?.Log($"velocityNPC = {npcController.Velocity.magnitude}");
     }
 
     #endregion
