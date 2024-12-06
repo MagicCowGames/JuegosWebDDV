@@ -17,23 +17,27 @@ public class AttackAction : IUtilityAction
     private NPCController controller;
     private float attackCooldown = 2.0f;
     private float timeSinceLastAttack = 0.0f;
-    private float attackDistance = 10.0f;
     private Element[] attackElements;
     private Form attackForm;
     private float attackDuration;
+
+    private float attackDistanceMin;
+    private float attackDistanceMax;
 
     #endregion
 
     #region Constructor
 
-    public AttackAction(NPCController controller, Element[] elements, Form form, float castTime, float cooldown, float distance)
+    public AttackAction(NPCController controller, Element[] elements, Form form, float castTime, float cooldown, float distanceMin, float distanceMax)
     {
         this.controller = controller;
         this.attackCooldown = cooldown;
-        this.attackDistance = distance;
         this.attackElements = elements;
         this.attackForm = form;
         this.attackDuration = castTime;
+
+        this.attackDistanceMin = distanceMin;
+        this.attackDistanceMax = distanceMax;
     }
 
     #endregion
@@ -42,19 +46,13 @@ public class AttackAction : IUtilityAction
 
     public float Calculate(float delta)
     {
-        if (this.controller.Target == null)
+        if (this.controller.Target == null || this.controller.spellCaster.GetIsCasting() || this.timeSinceLastAttack <= this.attackCooldown)
             return 0.0f;
 
         var distance = this.controller.DistanceToTarget;
 
-        if (distance > this.attackDistance || this.timeSinceLastAttack <= this.attackCooldown || this.controller.spellCaster.GetIsCasting())
-        {
-            return 0.0f;
-        }
-        else
-        {
-            return 0.6f;
-        }
+        return distance >= this.attackDistanceMin && distance <= this.attackDistanceMax ? 1.0f : 0.0f;
+
     }
 
     public void Execute(float delta)
