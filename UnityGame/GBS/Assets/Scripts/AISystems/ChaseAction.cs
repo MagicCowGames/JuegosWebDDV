@@ -29,6 +29,7 @@ public class ChaseAction : IUtilityAction
 
     public void Execute(float delta)
     {
+        this.controller.ForwardAxis = 1.0f;
         this.controller.NavTarget = this.controller.Target.transform.position;
     }
 

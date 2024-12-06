@@ -11,7 +11,7 @@ public class AttackMeleeAction : IUtilityAction
     private NPCController controller;
     private float attackCooldown = 5.0f;
     private float timeSinceLastAttack = 0.0f;
-    private float attackDistance = 3.0f;
+    private float attackDistance = 5.0f;
 
     #endregion
 
@@ -28,9 +28,12 @@ public class AttackMeleeAction : IUtilityAction
 
     public float Calculate(float delta)
     {
+        if (this.controller.Target == null)
+            return 0.0f;
+
         var distance = this.controller.DistanceToTarget;
 
-        if (distance > 3.0f || this.timeSinceLastAttack <= this.attackCooldown)
+        if (distance > this.attackDistance || this.timeSinceLastAttack <= this.attackCooldown)
         {
             return 0.0f;
         }
@@ -42,6 +45,7 @@ public class AttackMeleeAction : IUtilityAction
 
     public void Execute(float delta)
     {
+        this.controller.ForwardAxis = 0.0f;
         this.controller.AttackMelee();
         this.timeSinceLastAttack = 0.0f;
     }

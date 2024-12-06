@@ -30,7 +30,8 @@ public class FleeAction : IUtilityAction
 
     public float Calculate(float delta)
     {
-        // return Mathf.Clamp01(GameMath.Sigmoid((1.0f/fleeTime)));
+        if (this.controller.Target == null)
+            return 0.0f;
 
         if (this.fleeTime >= this.fleeTimeMax)
         {
@@ -53,7 +54,8 @@ public class FleeAction : IUtilityAction
         // Director vector (normalized)
         Vector3 dir = vec.normalized;
 
-        // Calculate a point in that direction
+        // Calculate a point in that direction and move to it
+        this.controller.ForwardAxis = 1.0f;
         this.controller.NavTarget = dir * 10.0f;
 
         // Update flee time
