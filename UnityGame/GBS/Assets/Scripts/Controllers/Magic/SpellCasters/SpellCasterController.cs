@@ -11,6 +11,9 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
 
     // NOTE : Maybe the magic manager should be the one to have a field with all of the prefabs stored so that we do not have multiple copies needlessly stored in memory?
 
+    [Header("Components")]
+    [SerializeField] private GameObject owner; // The reference to the owner of this spell caster. The player / entity / NPC that is using it.
+
     [Header("Element Queue Config")]
     // Size is 5 elements max on the queue by default. This is what the player uses. Some special entities could have a custom size queue.
     // NOTE : The size can only be configured at compiletime from the editor for now, since the value wont change afterwards.
@@ -350,6 +353,7 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
         // Set spell data
         var beam = obj.GetComponent<SpellBeamController>();
         beam.SetSpellData(this.elementQueueTemp);
+        beam.SetOwner(this.owner);
     }
 
     private void SpawnShield()
