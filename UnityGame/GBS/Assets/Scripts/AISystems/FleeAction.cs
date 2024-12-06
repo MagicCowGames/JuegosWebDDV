@@ -54,19 +54,24 @@ public class FleeAction : IUtilityAction
 
     public void Execute(float delta)
     {
-        // Vector that goes from self to target
-        Vector3 vec = this.controller.Target.transform.position - this.controller.transform.position;
+        // Vector that goes from target to self
+        Vector3 vec = this.controller.transform.position - this.controller.Target.transform.position;
         
         // Director vector (normalized)
         Vector3 dir = vec.normalized;
 
         // Calculate a point in that direction and move to it
         this.controller.ForwardAxis = 1.0f;
-        this.controller.NavTarget = dir * 10.0f;
+        this.controller.NavTarget = this.controller.transform.position + dir * 2.0f;
+
+        // Spawn a wall for protection before fleeing
+        if(!this.controller.isFleeing)
+            this.controller.Attack(new Element[] { Element.Earth, Element.Ice }, Form.Shield, 0.2f);
 
         // Update flee time
         this.fleeTime += delta;
         this.fleeTimeRest = 0.0f;
+        this.controller.isFleeing = true;
     }
 
     public void Update(float delta)
@@ -75,6 +80,7 @@ public class FleeAction : IUtilityAction
         if (this.fleeTimeRest >= this.fleeTimeCooldown)
         {
             this.fleeTime = 0.0f;
+            this.controller.isFleeing = false;
         }
     }
 
