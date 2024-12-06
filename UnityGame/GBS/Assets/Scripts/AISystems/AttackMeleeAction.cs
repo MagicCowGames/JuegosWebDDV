@@ -4,22 +4,30 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // TODO : Merge logic with the regular attack action and just make it configurable with an enum or something.
-public class AttackMeleeAction : IUtilityAction
+public class AttackAction : IUtilityAction
 {
     #region Variables
 
     private NPCController controller;
-    private float attackCooldown = 5.0f;
+    private float attackCooldown = 2.0f;
     private float timeSinceLastAttack = 0.0f;
-    private float attackDistance = 5.0f;
+    private float attackDistance = 10.0f;
+    private Element[] attackElements;
+    private Form attackForm;
+    private float attackDuration;
 
     #endregion
 
     #region Constructor
 
-    public AttackMeleeAction(NPCController controller)
+    public AttackAction(NPCController controller, Element[] elements, Form form, float castTime, float cooldown, float distance)
     {
         this.controller = controller;
+        this.attackCooldown = cooldown;
+        this.attackDistance = distance;
+        this.attackElements = elements;
+        this.attackForm = form;
+        this.attackDuration = castTime;
     }
 
     #endregion
@@ -46,7 +54,7 @@ public class AttackMeleeAction : IUtilityAction
     public void Execute(float delta)
     {
         this.controller.ForwardAxis = 0.0f;
-        this.controller.AttackMelee();
+        this.controller.Attack(this.attackElements, this.attackForm, this.attackDuration);
         this.timeSinceLastAttack = 0.0f;
     }
 
