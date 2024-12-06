@@ -42,6 +42,12 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    #region Variables3
+
+    public bool CanActivateTriggers { get; set; } = true; // TODO : Make this a generic EntityController property rather than player specific...
+
+    #endregion
+
     #region MonoBehaviour
 
     void Start()
