@@ -46,7 +46,7 @@ public class AttackAction : IUtilityAction
 
     public float Calculate(float delta)
     {
-        if (this.controller.Target == null || this.controller.spellCaster.GetIsCasting() || this.timeSinceLastAttack <= this.attackCooldown)
+        if (this.controller.Target == null || this.controller.isFleeing || this.controller.spellCaster.GetIsCasting() || this.timeSinceLastAttack <= this.attackCooldown)
             return 0.0f;
 
         var distance = this.controller.DistanceToTarget;
