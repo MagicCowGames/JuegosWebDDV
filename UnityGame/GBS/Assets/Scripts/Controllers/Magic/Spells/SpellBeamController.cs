@@ -57,7 +57,7 @@ public class SpellBeamController : SpellBaseController
 
     void Start()
     {
-        
+        this.GetComponent<HealthModifierController>().Owner = this.owner;
     }
 
     void Update()
