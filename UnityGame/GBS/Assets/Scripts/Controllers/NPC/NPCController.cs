@@ -106,13 +106,20 @@ public class NPCController : MonoBehaviour
 
     #region PublicMethods
 
-    public void AttackMelee()
+    public void Attack(Element[] elements, Form form, float castDuration)
     {
         // TODO : Use some kind of list of known spells or something...? or adjust the elements according to what the target uses, idk.
-        this.spellCaster.AddElement(Element.Fire);
-        this.spellCaster.AddElement(Element.Fire);
-        this.spellCaster.SetForm(Form.Beam);
+        this.spellCaster.AddElements(elements);
+        this.spellCaster.SetForm(form);
         this.spellCaster.StartCasting();
+        StartCoroutine(StopAttackCoroutine(castDuration));
+    }
+
+    // Using coroutines for this makes me cry blood, but it is what it is! time constraints and deadlines for the win, baby! Long live crappy code!!!
+    private IEnumerator StopAttackCoroutine(float castDuration)
+    {
+        yield return new WaitForSeconds(castDuration); // You think he was the Don? but you got the Fever!
+        this.spellCaster.StopCasting();
     }
 
     #endregion
