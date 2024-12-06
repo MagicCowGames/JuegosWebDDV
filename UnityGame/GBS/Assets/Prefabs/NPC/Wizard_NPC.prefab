@@ -380,7 +380,7 @@ MonoBehaviour:
   agent: {fileID: 7713064221824962987}
   hasAi: 1
   canDie: 1
-  speed: 3
+  speed: 6
   spellCaster: {fileID: 4933429835869951161}
   stateMain: 0
   stateWandering: 0
