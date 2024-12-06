@@ -773,6 +773,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -26
       objectReference: {fileID: 0}
+    - target: {fileID: 6907960208072818400, guid: 50e3aee60e719ae4e8509714a00ec6e2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.94
+      objectReference: {fileID: 0}
     - target: {fileID: 7398247817172340730, guid: 50e3aee60e719ae4e8509714a00ec6e2, type: 3}
       propertyPath: m_Name
       value: SpellCaster
