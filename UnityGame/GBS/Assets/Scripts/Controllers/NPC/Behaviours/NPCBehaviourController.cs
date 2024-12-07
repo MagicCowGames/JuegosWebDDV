@@ -54,3 +54,8 @@ public class NPCBehaviourController : MonoBehaviour
     #region PrivateMethods
     #endregion
 }
+
+// NOTE : The nomenclature used in most NPC Behaviour controllers will be the following:
+// FSM : Finite State Machine
+// US  : Utility System
+// BT  : Behaviour Tree
