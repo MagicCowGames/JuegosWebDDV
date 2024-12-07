@@ -100,6 +100,7 @@ public class ConsoleUIController : UIController
             new Cmd("gtfo", "Instantly finish the current level", "", 0, CmdGtfo, true),
             new Cmd("mkreq", "Make an HTTP request", "<type> <url> <message>", 3, CmdMkReq),
             new Cmd("triggermeelmo", "Enable or disable player trigger activation", "<enabled>", 1, CmdTriggerMeElmo, true),
+            new Cmd("leavemealone", "Make all NPCs forget about the player", "", 0, CmdLeaveMeAlone, true),
             // TODO : Add commands to get the current map name and the current language or something...
         };
         // TODO : Make an alias system of sorts, or maybe make it so that we can have a dict / list system to have multiple overloads for the same command
@@ -526,6 +527,17 @@ public class ConsoleUIController : UIController
         bool b = CmdParseBool(arg);
         PlayerDataManager.Instance.GetPlayer().CanActivateTriggers = b;
         CmdPrintln($"Trigger activation has been {(b ? CmdGetColorString("Enabled", Color.green) : CmdGetColorString("Disabled", Color.red))}!");
+    }
+
+    private void CmdLeaveMeAlone(string[] args, int startIndex)
+    {
+        NPCController[] npcs = GameObject.FindObjectsOfType<NPCController>();
+        foreach (var npc in npcs)
+        {
+            npc.detectionProgress.Value = 0.0f;
+            npc.Target = null;
+            npc.GetComponent<NPCBehaviourController>()?.ResetBehaviour();
+        }
     }
 
     #endregion
