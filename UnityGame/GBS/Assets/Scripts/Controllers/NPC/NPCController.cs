@@ -9,7 +9,7 @@ using UnityEngine.AI;
 // For now, just bundle it all together in the same place.
 public class NPCController : MonoBehaviour
 {
-    #region Variables
+    #region Variables - Inspector
 
     [Header("NPC Components")]
     [SerializeField] public HealthController healthController;
@@ -25,47 +25,35 @@ public class NPCController : MonoBehaviour
 
     [Header("NPC Weapons Components")] // Weapons systems
     [SerializeField] public SpellCasterController spellCaster;
+    
+    #endregion
+
+    #region Variables - Properties and private variables
+
+    private Vector3 gravityVector = new Vector3(0.0f, -9.8f, 0.0f);
+    private bool hasAwardedPlayer = false; // NOTE : Would make more sense to replace this with a "hasDied" variable, which would have more uses, or maybe on the health controller just make it impossible to be resurrected unless a resurrection command is issued...
 
     public bool CanDie { get { return this.canDie; } set { this.canDie = value; } }
 
     private Vector3 navTarget;
     public Vector3 NavTarget { get { return this.navTarget; } set { this.navTarget = GetClosestNavPoint(value); } }
+    
     public GameObject Target { get; set; }
-
-    private Vector3 gravityVector = new Vector3(0.0f, -9.8f, 0.0f);
 
     public float DistanceToNavTarget { get { return Vector3.Distance(this.transform.position, this.NavTarget); } }
     public float DistanceToTarget { get { return Vector3.Distance(this.transform.position, this.Target.transform.position); } }
 
-    private bool hasAwardedPlayer = false;
+    private float forwardAxis = 0.0f;
+    public float ForwardAxis { get { return this.forwardAxis; } set { this.forwardAxis = value; } }
+
+    public Vector3 Velocity { get; private set; } = Vector3.zero;
 
     #endregion
 
     #region Variables - AI Related
 
-    private float forwardAxis = 0.0f;
-    public float ForwardAxis { get { return this.forwardAxis; } set { this.forwardAxis = value; } }
-
-    [Header("AI States")]
-    [SerializeField] private AIState_Main stateMain = AIState_Main.None;
-    [SerializeField] private AIState_Wandering stateWandering = AIState_Wandering.None;
-    [SerializeField] private AIState_Combat stateCombat = AIState_Combat.None;
-
-    private float idleTime = 0.0f;
-    private float wanderTime = 0.0f;
-
-    private float retreatTime = 0.0f;
-
-    IUtilityAction[] actions;
-
     public bool isFleeing = false;
     public bool hasLineOfSight = false;
-
-    #endregion
-
-    #region Variables - Velocity
-
-    public Vector3 Velocity { get; private set; } = Vector3.zero;
 
     #endregion
 
@@ -137,6 +125,8 @@ public class NPCController : MonoBehaviour
     private void UpdateAI(float delta)
     {
         // Stop the actor from moving if they reach a distance that is less than or equal to the stopping distance of the NavMeshAgent component.
+        // NOTE : We do this before UpdateMovement() since the NPC behaviour controller could have modified the forward axis vector on its own, so
+        // it's important to override it by hand here.
         if (Vector3.Distance(this.transform.position, this.NavTarget) <= this.agent.stoppingDistance)
         {
             this.forwardAxis = 0.0f;
