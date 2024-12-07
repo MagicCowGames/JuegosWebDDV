@@ -6,6 +6,7 @@ using UnityEngine;
 // This will, for example, implement the state machines for specific AIs and whatnot.
 // NOTE : This is the base class from which you should inherit if you want to implement behaviours for NPCs.
 // NOTE : Each NPC should have one single behaviour, mixing multiple behaviours is bound to fuck shit up, so that's why we limit it.
+// NOTE : Maybe add support for multiple NPCBehaviourControllers? That way, we could mix some GenericWanderbehaviour, GenericChaseBehaviour, GenericWarriorBehaviour, GenericWizardBehaviour, etc...
 [DisallowMultipleComponent]
 [RequireComponent(typeof(NPCController))]
 public class NPCBehaviourController : MonoBehaviour
