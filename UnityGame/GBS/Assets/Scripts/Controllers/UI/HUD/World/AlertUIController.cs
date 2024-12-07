@@ -27,6 +27,7 @@ public class AlertUIController : UIController, IComponentValidator
         this.elapsedTime = 0.0f;
         this.timeToHide = 2.5f;
         this.canvasGroup.alpha = 0.0f; // Start with an invisible health bar to avoid cluttering the screen.
+        this.npcController.detectionProgress.OnValueChanged += OnDetectionChanged;
     }
 
     void Update()
@@ -47,33 +48,34 @@ public class AlertUIController : UIController, IComponentValidator
 
     private void UpdateAlertUI(float delta)
     {
-        UpdateIcon();
         UpdateVisibility(delta);
         UpdateLookAtTarget();
     }
 
-    private void UpdateIcon()
-    {
-        float progress = this.npcController.detectionProgress.Value;
-        bool showQuestion = progress > 0.0f && progress < 1.0f;
-        bool showExclamation = progress >= 1.0f;
-        this.alertImageDetecting.gameObject.SetActive(showQuestion);
-        this.alertImageDetected.gameObject.SetActive(showExclamation);
-    }
-
     private void UpdateVisibility(float delta)
     {
-        if (this.npcController.detectionProgress.Value < 1.0f)
-        {
-            this.canvasGroup.alpha = this.npcController.detectionProgress.Value > 0.0f ? 1.0f : 0.0f;
-        }
-        else
+        if (this.npcController.detectionProgress.Value >= 1.0f)
         {
             this.elapsedTime += delta;
             if (this.elapsedTime >= this.timeToHide)
             {
                 this.canvasGroup.alpha -= delta * 1.0f;
             }
+        }
+    }
+
+    private void OnDetectionChanged(float oldValue, float newValue)
+    {
+        // Update the icon to match the current state
+        bool showQuestion = newValue > 0.0f && newValue < 1.0f;
+        bool showExclamation = newValue >= 1.0f;
+        this.alertImageDetecting.gameObject.SetActive(showQuestion);
+        this.alertImageDetected.gameObject.SetActive(showExclamation);
+
+        // If the old value was lower than max detection, then we make the alert icon visible.
+        if (oldValue < 1.0f)
+        {
+            this.canvasGroup.alpha = 1.0f;
         }
     }
 
