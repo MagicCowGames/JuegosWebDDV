@@ -8,6 +8,7 @@ public interface ISpellCaster
     public ElementQueue GetElementQueue();
 
     public void AddElements(Element[] elements);
+    public void RemoveElements(); // Clear all of the elements within the element queue.
     public Element[] GetElements(); // Most fucking worthless function tho wtf was I thinking...
     public void AddElement(Element element);
     

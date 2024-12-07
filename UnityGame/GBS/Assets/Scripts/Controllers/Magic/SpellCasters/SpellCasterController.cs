@@ -200,6 +200,10 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
     {
         this.elementQueue.Add(elements); // Add the elements within the array one by one to the element queue to make sure that combinations are handled properly.
     }
+    public void RemoveElements()
+    {
+        this.elementQueue.Clear();
+    }
     public Element[] GetElements()
     {
         return this.elementQueue.Elements;
