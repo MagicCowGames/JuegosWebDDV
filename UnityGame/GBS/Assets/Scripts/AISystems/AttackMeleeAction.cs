@@ -58,7 +58,7 @@ public class AttackAction : IUtilityAction
     public void Execute(float delta)
     {
         this.controller.ForwardAxis = 0.0f;
-        this.controller.Attack(this.attackElements, this.attackForm, this.attackDuration);
+        this.controller.Attack(this.attackElements, this.attackForm, this.attackDuration, 0.2f);
         this.timeSinceLastAttack = 0.0f;
     }
 
