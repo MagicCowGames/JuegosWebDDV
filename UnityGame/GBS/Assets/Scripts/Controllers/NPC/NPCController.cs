@@ -204,6 +204,8 @@ public class NPCController : MonoBehaviour
 
     #region PrivateMethods - Pathing and AI Logical position handling
 
+    #region Deprecated
+
     // All of this convoluted crap is filled with patches and terrible solutions to artificially created problems that exist due to Unity's terrible
     // nav mesh implementation that everyone seems to praise, except those who are not on a payroll ofc.
     // In any case, after much effort, I have been able to get something decent (and expensive) out of it...
@@ -219,67 +221,65 @@ public class NPCController : MonoBehaviour
 
     // This behaviour does not appear to be documented officially but it is consistent across versions, so it is going to be the solution used for now.
 
-    private void UpdatePathing_OLD()
-    {
-        // If the AI is disabled, just early return because no pathing logic should be performed at all.
-        if (!this.hasAi)
-            return;
+    // private void UpdatePathing_OLD()
+    // {
+    //     // If the AI is disabled, just early return because no pathing logic should be performed at all.
+    //     if (!this.hasAi)
+    //         return;
+    // 
+    //     // Stupid fixes for Unity's NavMeshAgent being kinda weird...
+    //     #region Comment - this.agent.Warp()
+    //     /*
+    //         This is such a fucking stupid situation that I had to make a region exclussively for this comment that is basically a wall of text...
+    //         Stupid fix that exists because Unity's NavMeshAgent components seem to be allowed to move freely on their own away from their body if
+    //         updatePosition is set to false...
+    //         updatePosition in the documentation promises that the AI controller would not update its position allowing the user to use their own method
+    //         for position updating, such as physics or a character controller, allwoing the NavMeshAgent component to be used as a logical unit for pathing...
+    //         sadly this is not the case, and what it actually does is allow the logical pathing to move through the nav mesh independent of the body.
+    //         Funnily enough, the origin of the GameObject changes, causing any other form of movement to spaz out.
+    //         The solution in the official documentation hidden deep within layers and layers of indirection is legit, I shit you not, to warp the AI controller
+    //         to the position where we want the NPC's physical representation to be located. What the fuck is this shit. Wouldn't it make more sense to just
+    //         have a method to NOT update the AI's logical position and set it manually or use nextPosition? yes, yes it would. But the Unity people seem to disagree.
+    // 
+    //         In short: it's pretty cool that the logical position and physical position can be separated, but why can't we define the logical position to follow
+    //         a GO's transform out of the box? I know it would do the same as updating it ourselves every single frame but... then why the fuck does it update and move
+    //         on its own rather than taking as an input the new position?
+    //     */
+    //     #endregion
+    //     #region Comment - NavMehs.SamplePosition() and Distance() > 2.0f
+    // 
+    //     // Only allow warping the logical agent position to the physical one if it is close enough to attach to a nav mesh.
+    //     // This prevents any warnings from coming up. Could be discarded, but still, it's cleaner to use it.
+    // 
+    //     // Also only warp the NPC if the logical position has moved further than 2.0f units from the real position.
+    //     // This crappy patchy solution allows Unity's built in nav mesh agent's rotation system to work and not shit its pants...
+    // 
+    //     #endregion
+    // 
+    //     NavMeshHit hit;
+    //     bool hasHit = NavMesh.SamplePosition(this.characterController.transform.position, out hit, 1.0f, NavMesh.AllAreas);
+    //     if (hasHit && Vector3.Distance(this.agent.nextPosition, this.transform.position) > 2.0f)
+    //     {
+    //         this.agent.Warp(this.characterController.transform.position);
+    //     }
+    // 
+    //     // Only update AI / nav agent logic if the agent is within the bounds of a nav mesh.
+    //     // Prevents the agent from trying to path if they are out of a nav mesh, which prevents any errors from coming up.
+    //     if (this.agent.isOnNavMesh)
+    //     {
+    //         // Update the destination to the target position
+    //         this.agent.destination = this.NavTarget;
+    //     }
+    // }
 
-        // Stupid fixes for Unity's NavMeshAgent being kinda weird...
-        #region Comment - this.agent.Warp()
-        /*
-            This is such a fucking stupid situation that I had to make a region exclussively for this comment that is basically a wall of text...
-            Stupid fix that exists because Unity's NavMeshAgent components seem to be allowed to move freely on their own away from their body if
-            updatePosition is set to false...
-            updatePosition in the documentation promises that the AI controller would not update its position allowing the user to use their own method
-            for position updating, such as physics or a character controller, allwoing the NavMeshAgent component to be used as a logical unit for pathing...
-            sadly this is not the case, and what it actually does is allow the logical pathing to move through the nav mesh independent of the body.
-            Funnily enough, the origin of the GameObject changes, causing any other form of movement to spaz out.
-            The solution in the official documentation hidden deep within layers and layers of indirection is legit, I shit you not, to warp the AI controller
-            to the position where we want the NPC's physical representation to be located. What the fuck is this shit. Wouldn't it make more sense to just
-            have a method to NOT update the AI's logical position and set it manually or use nextPosition? yes, yes it would. But the Unity people seem to disagree.
+    #endregion
 
-            In short: it's pretty cool that the logical position and physical position can be separated, but why can't we define the logical position to follow
-            a GO's transform out of the box? I know it would do the same as updating it ourselves every single frame but... then why the fuck does it update and move
-            on its own rather than taking as an input the new position?
-        */
-        #endregion
-        #region Comment - NavMehs.SamplePosition() and Distance() > 2.0f
-
-        // Only allow warping the logical agent position to the physical one if it is close enough to attach to a nav mesh.
-        // This prevents any warnings from coming up. Could be discarded, but still, it's cleaner to use it.
-
-        // Also only warp the NPC if the logical position has moved further than 2.0f units from the real position.
-        // This crappy patchy solution allows Unity's built in nav mesh agent's rotation system to work and not shit its pants...
-
-        #endregion
-
-        NavMeshHit hit;
-        bool hasHit = NavMesh.SamplePosition(this.characterController.transform.position, out hit, 1.0f, NavMesh.AllAreas);
-        if (hasHit && Vector3.Distance(this.agent.nextPosition, this.transform.position) > 2.0f)
-        {
-            this.agent.Warp(this.characterController.transform.position);
-        }
-
-        // Only update AI / nav agent logic if the agent is within the bounds of a nav mesh.
-        // Prevents the agent from trying to path if they are out of a nav mesh, which prevents any errors from coming up.
-        if (this.agent.isOnNavMesh)
-        {
-            // Update the destination to the target position
-            this.agent.destination = this.NavTarget;
-        }
-    }
-
+    // Updates the pathing of the nav mesh agent.
+    // If the AI is enabled for this NPC, it will set the nav agent's destination to the nav target.
     private void UpdatePathing()
     {
         if (!this.hasAi)
             return;
-
-        /*
-        if (this.Target == null)
-            return;
-        */
-
         this.agent.destination = this.NavTarget;
     }
 
