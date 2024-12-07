@@ -85,7 +85,8 @@ public class NPCController : MonoBehaviour
     public void Attack(Element[] elements, Form form, float castDuration) // This version instantly queues all elements in one go
     {
         if (this.spellCaster.GetIsCasting())
-            return;
+            // return;
+            this.spellCaster.StopCasting(); // This is an alternative but I am not sure if it makes things better or worse...
 
         // TODO : Use some kind of list of known spells or something...? or adjust the elements according to what the target uses, idk.
         this.spellCaster.AddElements(elements);
@@ -97,7 +98,8 @@ public class NPCController : MonoBehaviour
     public void Attack(Element[] elements, Form form, float castDuration, float queueTime) // queueTime determines how long it takes to queue each element.
     {
         if (this.spellCaster.GetIsCasting())
-            return;
+            // return;
+            this.spellCaster.StopCasting();
 
         StartCoroutine(StartAttackCoroutine(elements, form, castDuration, queueTime));
     }
