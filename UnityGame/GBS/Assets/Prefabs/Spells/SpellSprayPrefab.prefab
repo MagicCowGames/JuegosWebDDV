@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4345997483708370909}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 5187412554677369805}
   - component: {fileID: 3640161005752448802}
   - component: {fileID: 6154785415184729482}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4883,7 +4883,7 @@ GameObject:
   - component: {fileID: 3189739474158278755}
   - component: {fileID: 6267436749440777408}
   - component: {fileID: 6197233759521691044}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SpellSprayPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4958,9 +4958,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82613f123eeb52f45af09007890a7c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
   type: 1
   modifierEnabled: 1
   collisionEnabled: 1
+  repeatTime: 1
   useDefaultValues: 0
   resetValues: 0
   inputDamageArray:
@@ -4977,7 +4979,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fd6ec9c1ebf85a4da96d05886bec7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphereCollider: {fileID: 3189739474158278755}
+  sphereColliders: []
+  boxColliders: []
 --- !u!1 &8490993986500311921
 GameObject:
   m_ObjectHideFlags: 0
@@ -4987,7 +4990,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1489691786671756284}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: idle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
