@@ -170,9 +170,15 @@ public class NPCController : MonoBehaviour
 
     private void HandleDeath()
     {
+        if (!this.canDie)
+            return;
+        
         this.hasAi = false;
-        if (this.canDie)
-            Destroy(this.gameObject, this.timeToDespawnOnDeath);
+
+        if(this.spellCaster.GetIsCasting())
+            this.spellCaster.StopCasting();
+        
+        Destroy(this.gameObject, this.timeToDespawnOnDeath);
     }
 
     private void HandleDamaged(float oldHealth, float newHealth)
