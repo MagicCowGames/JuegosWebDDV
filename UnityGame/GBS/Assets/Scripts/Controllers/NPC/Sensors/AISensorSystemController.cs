@@ -32,9 +32,9 @@ public class AISensorSystemController : MonoBehaviour
     void Update()
     {
         float delta = Time.deltaTime;
-        bool canDecay = this.aiController.detectionProgress < 1.0f && this.elapsedTime >= this.decayTime; // Once we detect, we can't decay detection.
+        bool canDecay = this.aiController.detectionProgress.Value < 1.0f && this.elapsedTime >= this.decayTime; // Once we detect, we can't decay detection.
         if (canDecay)
-            this.aiController.detectionProgress = Mathf.Clamp01(this.aiController.detectionProgress - (this.sensorDecay * delta));
+            this.aiController.detectionProgress.Value = Mathf.Clamp01(this.aiController.detectionProgress.Value - (this.sensorDecay * delta));
         this.elapsedTime += delta;
     }
 
@@ -51,8 +51,8 @@ public class AISensorSystemController : MonoBehaviour
     private void DetectEntity(GameObject obj, float detectionAmount)
     {
         this.elapsedTime = 0.0f; // Prevent the sensor from lowering the detection progress if an entity has been sensed.
-        this.aiController.detectionProgress = Mathf.Clamp01(this.aiController.detectionProgress + detectionAmount);
-        if (this.aiController.detectionProgress >= 1.0f)
+        this.aiController.detectionProgress.Value = Mathf.Clamp01(this.aiController.detectionProgress.Value + detectionAmount);
+        if (this.aiController.detectionProgress.Value >= 1.0f)
         {
             this.aiController.Target = obj;
         }

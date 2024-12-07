@@ -54,7 +54,7 @@ public class AlertUIController : UIController, IComponentValidator
 
     private void UpdateIcon()
     {
-        float progress = this.npcController.detectionProgress;
+        float progress = this.npcController.detectionProgress.Value;
         bool showQuestion = progress > 0.0f && progress < 1.0f;
         bool showExclamation = progress >= 1.0f;
         this.alertImageDetecting.gameObject.SetActive(showQuestion);
@@ -63,9 +63,9 @@ public class AlertUIController : UIController, IComponentValidator
 
     private void UpdateVisibility(float delta)
     {
-        if (this.npcController.detectionProgress < 1.0f)
+        if (this.npcController.detectionProgress.Value < 1.0f)
         {
-            this.canvasGroup.alpha = this.npcController.detectionProgress > 0.0f ? 1.0f : 0.0f;
+            this.canvasGroup.alpha = this.npcController.detectionProgress.Value > 0.0f ? 1.0f : 0.0f;
         }
         else
         {
