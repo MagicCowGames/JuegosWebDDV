@@ -13,8 +13,8 @@ public class NPCController : MonoBehaviour
 
     [Header("NPC Components")]
     [SerializeField] public HealthController healthController;
-    [SerializeField] private CharacterController characterController;
-    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] public CharacterController characterController;
+    [SerializeField] public NavMeshAgent agent;
 
     [Header("NPC Config")]
     [SerializeField] private bool hasAi = false;
