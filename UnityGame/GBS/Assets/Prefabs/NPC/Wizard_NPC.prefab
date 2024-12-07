@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2022210639922739882}
-  - component: {fileID: 5248968852165074271}
   - component: {fileID: 7073105148412250381}
+  - component: {fileID: 5248968852165074271}
   m_Layer: 2
   m_Name: Sight
   m_TagString: Untagged
@@ -33,21 +33,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2190596816526315912}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5248968852165074271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4080710351325594289}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84a210d2cc79af84ca4fab6b8c247039, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  senseOnEnter: 1
-  senseOnStay: 1
-  senseOnExit: 0
 --- !u!136 &7073105148412250381
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -71,6 +56,22 @@ CapsuleCollider:
   m_Height: 30
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 14}
+--- !u!114 &5248968852165074271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4080710351325594289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84a210d2cc79af84ca4fab6b8c247039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originTransform: {fileID: 6215074566716169910}
+  senseOnEnter: 0
+  senseOnStay: 1
+  senseOnExit: 0
 --- !u!1 &5529527472022068193
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,8 +138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a357c59aafff2f74795658d2546fa9c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  senseOnEnter: 1
-  senseOnStay: 0
+  originTransform: {fileID: 6215074566716169910}
+  senseOnEnter: 0
+  senseOnStay: 1
   senseOnExit: 0
 --- !u!1 &5851506362251369991
 GameObject:
@@ -387,6 +389,8 @@ MonoBehaviour:
   spellCaster: {fileID: 4933429835869951161}
   isFleeing: 0
   hasLineOfSight: 0
+  hasDetectedTarget: 0
+  detectionProgress: 0
 --- !u!195 &7713064221824962987
 NavMeshAgent:
   m_ObjectHideFlags: 0
