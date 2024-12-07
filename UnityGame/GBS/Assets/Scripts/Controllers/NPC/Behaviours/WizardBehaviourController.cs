@@ -24,6 +24,10 @@ public class WizardBehaviourController : NPCBehaviourController
 
     protected override void InitBehaviour()
     {
+        this.stateMain = AIState_Main.None;
+        this.stateWandering = AIState_Wandering.None;
+        this.stateCombat = AIState_Combat.None;
+
         this.actions = new IUtilityAction[] {
             new ChaseAction(this.npcController),
             new FleeAction(this.npcController),

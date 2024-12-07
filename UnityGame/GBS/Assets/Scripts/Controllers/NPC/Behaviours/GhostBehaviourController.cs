@@ -26,11 +26,14 @@ public class GhostBehaviourController : NPCBehaviourController
 
     protected override void InitBehaviour()
     {
+        this.stateMain = AIState_Main.None;
+        this.stateWandering = AIState_Wandering.None;
+        this.stateCombat = AIState_Combat.None;
+
         this.actions = new IUtilityAction[] {
             new ChaseAction(this.npcController),
             new FleeAction(this.npcController),
             new AttackAction(this.npcController, new Element[]{Element.Fire, Element.Fire, Element.Earth}, Form.Projectile, 1.5f, 3.5f, 15.0f, 20.0f),
-            // new AttackAction(this, new Element[]{Element.Fire, Element.Death, Element.Death}, Form.Beam, 3.0f, 10.5f, 21.0f, 40.0f),
             new AttackAction(this.npcController, new Element[]{Element.Fire, Element.Fire}, Form.Projectile, 0.1f, 1.5f, 0.0f, 3.0f)
         };
     }
