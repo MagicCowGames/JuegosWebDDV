@@ -36,18 +36,27 @@ public class NPCBehaviourController : MonoBehaviour
     #endregion
 
     #region PublicMethods
+
+    // NOTE : This method should only be called on very specific situations. Obviously, calling it constantly won't break anything if the behaviour impls
+    // are written correctly, but it should be noted that this is mostly used for stuff like CmdLeaveMeAlone() and some cinematic events.
+    public void ResetBehaviour()
+    {
+        // Reset the behaviour to the initial state
+        InitBehaviour();
+    }
+
     #endregion
 
     #region ProtectedMethods
 
     protected virtual void InitBehaviour()
     {
-
+        // Set the initial state of the behaviour
     }
 
     protected virtual void UpdateBehaviour(float delta)
     {
-
+        // Set the current state of the behaviour
     }
 
     #endregion
