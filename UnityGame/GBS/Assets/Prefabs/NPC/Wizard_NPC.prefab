@@ -321,7 +321,7 @@ GameObject:
   - component: {fileID: 7713064221824962987}
   - component: {fileID: 8043318680210230778}
   - component: {fileID: 4952731197100483945}
-  - component: {fileID: 8743747949051315921}
+  - component: {fileID: 2593392628212782196}
   m_Layer: 0
   m_Name: Wizard_NPC
   m_TagString: Untagged
@@ -449,7 +449,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcController: {fileID: 7289517046949347476}
   animator: {fileID: 5473838505423373750}
---- !u!114 &8743747949051315921
+--- !u!114 &2593392628212782196
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -458,7 +458,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6979400288211159785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48da9161629afd44289d74db821d1a43, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b46a840f4803e4479a7d31b73c4cb5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stateMain: 0
