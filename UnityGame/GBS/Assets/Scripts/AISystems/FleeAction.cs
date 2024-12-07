@@ -62,7 +62,7 @@ public class FleeAction : IUtilityAction
 
         // Calculate a point in that direction and move to it
         this.controller.ForwardAxis = 1.0f;
-        this.controller.NavTarget = this.controller.transform.position + dir * 2.0f;
+        this.controller.NavTarget = this.controller.transform.position + dir * 10.0f;
 
         // Spawn a wall for protection before fleeing
         if(!this.controller.isFleeing)
