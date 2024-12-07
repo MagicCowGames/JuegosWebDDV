@@ -55,7 +55,7 @@ public class NPCController : MonoBehaviour
     public bool isFleeing = false;
     public bool hasLineOfSight = false;
 
-    public float detectionProgress = 0.0f;
+    public ObservableValue<float> detectionProgress = new ObservableValue<float>(0.0f);
 
     #endregion
 
@@ -177,6 +177,7 @@ public class NPCController : MonoBehaviour
 
     private void HandleDamaged(float oldHealth, float newHealth)
     {
+        this.detectionProgress.Value = 1.0f;
         this.Target = PlayerDataManager.Instance.GetPlayer().gameObject;
     }
 
