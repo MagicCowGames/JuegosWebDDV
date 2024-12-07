@@ -55,6 +55,8 @@ public class NPCController : MonoBehaviour
     public bool isFleeing = false;
     public bool hasLineOfSight = false;
 
+    public float detectionProgress = 0.0f;
+
     #endregion
 
     #region MonoBehaviour
@@ -68,6 +70,9 @@ public class NPCController : MonoBehaviour
     {
         float delta = Time.deltaTime;
         UpdateAI(delta);
+
+        // if(this.detectionProgress > 0.0f)
+        //     DebugManager.Instance?.Log($"detection = {detectionProgress}");
     }
 
     #endregion
