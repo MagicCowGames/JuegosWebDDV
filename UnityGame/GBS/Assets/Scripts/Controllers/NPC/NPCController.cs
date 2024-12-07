@@ -73,54 +73,21 @@ public class NPCController : MonoBehaviour
 
     void Start()
     {
-        this.healthController.OnDeath += HandleDeath;
-        this.healthController.OnValueChanged += HandleDamaged;
-
-        this.healthController.OnDeath += () => { GiveScore(); };
-
-        this.agent.updatePosition = true;
-        this.agent.updateRotation = true;
-
-        this.Target = null;
-        this.NavTarget = Vector3.zero;
-
-        this.actions = new IUtilityAction[] {
-            new ChaseAction(this),
-            new FleeAction(this),
-            new AttackAction(this, new Element[]{Element.Fire, Element.Fire, Element.Earth}, Form.Projectile, 1.5f, 3.5f, 15.0f, 20.0f),
-            // new AttackAction(this, new Element[]{Element.Fire, Element.Death, Element.Death}, Form.Beam, 3.0f, 10.5f, 21.0f, 40.0f),
-            new AttackAction(this, new Element[]{Element.Fire, Element.Fire}, Form.Projectile, 0.1f, 1.5f, 0.0f, 3.0f)
-        };
+        Init();
     }
 
     void Update()
     {
         float delta = Time.deltaTime;
-
-        UpdateMovement(delta);
         UpdateAI(delta);
-
-        // For now, just walk toward the selected target GameObject.
-        if (this.Target != null)
-        {
-            // this.forwardAxis = 1.0f;
-            // this.NavTarget = this.Target.transform.position;
-            // this.agent.destination = NavTarget;
-            // DebugManager.Instance?.Log($"Distance = {this.DistanceToTarget}");
-            this.stateMain = AIState_Main.Combat; // This should be set through an event only ONCE, but whatever... for now we do it this way lol...
-        }
-
-        // Stop the actor from moving if they reach a distance that is less than or equal to the stopping distance of the NavMeshAgent component.
-        if (Vector3.Distance(this.transform.position, this.NavTarget) <= this.agent.stoppingDistance)
-        {
-            this.forwardAxis = 0.0f;
-        }
     }
 
     #endregion
 
     #region PublicMethods
 
+    // TODO : In the future, support for multiple spell casters will be added to the NPCController, which will allow more complex NPCs to have more than one caster.
+    // For it to be easy to work with, add an index input param for the Attack() function so that we can specify what specific spell caster to use for this attack.
     public void Attack(Element[] elements, Form form, float castDuration)
     {
         if (this.spellCaster.GetIsCasting())
@@ -145,6 +112,49 @@ public class NPCController : MonoBehaviour
 
     #region PrivateMethods
 
+    private void Init()
+    {
+        this.healthController.OnDeath += HandleDeath;
+        this.healthController.OnValueChanged += HandleDamaged;
+
+        this.healthController.OnDeath += () => { GiveScore(); };
+
+        this.agent.updatePosition = true;
+        this.agent.updateRotation = true;
+
+        this.Target = null;
+        this.NavTarget = Vector3.zero;
+
+        this.actions = new IUtilityAction[] {
+            new ChaseAction(this),
+            new FleeAction(this),
+            new AttackAction(this, new Element[]{Element.Fire, Element.Fire, Element.Earth}, Form.Projectile, 1.5f, 3.5f, 15.0f, 20.0f),
+            // new AttackAction(this, new Element[]{Element.Fire, Element.Death, Element.Death}, Form.Beam, 3.0f, 10.5f, 21.0f, 40.0f),
+            new AttackAction(this, new Element[]{Element.Fire, Element.Fire}, Form.Projectile, 0.1f, 1.5f, 0.0f, 3.0f)
+        };
+    }
+
+    private void UpdateAI(float delta)
+    {
+        // Stop the actor from moving if they reach a distance that is less than or equal to the stopping distance of the NavMeshAgent component.
+        if (Vector3.Distance(this.transform.position, this.NavTarget) <= this.agent.stoppingDistance)
+        {
+            this.forwardAxis = 0.0f;
+        }
+
+        // Update movement and pathing logic
+        UpdateMovement(delta);
+        UpdatePathing();
+    }
+
+    private void GiveScore()
+    {
+        if (this.hasAwardedPlayer)
+            return;
+        PlayerDataManager.Instance.GetPlayerScore().Score += this.score;
+        this.hasAwardedPlayer = true;
+    }
+
     private void HandleDeath()
     {
         this.hasAi = false;
@@ -159,7 +169,7 @@ public class NPCController : MonoBehaviour
 
     #endregion
 
-    #region PrivateMethods - Physical Movement
+    #region PrivateMethods - Movement
 
     private void Move(float delta, Vector3 direction = default, float speed = 1.0f)
     {
@@ -202,7 +212,9 @@ public class NPCController : MonoBehaviour
 
     #endregion
 
-    #region PrivateMethods - Pathing and AI Logical position handling
+    #region PrivateMethods - Pathing
+
+    // Pathing and AI Logical position handling
 
     #region Deprecated
 
@@ -291,155 +303,6 @@ public class NPCController : MonoBehaviour
         if (NavMesh.SamplePosition(position, out hit, 1000, NavMesh.AllAreas))
             ans = hit.position;
         return ans;
-    }
-
-    #endregion
-
-    #region PrivateMethods - FSM
-
-    private void UpdateFSM_Main(float delta)
-    {
-        switch (this.stateMain)
-        {
-            case AIState_Main.None:
-            default:
-                this.stateMain = AIState_Main.Idle;
-                break;
-            case AIState_Main.Idle:
-                this.forwardAxis = 0.0f;
-                this.idleTime += delta;
-                if (this.idleTime >= 5.0f)
-                {
-                    this.idleTime = 0.0f;
-                    this.stateMain = AIState_Main.Wandering;
-                }
-                break;
-            case AIState_Main.Wandering:
-                this.forwardAxis = 1.0f;
-                UpdateFSM_Wandering(delta);
-                break;
-            case AIState_Main.Combat:
-                UpdateUtilitySystem(delta);
-                break;
-        }
-    }
-
-    private void UpdateFSM_Wandering(float delta)
-    {
-        switch (this.stateWandering)
-        {
-            case AIState_Wandering.None:
-            default:
-                this.stateWandering = AIState_Wandering.SelectingTarget;
-                break;
-            case AIState_Wandering.SelectingTarget:
-                float rngX = Random.Range(-20, 20);
-                float rngY = Random.Range(-20, 20);
-                Vector3 vec = new Vector3(rngX, 0, rngY);
-                this.NavTarget = this.transform.position + vec;
-                this.stateWandering = AIState_Wandering.MovingToTarget;
-                break;
-            case AIState_Wandering.MovingToTarget:
-                DebugManager.Instance?.DrawSphere(this.NavTarget, 2, Color.magenta);
-                this.wanderTime += delta;
-                float distance = Vector3.Distance(this.transform.position, this.NavTarget);
-                if (wanderTime > 5.0f || distance <= this.agent.stoppingDistance)
-                {
-                    this.stateWandering = AIState_Wandering.ArrivedToTarget;
-                    this.wanderTime = 0.0f;
-                }
-                break;
-            case AIState_Wandering.ArrivedToTarget:
-                this.stateWandering = AIState_Wandering.None;
-                this.stateMain = AIState_Main.Idle;
-                break;
-        }
-    }
-
-    private void UpdateFSM_Combat(float delta)
-    {
-        this.stateCombat = AIState_Combat.Chasing;
-
-        float distanceToTarget = Vector3.Distance(this.transform.position, this.Target.transform.position);
-        if (distanceToTarget <= 20.0f)
-        {
-            this.stateCombat = AIState_Combat.Fighting;
-        }
-
-        if (this.healthController.Health <= 10.0f && this.retreatTime < 5.0f)
-        {
-            this.stateCombat = AIState_Combat.Retreating;
-        }
-
-        switch (this.stateCombat)
-        {
-            case AIState_Combat.None:
-            default:
-                this.stateCombat = AIState_Combat.Chasing;
-                break;
-            case AIState_Combat.Chasing:
-                this.forwardAxis = 1.0f;
-                this.NavTarget = this.Target.transform.position;
-                
-                break;
-            case AIState_Combat.Fighting:
-                // TODO : Implement more complex fighting logic with a custom FSM with distances based on whether this NPC can perform
-                // ranged attacks or not, distance to player, and other stuff like that, etc...
-                break;
-            case AIState_Combat.Retreating:
-                if (this.retreatTime >= 5.0f)
-                {
-                    this.retreatTime = 0.0f;
-                }
-                break;
-        }
-    }
-
-    #endregion
-
-    #region PrivateMethods - US
-
-    private void UpdateUtilitySystem(float delta)
-    {
-        IUtilityAction chosenAction = null;
-        float maxValue = 0.0f;
-        foreach (var action in this.actions)
-        {
-            var val = action.Calculate(delta);
-            // DebugManager.Instance?.Log($"{action.Name} : {val}");
-            if (val > maxValue)
-            {
-                maxValue = val;
-                chosenAction = action;
-            }
-        }
-
-        foreach (var action in this.actions)
-            action.Update(delta);
-
-        chosenAction?.Execute(delta);
-    }
-
-    #endregion
-
-    #region PrivateMethods - AI State
-
-    private void UpdateAI(float delta)
-    {
-        UpdateFSM_Main(delta);
-        UpdatePathing();
-    }
-
-    #endregion
-
-    #region PrivateMethods - Score
-
-    private void GiveScore()
-    {
-        if (this.hasAwardedPlayer)
-            return;
-        PlayerDataManager.Instance.GetPlayerScore().Score += this.score;
-        this.hasAwardedPlayer = true;
     }
 
     #endregion
