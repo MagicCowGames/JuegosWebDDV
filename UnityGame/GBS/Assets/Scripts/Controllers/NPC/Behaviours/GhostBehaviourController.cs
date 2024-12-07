@@ -4,16 +4,44 @@ using UnityEngine;
 
 public class GhostBehaviourController : NPCBehaviourController
 {
+    #region Variables
+
+    // NOTE : These state enums could be made to be specific for each behaviour rather than generic.
+
+    [Header("AI States")]
+    [SerializeField] private AIState_Main stateMain = AIState_Main.None;
+    [SerializeField] private AIState_Wandering stateWandering = AIState_Wandering.None;
+    [SerializeField] private AIState_Combat stateCombat = AIState_Combat.None;
+
+    private float idleTime = 0.0f;
+    private float wanderTime = 0.0f;
+
+    private float retreatTime = 0.0f;
+
+    IUtilityAction[] actions;
+
+    #endregion
+
     #region NPCBehaviour
 
     protected override void InitBehaviour()
     {
-
+        this.actions = new IUtilityAction[] {
+            new ChaseAction(this.npcController),
+            new FleeAction(this.npcController),
+            new AttackAction(this.npcController, new Element[]{Element.Fire, Element.Fire, Element.Earth}, Form.Projectile, 1.5f, 3.5f, 15.0f, 20.0f),
+            // new AttackAction(this, new Element[]{Element.Fire, Element.Death, Element.Death}, Form.Beam, 3.0f, 10.5f, 21.0f, 40.0f),
+            new AttackAction(this.npcController, new Element[]{Element.Fire, Element.Fire}, Form.Projectile, 0.1f, 1.5f, 0.0f, 3.0f)
+        };
     }
 
     protected override void UpdateBehaviour(float delta)
     {
-
+        // For now, just walk toward the selected target GameObject.
+        if (this.npcController.Target != null)
+        {
+            this.stateMain = AIState_Main.Combat; // This should be set through an event only ONCE, but whatever... for now we do it this way lol...
+        }
     }
 
     #endregion
@@ -29,7 +57,7 @@ public class GhostBehaviourController : NPCBehaviourController
                 this.stateMain = AIState_Main.Idle;
                 break;
             case AIState_Main.Idle:
-                this.forwardAxis = 0.0f;
+                this.npcController.ForwardAxis = 0.0f;
                 this.idleTime += delta;
                 if (this.idleTime >= 5.0f)
                 {
@@ -38,11 +66,11 @@ public class GhostBehaviourController : NPCBehaviourController
                 }
                 break;
             case AIState_Main.Wandering:
-                this.forwardAxis = 1.0f;
+                this.npcController.ForwardAxis = 1.0f;
                 UpdateFSM_Wandering(delta);
                 break;
             case AIState_Main.Combat:
-                UpdateUtilitySystem(delta);
+                UpdateUS(delta);
                 break;
         }
     }
@@ -59,14 +87,14 @@ public class GhostBehaviourController : NPCBehaviourController
                 float rngX = Random.Range(-20, 20);
                 float rngY = Random.Range(-20, 20);
                 Vector3 vec = new Vector3(rngX, 0, rngY);
-                this.NavTarget = this.transform.position + vec;
+                this.npcController.NavTarget = this.transform.position + vec;
                 this.stateWandering = AIState_Wandering.MovingToTarget;
                 break;
             case AIState_Wandering.MovingToTarget:
-                DebugManager.Instance?.DrawSphere(this.NavTarget, 2, Color.magenta);
+                DebugManager.Instance?.DrawSphere(this.npcController.NavTarget, 2, Color.magenta);
                 this.wanderTime += delta;
-                float distance = Vector3.Distance(this.transform.position, this.NavTarget);
-                if (wanderTime > 5.0f || distance <= this.agent.stoppingDistance)
+                float distance = Vector3.Distance(this.transform.position, this.npcController.NavTarget);
+                if (wanderTime > 5.0f || distance <= this.npcController.agent.stoppingDistance)
                 {
                     this.stateWandering = AIState_Wandering.ArrivedToTarget;
                     this.wanderTime = 0.0f;
@@ -83,13 +111,13 @@ public class GhostBehaviourController : NPCBehaviourController
     {
         this.stateCombat = AIState_Combat.Chasing;
 
-        float distanceToTarget = Vector3.Distance(this.transform.position, this.Target.transform.position);
+        float distanceToTarget = Vector3.Distance(this.transform.position, this.npcController.Target.transform.position);
         if (distanceToTarget <= 20.0f)
         {
             this.stateCombat = AIState_Combat.Fighting;
         }
 
-        if (this.healthController.Health <= 10.0f && this.retreatTime < 5.0f)
+        if (this.npcController.healthController.Health <= 10.0f && this.retreatTime < 5.0f)
         {
             this.stateCombat = AIState_Combat.Retreating;
         }
@@ -101,8 +129,8 @@ public class GhostBehaviourController : NPCBehaviourController
                 this.stateCombat = AIState_Combat.Chasing;
                 break;
             case AIState_Combat.Chasing:
-                this.forwardAxis = 1.0f;
-                this.NavTarget = this.Target.transform.position;
+                this.npcController.ForwardAxis = 1.0f;
+                this.npcController.NavTarget = this.npcController.Target.transform.position;
 
                 break;
             case AIState_Combat.Fighting:
