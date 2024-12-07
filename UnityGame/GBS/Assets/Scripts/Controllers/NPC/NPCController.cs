@@ -74,9 +74,10 @@ public class NPCController : MonoBehaviour
 
     #region PublicMethods
 
+    // TODO : Maybe should rename Attack() to Cast()...?
     // TODO : In the future, support for multiple spell casters will be added to the NPCController, which will allow more complex NPCs to have more than one caster.
     // For it to be easy to work with, add an index input param for the Attack() function so that we can specify what specific spell caster to use for this attack.
-    public void Attack(Element[] elements, Form form, float castDuration)
+    public void Attack(Element[] elements, Form form, float castDuration) // This version instantly queues all elements in one go
     {
         if (this.spellCaster.GetIsCasting())
             return;
@@ -86,6 +87,31 @@ public class NPCController : MonoBehaviour
         this.spellCaster.SetForm(form);
         this.spellCaster.StartCasting();
         StartCoroutine(StopAttackCoroutine(castDuration));
+    }
+
+    public void Attack(Element[] elements, Form form, float castDuration, float queueTime) // queueTime determines how long it takes to queue each element.
+    {
+        if (this.spellCaster.GetIsCasting())
+            return;
+
+        StartCoroutine(StartAttackCoroutine(elements, form, castDuration, queueTime));
+    }
+
+    private IEnumerator StartAttackCoroutine(Element[] elements, Form form, float castDuration, float queueTime)
+    {
+        this.spellCaster.SetForm(form);
+
+        foreach(var element in elements)
+        {
+            this.spellCaster.AddElement(element);
+            yield return new WaitForSeconds(queueTime);
+        }
+        this.spellCaster.StartCasting();
+        
+        yield return new WaitForSeconds(castDuration);
+        
+        if(this.spellCaster.GetIsCasting())
+            this.spellCaster.StopCasting();
     }
 
     // Using coroutines for this makes me cry blood, but it is what it is! time constraints and deadlines for the win, baby! Long live crappy code!!!
