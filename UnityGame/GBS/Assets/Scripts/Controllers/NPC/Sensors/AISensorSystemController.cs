@@ -14,6 +14,9 @@ public class AISensorSystemController : MonoBehaviour
     [Header("Sensors")]
     [SerializeField] private AISensorBase[] sensors;
 
+    private float sensorDecay = 10.0f;
+    private bool canDecay = true;
+
     #endregion
 
     #region MonoBehaviour
@@ -27,7 +30,10 @@ public class AISensorSystemController : MonoBehaviour
 
     void Update()
     {
-        
+        //float delta = Time.deltaTime;
+        //if (this.canDecay)
+        //    this.aiController.detectionProgress = Mathf.Clamp01(this.aiController.detectionProgress - (this.sensorDecay * delta));
+        //this.canDecay = true;
     }
 
     #endregion
@@ -40,9 +46,14 @@ public class AISensorSystemController : MonoBehaviour
     // TODO : Modify the code within the sensors system to detect any kind of entity with a team system in the future. This could be done by having a bool checking
     // function within the base sensor class.
     // For now, just detect the player since all NPCs will be enemies for now.
-    private void DetectEntity(GameObject obj)
+    private void DetectEntity(GameObject obj, float detectionAmount)
     {
-        this.aiController.Target = obj; // The player is instantly detected and targetted.
+        this.canDecay = false; // Prevent the sensor from lowering the detection progress if an entity has been sensed.
+        this.aiController.detectionProgress = Mathf.Clamp01(this.aiController.detectionProgress + detectionAmount);
+        if (this.aiController.detectionProgress >= 1.0f)
+        {
+            this.aiController.Target = obj;
+        }
     }
 
     #endregion
