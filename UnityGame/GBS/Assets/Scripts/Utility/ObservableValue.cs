@@ -16,7 +16,7 @@ public class ObservableValue<T>
             
             this.value = newValue;
             
-            this.OnValueChanged(oldValue, newValue);
+            this.OnValueChanged?.Invoke(oldValue, newValue);
         }
     }
     public Action<T, T> OnValueChanged;
