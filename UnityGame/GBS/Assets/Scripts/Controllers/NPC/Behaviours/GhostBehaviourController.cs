@@ -42,6 +42,8 @@ public class GhostBehaviourController : NPCBehaviourController
         {
             this.stateMain = AIState_Main.Combat; // This should be set through an event only ONCE, but whatever... for now we do it this way lol...
         }
+
+        UpdateFSM_Main(delta);
     }
 
     #endregion
