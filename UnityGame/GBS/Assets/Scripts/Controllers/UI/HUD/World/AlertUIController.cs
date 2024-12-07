@@ -63,16 +63,17 @@ public class AlertUIController : UIController, IComponentValidator
 
     private void UpdateVisibility(float delta)
     {
-        this.canvasGroup.alpha = this.npcController.detectionProgress > 0.0f ? 1.0f : 0.0f;
-
-        if (this.npcController.detectionProgress >= 1.0f)
+        if (this.npcController.detectionProgress < 1.0f)
+        {
+            this.canvasGroup.alpha = this.npcController.detectionProgress > 0.0f ? 1.0f : 0.0f;
+        }
+        else
         {
             this.elapsedTime += delta;
-        }
-
-        if (this.elapsedTime >= this.timeToHide)
-        {
-            this.canvasGroup.alpha -= delta * 1.0f;
+            if (this.elapsedTime >= this.timeToHide)
+            {
+                this.canvasGroup.alpha -= delta * 1.0f;
+            }
         }
     }
 
