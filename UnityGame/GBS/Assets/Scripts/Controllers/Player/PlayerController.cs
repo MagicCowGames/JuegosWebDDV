@@ -278,7 +278,10 @@ public class PlayerController : MonoBehaviour
 
     private void HandleDeath()
     {
-        StartCoroutine("HandleDeathCoroutine");
+        this.spellCasterController.RemoveElements();
+        this.spellCasterController.StopCasting();
+
+        StartCoroutine(HandleDeathCoroutine());
     }
 
     private IEnumerator HandleDeathCoroutine()
