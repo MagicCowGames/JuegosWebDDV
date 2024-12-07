@@ -16,8 +16,6 @@ public class WizardBehaviourController : NPCBehaviourController
     private float idleTime = 0.0f;
     private float wanderTime = 0.0f;
 
-    private float retreatTime = 0.0f;
-
     IUtilityAction[] actions;
 
     #endregion
@@ -31,7 +29,7 @@ public class WizardBehaviourController : NPCBehaviourController
             new FleeAction(this.npcController),
             new AttackAction(this.npcController, new Element[]{Element.Fire, Element.Electricity}, Form.Beam, 5.0f, 5.2f, 0.0f, 10.0f),
             new AttackAction(this.npcController, new Element[]{Element.Fire, Element.Death, Element.Earth}, Form.Projectile, 1.0f, 3.0f, 10.1f, 20.0f),
-            // new AttackAction(this, new Element[]{Element.Fire, Element.Death, Element.Death}, Form.Beam, 3.0f, 10.5f, 21.0f, 40.0f),
+            new AttackAction(this.npcController, new Element[]{Element.Earth, Element.Ice, Element.Ice, Element.Ice}, Form.Projectile, 1.0f, 3.0f, 20.1f, 50.0f), // Yes, the NPCs queue up ice directly rather than water and cold lmao
         };
     }
 
