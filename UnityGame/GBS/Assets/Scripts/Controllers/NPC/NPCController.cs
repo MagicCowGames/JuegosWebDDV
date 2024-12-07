@@ -177,6 +177,7 @@ public class NPCController : MonoBehaviour
 
         if(this.spellCaster.GetIsCasting())
             this.spellCaster.StopCasting();
+        this.spellCaster.RemoveElements();
         
         Destroy(this.gameObject, this.timeToDespawnOnDeath);
     }
