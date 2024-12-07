@@ -15,7 +15,8 @@ public class AISensorSystemController : MonoBehaviour
     [SerializeField] private AISensorBase[] sensors;
 
     private float sensorDecay = 10.0f;
-    private bool canDecay = true;
+    private float decayTime = 0.5f; // The time it takes after the last detection has taken place for the detection value to start decaying.
+    private float elapsedTime = 0.0f; // This measures the time since last detection.
 
     #endregion
 
@@ -30,10 +31,11 @@ public class AISensorSystemController : MonoBehaviour
 
     void Update()
     {
-        //float delta = Time.deltaTime;
-        //if (this.canDecay)
-        //    this.aiController.detectionProgress = Mathf.Clamp01(this.aiController.detectionProgress - (this.sensorDecay * delta));
-        //this.canDecay = true;
+        float delta = Time.deltaTime;
+        bool canDecay = this.aiController.detectionProgress < 1.0f && this.elapsedTime >= this.decayTime; // Once we detect, we can't decay detection.
+        if (canDecay)
+            this.aiController.detectionProgress = Mathf.Clamp01(this.aiController.detectionProgress - (this.sensorDecay * delta));
+        this.elapsedTime += delta;
     }
 
     #endregion
@@ -48,7 +50,7 @@ public class AISensorSystemController : MonoBehaviour
     // For now, just detect the player since all NPCs will be enemies for now.
     private void DetectEntity(GameObject obj, float detectionAmount)
     {
-        this.canDecay = false; // Prevent the sensor from lowering the detection progress if an entity has been sensed.
+        this.elapsedTime = 0.0f; // Prevent the sensor from lowering the detection progress if an entity has been sensed.
         this.aiController.detectionProgress = Mathf.Clamp01(this.aiController.detectionProgress + detectionAmount);
         if (this.aiController.detectionProgress >= 1.0f)
         {
