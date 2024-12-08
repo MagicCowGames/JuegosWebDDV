@@ -4,6 +4,9 @@ using UnityEngine;
 
 // TODO : Possibly replace this with a regular trigger when the Entity system is implemented?
 // TODO : Finish implementing logic for all the other sensors, such as hearing and stuff like that.
+// TODO : Modify the logic on each specific sensor so that it would maybe use an interface rather than a base class, and also create some IDetectableComponent so that
+// The NPCs can detect more stuff appart from the player, like other NPCs, money, etc... also the reactions to the things that the sensors detect should be more easily
+// accessible from the behaviour component classes...
 public class AISensorSystemController : MonoBehaviour
 {
     #region Variables

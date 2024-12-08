@@ -20,6 +20,7 @@ public class NPCController : MonoBehaviour
     [SerializeField] private bool hasAi = false;
     [SerializeField] private bool canDie = false;
     [SerializeField] private float speed = 3.0f;
+    // TODO : Add a turn speed configuration variable here that modifies the nav mesh agent's rotation speed...
     [SerializeField] private float timeToDespawnOnDeath = 0.0f;
     [SerializeField] private int score = 150;
 
