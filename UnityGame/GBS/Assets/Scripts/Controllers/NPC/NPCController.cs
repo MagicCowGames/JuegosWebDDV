@@ -21,6 +21,7 @@ public class NPCController : MonoBehaviour
     [SerializeField] private bool canDie = false;
     [SerializeField] private float speed = 3.0f;
     // TODO : Add a turn speed configuration variable here that modifies the nav mesh agent's rotation speed...
+    // TODO : Add isAttacking value to prevent enemies from starting attacks while an attack coro is already running (which is what is causing a bug as of now with weird attacks)
     [SerializeField] private float timeToDespawnOnDeath = 0.0f;
     [SerializeField] private int score = 150;
 
