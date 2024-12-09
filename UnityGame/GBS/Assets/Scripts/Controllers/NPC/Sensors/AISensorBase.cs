@@ -37,7 +37,7 @@ public class AISensorBase : MonoBehaviour
     void OnTriggerStay(Collider other)
     {
         if (this.senseOnStay)
-            this.Sense(other.gameObject, Time.deltaTime, Vector3.Distance(this.originTransform.position, other.gameObject.transform.position));
+            this.Sense(other.gameObject, Time.fixedDeltaTime, Vector3.Distance(this.originTransform.position, other.gameObject.transform.position));
     }
 
     void OnTriggerExit(Collider other)
