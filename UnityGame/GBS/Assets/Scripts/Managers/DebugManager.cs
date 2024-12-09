@@ -295,5 +295,21 @@ public class DebugManager : SingletonPersistent<DebugManager>
         return points;
     }
 
+    private Vector3[] ApplySegmentTransform(Vector3[] points, Vector3 origin, Vector3 rotation, Vector3 scale)
+    {
+        Quaternion rot = Quaternion.Euler(rotation);
+        for (int i = 0; i < points.Length; ++i)
+        {
+            points[i] = origin + (rot * MulVec3(points[i], scale));
+        }
+        return points;
+    }
+
+    private Vector3 MulVec3(Vector3 v1, Vector3 v2)
+    {
+        Vector3 ans = new Vector3(v1.x * v2.x, v1.y + v2.y, v1.z + v2.z);
+        return ans;
+    }
+
     #endregion
 }
