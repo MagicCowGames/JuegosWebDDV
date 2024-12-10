@@ -90,6 +90,16 @@ public class SoundManager : SingletonPersistent<SoundManager>
         return name == this.currentMusicName;
     }
 
+    public void SetMusicVolume(float volume)
+    {
+        this.musicSource.volume = Mathf.Clamp01(volume);
+    }
+
+    public float GetMusicVolume()
+    {
+        return this.musicSource.volume;
+    }
+
     #endregion
 
     #region PublicMethods - UI
