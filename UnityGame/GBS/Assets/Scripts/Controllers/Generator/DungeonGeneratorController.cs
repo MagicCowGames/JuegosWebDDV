@@ -4,22 +4,6 @@ using UnityEngine;
 
 public class DungeonGeneratorController : MonoBehaviour
 {
-    #region Structs
-
-    public struct RoomPosition
-    {
-        int x;
-        int y;
-
-        public RoomPosition(int x, int y)
-        {
-            this.x = x;
-            this.y = y;
-        }
-    }
-
-    #endregion
-
     #region Variables
 
     [SerializeField] private GameObject[] smallRooms;
