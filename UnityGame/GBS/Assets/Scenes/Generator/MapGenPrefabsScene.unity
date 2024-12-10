@@ -1357,8 +1357,8 @@ MonoBehaviour:
   mediumRooms: []
   largeRooms: []
   spawnTransform: {fileID: 1569406804}
-  roomsMaxX: 100
-  roomsMaxY: 100
+  roomsMaxX: 20
+  roomsMaxY: 20
 --- !u!1 &1992100206
 GameObject:
   m_ObjectHideFlags: 0
