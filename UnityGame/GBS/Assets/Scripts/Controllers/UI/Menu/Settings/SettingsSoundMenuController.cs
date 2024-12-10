@@ -20,7 +20,11 @@ public class SettingsSoundMenuController : MonoBehaviour
 
     void Update()
     {
-        this.volumeImageMusic.fillAmount = 0.5f;
+        float delta = Time.deltaTime;
+        float speed = 10.0f;
+        float sdt = delta * speed;
+
+        this.volumeImageMusic.fillAmount = Mathf.Lerp(this.volumeImageMusic.fillAmount, SoundManager.Instance.GetMusicVolume(), sdt);
     }
 
     #endregion
