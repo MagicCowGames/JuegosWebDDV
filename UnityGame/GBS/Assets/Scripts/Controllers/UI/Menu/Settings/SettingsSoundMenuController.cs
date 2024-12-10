@@ -8,6 +8,7 @@ public class SettingsSoundMenuController : MonoBehaviour
     #region Variables
 
     [SerializeField] private Image volumeImageMusic;
+    [SerializeField] private Slider volumeSliderMusic;
 
     #endregion
 
@@ -15,7 +16,7 @@ public class SettingsSoundMenuController : MonoBehaviour
 
     void Start()
     {
-        
+        this.volumeSliderMusic.value = SoundManager.Instance.GetMusicVolume();
     }
 
     void Update()
@@ -31,6 +32,8 @@ public class SettingsSoundMenuController : MonoBehaviour
 
     #region PublicMethods
 
+    // Deprecated old system
+    /*
     public void DecreaseVolumeMusic()
     {
         SoundManager.Instance.SetMusicVolumeLevel(SoundManager.Instance.GetMusicVolumeLevel() - 1);
@@ -39,6 +42,12 @@ public class SettingsSoundMenuController : MonoBehaviour
     public void IncreaseVolumeMuisc()
     {
         SoundManager.Instance.SetMusicVolumeLevel(SoundManager.Instance.GetMusicVolumeLevel() + 1);
+    }
+    */
+
+    public void Slider_SetVolume_Music(float volume)
+    {
+        SoundManager.Instance?.SetMusicVolume(volume);
     }
 
     public void Button_Return()
