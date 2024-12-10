@@ -29,12 +29,12 @@ public class SettingsSoundMenuController : MonoBehaviour
 
     public void DecreaseVolumeMusic()
     {
-        // SoundManager.Instance.SetMusicVolume();
+        SoundManager.Instance.SetMusicVolumeLevel(SoundManager.Instance.GetMusicVolumeLevel() - 1);
     }
 
     public void IncreaseVolumeMuisc()
     {
-        // SoundManager.Instance.SetMusicVolume();
+        SoundManager.Instance.SetMusicVolumeLevel(SoundManager.Instance.GetMusicVolumeLevel() + 1);
     }
 
     public void Button_Return()
