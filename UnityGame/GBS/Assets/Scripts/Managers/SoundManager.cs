@@ -100,7 +100,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
     public void SetMusicVolumeLevel(int volumeLevel)
     {
         volumeLevel = Mathf.Clamp(volumeLevel, this.minVolumeLevel, this.maxVolumeLevel);
-        this.musicVolume = volumeLevel;
+        this.currentMusicVolumeLevel = volumeLevel;
         float volume = (float)(((float)volumeLevel) / ((float)this.maxVolumeLevel));
         SetMusicVolume(volume);
     }
