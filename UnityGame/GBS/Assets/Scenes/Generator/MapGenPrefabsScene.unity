@@ -1354,11 +1354,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smallRooms:
   - {fileID: 1815356042519995930, guid: c884226eb55eea4489162253fdc71ac4, type: 3}
+  - {fileID: 1815356042519995930, guid: b7948078f66ee8d4286ba624159d186e, type: 3}
   mediumRooms: []
   largeRooms: []
   spawnTransform: {fileID: 1569406804}
-  roomsMaxX: 20
-  roomsMaxY: 20
+  roomsMaxX: 5
+  roomsMaxY: 5
 --- !u!1 &1992100206
 GameObject:
   m_ObjectHideFlags: 0
