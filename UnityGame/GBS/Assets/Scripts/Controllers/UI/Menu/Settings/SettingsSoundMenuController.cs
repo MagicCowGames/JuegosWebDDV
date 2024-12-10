@@ -7,7 +7,7 @@ public class SettingsSoundMenuController : MonoBehaviour
 {
     #region Variables
 
-    [SerializeField] private Image volumeImageMusic;
+    // [SerializeField] private Image volumeImageMusic;
     [SerializeField] private Slider volumeSliderMusic;
 
     #endregion
@@ -21,11 +21,13 @@ public class SettingsSoundMenuController : MonoBehaviour
 
     void Update()
     {
+        /*
         float delta = Time.deltaTime;
         float speed = 10.0f;
         float sdt = delta * speed;
 
         this.volumeImageMusic.fillAmount = Mathf.Lerp(this.volumeImageMusic.fillAmount, SoundManager.Instance.GetMusicVolume(), sdt);
+        */
     }
 
     #endregion
