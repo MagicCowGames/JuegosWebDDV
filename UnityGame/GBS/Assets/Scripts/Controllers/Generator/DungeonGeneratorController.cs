@@ -41,7 +41,7 @@ public class DungeonGeneratorController : MonoBehaviour
 
     private GameObject GetRandomRoom(GameObject[] rooms)
     {
-        return rooms[Random.Range(0, rooms.Length - 1)];
+        return rooms[Random.Range(0, rooms.Length)];
     }
 
     private GameObject SpawnRandomRoom(GameObject[] rooms, Vector3 spawnPosition)
