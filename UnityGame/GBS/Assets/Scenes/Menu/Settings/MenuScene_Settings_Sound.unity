@@ -576,7 +576,7 @@ GameObject:
   - component: {fileID: 1027768175}
   - component: {fileID: 1027768174}
   m_Layer: 0
-  m_Name: SettingsTitle (1)
+  m_Name: MusicVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -794,8 +794,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2049583494}
-        m_TargetAssemblyTypeName: SettingsLanguageMenuController, Assembly-CSharp
-        m_MethodName: SetLanguageSpanish
+        m_TargetAssemblyTypeName: SettingsSoundMenuController, Assembly-CSharp
+        m_MethodName: IncreaseVolumeMuisc
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1074,7 +1074,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2049583494}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsLanguageMenuController, Assembly-CSharp
         m_MethodName: Button_Return
         m_Mode: 1
@@ -1207,8 +1207,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2049583494}
-        m_TargetAssemblyTypeName: SettingsLanguageMenuController, Assembly-CSharp
-        m_MethodName: SetLanguageEnglish
+        m_TargetAssemblyTypeName: SettingsSoundMenuController, Assembly-CSharp
+        m_MethodName: DecreaseVolumeMusic
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1344,7 +1344,7 @@ GameObject:
   - component: {fileID: 1801643602}
   - component: {fileID: 1801643601}
   m_Layer: 0
-  m_Name: SettingsTitleShadow (1)
+  m_Name: MusicVolumeShadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1613,9 +1613,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2049583492}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6751f34e214c3647a6c4adf96a94565, type: 3}
+  m_Script: {fileID: 11500000, guid: 21fb640b1d4cc454481f199bad0135e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeImageMusic: {fileID: 1619738967}
 --- !u!1 &2124717924
 GameObject:
   m_ObjectHideFlags: 0
