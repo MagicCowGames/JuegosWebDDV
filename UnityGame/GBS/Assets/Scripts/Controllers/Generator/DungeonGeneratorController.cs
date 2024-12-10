@@ -238,7 +238,7 @@ public class DungeonGeneratorController : MonoBehaviour
                     foreach (var direction in directions)
                     {
                         int idx = GetAdjacentRoomIndex(i, j, direction);
-                        if (idx > 0 && spawnRooms[idx])
+                        if (idx >= 0 && spawnRooms[idx])
                         {
                             room.RemoveWall(direction);
                         }
