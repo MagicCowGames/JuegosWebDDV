@@ -77,6 +77,7 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_settings_quality_4", "Very High" },
             { "loc_settings_quality_5", "Ultra" },
             { "loc_settings_extra", "Extra" },
+            { "loc_settings_sound", "Sound" },
 
             // Loc Strings : Actions (wtf is this name?)
             { "loc_use", "Use" },
@@ -228,6 +229,7 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_settings_quality_4", "Muy Alto" },
             { "loc_settings_quality_5", "Ultra" },
             { "loc_settings_extra", "Extra" },
+            { "loc_settings_sound", "Sonido" },
 
             // Loc Strings : Actions (wtf is this name?)
             { "loc_use", "Usar" },
