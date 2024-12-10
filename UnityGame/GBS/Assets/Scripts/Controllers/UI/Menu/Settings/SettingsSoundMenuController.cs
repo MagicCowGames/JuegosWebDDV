@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SettingsSoundMenuController : MonoBehaviour
 {
     #region Variables
+
+    [SerializeField] private Image volumeImageMusic;
+
     #endregion
 
     #region MonoBehaviour
@@ -16,24 +20,21 @@ public class SettingsSoundMenuController : MonoBehaviour
 
     void Update()
     {
-        
+        this.volumeImageMusic.fillAmount = 0.5f;
     }
 
     #endregion
 
     #region PublicMethods
 
-    // NOTE : This looks kinda funky, and yes, it should be possible to do this with just 1 function that takes the language as an input, but sadly it is not...
-    // Unity's buttons on click events use UnityEvents, which don't seem to support enum inputs... XD
-
-    public void SetLanguageEnglish()
+    public void DecreaseVolumeMusic()
     {
-        LanguageSystem.SetLanguage(LanguageSystem.Language.English);
+        // SoundManager.Instance.SetMusicVolume();
     }
 
-    public void SetLanguageSpanish()
+    public void IncreaseVolumeMuisc()
     {
-        LanguageSystem.SetLanguage(LanguageSystem.Language.Spanish);
+        // SoundManager.Instance.SetMusicVolume();
     }
 
     public void Button_Return()
