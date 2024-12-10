@@ -46,7 +46,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
     [SerializeField] private AudioClip clickClip;
 
     private readonly int minVolumeLevel = 0;
-    private readonly int maxVolumeLevel = 5;
+    private readonly int maxVolumeLevel = 10;
 
     private string currentMusicName;
     private int currentMusicVolumeLevel;
