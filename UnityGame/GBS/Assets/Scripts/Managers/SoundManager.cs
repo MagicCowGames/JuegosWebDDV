@@ -33,6 +33,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
     // [SerializeField] private AudioSource audioSourceMusic1;
     // [SerializeField] private AudioSource audioSourceMusic2;
 
+    // TODO : Rework volume vars system to be less fucked up...
     [Header("Volume")]
     [SerializeField] private float effectsVolume;
     [SerializeField] private float musicVolume;
@@ -44,7 +45,12 @@ public class SoundManager : SingletonPersistent<SoundManager>
     [Header("UI Audio Clips")]
     [SerializeField] private AudioClip clickClip;
 
+    private readonly int minVolumeLevel = 0;
+    private readonly int maxVolumeLevel = 5;
+
     private string currentMusicName;
+    private int currentMusicVolumeLevel;
+
 
     #endregion
 
@@ -52,7 +58,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     void Start()
     {
-        
+        this.currentMusicVolumeLevel = this.maxVolumeLevel;
     }
 
     void Update()
@@ -90,11 +96,24 @@ public class SoundManager : SingletonPersistent<SoundManager>
         return name == this.currentMusicName;
     }
 
+    // Int volume level functions
+    public void SetMusicVolumeLevel(int volumeLevel)
+    {
+        volumeLevel = Mathf.Clamp(volumeLevel, this.minVolumeLevel, this.maxVolumeLevel);
+        this.musicVolume = volumeLevel;
+        float volume = (float)(((float)volumeLevel) / ((float)this.maxVolumeLevel));
+        SetMusicVolume(volume);
+    }
+    public int GetMusicVolumeLevel()
+    {
+        return this.currentMusicVolumeLevel;
+    }
+
+    // Float volume functions
     public void SetMusicVolume(float volume)
     {
         this.musicSource.volume = Mathf.Clamp01(volume);
     }
-
     public float GetMusicVolume()
     {
         return this.musicSource.volume;
