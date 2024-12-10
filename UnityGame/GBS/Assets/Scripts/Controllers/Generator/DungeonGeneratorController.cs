@@ -225,6 +225,8 @@ public class DungeonGeneratorController : MonoBehaviour
                 if (this.spawnRooms[globalIndex])
                 {
                     var room = SpawnRoom(RoomType.Small, i, j);
+
+                    room.gameObject.transform.parent = this.spawnTransform; // attach the spawned room to the spawn transform.
                     
                     Direction[] directions = {
                         Direction.Up,
