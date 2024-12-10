@@ -101,6 +101,7 @@ public class ConsoleUIController : UIController
             new Cmd("mkreq", "Make an HTTP request", "<type> <url> <message>", 3, CmdMkReq),
             new Cmd("triggermeelmo", "Enable or disable player trigger activation", "<enabled>", 1, CmdTriggerMeElmo, true),
             new Cmd("leavemealone", "Make all NPCs forget about the player", "", 0, CmdLeaveMeAlone, true),
+            new Cmd("musicvolume", "Set the music volume", "<volume>", 1, CmdMusicVolume),
             // TODO : Add commands to get the current map name and the current language or something...
         };
         // TODO : Make an alias system of sorts, or maybe make it so that we can have a dict / list system to have multiple overloads for the same command
@@ -538,6 +539,13 @@ public class ConsoleUIController : UIController
             npc.Target = null;
             npc.GetComponent<NPCBehaviourController>()?.ResetBehaviour();
         }
+    }
+
+    private void CmdMusicVolume(string[] args, int startIndex)
+    {
+        float volume = CmdParseFloat(args[startIndex + 1]);
+        SoundManager.Instance?.SetMusicVolume(volume);
+        CmdPrintln($"Music Volume has been set to {SoundManager.Instance.GetMusicVolume()}");
     }
 
     #endregion
