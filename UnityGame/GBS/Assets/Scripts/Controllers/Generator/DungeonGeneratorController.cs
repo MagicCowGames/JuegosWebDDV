@@ -244,9 +244,6 @@ public class DungeonGeneratorController : MonoBehaviour
                 }
             }
         }
-
-        for (int i = 0; i < totalRooms; ++i)
-            Debug.Log($"room[{i}] = {spawnRooms[i]}");
     }
 
     private void SpawnDungeonAlgo3()
