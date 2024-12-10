@@ -136,7 +136,7 @@ public class NPCController : MonoBehaviour
     // Using coroutines for this makes me cry blood, but it is what it is! time constraints and deadlines for the win, baby! Long live crappy code!!!
     private IEnumerator StopAttackCoroutine(float castDuration)
     {
-        yield return new WaitForSeconds(castDuration); // You think he was the Don? but you got the Fever!
+        yield return new WaitForSeconds(castDuration); // You thought that man was the Don? (fever!) but he gave you the Fever!
         if(this.spellCaster.GetIsCasting())
             this.spellCaster.StopCasting();
         this.isAttacking = false;
