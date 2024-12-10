@@ -1074,8 +1074,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingsLanguageMenuController, Assembly-CSharp
+      - m_Target: {fileID: 2049583494}
+        m_TargetAssemblyTypeName: SettingsSoundMenuController, Assembly-CSharp
         m_MethodName: Button_Return
         m_Mode: 1
         m_Arguments:
