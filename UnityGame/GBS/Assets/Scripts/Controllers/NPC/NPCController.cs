@@ -56,6 +56,7 @@ public class NPCController : MonoBehaviour
 
     public bool isFleeing = false;
     public bool hasLineOfSight = false;
+    public bool isAttacking = false;
 
     public ObservableValue<float> detectionProgress = new ObservableValue<float>(0.0f);
 
@@ -86,6 +87,10 @@ public class NPCController : MonoBehaviour
     // For it to be easy to work with, add an index input param for the Attack() function so that we can specify what specific spell caster to use for this attack.
     public void Attack(Element[] elements, Form form, float castDuration) // This version instantly queues all elements in one go
     {
+        if (this.isAttacking)
+            return;
+        this.isAttacking = true;
+
         if (this.spellCaster.GetIsCasting())
             // return;
             this.spellCaster.StopCasting(); // This is an alternative but I am not sure if it makes things better or worse...
@@ -99,6 +104,10 @@ public class NPCController : MonoBehaviour
 
     public void Attack(Element[] elements, Form form, float castDuration, float queueTime) // queueTime determines how long it takes to queue each element.
     {
+        if (this.isAttacking)
+            return;
+        this.isAttacking = true;
+
         if (this.spellCaster.GetIsCasting())
             // return;
             this.spellCaster.StopCasting();
@@ -121,6 +130,7 @@ public class NPCController : MonoBehaviour
         
         if(this.spellCaster.GetIsCasting())
             this.spellCaster.StopCasting();
+        this.isAttacking = false;
     }
 
     // Using coroutines for this makes me cry blood, but it is what it is! time constraints and deadlines for the win, baby! Long live crappy code!!!
@@ -129,6 +139,7 @@ public class NPCController : MonoBehaviour
         yield return new WaitForSeconds(castDuration); // You think he was the Don? but you got the Fever!
         if(this.spellCaster.GetIsCasting())
             this.spellCaster.StopCasting();
+        this.isAttacking = false;
     }
 
     #endregion
