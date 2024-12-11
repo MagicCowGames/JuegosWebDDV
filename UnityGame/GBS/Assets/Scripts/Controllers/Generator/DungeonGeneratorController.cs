@@ -425,13 +425,20 @@ public class DungeonGeneratorController : MonoBehaviour
 
     private void SpawnSquareRoom(int roomType, int startX, int startY, int endX, int endY)
     {
-        int sizeX = endX - startX;
-        int sizeY = endY - startY;
+        int currentStartX = Mathf.Min(startX, endX);
+        int currentStartY = Mathf.Min(startY, endY);
+
+        int currentEndX = Mathf.Max(startX, endX);
+        int currentEndY = Mathf.Max(startY, endY);
+
+        int sizeX = currentEndX - currentStartX + 1;
+        int sizeY = currentEndY - currentStartY + 1;
+        
         for (int i = 0; i < sizeX; ++i)
         {
             for (int j = 0; j < sizeY; ++j)
             {
-                SetTile(startX + i, startY + j, roomType);
+                SetTile(currentStartX + i, currentStartY + j, roomType);
             }
         }
     }
