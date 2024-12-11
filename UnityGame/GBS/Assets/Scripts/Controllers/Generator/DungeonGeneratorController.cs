@@ -12,14 +12,20 @@ public class DungeonGeneratorController : MonoBehaviour
     public struct RoomData
     {
         public GameObject[] tiles;
+
+        public int minRoomSizeX;
+        public int minRoomSizeY;
+        
         public int maxRoomSizeX;
         public int maxRoomSizeY;
 
-        public RoomData(GameObject[] tiles, int sizeX = 1, int sizeY = 1)
+        public RoomData(GameObject[] tiles, int minSizeX = 1, int minSizeY = 1, int maxSizeX = 3, int maxSizeY = 3)
         {
             this.tiles = tiles;
-            this.maxRoomSizeX = sizeX;
-            this.maxRoomSizeY = sizeY;
+            this.minRoomSizeX = minSizeX;
+            this.minRoomSizeY = minSizeY;
+            this.maxRoomSizeX = maxSizeX;
+            this.maxRoomSizeY = maxSizeY;
         }
     }
 
@@ -451,8 +457,8 @@ public class DungeonGeneratorController : MonoBehaviour
         var data = this.roomData[roomType];
         
         // Calculate the room size
-        int sizeX = data.maxRoomSizeX;
-        int sizeY = data.maxRoomSizeY;
+        int sizeX = Random.Range(data.minRoomSizeX, data.maxRoomSizeX);
+        int sizeY = Random.Range(data.minRoomSizeY, data.maxRoomSizeY);
         
         // Spawn the room square
         SpawnSquareRoom(roomType, startX, startY, startX + sizeX, startY + sizeY);
