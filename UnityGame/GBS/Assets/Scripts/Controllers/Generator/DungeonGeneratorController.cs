@@ -95,6 +95,7 @@ public class DungeonGeneratorController : MonoBehaviour
         this.roomCoordinates = new List<PointInt>();
         GenerateDungeon();
         GenerateNavMesh();
+        SpawnPlayer();
     }
 
     private void GenerateDungeon()
@@ -116,6 +117,13 @@ public class DungeonGeneratorController : MonoBehaviour
         }
 
         InstantiateRooms();
+    }
+
+    private void SpawnPlayer()
+    {
+        var point2D = this.roomCoordinates[0];
+        var point3D = GetTileCoordinates3D(point2D.x, point2D.y, true) + new Vector3(0.0f, 5.0f, 0.0f);
+        GameManager.Instance?.SpawnPlayer(point3D);
     }
 
     #endregion
@@ -194,6 +202,18 @@ public class DungeonGeneratorController : MonoBehaviour
         if (idx < 0)
             return false;
         return this.tiles[idx] >= 0;
+    }
+
+    #endregion
+
+    #region PrivateMethods - Coordinates
+
+    private Vector3 GetTileCoordinates3D(int x, int y, bool center = false)
+    {
+        Vector3 selfPos = this.transform.position;
+        Vector3 tilePos = center ? new Vector3(((float)x + 0.5f) * this.tileSize, 0.0f, ((float)y + 0.5f) * this.tileSize) : new Vector3(x * this.tileSize, 0.0f, y * this.tileSize);
+        Vector3 ans = selfPos + tilePos;
+        return ans;
     }
 
     #endregion
