@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
@@ -22,6 +23,17 @@ public class DungeonGeneratorController : MonoBehaviour
         }
     }
 
+    public struct PointInt
+    {
+        int x;
+        int y;
+        public PointInt(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
     #endregion
 
     #region Variables
@@ -42,6 +54,7 @@ public class DungeonGeneratorController : MonoBehaviour
 
     private readonly float tileSize = 30;
     private int[] tiles;
+    private List<PointInt> roomCoordinates;
     // private List<GameObject> rooms; // We could store the rooms we spawned and use that data later on for something, I guess.
 
     #endregion
@@ -72,6 +85,7 @@ public class DungeonGeneratorController : MonoBehaviour
         for (int i = 0; i < tiles.Length; ++i)
             tiles[i] = -1;
         // this.rooms = new GameObject[totalRooms];
+        this.roomCoordinates = new List<PointInt>();
         GenerateDungeon();
         GenerateNavMesh();
     }
@@ -421,6 +435,17 @@ public class DungeonGeneratorController : MonoBehaviour
                 SetTile(startX + i, startY + j, roomType);
             }
         }
+
+        int middlePointX = Mathf.Clamp(startX + sizeX / 2, 0, this.worldSizeX - 1);
+        int middlePointY = Mathf.Clamp(startY + sizeY / 2, 0, this.worldSizeY - 1);
+
+        this.roomCoordinates.Add(new PointInt(middlePointX, middlePointY));
+    }
+
+    // path type literally just indicates the room type index to be used when generating the path.
+    private void ConnectRooms(int pathType, int roomA, int roomB)
+    {
+
     }
 
     private void InstantiateRooms()
