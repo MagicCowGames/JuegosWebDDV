@@ -1427,6 +1427,7 @@ MonoBehaviour:
   - {fileID: 1815356042519995930, guid: 0253dd6e36b77e6488cdab9a7d467192, type: 3}
   - {fileID: 1815356042519995930, guid: b7948078f66ee8d4286ba624159d186e, type: 3}
   - {fileID: 1815356042519995930, guid: 0253dd6e36b77e6488cdab9a7d467192, type: 3}
+  - {fileID: 1815356042519995930, guid: 3739ddb380e410248b14fd2dd5c336d0, type: 3}
   mediumRooms: []
   largeRooms: []
   spawnTransform: {fileID: 1569406804}
