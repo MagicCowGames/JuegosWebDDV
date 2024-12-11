@@ -34,16 +34,16 @@ public class RoomController : MonoBehaviour
         switch (direction)
         {
             case Direction.Up:
-                this.entryUp.gameObject.SetActive(enabled);
+                this.entryUp.gameObject?.SetActive(enabled);
                 break;
             case Direction.Right:
-                this.entryRight.gameObject.SetActive(enabled);
+                this.entryRight.gameObject?.SetActive(enabled);
                 break;
             case Direction.Down:
-                this.entryDown.gameObject.SetActive(enabled);
+                this.entryDown.gameObject?.SetActive(enabled);
                 break;
             case Direction.Left:
-                this.entryLeft.gameObject.SetActive(enabled);
+                this.entryLeft.gameObject?.SetActive(enabled);
                 break;
         }
     }
