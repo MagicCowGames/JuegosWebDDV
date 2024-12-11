@@ -27,8 +27,7 @@ public class DungeonGeneratorController : MonoBehaviour
 
     void Start()
     {
-        SpawnDungeonAlgo1();
-        GenerateNavMesh();
+        GenerateDungeon();
     }
 
     void Update()
@@ -39,6 +38,13 @@ public class DungeonGeneratorController : MonoBehaviour
     #endregion
 
     #region PublicMethods
+
+    public void GenerateDungeon()
+    {
+        SpawnDungeonAlgo4();
+        GenerateNavMesh();
+    }
+
     #endregion
 
     #region PrivateMethods
@@ -343,6 +349,95 @@ public class DungeonGeneratorController : MonoBehaviour
             Debug.Log($"room[{i}] = {spawnRooms[i]}");
         */
     }
+
+    private void SpawnDungeonAlgo4()
+    {
+        int totalRooms = this.roomsMaxX * this.roomsMaxY;
+        this.spawnRooms = new bool[totalRooms];
+        this.rooms = new GameObject[totalRooms];
+
+        for (int i = 0; i < this.roomsMaxX; ++i)
+        {
+            for (int j = 0; j < this.roomsMaxY; ++j)
+            {
+                int globalIndex = j + i * this.roomsMaxY;
+                this.spawnRooms[globalIndex] = Random.Range(0, 2) == 1;
+            }
+        }
+
+        for (int i = 1; i < this.roomsMaxX - 1; ++i)
+        {
+            for (int j = 1; j < this.roomsMaxY - 1; ++j)
+            {
+                int globalIndex = j + i * this.roomsMaxY;
+
+                bool u = this.spawnRooms[GetGlobalIndex(i, j + 1)];
+                bool r = this.spawnRooms[GetGlobalIndex(i + 1, j)];
+                bool d = this.spawnRooms[GetGlobalIndex(i, j - 1)];
+                bool l = this.spawnRooms[GetGlobalIndex(i - 1, j)];
+
+                // int count = u + r + d + l;
+                bool check = u && r && d && l;
+
+                if (!this.spawnRooms[globalIndex] && !check)
+                    this.spawnRooms[globalIndex] = true;
+            }
+        }
+
+        for (int i = 0; i < this.roomsMaxX; ++i)
+        {
+            for (int j = 0; j < this.roomsMaxY; ++j)
+            {
+                int globalIndex = GetGlobalIndex(i, j);
+
+                int uidx = GetAdjacentRoomIndex(i, j, Direction.Up);
+                int ridx = GetAdjacentRoomIndex(i, j, Direction.Right);
+                int didx = GetAdjacentRoomIndex(i, j, Direction.Down);
+                int lidx = GetAdjacentRoomIndex(i, j, Direction.Left);
+
+                bool u = uidx < 0 ? false : this.spawnRooms[uidx];
+                bool r = ridx < 0 ? false : this.spawnRooms[ridx];
+                bool d = didx < 0 ? false : this.spawnRooms[didx];
+                bool l = lidx < 0 ? false : this.spawnRooms[lidx];
+
+                bool check = !u && !r && !d && !l;
+
+                if (this.spawnRooms[globalIndex] && check)
+                    this.spawnRooms[globalIndex] = false;
+            }
+        }
+
+        for (int i = 0; i < this.roomsMaxX; ++i)
+        {
+            for (int j = 0; j < this.roomsMaxY; ++j)
+            {
+                int globalIndex = j + i * this.roomsMaxY;
+                if (this.spawnRooms[globalIndex])
+                {
+                    var room = SpawnRoom(RoomType.Small, i, j);
+
+                    room.gameObject.transform.parent = this.spawnTransform; // attach the spawned room to the spawn transform.
+
+                    Direction[] directions = {
+                        Direction.Up,
+                        Direction.Right,
+                        Direction.Down,
+                        Direction.Left
+                    };
+
+                    foreach (var direction in directions)
+                    {
+                        int idx = GetAdjacentRoomIndex(i, j, direction);
+                        if (idx >= 0 && spawnRooms[idx])
+                        {
+                            room.RemoveWall(direction);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     #endregion
 
