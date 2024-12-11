@@ -423,15 +423,10 @@ public class DungeonGeneratorController : MonoBehaviour
     }
     */
 
-    // A room is formed by a group of tiles
-    private void SpawnRoom(int roomType, int startX, int startY)
+    private void SpawnSquareRoom(int roomType, int startX, int startY, int endX, int endY)
     {
-        var data = this.roomData[roomType];
-        SpawnRoom(roomType, startX, startY, data.maxRoomSizeX, data.maxRoomSizeY);
-    }
-
-    private void SpawnRoom(int roomType, int startX, int startY, int sizeX, int sizeY)
-    {
+        int sizeX = endX - startX;
+        int sizeY = endY - startY;
         for (int i = 0; i < sizeX; ++i)
         {
             for (int j = 0; j < sizeY; ++j)
@@ -439,10 +434,25 @@ public class DungeonGeneratorController : MonoBehaviour
                 SetTile(startX + i, startY + j, roomType);
             }
         }
+    }
 
+
+    // A room is formed by a group of tiles
+    private void SpawnRoom(int roomType, int startX, int startY)
+    {
+        // Get the room data
+        var data = this.roomData[roomType];
+        
+        // Calculate the room size
+        int sizeX = data.maxRoomSizeX;
+        int sizeY = data.maxRoomSizeY;
+        
+        // Spawn the room square
+        SpawnSquareRoom(roomType, startX, startY, startX + sizeX, startY + sizeY);
+        
+        // Add the room's center point to the spawned room coordinates list
         int middlePointX = Mathf.Clamp(startX + sizeX / 2, 0, this.worldSizeX - 1);
         int middlePointY = Mathf.Clamp(startY + sizeY / 2, 0, this.worldSizeY - 1);
-
         this.roomCoordinates.Add(new PointInt(middlePointX, middlePointY));
     }
 
