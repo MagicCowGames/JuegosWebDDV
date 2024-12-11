@@ -29,23 +29,33 @@ public class RoomController : MonoBehaviour
 
     #region PublicMethods
 
-    public void RemoveWall(Direction direction)
+    public void SetWallEnabled(Direction direction, bool enabled)
     {
         switch (direction)
         {
             case Direction.Up:
-                Destroy(this.entryUp.gameObject);
+                this.entryUp.gameObject.SetActive(enabled);
                 break;
             case Direction.Right:
-                Destroy(this.entryRight.gameObject);
+                this.entryRight.gameObject.SetActive(enabled);
                 break;
             case Direction.Down:
-                Destroy(this.entryDown.gameObject);
+                this.entryDown.gameObject.SetActive(enabled);
                 break;
             case Direction.Left:
-                Destroy(this.entryLeft.gameObject);
+                this.entryLeft.gameObject.SetActive(enabled);
                 break;
         }
+    }
+
+    public void RemoveWall(Direction direction)
+    {
+        SetWallEnabled(direction, false);
+    }
+
+    public void AddWall(Direction direction)
+    {
+        SetWallEnabled(direction, true);
     }
 
     #endregion
