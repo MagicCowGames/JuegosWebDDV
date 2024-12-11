@@ -57,6 +57,7 @@ public class DungeonGeneratorController : MonoBehaviour
 
     [Header("Spawn Settings")]
     [SerializeField] private int roomsToSpawn = 3;
+    [SerializeField] private bool spawnConnections = true;
 
     private readonly float tileSize = 30;
     private int[] tiles;
@@ -103,12 +104,15 @@ public class DungeonGeneratorController : MonoBehaviour
             int type = Random.Range(0, this.roomData.Length);
             int x = Random.Range(0, this.worldSizeX);
             int y = Random.Range(0, this.worldSizeY);
-            SpawnRoom(0, x, y);
+            SpawnRoom(type, x, y);
         }
 
-        for (int i = 1; i < this.roomCoordinates.Count; ++i)
+        if (this.spawnConnections)
         {
-            ConnectRooms(0, i - 1, i);
+            for (int i = 1; i < this.roomCoordinates.Count; ++i)
+            {
+                ConnectRooms(0, i - 1, i);
+            }
         }
 
         InstantiateRooms();
