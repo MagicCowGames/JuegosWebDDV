@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class DungeonGeneratorController : MonoBehaviour
 {
     #region Variables
+
+    [SerializeField] private NavMeshSurface navMesh;
 
     [SerializeField] private GameObject[] smallRooms;
     [SerializeField] private GameObject[] mediumRooms;
@@ -25,6 +28,7 @@ public class DungeonGeneratorController : MonoBehaviour
     void Start()
     {
         SpawnDungeonAlgo1();
+        GenerateNavMesh();
     }
 
     void Update()
@@ -103,16 +107,6 @@ public class DungeonGeneratorController : MonoBehaviour
                 return GetGlobalIndex(x - 1, y);
         }
     }
-
-    /*
-    private Room RandomRoom()
-    {
-        int x = Random.Range(0, this.roomsMaxX);
-        int y = Random.Range(0, this.roomsMaxY);
-        Room room = new Room(x, y);
-        return room;
-    }
-    */
 
     #endregion
 
@@ -325,6 +319,15 @@ public class DungeonGeneratorController : MonoBehaviour
         for (int i = 0; i < totalRooms; ++i)
             Debug.Log($"room[{i}] = {spawnRooms[i]}");
         */
+    }
+
+    #endregion
+
+    #region PrivateMethods - Nav Mesh
+
+    private void GenerateNavMesh()
+    {
+        this.navMesh?.BuildNavMesh();
     }
 
     #endregion
