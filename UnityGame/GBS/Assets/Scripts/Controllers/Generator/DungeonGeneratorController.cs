@@ -215,6 +215,29 @@ public class DungeonGeneratorController : MonoBehaviour
         {
             for (int j = 0; j < this.roomsMaxY; ++j)
             {
+                int globalIndex = GetGlobalIndex(i, j);
+
+                int uidx = GetAdjacentRoomIndex(i, j, Direction.Up);
+                int ridx = GetAdjacentRoomIndex(i, j, Direction.Right);
+                int didx = GetAdjacentRoomIndex(i, j, Direction.Down);
+                int lidx = GetAdjacentRoomIndex(i, j, Direction.Left);
+
+                bool u = uidx < 0 ? false : this.spawnRooms[uidx];
+                bool r = ridx < 0 ? false : this.spawnRooms[ridx];
+                bool d = didx < 0 ? false : this.spawnRooms[didx];
+                bool l = lidx < 0 ? false : this.spawnRooms[lidx];
+
+                bool check = !u && !r && !d && !l;
+
+                if (this.spawnRooms[globalIndex] && check)
+                    this.spawnRooms[globalIndex] = false;
+            }
+        }
+
+        for (int i = 0; i < this.roomsMaxX; ++i)
+        {
+            for (int j = 0; j < this.roomsMaxY; ++j)
+            {
                 int globalIndex = j + i * this.roomsMaxY;
                 if (this.spawnRooms[globalIndex])
                 {
