@@ -5,21 +5,44 @@ using UnityEngine;
 
 public class DungeonGeneratorController : MonoBehaviour
 {
+    #region Structs
+
+    [System.Serializable]
+    public struct RoomData
+    {
+        public GameObject[] tiles;
+        public int maxRoomSizeX;
+        public int maxRoomSizeY;
+
+        public RoomData(GameObject[] tiles, int sizeX = 1, int sizeY = 1)
+        {
+            this.tiles = tiles;
+            this.maxRoomSizeX = sizeX;
+            this.maxRoomSizeY = sizeY;
+        }
+    }
+
+    #endregion
+
     #region Variables
 
+    [Header("Components")]
     [SerializeField] private NavMeshSurface navMesh;
-
-    [SerializeField] private GameObject[] smallRooms;
-    [SerializeField] private GameObject[] mediumRooms;
-    [SerializeField] private GameObject[] largeRooms;
-
     [SerializeField] private Transform spawnTransform;
 
-    [SerializeField] private int roomsMaxX = 10;
-    [SerializeField] private int roomsMaxY = 10;
+    [Header("Room Types")]
+    [SerializeField] private RoomData[] roomData;
 
-    private bool[] spawnRooms;
-    private GameObject[] rooms;
+    [Header("World Data")]
+    [SerializeField] private int worldSizeX = 10;
+    [SerializeField] private int worldSizeY = 10;
+
+    [Header("Spawn Settings")]
+    [SerializeField] private int roomsToSpawn = 3;
+
+    private readonly float tileSize = 30;
+    private int[] tiles;
+    // private List<GameObject> rooms; // We could store the rooms we spawned and use that data later on for something, I guess.
 
     #endregion
 
@@ -27,7 +50,7 @@ public class DungeonGeneratorController : MonoBehaviour
 
     void Start()
     {
-        GenerateDungeon();
+        Init();
     }
 
     void Update()
@@ -38,80 +61,111 @@ public class DungeonGeneratorController : MonoBehaviour
     #endregion
 
     #region PublicMethods
-
-    public void GenerateDungeon()
-    {
-        SpawnDungeonAlgo4();
-        GenerateNavMesh();
-    }
-
     #endregion
 
     #region PrivateMethods
 
-    private GameObject GetRandomRoom(GameObject[] rooms)
+    private void Init()
     {
-        return rooms[Random.Range(0, rooms.Length)];
+        int totalTiles = this.worldSizeX * this.worldSizeY;
+        this.tiles = new int[totalTiles];
+        for (int i = 0; i < tiles.Length; ++i)
+            tiles[i] = -1;
+        // this.rooms = new GameObject[totalRooms];
+        GenerateDungeon();
+        GenerateNavMesh();
     }
 
-    private GameObject SpawnRandomRoom(GameObject[] rooms, Vector3 spawnPosition)
+    private void GenerateDungeon()
     {
-        var obj = ObjectSpawner.Spawn(GetRandomRoom(rooms), this.spawnTransform.position + spawnPosition);
+        for (int i = 0; i < this.roomsToSpawn; ++i)
+        {
+            int type = Random.Range(0, this.roomData.Length);
+            int x = Random.Range(0, this.worldSizeX);
+            int y = Random.Range(0, this.worldSizeY);
+            SpawnRoom(0, x, y);
+        }
+        // SpawnRoom(0, 0, 0);
+        // SpawnRoom(0, 10, 0);
+        InstantiateRooms();
+    }
+
+    #endregion
+
+    #region PrivateMethods - Tiles
+
+    private GameObject GetRandomTile(GameObject[] tiles)
+    {
+        return tiles[Random.Range(0, tiles.Length)];
+    }
+
+    private GameObject SpawnTile(GameObject[] tiles, Vector3 spawnPosition)
+    {
+        var obj = ObjectSpawner.Spawn(GetRandomTile(tiles), this.spawnTransform.position + spawnPosition);
+        obj.gameObject.transform.parent = this.spawnTransform; // attach the spawned room to the spawn transform.
         return obj;
     }
 
-    private RoomController SpawnRoom(RoomType type, int x, int y)
+    private RoomController SpawnTile(int x, int y, int roomType)
     {
         RoomController ans;
-        switch (type)
-        {
-            default:
-            case RoomType.Small:
-                {
-                    var obj = SpawnRandomRoom(smallRooms, new Vector3(x * 30, 0, y * 30));
-                    ans = obj.GetComponent<RoomController>();
-                }
-                break;
-            case RoomType.Medium:
-                {
-                    var obj = SpawnRandomRoom(mediumRooms, new Vector3(x * 30, 0, y * 30));
-                    ans = obj.GetComponent<RoomController>();
-                }
-                break;
-            case RoomType.Large:
-                {
-                    var obj = SpawnRandomRoom(largeRooms, new Vector3(x * 30, 0, y * 30));
-                    ans = obj.GetComponent<RoomController>();
-                }
-                break;
-        }
+        var obj = SpawnTile(this.roomData[roomType].tiles, new Vector3(x * this.tileSize, 0, y * this.tileSize));
+        ans = obj.GetComponent<RoomController>();
         return ans;
     }
 
-    private int GetGlobalIndex(int x, int y)
+    private int GetTileIndex(int x, int y)
     {
-        if (x < 0 || y < 0 || x >= this.roomsMaxX || y >= this.roomsMaxY)
+        if (x < 0 || y < 0 || x >= this.worldSizeX || y >= this.worldSizeY)
             return -1;
-
-        int globalIndex = y + x * this.roomsMaxY;
+        int globalIndex = y + x * this.worldSizeY;
         return globalIndex;
     }
 
-    private int GetAdjacentRoomIndex(int x, int y, Direction direction)
+    private int GetAdjacentTileIndex(int x, int y, Direction direction)
     {
         switch (direction)
         {
             default:
-                return GetGlobalIndex(x, y);
+                return GetTileIndex(x, y);
             case Direction.Up:
-                return GetGlobalIndex(x, y + 1);
+                return GetTileIndex(x, y + 1);
             case Direction.Right:
-                return GetGlobalIndex(x + 1, y);
+                return GetTileIndex(x + 1, y);
             case Direction.Down:
-                return GetGlobalIndex(x, y - 1);
+                return GetTileIndex(x, y - 1);
             case Direction.Left:
-                return GetGlobalIndex(x - 1, y);
+                return GetTileIndex(x - 1, y);
         }
+    }
+
+    private void SetTile(int x, int y, int type)
+    {
+        int idx = GetTileIndex(x, y);
+        if (idx < 0)
+            return;
+        this.tiles[idx] = type;
+    }
+    private int GetTile(int x, int y)
+    {
+        int idx = GetTileIndex(x, y);
+        if (idx < 0)
+            return -1;
+        return this.tiles[idx];
+    }
+    private bool IsTileSet(int x, int y)
+    {
+        int idx = GetTileIndex(x, y);
+        if(idx < 0)
+            return false;
+        return this.tiles[idx] >= 0;
+    }
+    private bool IsAdjacentTileSet(int x, int y, Direction direction)
+    {
+        int idx = GetAdjacentTileIndex(x, y, direction);
+        if (idx < 0)
+            return false;
+        return this.tiles[idx] >= 0;
     }
 
     #endregion
@@ -183,6 +237,7 @@ public class DungeonGeneratorController : MonoBehaviour
     }
     */
 
+    /*
     private void SpawnDungeonAlgo1()
     {
         int totalRooms = this.roomsMaxX * this.roomsMaxY;
@@ -347,76 +402,36 @@ public class DungeonGeneratorController : MonoBehaviour
 
         for (int i = 0; i < totalRooms; ++i)
             Debug.Log($"room[{i}] = {spawnRooms[i]}");
-        */
+    }
+    */
+
+    // A room is formed by a group of tiles
+    private void SpawnRoom(int roomType, int startX, int startY)
+    {
+        var data = this.roomData[roomType];
+        SpawnRoom(roomType, startX, startY, data.maxRoomSizeX, data.maxRoomSizeY);
     }
 
-    private void SpawnDungeonAlgo4()
+    private void SpawnRoom(int roomType, int startX, int startY, int sizeX, int sizeY)
     {
-        int totalRooms = this.roomsMaxX * this.roomsMaxY;
-        this.spawnRooms = new bool[totalRooms];
-        this.rooms = new GameObject[totalRooms];
-
-        for (int i = 0; i < this.roomsMaxX; ++i)
+        for (int i = 0; i < sizeX; ++i)
         {
-            for (int j = 0; j < this.roomsMaxY; ++j)
+            for (int j = 0; j < sizeY; ++j)
             {
-                int globalIndex = j + i * this.roomsMaxY;
-                this.spawnRooms[globalIndex] = Random.Range(0, 2) == 1;
+                SetTile(startX + i, startY + j, roomType);
             }
         }
+    }
 
-        for (int i = 1; i < this.roomsMaxX - 1; ++i)
+    private void InstantiateRooms()
+    {
+        for (int i = 0; i < this.worldSizeX; ++i)
         {
-            for (int j = 1; j < this.roomsMaxY - 1; ++j)
+            for (int j = 0; j < this.worldSizeY; ++j)
             {
-                int globalIndex = j + i * this.roomsMaxY;
-
-                bool u = this.spawnRooms[GetGlobalIndex(i, j + 1)];
-                bool r = this.spawnRooms[GetGlobalIndex(i + 1, j)];
-                bool d = this.spawnRooms[GetGlobalIndex(i, j - 1)];
-                bool l = this.spawnRooms[GetGlobalIndex(i - 1, j)];
-
-                // int count = u + r + d + l;
-                bool check = u && r && d && l;
-
-                if (!this.spawnRooms[globalIndex] && !check)
-                    this.spawnRooms[globalIndex] = true;
-            }
-        }
-
-        for (int i = 0; i < this.roomsMaxX; ++i)
-        {
-            for (int j = 0; j < this.roomsMaxY; ++j)
-            {
-                int globalIndex = GetGlobalIndex(i, j);
-
-                int uidx = GetAdjacentRoomIndex(i, j, Direction.Up);
-                int ridx = GetAdjacentRoomIndex(i, j, Direction.Right);
-                int didx = GetAdjacentRoomIndex(i, j, Direction.Down);
-                int lidx = GetAdjacentRoomIndex(i, j, Direction.Left);
-
-                bool u = uidx < 0 ? false : this.spawnRooms[uidx];
-                bool r = ridx < 0 ? false : this.spawnRooms[ridx];
-                bool d = didx < 0 ? false : this.spawnRooms[didx];
-                bool l = lidx < 0 ? false : this.spawnRooms[lidx];
-
-                bool check = !u && !r && !d && !l;
-
-                if (this.spawnRooms[globalIndex] && check)
-                    this.spawnRooms[globalIndex] = false;
-            }
-        }
-
-        for (int i = 0; i < this.roomsMaxX; ++i)
-        {
-            for (int j = 0; j < this.roomsMaxY; ++j)
-            {
-                int globalIndex = j + i * this.roomsMaxY;
-                if (this.spawnRooms[globalIndex])
+                if (IsTileSet(i, j))
                 {
-                    var room = SpawnRoom(RoomType.Small, i, j);
-
-                    room.gameObject.transform.parent = this.spawnTransform; // attach the spawned room to the spawn transform.
+                    var room = SpawnTile(i, j, GetTile(i, j));
 
                     Direction[] directions = {
                         Direction.Up,
@@ -427,8 +442,7 @@ public class DungeonGeneratorController : MonoBehaviour
 
                     foreach (var direction in directions)
                     {
-                        int idx = GetAdjacentRoomIndex(i, j, direction);
-                        if (idx >= 0 && spawnRooms[idx])
+                        if (IsAdjacentTileSet(i, j, direction))
                         {
                             room.RemoveWall(direction);
                         }
