@@ -1433,9 +1433,10 @@ MonoBehaviour:
     minRoomSizeY: 1
     maxRoomSizeX: 3
     maxRoomSizeY: 3
-  worldSizeX: 20
-  worldSizeY: 20
-  roomsToSpawn: 3
+  worldSizeX: 10
+  worldSizeY: 10
+  roomsToSpawn: 5
+  spawnConnections: 1
 --- !u!114 &1569406806
 MonoBehaviour:
   m_ObjectHideFlags: 0
