@@ -8,6 +8,9 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] private string musicName;
 
+    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject cameraPrefab;
+
     /*
     public int Score { get; set; }
     public int Money { get; set; }
@@ -44,6 +47,12 @@ public class GameManager : Singleton<GameManager>
         //Update score and money values on the server
         AccountManager.Instance.UpdateScore(PlayerDataManager.Instance.GetPlayerScore().Score);
         AccountManager.Instance.UpdateMoney(PlayerDataManager.Instance.GetPlayerMoney().Money);
+    }
+
+    public void SpawnPlayer(Vector3 position)
+    {
+        ObjectSpawner.Spawn(playerPrefab, position);
+        ObjectSpawner.Spawn(cameraPrefab, position);
     }
 
     #endregion
