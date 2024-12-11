@@ -464,11 +464,11 @@ public class DungeonGeneratorController : MonoBehaviour
 
         // Step 1 : Straight line that aligns X axis
         // goes from (A.x, A.y) to (B.x, A.y)
-        SpawnRoom(pathType, roomACoords.x, roomACoords.y, roomBCoords.x - roomACoords.x + 1, 1);
+        SpawnSquareRoom(pathType, roomACoords.x, roomACoords.y, roomBCoords.x, roomACoords.y);
 
         // Step 2 : Straight line that aligns Y axis
         // goes from (B.x, A.y) to (B.x, B.y)
-        SpawnRoom(pathType, roomBCoords.x, roomACoords.y, 1, roomBCoords.y - roomACoords.y + 1);
+        SpawnSquareRoom(pathType, roomBCoords.x, roomACoords.y, roomBCoords.x, roomBCoords.y);
     }
 
     private void InstantiateRooms()
