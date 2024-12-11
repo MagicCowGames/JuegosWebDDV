@@ -71,4 +71,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu/Settings/MenuScene_Settings_Extra.unity
     guid: 589b4da94948ce14fa24691d636d05f6
+  - enabled: 1
+    path: Assets/Scenes/Generator/MapGenPrefabsScene.unity
+    guid: b84452c814663a347a3130c0058439c1
   m_configObjects: {}
