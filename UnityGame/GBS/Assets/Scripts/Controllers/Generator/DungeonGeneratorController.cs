@@ -99,8 +99,12 @@ public class DungeonGeneratorController : MonoBehaviour
             int y = Random.Range(0, this.worldSizeY);
             SpawnRoom(0, x, y);
         }
-        // SpawnRoom(0, 0, 0);
-        // SpawnRoom(0, 10, 0);
+
+        for (int i = 1; i < this.roomCoordinates.Count; ++i)
+        {
+            ConnectRooms(0, i - 1, i);
+        }
+
         InstantiateRooms();
     }
 
