@@ -30,9 +30,9 @@ public class StoreCurrencyMenuController : MonoBehaviour
         SceneLoadingManager.Instance?.LoadSceneStore();
     }
 
-    public void Button_WIP()
+    public void Button_WIP_Transaction()
     {
-        UIManager.Instance.GetPopUpUIController().Open("loc_wip_title", "loc_wip_message");
+        UIManager.Instance.GetPopUpUIController().Open("loc_transaction", "loc_transaction_success_msg");
     }
 
     #endregion
