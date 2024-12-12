@@ -179,6 +179,9 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_inspect", "Inspect" },
             { "loc_buy_items", "Buy Items" },
             { "loc_buy_currency", "Buy Coins" },
+            { "loc_transaction", "Transaction" },
+            { "loc_transaction_success", "Transaction Successfully Processed!" },
+            { "loc_transaction_success_msg", "The transaction has been successfully processed. Enjoy your purchase!" },
 
             // Loc Strings : WIP
             { "loc_wip", "WIP"},
@@ -336,6 +339,9 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_inspect", "Revisar" }, // FUCK ME The OG did not fit within the button's size :(
             { "loc_buy_items", "Comprar Objetos" },
             { "loc_buy_currency", "Comprar Monedas" },
+            { "loc_transaction", "Transacción" },
+            { "loc_transaction_success", "¡Transacción Procesada Exitosamente!" },
+            { "loc_transaction_success_msg", "La transacción ha sido procesoda exitosamente. ¡Disfrute de su compra!" },
 
             // Loc Strings : WIP
             { "loc_wip", "WIP"},
