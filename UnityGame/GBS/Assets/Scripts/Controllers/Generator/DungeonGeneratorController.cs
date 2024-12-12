@@ -51,6 +51,9 @@ public class DungeonGeneratorController : MonoBehaviour
     [Header("Room Types")]
     [SerializeField] private RoomData[] roomData;
 
+    [Header("Special Tiles")]
+    [SerializeField] private GameObject exitRoomTile; // This is kind of a patchy solution. This room should spawn only once btw.
+
     [Header("World Data")]
     [SerializeField] private int worldSizeX = 10;
     [SerializeField] private int worldSizeY = 10;
@@ -58,6 +61,8 @@ public class DungeonGeneratorController : MonoBehaviour
     [Header("Spawn Settings")]
     [SerializeField] private int roomsToSpawn = 3;
     [SerializeField] private bool spawnConnections = true;
+    [SerializeField] private bool spawnExit = true;
+    [SerializeField] private bool spawnPlayer = true;
 
     private readonly float tileSize = 30;
     private int[] tiles;
@@ -95,7 +100,9 @@ public class DungeonGeneratorController : MonoBehaviour
         this.roomCoordinates = new List<PointInt>();
         GenerateDungeon();
         GenerateNavMesh();
-        SpawnPlayer();
+
+        if(this.spawnPlayer)
+            SpawnPlayer();
     }
 
     private void GenerateDungeon()
@@ -114,6 +121,14 @@ public class DungeonGeneratorController : MonoBehaviour
             {
                 ConnectRooms(0, i - 1, i);
             }
+        }
+
+        if (this.spawnExit)
+        {
+            int roomId = Random.Range(1, this.roomCoordinates.Count);
+            var coords = this.roomCoordinates[roomId];
+            SetTile(coords.x, coords.y, 999); // Hacky magic code solution...
+            // TODO : Fix this shit and replace with a proper system when you have time...
         }
 
         InstantiateRooms();
@@ -135,18 +150,22 @@ public class DungeonGeneratorController : MonoBehaviour
         return tiles[Random.Range(0, tiles.Length)];
     }
 
-    private GameObject SpawnTile(GameObject[] tiles, Vector3 spawnPosition)
+    private RoomController SpawnTile(GameObject tile, Vector3 spawnPosition)
     {
-        var obj = ObjectSpawner.Spawn(GetRandomTile(tiles), this.spawnTransform.position + spawnPosition);
+        var obj = ObjectSpawner.Spawn(tile, this.spawnTransform.position + spawnPosition);
         obj.gameObject.transform.parent = this.spawnTransform; // attach the spawned room to the spawn transform.
-        return obj;
+        var ans = obj.GetComponent<RoomController>();
+        return ans;
+    }
+
+    private RoomController SpawnTile(GameObject[] tiles, Vector3 spawnPosition)
+    {
+        return SpawnTile(GetRandomTile(tiles), spawnPosition);
     }
 
     private RoomController SpawnTile(int x, int y, int roomType)
     {
-        RoomController ans;
-        var obj = SpawnTile(this.roomData[roomType].tiles, new Vector3(x * this.tileSize, 0, y * this.tileSize));
-        ans = obj.GetComponent<RoomController>();
+        var ans = SpawnTile(this.roomData[roomType].tiles, GetTileCoordinates3D(x, y));
         return ans;
     }
 
@@ -516,7 +535,8 @@ public class DungeonGeneratorController : MonoBehaviour
             {
                 if (IsTileSet(i, j))
                 {
-                    var room = SpawnTile(i, j, GetTile(i, j));
+                    // TODO : Remove this hacky piece of shit solution when you have time to actually implement a proper solution...
+                    var room = GetTile(i, j) > this.roomData.Length ? SpawnTile(exitRoomTile, GetTileCoordinates3D(i, j)) : SpawnTile(i, j, GetTile(i, j));
 
                     Direction[] directions = {
                         Direction.Up,
