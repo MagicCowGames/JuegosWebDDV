@@ -177,6 +177,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             // Loc Strings : Store
             { "loc_buy", "Buy" },
             { "loc_inspect", "Inspect" },
+            { "loc_buy_items", "Buy Items" },
+            { "loc_buy_currency", "Buy Coins" },
 
             // Loc Strings : WIP
             { "loc_wip", "WIP"},
@@ -332,6 +334,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             // Loc Strings : Store
             { "loc_buy", "Comprar" },
             { "loc_inspect", "Revisar" }, // FUCK ME The OG did not fit within the button's size :(
+            { "loc_buy_items", "Comprar Objetos" },
+            { "loc_buy_currency", "Comprar Monedas" },
 
             // Loc Strings : WIP
             { "loc_wip", "WIP"},
