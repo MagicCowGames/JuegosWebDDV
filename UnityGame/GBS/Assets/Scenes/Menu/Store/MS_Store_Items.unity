@@ -282,7 +282,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2049583494}
-        m_TargetAssemblyTypeName: StoreMenuController, Assembly-CSharp
+        m_TargetAssemblyTypeName: StoreItemsMenuController, Assembly-CSharp
         m_MethodName: Button_WIP
         m_Mode: 1
         m_Arguments:
@@ -1470,7 +1470,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2049583494}
-        m_TargetAssemblyTypeName: StoreMenuController, Assembly-CSharp
+        m_TargetAssemblyTypeName: StoreItemsMenuController, Assembly-CSharp
         m_MethodName: Button_WIP
         m_Mode: 1
         m_Arguments:
@@ -1884,8 +1884,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2049583494}
-        m_TargetAssemblyTypeName: StoreMenuController, Assembly-CSharp
-        m_MethodName: ReturnToMenu
+        m_TargetAssemblyTypeName: StoreItemsMenuController, Assembly-CSharp
+        m_MethodName: Button_ReturnToStoreMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3448,7 +3448,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2049583492}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7073c389437f6984ba58aeb2d25016cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 3bdd47fa7dc992d4b8f8cf4c50898c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2124717924
