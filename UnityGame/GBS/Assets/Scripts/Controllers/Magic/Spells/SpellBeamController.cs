@@ -16,6 +16,8 @@ public class SpellBeamController : SpellBaseController
     [SerializeField] private float maxDistance;
     [SerializeField] private ParticleSystem particleStart;
     [SerializeField] private ParticleSystem particleEnd;
+    [SerializeField] private Light lightPointStart;
+    [SerializeField] private Light lightPointEnd;
     [SerializeField] private CapsuleCollider capsuleCollider; // This capsule collider could be used both for beam collisions AND damage area. But maybe it makes more sense to only add a damage area at the target location, since that's technically the only possible contact point for a beam...
     [SerializeField] private bool canMix = false;
 
@@ -273,6 +275,9 @@ public class SpellBeamController : SpellBaseController
         // TODO : Find something that is not deprecated...
         this.particleStart.startColor = GetSpellColor();
         this.particleEnd.startColor = GetSpellColor();
+
+        this.lightPointStart.color = GetSpellColor();
+        this.lightPointEnd.color = GetSpellColor();
 
         // NOTE : The following is an example of how to change color when using custom shaders that have a color property that is not tied to vertex color.
         // This works because we pray that there's always a material in slot 0. Which should be the case with the beam prefab tbh.
