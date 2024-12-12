@@ -501,7 +501,7 @@ GameObject:
   - component: {fileID: 522056607}
   - component: {fileID: 522056606}
   m_Layer: 0
-  m_Name: Button_Tutorial_Menu
+  m_Name: Button_Items
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -571,9 +571,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TutorialMenuController, Assembly-CSharp
-        m_MethodName: Button_TutorialMenu
+      - m_Target: {fileID: 2049583494}
+        m_TargetAssemblyTypeName: StoreMenuController, Assembly-CSharp
+        m_MethodName: Button_StoreItems
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1063,7 +1063,7 @@ GameObject:
   - component: {fileID: 1484709291}
   - component: {fileID: 1484709290}
   m_Layer: 0
-  m_Name: Button_Tutorial_Map
+  m_Name: Button_Currency
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1133,9 +1133,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TutorialMenuController, Assembly-CSharp
-        m_MethodName: Button_TutorialLevel
+      - m_Target: {fileID: 2049583494}
+        m_TargetAssemblyTypeName: StoreMenuController, Assembly-CSharp
+        m_MethodName: Button_StoreCurrency
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
