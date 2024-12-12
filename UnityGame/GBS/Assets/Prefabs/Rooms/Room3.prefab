@@ -1583,7 +1583,19 @@ MonoBehaviour:
   infinite: 0
   onTrigger:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5857384118914480490}
+        m_TargetAssemblyTypeName: NPCSpawnerController, Assembly-CSharp
+        m_MethodName: SpawnDummies
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   triggerOnAreaEnter: 1
   triggerOnAreaExit: 0
   triggerOnAreaStay: 0
