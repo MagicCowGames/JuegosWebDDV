@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 26615525}
   - component: {fileID: 26615527}
   m_Layer: 0
-  m_Name: TutorialTitleShadow
+  m_Name: StoreTitleShadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -524,8 +524,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000076293945, y: 113.24095}
-  m_SizeDelta: {x: 600, y: 70}
+  m_AnchoredPosition: {x: 0, y: 113.24095}
+  m_SizeDelta: {x: 681.0026, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &522056606
 MonoBehaviour:
@@ -634,7 +634,7 @@ GameObject:
   - component: {fileID: 599816442}
   - component: {fileID: 599816441}
   m_Layer: 0
-  m_Name: TutorialTitle
+  m_Name: StoreTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1086,8 +1086,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000076293945, y: 0.000011444092}
-  m_SizeDelta: {x: 600, y: 70}
+  m_AnchoredPosition: {x: 0, y: 0.000011444092}
+  m_SizeDelta: {x: 681.0026, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1484709290
 MonoBehaviour:
