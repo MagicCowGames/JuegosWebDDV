@@ -8659,6 +8659,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicName: gameplay1
+  playerPrefab: {fileID: 0}
+  cameraPrefab: {fileID: 0}
 --- !u!4 &593860327
 Transform:
   m_ObjectHideFlags: 0
@@ -32346,7 +32348,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 593860326}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: FinishGame
+        m_MethodName: FinishGameDemo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
