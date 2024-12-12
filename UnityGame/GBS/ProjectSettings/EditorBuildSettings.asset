@@ -42,7 +42,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu/MenuScene_Inventory.unity
     guid: 386a16419ebf57142983b30bb89e5f6f
   - enabled: 1
-    path: Assets/Scenes/Menu/MenuScene_Store.unity
+    path: Assets/Scenes/Menu/Store/MenuScene_Store.unity
+    guid: 408d748b20b0f9a418de2f7de920bcc8
+  - enabled: 1
+    path: Assets/Scenes/Menu/Store/MS_Store_Items.unity
     guid: b7c214a4d15c7c545af4bc115a2e0658
   - enabled: 1
     path: Assets/Scenes/Menu/MenuScene_Scoreboard.unity
