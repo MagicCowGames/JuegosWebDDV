@@ -548,9 +548,17 @@ public class DungeonGeneratorController : MonoBehaviour
             {
                 if (IsTileSet(i, j))
                 {
-                    // TODO : Remove this hacky piece of shit solution when you have time to actually implement a proper solution...
+                    Direction[] directions = {
+                        Direction.Up,
+                        Direction.Right,
+                        Direction.Down,
+                        Direction.Left
+                    };
+
                     RoomController room;
 
+                    // TODO : Remove this hacky piece of shit solution when you have time to actually implement a proper solution...
+                    // NOTE : We only rotate for "standard" rooms, special rooms such as the start and exit rooms are always with the same rotation / facing direction.
                     int tileId = GetTile(i, j);
                     if (tileId == 998)
                     {
@@ -564,14 +572,8 @@ public class DungeonGeneratorController : MonoBehaviour
                     else
                     {
                         room = SpawnTile(i, j, GetTile(i, j));
+                        room.SetFaceDirection(directions[Random.Range(0, directions.Length)]); // Make the room face a random direction
                     }
-
-                    Direction[] directions = {
-                        Direction.Up,
-                        Direction.Right,
-                        Direction.Down,
-                        Direction.Left
-                    };
 
                     foreach (var direction in directions)
                     {
