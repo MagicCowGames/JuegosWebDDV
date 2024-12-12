@@ -30,6 +30,16 @@ public class StoreMenuController : MonoBehaviour
         SceneLoadingManager.Instance?.LoadSceneMainMenu();
     }
 
+    public void Button_StoreItems()
+    {
+        SceneLoadingManager.Instance?.LoadScene("MS_Store_Items");
+    }
+
+    public void Button_StoreCurrency()
+    {
+        SceneLoadingManager.Instance?.LoadScene("MS_Store_Currency");
+    }
+
     #endregion
 
     #region PrivateMethods
