@@ -1590,10 +1590,12 @@ MonoBehaviour:
     minRoomSizeY: 1
     maxRoomSizeX: 3
     maxRoomSizeY: 3
+  exitRoomTile: {fileID: 1815356042519995930, guid: a9b5678cfaafec347ba37770eb306d2d, type: 3}
   worldSizeX: 10
   worldSizeY: 10
   roomsToSpawn: 5
   spawnConnections: 1
+  spawnExit: 1
 --- !u!114 &1569406806
 MonoBehaviour:
   m_ObjectHideFlags: 0
