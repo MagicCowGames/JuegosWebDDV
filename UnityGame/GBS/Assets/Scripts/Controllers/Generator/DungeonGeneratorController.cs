@@ -52,7 +52,11 @@ public class DungeonGeneratorController : MonoBehaviour
     [SerializeField] private RoomData[] roomData;
 
     [Header("Special Tiles")]
-    [SerializeField] private GameObject exitRoomTile; // This is kind of a patchy solution. This room should spawn only once btw.
+    // This is kind of a patchy solution.
+    // These rooms should spawn only one time each btw.
+    // TODO : Replace this crap with a proper room prefab spawn system and whatnot...
+    [SerializeField] private GameObject startRoomTile;
+    [SerializeField] private GameObject exitRoomTile;
 
     [Header("World Data")]
     [SerializeField] private int worldSizeX = 10;
@@ -61,6 +65,7 @@ public class DungeonGeneratorController : MonoBehaviour
     [Header("Spawn Settings")]
     [SerializeField] private int roomsToSpawn = 3;
     [SerializeField] private bool spawnConnections = true;
+    [SerializeField] private bool spawnStart = true;
     [SerializeField] private bool spawnExit = true;
     [SerializeField] private bool spawnPlayer = true;
 
@@ -121,6 +126,14 @@ public class DungeonGeneratorController : MonoBehaviour
             {
                 ConnectRooms(0, i - 1, i);
             }
+        }
+
+        if (this.spawnStart)
+        {
+            int roomId = 0;
+            var coords = this.roomCoordinates[roomId];
+            SetTile(coords.x, coords.y, 998); // Hacky magic code solution...
+            // TODO : Fix this shit and replace with a proper system when you have time...
         }
 
         if (this.spawnExit)
@@ -536,7 +549,22 @@ public class DungeonGeneratorController : MonoBehaviour
                 if (IsTileSet(i, j))
                 {
                     // TODO : Remove this hacky piece of shit solution when you have time to actually implement a proper solution...
-                    var room = GetTile(i, j) > this.roomData.Length ? SpawnTile(exitRoomTile, GetTileCoordinates3D(i, j)) : SpawnTile(i, j, GetTile(i, j));
+                    RoomController room;
+
+                    int tileId = GetTile(i, j);
+                    if (tileId == 998)
+                    {
+                        room = SpawnTile(startRoomTile, GetTileCoordinates3D(i, j));
+                    }
+                    else
+                    if (tileId == 999)
+                    {
+                        room = SpawnTile(exitRoomTile, GetTileCoordinates3D(i, j));
+                    }
+                    else
+                    {
+                        room = SpawnTile(i, j, GetTile(i, j));
+                    }
 
                     Direction[] directions = {
                         Direction.Up,
