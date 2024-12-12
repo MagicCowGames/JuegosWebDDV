@@ -1596,6 +1596,7 @@ MonoBehaviour:
   roomsToSpawn: 5
   spawnConnections: 1
   spawnExit: 1
+  spawnPlayer: 1
 --- !u!114 &1569406806
 MonoBehaviour:
   m_ObjectHideFlags: 0
