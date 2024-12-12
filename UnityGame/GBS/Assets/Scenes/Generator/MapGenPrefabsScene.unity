@@ -1586,6 +1586,7 @@ MonoBehaviour:
     - {fileID: 1815356042519995930, guid: b7948078f66ee8d4286ba624159d186e, type: 3}
     - {fileID: 1815356042519995930, guid: 0253dd6e36b77e6488cdab9a7d467192, type: 3}
     - {fileID: 1815356042519995930, guid: 3739ddb380e410248b14fd2dd5c336d0, type: 3}
+    - {fileID: 1815356042519995930, guid: 9e8431bb2856aa848943d43fd3098040, type: 3}
     minRoomSizeX: 1
     minRoomSizeY: 1
     maxRoomSizeX: 3
