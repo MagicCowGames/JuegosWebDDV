@@ -35,7 +35,7 @@ public class GameManager : Singleton<GameManager>
     #region PublicMethods
 
     // TODO : You gotta Polish that Finish screen! damn these jokes suck... just fix this shit lol, just make it look good...
-    public void FinishGame()
+    public void FinishGameDemo()
     {
         // Make the player immortal so that they cannot die during this screen.
         PlayerDataManager.Instance.GetPlayerHealth().HealthMin = 1.0f; // Basically, make the player immortal so that they can't die during the victory screen.
@@ -43,6 +43,16 @@ public class GameManager : Singleton<GameManager>
         // Change UI visibility.
         UIManager.Instance.GetFinishUIController().UI_SetVisible(true); // Display the finish UI
         UIManager.Instance.GetPlayerUIController().UI_SetVisible(false); // Hide the player's UI so taht we don't see the scores twice (they are also displayed on the finish UI).
+
+        //Update score and money values on the server
+        AccountManager.Instance.UpdateScore(PlayerDataManager.Instance.GetPlayerScore().Score);
+        AccountManager.Instance.UpdateMoney(PlayerDataManager.Instance.GetPlayerMoney().Money);
+    }
+
+    public void FinishGame()
+    {
+        // Start next level after you enter the portal
+        SceneLoadingManager.Instance?.LoadSceneWithTransition("MapGenPrefabsScene");
 
         //Update score and money values on the server
         AccountManager.Instance.UpdateScore(PlayerDataManager.Instance.GetPlayerScore().Score);
