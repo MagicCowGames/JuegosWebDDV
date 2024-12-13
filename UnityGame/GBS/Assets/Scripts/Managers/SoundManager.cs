@@ -34,30 +34,19 @@ public class SoundManager : SingletonPersistent<SoundManager>
     [SerializeField] private AudioSource audioSourceVoice;
     [SerializeField] private AudioSource audioSourceUI;
 
-    // NOTE : More complex music system ahead.
-    // One sound will be the one currently playing, the other will be used for fading into the next music track.
-    // For now, this is disabled for simplicity.
-    // [SerializeField] private AudioSource audioSourceMusic1;
-    // [SerializeField] private AudioSource audioSourceMusic2;
+    [Header("Audio Clips SFX")]
+    [SerializeField] private NamedAudioClip[] audioClipsSFX;
 
-    [Header("Music Audio Clips")] // The audio clips used for music.
-    [SerializeField] private NamedAudioClip[] musicTracks;
+    [Header("Audio Clips Music")]
+    [SerializeField] private NamedAudioClip[] audioClipsMusic;
 
-    [Header("UI Audio Clips")]
-    [SerializeField] private AudioClip clickClip;
+    [Header("Audio Clips Voice")]
+    [SerializeField] private NamedAudioClip[] audioClipsVoice;
 
-    [Header("Voice Audio Clips")]
-    [SerializeField] private NamedAudioClip[] voiceAudioClips;
-
-    [Header("Ambient Audio Clips")]
-    [SerializeField] private NamedAudioClip[] ambientAudioClips;
-
-    private readonly int minVolumeLevel = 0;
-    private readonly int maxVolumeLevel = 10;
+    [Header("Audio Clips UI")]
+    [SerializeField] private NamedAudioClip[] audioClipsUI;
 
     private string currentMusicName;
-    private int currentMusicVolumeLevel;
-
 
     #endregion
 
@@ -81,7 +70,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     void Start()
     {
-        this.currentMusicVolumeLevel = this.maxVolumeLevel;
+
     }
 
     void Update()
