@@ -75,6 +75,12 @@ public class SoundManager : SingletonPersistent<SoundManager>
     #endregion
 
     #region PublicMethods
+
+    public void PlaySound(SoundType soundType, string name)
+    {
+        // TODO : Implement
+    }
+
     #endregion
 
     #region PublicMethods - Music
