@@ -80,7 +80,11 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_settings_quality_5", "Ultra" },
             { "loc_settings_extra", "Extra" },
             { "loc_settings_sound", "Sound" },
+            { "loc_settings_volume_global", "Global Volume" },
+            { "loc_settings_volume_sfx", "SFX Volume" },
             { "loc_settings_volume_music", "Music Volume" },
+            { "loc_settings_volume_voice", "Voice Volume" },
+            { "loc_settings_volume_ui", "UI Volume" },
 
             // Loc Strings : Actions (wtf is this name?)
             { "loc_use", "Use" },
@@ -240,7 +244,11 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_settings_quality_5", "Ultra" },
             { "loc_settings_extra", "Extra" },
             { "loc_settings_sound", "Sonido" },
+            { "loc_settings_volume_global", "Volumen Global" },
+            { "loc_settings_volume_sfx", "Volumen de Efectos" },
             { "loc_settings_volume_music", "Volumen de Música" },
+            { "loc_settings_volume_voice", "Volumen de Voz" },
+            { "loc_settings_volume_ui", "Volumen de Interfaz" },
 
             // Loc Strings : Actions (wtf is this name?)
             { "loc_use", "Usar" },
