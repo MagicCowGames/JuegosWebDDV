@@ -29,9 +29,10 @@ public class SoundManager : SingletonPersistent<SoundManager>
     #region Variables
 
     [Header("Audio Sources")]
-    [SerializeField] private AudioSource musicSource; // Audio source for music.
-    [SerializeField] private AudioSource uiSource; // Audio source for UI related sounds.
     [SerializeField] private AudioSource audioSourceSFX;
+    [SerializeField] private AudioSource audioSourceMusic;
+    [SerializeField] private AudioSource audioSourceVoice;
+    [SerializeField] private AudioSource audioSourceUI;
 
     // NOTE : More complex music system ahead.
     // One sound will be the one currently playing, the other will be used for fading into the next music track.
@@ -92,6 +93,8 @@ public class SoundManager : SingletonPersistent<SoundManager>
     }
 
     #endregion
+
+    
 
     #region PublicMethods - SFX / Effects
 
