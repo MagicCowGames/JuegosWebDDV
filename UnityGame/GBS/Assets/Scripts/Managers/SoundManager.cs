@@ -89,6 +89,15 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     #endregion
 
+    #region PublicMethods
+
+    public AudioClip GetAudioClipSFX(string name)
+    {
+        return GetAudioClip(this.audioClipsSFX, name);
+    }
+
+    #endregion
+
     #region PublicMethods - Global
 
     public void SetVolumeGlobal(float volume)
