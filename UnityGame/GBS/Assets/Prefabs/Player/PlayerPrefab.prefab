@@ -794,6 +794,10 @@ PrefabInstance:
       propertyPath: owner
       value: 
       objectReference: {fileID: 7547504269008325229}
+    - target: {fileID: 2075579377285926699, guid: 50e3aee60e719ae4e8509714a00ec6e2, type: 3}
+      propertyPath: beamDuration
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3864805257391592178, guid: 50e3aee60e719ae4e8509714a00ec6e2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.7
