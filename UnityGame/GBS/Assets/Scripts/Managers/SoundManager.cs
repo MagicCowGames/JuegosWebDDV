@@ -8,11 +8,11 @@ public class SoundManager : SingletonPersistent<SoundManager>
     #region Structs
 
     [System.Serializable]
-    public struct MusicTrack
+    public struct NamedAudioClip
     {
         public string name;
         public AudioClip clip;
-        public MusicTrack(string name = default, AudioClip clip = null)
+        public NamedAudioClip(string name = default, AudioClip clip = null)
         {
             this.name = name;
             this.clip = clip;
@@ -40,7 +40,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
     [SerializeField] private float voiceVolume;
 
     [Header("Music Tracks")] // The audio clips used for music.
-    [SerializeField] private MusicTrack[] musicTracks;
+    [SerializeField] private NamedAudioClip[] musicTracks;
 
     [Header("UI Audio Clips")]
     [SerializeField] private AudioClip clickClip;
