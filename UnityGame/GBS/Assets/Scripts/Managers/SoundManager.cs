@@ -40,12 +40,6 @@ public class SoundManager : SingletonPersistent<SoundManager>
     // [SerializeField] private AudioSource audioSourceMusic1;
     // [SerializeField] private AudioSource audioSourceMusic2;
 
-    // TODO : Rework volume vars system to be less fucked up...
-    [Header("Volume")]
-    [SerializeField] private float effectsVolume;
-    [SerializeField] private float musicVolume;
-    [SerializeField] private float voiceVolume;
-
     [Header("Music Audio Clips")] // The audio clips used for music.
     [SerializeField] private NamedAudioClip[] musicTracks;
 
