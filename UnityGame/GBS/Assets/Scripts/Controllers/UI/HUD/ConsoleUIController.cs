@@ -544,8 +544,8 @@ public class ConsoleUIController : UIController
     private void CmdMusicVolume(string[] args, int startIndex)
     {
         float volume = CmdParseFloat(args[startIndex + 1]);
-        SoundManager.Instance?.SetMusicVolume(volume);
-        CmdPrintln($"Music Volume has been set to {SoundManager.Instance.GetMusicVolume()}");
+        SoundManager.Instance.VolumeMusic = volume;
+        CmdPrintln($"Music Volume has been set to {SoundManager.Instance.VolumeMusic}");
     }
 
     #endregion

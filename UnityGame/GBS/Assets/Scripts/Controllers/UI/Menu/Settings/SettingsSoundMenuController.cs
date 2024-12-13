@@ -16,7 +16,7 @@ public class SettingsSoundMenuController : MonoBehaviour
 
     void Start()
     {
-        this.volumeSliderMusic.value = SoundManager.Instance.GetMusicVolume();
+        this.volumeSliderMusic.value = SoundManager.Instance.VolumeMusic;
     }
 
     void Update()
@@ -49,7 +49,7 @@ public class SettingsSoundMenuController : MonoBehaviour
 
     public void Slider_SetVolume_Music(float volume)
     {
-        SoundManager.Instance?.SetMusicVolume(volume);
+        SoundManager.Instance.VolumeMusic = volume;
     }
 
     public void Button_Return()

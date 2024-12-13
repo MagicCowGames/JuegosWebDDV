@@ -101,7 +101,7 @@ public class UI_ButtonController : MonoBehaviour, IComponentValidator
     {
         this.button.onClick = this.onClick;
         this.button.onClick.AddListener(() => {
-            SoundManager.Instance?.PlayClickSound();
+            SoundManager.Instance?.PlaySoundUI("click");
         });
         this.buttonShadow.gameObject.SetActive(this.buttonHasShadow);
 
