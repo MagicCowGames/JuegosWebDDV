@@ -146,9 +146,9 @@ public class SoundManager : SingletonPersistent<SoundManager>
         {
             if (track.name == name)
             {
-                this.musicSource.loop = loop;
-                this.musicSource.clip = track.clip;
-                this.musicSource.Play();
+                this.audioSourceMusic.loop = loop;
+                this.audioSourceMusic.clip = track.clip;
+                this.audioSourceMusic.Play();
                 this.currentMusicName = track.name;
                 return;
             }
@@ -157,7 +157,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     public void StopMusic()
     {
-        this.musicSource.Stop();
+        this.audioSourceMusic.Stop();
         this.currentMusicName = "";
     }
 
