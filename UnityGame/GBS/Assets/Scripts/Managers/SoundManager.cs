@@ -77,6 +77,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     public float VolumeGlobal { get { return GetVolumeGlobal(); } set { SetVolumeGlobal(value); } }
     public float VolumeSFX { get { return GetVolumeSFX(); } set { SetVolumeSFX(value); } }
+    public float VolumeMusic { get { return GetVolumeMusic(); } set { SetVolumeMusic(value); } }
     public float VolumeVoice { get { return GetVolumeVoice(); } set { SetVolumeVoice(value); } }
     public float VolumeUI { get { return GetVolumeUI(); } set { SetVolumeUI(value); } }
 
@@ -167,11 +168,12 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     public void SetMusicVolume(float volume)
     {
-        this.musicSource.volume = Mathf.Clamp01(volume);
+        this.volumeMusic = Mathf.Clamp01(volume);
+        this.audioSourceMusic.volume = this.volumeMusic * this.volumeGlobal;
     }
     public float GetMusicVolume()
     {
-        return this.musicSource.volume;
+        return volumeMusic;
     }
 
     #endregion
