@@ -166,14 +166,14 @@ public class SoundManager : SingletonPersistent<SoundManager>
         return name == this.currentMusicName;
     }
 
-    public void SetMusicVolume(float volume)
+    public void SetVolumeMusic(float volume)
     {
         this.volumeMusic = Mathf.Clamp01(volume);
         this.audioSourceMusic.volume = this.volumeMusic * this.volumeGlobal;
     }
-    public float GetMusicVolume()
+    public float GetVolumeMusic()
     {
-        return volumeMusic;
+        return this.volumeMusic;
     }
 
     #endregion
