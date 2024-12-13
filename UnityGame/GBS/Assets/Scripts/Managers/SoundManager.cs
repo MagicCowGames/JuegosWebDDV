@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // NOTE : I would LOVE to have a MusicManager class, but this class will handle all things sound related. Fuck the names, focus on functionality.
+// I would also love it if I had named this AudioManager instead, but I don't want to bother renaming shit now, so fuck it...
+
+// NOTE : We could have used the audio mixer system but I've found it to be quite a hassle to work with and it doesn't bring much to the table for what I'm trying
+// to do, which is quite simple, so I'd rather manage things by myself for now.
+
 public class SoundManager : SingletonPersistent<SoundManager>
 {
     #region Structs
@@ -23,9 +28,10 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     #region Variables
 
-    [Header("Components")]
+    [Header("Audio Sources")]
     [SerializeField] private AudioSource musicSource; // Audio source for music.
     [SerializeField] private AudioSource uiSource; // Audio source for UI related sounds.
+    [SerializeField] private AudioSource audioSourceSFX;
 
     // NOTE : More complex music system ahead.
     // One sound will be the one currently playing, the other will be used for fading into the next music track.
@@ -60,6 +66,19 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     #endregion
 
+    #region Variables - Volume
+
+    private float volumeGlobal = 1.0f; // This one controls the overall volume, which means it has to multiply its value by the other values, because the volume values are percentages (they go from 0.0f to 1.0f)
+    private float volumeSFX = 1.0f;
+    private float volumeMusic = 1.0f;
+    private float volumeVoice = 1.0f;
+
+    // public float VolumeGlobal { get { return GetVolumeGlobal(); } set { SetVolumeGlobal(value); } }
+
+    public float VolumeSFX { get { return GetVolumeSFX(); } set { SetVolumeSFX(value); } }
+
+    #endregion
+
     #region MonoBehaviour
 
     void Start()
@@ -74,11 +93,22 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     #endregion
 
-    #region PublicMethods
+    #region PublicMethods - SFX / Effects
 
-    public void PlaySound(SoundType soundType, string name)
+    public void PlaySoundSFX(AudioClip clip)
     {
-        // TODO : Implement
+        this.audioSourceSFX.PlayOneShot(clip);
+    }
+
+    public void SetVolumeSFX(float volume)
+    {
+        this.volumeSFX = Mathf.Clamp01(volume);
+        this.audioSourceSFX.volume = this.volumeSFX * this.volumeGlobal;
+    }
+
+    public float GetVolumeSFX()
+    {
+        return this.volumeSFX;
     }
 
     #endregion
