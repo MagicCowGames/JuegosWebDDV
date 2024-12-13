@@ -202,5 +202,14 @@ public class SoundManager : SingletonPersistent<SoundManager>
     #endregion
 
     #region PrivateMethods
+
+    private AudioClip GetAudioClip(NamedAudioClip[] clips, string name)
+    {
+        foreach (var clip in clips)
+            if (clip.name == name)
+                return clip.clip;
+        return null;
+    }
+
     #endregion
 }
