@@ -1991,6 +1991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d1d86890fe62847a3fd08f21e24e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: f451eafa90e997d4c9c38f51a118e50e, type: 2}
   audioSourceSFX: {fileID: 1646633468}
   audioSourceMusic: {fileID: 781728712}
   audioSourceVoice: {fileID: 1536487364}
