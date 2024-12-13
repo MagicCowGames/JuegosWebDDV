@@ -74,8 +74,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
     private float volumeMusic = 1.0f;
     private float volumeVoice = 1.0f;
 
-    // public float VolumeGlobal { get { return GetVolumeGlobal(); } set { SetVolumeGlobal(value); } }
-
+    public float VolumeGlobal { get { return GetVolumeGlobal(); } set { SetVolumeGlobal(value); } }
     public float VolumeSFX { get { return GetVolumeSFX(); } set { SetVolumeSFX(value); } }
 
     #endregion
@@ -94,7 +93,25 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     #endregion
 
-    
+    #region PublicMethods - Global
+
+    public void SetVolumeGlobal(float volume)
+    {
+        // Set the global volume variable
+        this.volumeGlobal = Mathf.Clamp01(volume);
+
+        // Update the volume of the audio sources
+        this.audioSourceSFX.volume = this.volumeSFX * this.volumeGlobal;
+        this.audioSourceMusic.volume = this.volumeMusic * this.volumeGlobal;
+        this.audioSourceVoice.volume = this.volumeVoice * this.volumeGlobal;
+    }
+
+    public float GetVolumeGlobal()
+    {
+        return this.volumeGlobal;
+    }
+
+    #endregion
 
     #region PublicMethods - SFX / Effects
 
