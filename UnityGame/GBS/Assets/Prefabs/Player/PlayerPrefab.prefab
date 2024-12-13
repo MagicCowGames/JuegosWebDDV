@@ -382,6 +382,7 @@ GameObject:
   - component: {fileID: 4671014162685389885}
   - component: {fileID: 5273888175177943651}
   - component: {fileID: 8245531900285691232}
+  - component: {fileID: 7866830801208247175}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -520,6 +521,14 @@ MonoBehaviour:
   castingName: Casting
   castingValue: 0
   castingUpdateSpeed: 2
+--- !u!81 &7866830801208247175
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7547504269008325229}
+  m_Enabled: 1
 --- !u!1001 &152181874143987095
 PrefabInstance:
   m_ObjectHideFlags: 0
