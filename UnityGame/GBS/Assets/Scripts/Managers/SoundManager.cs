@@ -165,20 +165,6 @@ public class SoundManager : SingletonPersistent<SoundManager>
         return name == this.currentMusicName;
     }
 
-    // Int volume level functions
-    public void SetMusicVolumeLevel(int volumeLevel)
-    {
-        volumeLevel = Mathf.Clamp(volumeLevel, this.minVolumeLevel, this.maxVolumeLevel);
-        this.currentMusicVolumeLevel = volumeLevel;
-        float volume = (float)(((float)volumeLevel) / ((float)this.maxVolumeLevel));
-        SetMusicVolume(volume);
-    }
-    public int GetMusicVolumeLevel()
-    {
-        return this.currentMusicVolumeLevel;
-    }
-
-    // Float volume functions
     public void SetMusicVolume(float volume)
     {
         this.musicSource.volume = Mathf.Clamp01(volume);
