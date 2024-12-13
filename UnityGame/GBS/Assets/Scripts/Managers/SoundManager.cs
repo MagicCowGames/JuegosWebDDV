@@ -103,6 +103,13 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     #region PublicMethods - SFX / Effects
 
+    public void PlaySoundSFX(string name)
+    {
+        var clip = GetAudioClip(this.audioClipsSFX, name);
+        if (clip != null)
+            PlaySoundSFX(clip);
+    }
+
     public void PlaySoundSFX(AudioClip clip)
     {
         this.audioSourceSFX.PlayOneShot(clip);
@@ -125,17 +132,15 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     public void PlayMusic(string name, bool loop = true)
     {
-        foreach (var track in this.musicTracks)
-        {
-            if (track.name == name)
-            {
-                this.audioSourceMusic.loop = loop;
-                this.audioSourceMusic.clip = track.clip;
-                this.audioSourceMusic.Play();
-                this.currentMusicName = track.name;
-                return;
-            }
-        }
+        var clip = GetAudioClip(this.audioClipsMusic, name);
+
+        if (clip == null)
+            return;
+
+        this.audioSourceMusic.loop = loop;
+        this.audioSourceMusic.clip = clip;
+        this.audioSourceMusic.Play();
+        this.currentMusicName = name;
     }
 
     public void StopMusic()
@@ -163,6 +168,13 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     #region PublicMethods - Voice
 
+    public void PlaySoundVoice(string name)
+    {
+        var clip = GetAudioClip(this.audioClipsVoice, name);
+        if(clip != null)
+            PlaySoundVoice(clip);
+    }
+
     public void PlaySoundVoice(AudioClip clip)
     {
         this.audioSourceVoice.PlayOneShot(clip);
@@ -182,6 +194,13 @@ public class SoundManager : SingletonPersistent<SoundManager>
     #endregion
 
     #region PublicMethods - UI
+
+    public void PlaySoundUI(string name)
+    {
+        var clip = GetAudioClip(this.audioClipsUI, name);
+        if (clip != null)
+            PlaySoundUI(clip);
+    }
 
     public void PlaySoundUI(AudioClip clip)
     {
