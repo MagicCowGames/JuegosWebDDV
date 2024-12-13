@@ -196,6 +196,11 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     #region PublicMethods - UI
 
+    public void PlaySoundUI(AudioClip clip)
+    {
+        this.audioSourceUI.PlayOneShot(clip);
+    }
+
     public void SetVolumeUI(float volume)
     {
         this.volumeUI = Mathf.Clamp01(volume);
