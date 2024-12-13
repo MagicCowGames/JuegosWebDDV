@@ -39,11 +39,17 @@ public class SoundManager : SingletonPersistent<SoundManager>
     [SerializeField] private float musicVolume;
     [SerializeField] private float voiceVolume;
 
-    [Header("Music Tracks")] // The audio clips used for music.
+    [Header("Music Audio Clips")] // The audio clips used for music.
     [SerializeField] private NamedAudioClip[] musicTracks;
 
     [Header("UI Audio Clips")]
     [SerializeField] private AudioClip clickClip;
+
+    [Header("Voice Audio Clips")]
+    [SerializeField] private NamedAudioClip[] voiceAudioClips;
+
+    [Header("Ambient Audio Clips")]
+    [SerializeField] private NamedAudioClip[] ambientAudioClips;
 
     private readonly int minVolumeLevel = 0;
     private readonly int maxVolumeLevel = 10;
@@ -66,6 +72,9 @@ public class SoundManager : SingletonPersistent<SoundManager>
         
     }
 
+    #endregion
+
+    #region PublicMethods
     #endregion
 
     #region PublicMethods - Music
