@@ -13,6 +13,7 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
 
     [Header("Components")]
     [SerializeField] private GameObject owner; // The reference to the owner of this spell caster. The player / entity / NPC that is using it.
+    [SerializeField] private AudioSource audioSource;
 
     [Header("Element Queue Config")]
     // Size is 5 elements max on the queue by default. This is what the player uses. Some special entities could have a custom size queue.
@@ -280,6 +281,7 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
     private void HandleStartCasting_Beam()
     {
         SpawnBeam();
+        this.audioSource.PlayOneShot(SoundManager.Instance.GetAudioClipSFX("BeamStart"));
 
         // Auto stop casting after N seconds of sustained beam firing.
         // The user can manually stop casting on their own if they release the cast button, but if they keep holding it, to prevent them from being too OP,
@@ -314,6 +316,7 @@ public class SpellCasterController : MonoBehaviour, ISpellCaster
         {
             Destroy(this.activeBeam.gameObject);
             this.activeBeam = null;
+            this.audioSource.PlayOneShot(SoundManager.Instance.GetAudioClipSFX("BeamStop"));
         }
     }
 
