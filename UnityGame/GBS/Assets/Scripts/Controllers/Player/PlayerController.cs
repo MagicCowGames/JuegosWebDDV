@@ -287,7 +287,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator HandleDeathCoroutine()
     {
         GameUtility.SetCanPause(false); // We set the can pause to false before waiting for 2 seconds because that wait time is in real time, it does not account for time scale, which is what we use for pausing.
-        AudioSource.PlayClipAtPoint(this.deathSound, CameraManager.Instance.GetActiveCamera().transform.position + CameraManager.Instance.GetActiveCamera().transform.forward * 3.0f);
+        SoundManager.Instance.PlaySoundVoice("player_death");
         yield return new WaitForSeconds(2.0f);
         UIManager.Instance.GetDeathUIController().UI_SetVisible(true);
         SoundManager.Instance.PlayMusic("death", false);
