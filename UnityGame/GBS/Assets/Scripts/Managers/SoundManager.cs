@@ -77,7 +77,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     public float VolumeGlobal { get { return GetVolumeGlobal(); } set { SetVolumeGlobal(value); } }
     public float VolumeSFX { get { return GetVolumeSFX(); } set { SetVolumeSFX(value); } }
-
+    public float VolumeVoice { get { return GetVolumeVoice(); } set { SetVolumeVoice(value); } }
     public float VolumeUI { get { return GetVolumeUI(); } set { SetVolumeUI(value); } }
 
     #endregion
@@ -191,6 +191,22 @@ public class SoundManager : SingletonPersistent<SoundManager>
     #endregion
 
     #region PublicMethods - Voice
+
+    public void PlaySoundVoice(AudioClip clip)
+    {
+        this.audioSourceVoice.PlayOneShot(clip);
+    }
+
+    public void SetVolumeVoice(float volume)
+    {
+        this.volumeVoice = Mathf.Clamp01(volume);
+        this.audioSourceVoice.volume = this.volumeVoice * this.volumeGlobal;
+    }
+
+    public float GetVolumeVoice()
+    {
+        return this.volumeVoice;
+    }
 
     #endregion
 
