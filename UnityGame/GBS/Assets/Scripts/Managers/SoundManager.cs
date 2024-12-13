@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 // NOTE : I would LOVE to have a MusicManager class, but this class will handle all things sound related. Fuck the names, focus on functionality.
 // I would also love it if I had named this AudioManager instead, but I don't want to bother renaming shit now, so fuck it...
@@ -27,6 +28,9 @@ public class SoundManager : SingletonPersistent<SoundManager>
     #endregion
 
     #region Variables
+
+    [Header("Audio Mixer")]
+    [SerializeField] private AudioMixer audioMixer;
 
     [Header("Audio Sources")]
     [SerializeField] private AudioSource audioSourceSFX;
@@ -70,7 +74,12 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     void Start()
     {
-
+        // Reset the volume values on start to 1.0f (max value) when starting the game again so that the mixer's values can be reset in the editor.
+        SetVolumeGlobal(1.0f);
+        SetVolumeSFX(1.0f);
+        SetVolumeMusic(1.0f);
+        SetVolumeVoice(1.0f);
+        SetVolumeUI(1.0f);
     }
 
     void Update()
@@ -84,14 +93,8 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     public void SetVolumeGlobal(float volume)
     {
-        // Set the global volume variable
         this.volumeGlobal = Mathf.Clamp01(volume);
-
-        // Update the volume of the audio sources
-        this.audioSourceSFX.volume = this.volumeSFX * this.volumeGlobal;
-        this.audioSourceMusic.volume = this.volumeMusic * this.volumeGlobal;
-        this.audioSourceVoice.volume = this.volumeVoice * this.volumeGlobal;
-        this.audioSourceUI.volume = this.volumeUI * this.volumeGlobal;
+        SetMixerVolumeValue("Master", this.volumeGlobal);
     }
 
     public float GetVolumeGlobal()
@@ -118,7 +121,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
     public void SetVolumeSFX(float volume)
     {
         this.volumeSFX = Mathf.Clamp01(volume);
-        this.audioSourceSFX.volume = this.volumeSFX * this.volumeGlobal;
+        SetMixerVolumeValue("SFX", this.volumeSFX);
     }
 
     public float GetVolumeSFX()
@@ -157,7 +160,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
     public void SetVolumeMusic(float volume)
     {
         this.volumeMusic = Mathf.Clamp01(volume);
-        this.audioSourceMusic.volume = this.volumeMusic * this.volumeGlobal;
+        SetMixerVolumeValue("Music", this.volumeMusic);
     }
     public float GetVolumeMusic()
     {
@@ -183,7 +186,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
     public void SetVolumeVoice(float volume)
     {
         this.volumeVoice = Mathf.Clamp01(volume);
-        this.audioSourceVoice.volume = this.volumeVoice * this.volumeGlobal;
+        SetMixerVolumeValue("Voice", this.volumeVoice);
     }
 
     public float GetVolumeVoice()
@@ -210,7 +213,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
     public void SetVolumeUI(float volume)
     {
         this.volumeUI = Mathf.Clamp01(volume);
-        this.audioSourceUI.volume = this.volumeUI * this.volumeGlobal;
+        SetMixerVolumeValue("UI", this.volumeUI);
     }
 
     public float GetVolumeUI()
@@ -228,6 +231,18 @@ public class SoundManager : SingletonPersistent<SoundManager>
             if (clip.name == name)
                 return clip.clip;
         return null;
+    }
+
+    // Maps the volume value from Unity's [0.0, 1.0] scale to the logarithmic db scale [-80, 0]
+    private float MapVolumeValue(float volume)
+    {
+        volume = Mathf.Clamp(volume, 0.0001f, 1.0f); // Clamp the value cause log(0) is undefined. With the current implementation, it goes to NaN, which the mixer just treats as maximum boosting, and we don't want to rape any ears, now do we?
+        return Mathf.Log10(volume) * 20.0f;
+    }
+
+    private void SetMixerVolumeValue(string name, float volume)
+    {
+        audioMixer.SetFloat(name, MapVolumeValue(volume));
     }
 
     #endregion
