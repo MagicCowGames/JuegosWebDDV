@@ -25529,6 +25529,7 @@ GameObject:
   - component: {fileID: 2125198943}
   - component: {fileID: 2125198944}
   - component: {fileID: 2125198945}
+  - component: {fileID: 2125198946}
   m_Layer: 2
   m_Name: FinishTrigger
   m_TagString: Untagged
@@ -25590,9 +25591,9 @@ MonoBehaviour:
   onTrigger:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 593860326}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: FinishGameDemo
+      - m_Target: {fileID: 2125198946}
+        m_TargetAssemblyTypeName: DialogueController, Assembly-CSharp
+        m_MethodName: StartDialogue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -25607,6 +25608,50 @@ MonoBehaviour:
   triggerOnAreaStay: 0
   triggeredByPlayer: 1
   triggeredByDummy: 0
+--- !u!114 &2125198946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125198942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df9e68ab38576f8418a18cc4e13418f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSequence:
+    dialogues:
+    - characterSprite: {fileID: 0}
+      name: loc_name_wizard
+      text: loc_dialogue_4_0
+      onDialogueStart:
+        m_PersistentCalls:
+          m_Calls: []
+      onDialogueEnd:
+        m_PersistentCalls:
+          m_Calls: []
+    - characterSprite: {fileID: 0}
+      name: loc_name_wizard
+      text: loc_dialogue_4_1
+      onDialogueStart:
+        m_PersistentCalls:
+          m_Calls: []
+      onDialogueEnd:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 1305040534}
+            m_TargetAssemblyTypeName: BossSceneController, Assembly-CSharp
+            m_MethodName: StartProceduralLevel
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
 --- !u!1001 &2137782484
 PrefabInstance:
   m_ObjectHideFlags: 0
