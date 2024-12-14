@@ -20,8 +20,8 @@ public class DialogueUIController : UIController
     private float timeAccumulator = 0.0f;
     private float timePerCharacter = 0.1f;
 
-    private int currentDialogue;
-    private int numDialogues;
+    private int currentDialogue = 0;
+    private int numDialogues = 0;
 
     #endregion
 
