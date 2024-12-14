@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     #region Variables3
 
     public bool CanActivateTriggers { get; set; } = true; // TODO : Make this a generic EntityController property rather than player specific...
+    public bool ControlsEnabled { get; set; } = true; // NOTE : one hell of a patch on a solution this is!!! lmao...
 
     #endregion
 
@@ -126,6 +127,7 @@ public class PlayerController : MonoBehaviour
         Vector3 currentPosition = this.transform.position;
 
         this.currentVelocity = (currentPosition - oldPosition) / delta; // This is a shitty patch that really needs to be moved to a different controller...
+        #region Comment
         // NOTE : The reason this crappy patch exists is because the PlayerAnimationController cannot access characterController.velocity AT ALL!
         // This happens because the velocity is calculated after all of the Move() and SimpleMove() calls take place... which means that at frame start, it is reset to
         // <0,0,0>, so that means we need to either manually calculate it or save it so that it can be used by other classes...
@@ -135,6 +137,7 @@ public class PlayerController : MonoBehaviour
         // ourselves... As always, the documentation says X, but the reality is Y, plus a few sprinkles of shit.
         // TODO : Move all of the movement logic to a PlayerMovementController... ffs...
         // DebugManager.Instance?.Log($"playervelocity = {this.currentVelocity}");
+        #endregion
     }
 
     private void UpdatePositionWalk(float delta)
@@ -223,11 +226,17 @@ public class PlayerController : MonoBehaviour
 
     private void SetForwardAxis(float value)
     {
+        if (!this.ControlsEnabled)
+            return;
+
         this.movementForward = value;
     }
 
     private void SetLookToPoint(Vector3 inputScreenLocation)
     {
+        if (!this.ControlsEnabled)
+            return;
+
         if (CameraManager.Instance == null || CameraManager.Instance.GetActiveCamera() == null)
             return;
 
@@ -244,21 +253,29 @@ public class PlayerController : MonoBehaviour
 
     private void AddElement(Element element)
     {
+        if (!this.ControlsEnabled)
+            return;
         this.spellCasterController.AddElement(element);
     }
 
     private void RightClickDown()
     {
+        if (!this.ControlsEnabled)
+            return;
         this.spellCasterController.StartCasting();
     }
 
     private void RightClickUp()
     {
+        if (!this.ControlsEnabled)
+            return;
         this.spellCasterController.StopCasting();
     }
 
     private void SetForm(Form form)
     {
+        if (!this.ControlsEnabled)
+            return;
         this.spellCasterController.SetForm(form);
     }
 
