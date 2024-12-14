@@ -209,12 +209,12 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_dialogue_2_0", "So you are trying to escape..." },
             { "loc_dialogue_2_1", "¡You will not make it out of here alive!" },
             { "loc_dialogue_3_0", "No... it cannot be..." },
-            { "loc_dialogue_3_1", "You will not be able to escape. The Tower is powerful. The dungeon, it shift as you go and there is nothing you can do to escape the wrath of The Order!" },
+            { "loc_dialogue_3_1", $"You will not be able to escape. {GameUtility.GetColorString("The Tower", Color.yellow)} is powerful. The dungeon, it shift as you go and there is nothing you can do to escape the wrath of {GameUtility.GetColorString("The Order", Color.yellow)}!" },
             { "loc_dialogue_3_2", "..." },
             { "loc_dialogue_3_3", "We'll see about that. There is no dungeon I cannot crack." },
             { "loc_dialogue_3_4", "There is nothing you can do to stop me from escaping..." },
-            { "loc_dialogue_4_0", "The dungeons of The Tower change their physical manifestation constantly due to the flow of magical energies..." },
-            { "loc_dialogue_4_1", "Every time I cross a portal I could end up anywhere within The Tower... I'll have to be careful." },
+            { "loc_dialogue_4_0", $"The dungeons of {GameUtility.GetColorString("The Tower", Color.yellow)} change their physical manifestation constantly due to the flow of magical energies..." },
+            { "loc_dialogue_4_1", $"Every time I cross a portal I could end up anywhere within {GameUtility.GetColorString("The Tower", Color.yellow)}... I'll have to be careful." },
         } },
         { Language.Spanish, new Dictionary<string, string> {
             // Loc Strings : Generic
@@ -393,12 +393,12 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_dialogue_2_0", "Así que estás intentando escapar..." },
             { "loc_dialogue_2_1", "¡No lograrás salir de aquí con vida!" },
             { "loc_dialogue_3_0", "No... no puede ser..." },
-            { "loc_dialogue_3_1", "No serás capaz de escapar. La Torre es poderosa. La mazmorra, se modifica a medida que avanzas ¡y no hay nada que puedas hacer para escapar de la ira de La Orden!" },
+            { "loc_dialogue_3_1", $"No serás capaz de escapar. {GameUtility.GetColorString("La Torre", Color.yellow)} es poderosa. La mazmorra, se modifica a medida que avanzas ¡y no hay nada que puedas hacer para escapar de la ira de {GameUtility.GetColorString("La Orden", Color.yellow)}!" },
             { "loc_dialogue_3_2", "..." },
             { "loc_dialogue_3_3", "Ya veremos. No hay mazmorra que se me resista." },
             { "loc_dialogue_3_4", "No hay nada que puedas hacer para evitar que escape..." },
-            { "loc_dialogue_4_0", "Las mazmorras de La Torre cambian su manifestación física de forma constante debido al flujo de la magia..." },
-            { "loc_dialogue_4_1", "Cada vez que cruce un portal podría acabar en cualquier parte de La Torre... tendré que tener cuidado." },
+            { "loc_dialogue_4_0", $"Las mazmorras de {GameUtility.GetColorString("La Torre", Color.yellow)} cambian su manifestación física de forma constante debido al flujo de la magia..." },
+            { "loc_dialogue_4_1", $"Cada vez que cruce un portal podría acabar en cualquier parte de {GameUtility.GetColorString("La Torre", Color.yellow)}... tendré que tener cuidado." },
         } }
     };
 
