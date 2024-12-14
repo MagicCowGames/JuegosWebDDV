@@ -207,7 +207,7 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_dialogue_0_1", "Too bad I don't really care about any of this." },
             { "loc_dialogue_1_0", "They think they can keep me imprissoned in this tower? Amateurs... They don't know my true power!" },
             { "loc_dialogue_2_0", "So you are trying to escape..." },
-            { "loc_dialogue_2_1", "¡You will not make it out of here alive!" },
+            { "loc_dialogue_2_1", "You will not make it out of here alive!" },
             { "loc_dialogue_3_0", "No... it cannot be..." },
             { "loc_dialogue_3_1", $"You will not be able to escape. {GameUtility.GetColorString("The Tower", Color.yellow)} is powerful. The dungeon, it shift as you go and there is nothing you can do to escape the wrath of {GameUtility.GetColorString("The Order", Color.yellow)}!" },
             { "loc_dialogue_3_2", "..." },
