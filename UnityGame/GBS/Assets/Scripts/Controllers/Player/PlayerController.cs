@@ -80,6 +80,15 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    #region PublicMethods
+
+    public void MoveCameraToPlayer()
+    {
+        CameraManager.Instance?.SetActiveTarget(this.cameraSocket);
+    }
+
+    #endregion
+
     #region PublicMethods - Getters and Setters
 
     public Transform GetPlayerTransform()
