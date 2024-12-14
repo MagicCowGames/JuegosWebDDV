@@ -42,8 +42,10 @@ public class MainMeuController : MonoBehaviour
         */
 
         // Display Pop up asking the player if they are sure they want to proceed without an account
+        /*
         if(!AccountManager.Instance.IsLoggedIn)
             UIManager.Instance.GetPopUpUIController().Open("loc_warning_title", "loc_warning_play");
+        */
 
         // Load Play Scene
         SceneLoadingManager.Instance?.LoadScene("MenuScene_Play");
