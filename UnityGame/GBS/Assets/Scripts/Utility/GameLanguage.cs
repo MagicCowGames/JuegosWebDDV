@@ -206,6 +206,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_dialogue_0_0", "A pile of most interesting arcane texts!" },
             { "loc_dialogue_0_1", "Too bad I don't really care about any of this." },
             { "loc_dialogue_1_0", "They think they can keep me imprissoned in this tower? Amateurs... They don't know my true power!" },
+            { "loc_dialogue_2_0", "So you are trying to escape..." },
+            { "loc_dialogue_2_1", "¡You will not make it out of here alive!" },
         } },
         { Language.Spanish, new Dictionary<string, string> {
             // Loc Strings : Generic
@@ -381,6 +383,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_dialogue_0_0", "¡Una pila de textos arcanos extremadamente interesantes!" },
             { "loc_dialogue_0_1", "Es una pena que no me importe absolutamente nada de esto." },
             { "loc_dialogue_1_0", "¿Se creen que pueden mantenerme encerrado en esta torre? Amateurs... ¡No conocen mi poder!" },
+            { "loc_dialogue_2_0", "Así que estás intentando escapar..." },
+            { "loc_dialogue_2_1", "¡No lograrás salir de aquí con vida!" },
         } }
     };
 
