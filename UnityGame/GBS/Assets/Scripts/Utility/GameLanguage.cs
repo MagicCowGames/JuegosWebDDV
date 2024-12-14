@@ -42,8 +42,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             
             // Loc Strings : Menu
             { "loc_play", "Play"},
-            { "loc_play_campaign", "Play Campaign" },
-            { "loc_play_procedural", "Explore The Tower" },
+            { "loc_play_campaign", "Campaign Mode" },
+            { "loc_play_procedural", "Endless Mode" },
             { "loc_account", "Account" },
             { "loc_credits", "Credits" },
             { "loc_return", "Return" },
@@ -226,8 +226,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             
             // Loc Strings : Menu
             { "loc_play", "Jugar" },
-            { "loc_play_campaign", "Jugar Campaña" },
-            { "loc_play_procedural", "Explorar La Torre" },
+            { "loc_play_campaign", "Modo Campaña" },
+            { "loc_play_procedural", "Modo Infinito" },
             { "loc_account", "Cuenta" },
             { "loc_credits", "Créditos" },
             { "loc_return", "Volver" },
