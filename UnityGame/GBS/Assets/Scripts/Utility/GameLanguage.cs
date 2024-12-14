@@ -213,6 +213,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_dialogue_3_2", "..." },
             { "loc_dialogue_3_3", "We'll see about that. There is no dungeon I cannot crack." },
             { "loc_dialogue_3_4", "There is nothing you can do to stop me from escaping..." },
+            { "loc_dialogue_4_0", "The dungeons of The Tower change their physical manifestation constantly due to the flow of magical energies..." },
+            { "loc_dialogue_4_1", "Every time I cross a portal I could end up anywhere within The Tower... I'll have to be careful." },
         } },
         { Language.Spanish, new Dictionary<string, string> {
             // Loc Strings : Generic
@@ -395,6 +397,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_dialogue_3_2", "..." },
             { "loc_dialogue_3_3", "Ya veremos. No hay mazmorra que se me resista." },
             { "loc_dialogue_3_4", "No hay nada que puedas hacer para evitar que escape..." },
+            { "loc_dialogue_4_0", "Las mazmorras de La Torre cambian su manifestación física de forma constante debido al flujo de la magia..." },
+            { "loc_dialogue_4_1", "Cada vez que cruce un portal podría acabar en cualquier parte de La Torre... tendré que tener cuidado." },
         } }
     };
 
