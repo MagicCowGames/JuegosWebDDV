@@ -194,7 +194,15 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_coming_soon", "COMING SOON!" },
 
             // Loc Strings : Scoreboard
-            { "loc_top_10", "Top 10" }
+            { "loc_top_10", "Top 10" },
+
+            // Loc Strings : Entity Names
+            { "loc_name_wizard", "Wizard" },
+            { "loc_name_wizard_unknown", "Unknown Wizard" },
+
+            // Loc Strings : Dialogues
+            { "loc_dialogue_0_0", "A pile of most interesting arcane texts!" },
+            { "loc_dialogue_0_1", "Too bad I don't really care about any of this." },
         } },
         { Language.Spanish, new Dictionary<string, string> {
             // Loc Strings : Generic
@@ -358,7 +366,15 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_coming_soon", "¡PRÓXIMAMENTE!" },
 
             // Loc Strings : Scoreboard
-            { "loc_top_10", "Top 10" }
+            { "loc_top_10", "Top 10" },
+
+            // Loc Strings : Entity Names
+            { "loc_name_wizard", "Mago" },
+            { "loc_name_wizard_unknown", "Mago Desconocido" },
+
+            // Loc Strings : Dialogues
+            { "loc_dialogue_0_0", "¡Una pila de textos arcanos extremadamente interesantes!" },
+            { "loc_dialogue_0_1", "Es una pena que no me importe absolutamente nada de esto." },
         } }
     };
 
