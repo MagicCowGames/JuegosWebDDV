@@ -1499,7 +1499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df46235fb701e744fbe133b5ac3df42e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicName: 
+  musicName: gameplay1
   playerPrefab: {fileID: 7547504269008325229, guid: 8e82e07ae041dd74eabd50a07ae44e2c, type: 3}
   cameraPrefab: {fileID: 8369457214375777977, guid: 34ee53c895ca913419590f4495218af2, type: 3}
 --- !u!1 &1485873691
