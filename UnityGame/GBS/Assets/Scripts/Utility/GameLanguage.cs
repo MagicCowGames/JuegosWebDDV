@@ -113,6 +113,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
 
             // Loc Strings : Windows / PopUps
             { "loc_close", "Close" },
+            { "loc_warning_title", "Warning" },
+            { "loc_warning_play", "You are about to play without logging into an account. Your progress will not be saved." },
 
             // Loc Strings : Test
             { "loc_test_dummy", "Test Dummy" },
@@ -286,6 +288,8 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
 
             // Loc Strings : Windows / PopUps
             { "loc_close", "Cerrar" },
+            { "loc_warning_title", "Alerta" },
+            { "loc_warning_play", "Estás a punto de jugar una partida sin acceder a una cuenta. Tu progreso no será guardado." },
 
             // Loc Strings : Test
             { "loc_test_dummy", "Muñeco de Pruebas" },
