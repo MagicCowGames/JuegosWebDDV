@@ -44,6 +44,7 @@ public class UIManager : Singleton<UIManager>, IManager
     void Start()
     {
         this.popUpUIController?.Close();
+        this.dialogueUIController?.UI_SetVisible(false);
     }
 
     void Update()
