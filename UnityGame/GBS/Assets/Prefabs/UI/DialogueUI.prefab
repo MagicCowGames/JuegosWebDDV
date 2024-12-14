@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: LOC["English"][""] NOT FOUND
+  m_text: LOC["Spanish"][""] NOT FOUND
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -182,8 +182,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -378, y: 246}
-  m_SizeDelta: {x: -815.0127, y: 264.9873}
+  m_AnchoredPosition: {x: -467, y: 281}
+  m_SizeDelta: {x: -997.1469, y: 320.9854}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4864966061736142692
 CanvasRenderer:
@@ -258,8 +258,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -1.5772705, y: 74.365906}
-  m_SizeDelta: {x: -49.5303, y: 110.7317}
+  m_AnchoredPosition: {x: -1.5772705, y: 98.838}
+  m_SizeDelta: {x: -49.5303, y: 159.68}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5184428416167573335
 CanvasRenderer:
@@ -334,7 +334,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -1.5772705, y: 157.061}
+  m_AnchoredPosition: {x: -1.5772705, y: 207}
   m_SizeDelta: {x: -49.5303, y: 43.229}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7900316151254557444
@@ -411,8 +411,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 487.2, y: 40.5}
-  m_SizeDelta: {x: -1039.6997, y: 36.138397}
+  m_AnchoredPosition: {x: 609, y: 57}
+  m_SizeDelta: {x: -1300.7775, y: 52.2724}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6061730734642517527
 CanvasRenderer:
@@ -543,8 +543,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -23.0168, y: 0}
-  m_SizeDelta: {x: -66.0336, y: -20}
+  m_AnchoredPosition: {x: -36.217293, y: 0}
+  m_SizeDelta: {x: -92.4346, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6994665402913859745
 CanvasRenderer:
@@ -574,7 +574,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: LOC["English"][""] NOT FOUND
+  m_text: LOC["Spanish"][""] NOT FOUND
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -784,12 +784,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1280, y: 720}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
