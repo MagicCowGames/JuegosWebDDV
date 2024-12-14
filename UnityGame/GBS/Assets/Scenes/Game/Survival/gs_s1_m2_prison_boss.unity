@@ -5389,6 +5389,38 @@ PrefabInstance:
       propertyPath: speed
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7289517046949347476, guid: b55ca217b0dad484cbecccca86c2744e, type: 3}
+      propertyPath: OnNPCDeath.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289517046949347476, guid: b55ca217b0dad484cbecccca86c2744e, type: 3}
+      propertyPath: OnNPCDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289517046949347476, guid: b55ca217b0dad484cbecccca86c2744e, type: 3}
+      propertyPath: OnNPCDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 860526734}
+    - target: {fileID: 7289517046949347476, guid: b55ca217b0dad484cbecccca86c2744e, type: 3}
+      propertyPath: OnNPCDeath.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289517046949347476, guid: b55ca217b0dad484cbecccca86c2744e, type: 3}
+      propertyPath: OnNPCDeath.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetTargetTransform
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289517046949347476, guid: b55ca217b0dad484cbecccca86c2744e, type: 3}
+      propertyPath: OnNPCDeath.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FollowController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289517046949347476, guid: b55ca217b0dad484cbecccca86c2744e, type: 3}
+      propertyPath: OnNPCDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 897230757}
+    - target: {fileID: 7289517046949347476, guid: b55ca217b0dad484cbecccca86c2744e, type: 3}
+      propertyPath: OnNPCDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Transform, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5648,7 +5680,6 @@ Transform:
   - {fileID: 860526733}
   - {fileID: 959835806}
   - {fileID: 897230757}
-  - {fileID: 927746691}
   m_Father: {fileID: 1850077662}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &471622131
@@ -12149,131 +12180,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 927411473}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &927746690
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 927746691}
-  - component: {fileID: 927746692}
-  - component: {fileID: 927746693}
-  - component: {fileID: 927746694}
-  m_Layer: 2
-  m_Name: GrateTrigger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &927746691
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 927746690}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.17, y: -4.63, z: 36.19}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 469723923}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &927746692
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 927746690}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 10
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &927746693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 927746690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 146589f81deeab240b8f9a81baa1ca58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerName: GrateTrigger_Open
-  count: 1
-  infinite: 1
-  onTrigger:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 860526734}
-        m_TargetAssemblyTypeName: FollowController, Assembly-CSharp
-        m_MethodName: SetTargetTransform
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 897230757}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  triggerOnAreaEnter: 1
-  triggerOnAreaExit: 0
-  triggerOnAreaStay: 0
-  triggeredByPlayer: 1
-  triggeredByDummy: 0
---- !u!114 &927746694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 927746690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 146589f81deeab240b8f9a81baa1ca58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerName: GrateTrigger_Close
-  count: 1
-  infinite: 1
-  onTrigger:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 860526734}
-        m_TargetAssemblyTypeName: FollowController, Assembly-CSharp
-        m_MethodName: SetTargetTransform
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 959835806}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  triggerOnAreaEnter: 0
-  triggerOnAreaExit: 1
-  triggerOnAreaStay: 0
-  triggeredByPlayer: 1
-  triggeredByDummy: 0
 --- !u!1001 &934736756
 PrefabInstance:
   m_ObjectHideFlags: 0
