@@ -208,6 +208,11 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_dialogue_1_0", "They think they can keep me imprissoned in this tower? Amateurs... They don't know my true power!" },
             { "loc_dialogue_2_0", "So you are trying to escape..." },
             { "loc_dialogue_2_1", "¡You will not make it out of here alive!" },
+            { "loc_dialogue_3_0", "No... it cannot be..." },
+            { "loc_dialogue_3_1", "You will not be able to escape. The Tower is powerful. The dungeon, it shift as you go and there is nothing you can do to escape the wrath of The Order!" },
+            { "loc_dialogue_3_2", "..." },
+            { "loc_dialogue_3_3", "We'll see about that. There is no dungeon I cannot crack." },
+            { "loc_dialogue_3_4", "There is nothing you can do to stop me from escaping..." },
         } },
         { Language.Spanish, new Dictionary<string, string> {
             // Loc Strings : Generic
@@ -385,6 +390,11 @@ public static class LanguageSystem // TODO : Rename this fucking class bruh
             { "loc_dialogue_1_0", "¿Se creen que pueden mantenerme encerrado en esta torre? Amateurs... ¡No conocen mi poder!" },
             { "loc_dialogue_2_0", "Así que estás intentando escapar..." },
             { "loc_dialogue_2_1", "¡No lograrás salir de aquí con vida!" },
+            { "loc_dialogue_3_0", "No... no puede ser..." },
+            { "loc_dialogue_3_1", "No serás capaz de escapar. La Torre es poderosa. La mazmorra, se modifica a medida que avanzas ¡y no hay nada que puedas hacer para escapar de la ira de La Orden!" },
+            { "loc_dialogue_3_2", "..." },
+            { "loc_dialogue_3_3", "Ya veremos. No hay mazmorra que se me resista." },
+            { "loc_dialogue_3_4", "No hay nada que puedas hacer para evitar que escape..." },
         } }
     };
 
