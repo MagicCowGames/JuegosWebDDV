@@ -31983,11 +31983,11 @@ MonoBehaviour:
   dialogueSequence:
     dialogues:
     - characterSprite: {fileID: 0}
-      name: Wizard
-      text: Estos libros son la ostia de interesantes!
+      name: loc_name_wizard
+      text: loc_dialogue_0_0
     - characterSprite: {fileID: 0}
-      name: Wizard
-      text: Bueno, en realidad me la pela mucho...
+      name: loc_name_wizard
+      text: loc_dialogue_0_1
 --- !u!1001 &2087910221
 PrefabInstance:
   m_ObjectHideFlags: 0
