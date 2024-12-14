@@ -227,9 +227,9 @@ public class PlayerController : MonoBehaviour
     private void SetForwardAxis(float value)
     {
         if (!this.ControlsEnabled)
-            return;
-
-        this.movementForward = value;
+            this.movementForward = 0.0f;
+        else
+            this.movementForward = value;
     }
 
     private void SetLookToPoint(Vector3 inputScreenLocation)
