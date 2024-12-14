@@ -6,8 +6,25 @@ using UnityEngine;
 // Thanks, deadlines, you made my code be shit!
 public class PlayButtonSoundController : MonoBehaviour
 {
+    private float click2PlayDelay = 0.05f;
+    private float timeElapsed = 0.0f;
+
+    private void Update()
+    {
+        float delta = Time.deltaTime;
+        this.timeElapsed += delta;
+    }
+
     public void PlayClickSound()
     {
         SoundManager.Instance?.PlaySoundUI("click");
+    }
+
+    public void PlayClick2Sound()
+    {
+        if (this.timeElapsed < this.click2PlayDelay)
+            return;
+        SoundManager.Instance?.PlaySoundUI("click2");
+        this.timeElapsed = 0.0f;
     }
 }
