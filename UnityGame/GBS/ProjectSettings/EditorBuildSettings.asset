@@ -83,4 +83,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu/MenuScene_Play.unity
     guid: fb4cefd652a32ab418dde13eae0d5136
+  - enabled: 1
+    path: Assets/Scenes/Game/Survival/gs_s1_m2_prison_boss.unity
+    guid: 63fd778c3243ee7419480ead08a28cb6
   m_configObjects: {}
