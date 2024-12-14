@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class WizardBossBehaviourController : NPCBehaviourController
 {
+    #region Enums
+
+    private enum BossAIState
+    {
+        None = 0,
+        Idle,
+        Combat
+    }
+
+    #endregion
+
     #region Variables
 
-    // NOTE : These state enums could be made to be specific for each behaviour rather than generic.
-
-    [Header("AI States")]
-    [SerializeField] private AIState_Main stateMain = AIState_Main.None;
-    [SerializeField] private AIState_Wandering stateWandering = AIState_Wandering.None;
-    [SerializeField] private AIState_Combat stateCombat = AIState_Combat.None;
-
-    private float idleTime = 0.0f;
-    private float wanderTime = 0.0f;
-
-    IUtilityAction[] actions;
+    private BossAIState state;
+    private IUtilityAction[] actions;
 
     #endregion
 
@@ -24,10 +26,8 @@ public class WizardBossBehaviourController : NPCBehaviourController
 
     protected override void InitBehaviour()
     {
-        this.stateMain = AIState_Main.None;
-        this.stateWandering = AIState_Wandering.None;
-        this.stateCombat = AIState_Combat.None;
-
+        this.npcController.CanDie = false;
+        this.state = BossAIState.None;
         this.actions = new IUtilityAction[] {
             new ChaseAction(this.npcController),
             new AttackAction(this.npcController, new Element[]{Element.Death, Element.Fire, Element.Electricity}, Form.Beam, 1.5f, 5.2f, 0.0f, 10.0f),
@@ -39,74 +39,40 @@ public class WizardBossBehaviourController : NPCBehaviourController
 
     protected override void UpdateBehaviour(float delta)
     {
-        // For now, just walk toward the selected target GameObject.
-        if (this.npcController.Target != null)
-        {
-            this.stateMain = AIState_Main.Combat; // This should be set through an event only ONCE, but whatever... for now we do it this way lol...
-        }
+        UpdateFSM(delta);
+    }
 
-        UpdateFSM_Main(delta);
+    #endregion
+
+    #region PublicMethods
+
+    public void StartBossBattle()
+    {
+        this.npcController.healthController.Heal(); // Just in case the player has done some shenanigans off screen, we restore the boss NPC's health when the battle starts...
+        this.npcController.CanDie = true;
+        this.state = BossAIState.Combat;
     }
 
     #endregion
 
     #region PrivateMethods - FSM
 
-    private void UpdateFSM_Main(float delta)
+    // The Boss Behaviour is quite simple tbh... barely anything more than a fucking bool at this point tbh.
+    private void UpdateFSM(float delta)
     {
-        switch (this.stateMain)
+        switch (this.state)
         {
-            case AIState_Main.None:
             default:
-                this.stateMain = AIState_Main.Idle;
+            case BossAIState.None:
+                this.state = BossAIState.Idle;
                 break;
-            case AIState_Main.Idle:
-                this.npcController.ForwardAxis = 0.0f;
-                this.idleTime += delta;
-                if (this.idleTime >= 5.0f)
-                {
-                    this.idleTime = 0.0f;
-                    this.stateMain = AIState_Main.Wandering;
-                }
+            case BossAIState.Idle:
+                // Do Nothing...
                 break;
-            case AIState_Main.Wandering:
+            case BossAIState.Combat:
+                // Chase the player and fight!
                 this.npcController.ForwardAxis = 1.0f;
-                UpdateFSM_Wandering(delta);
-                break;
-            case AIState_Main.Combat:
                 UpdateUS(delta);
-                break;
-        }
-    }
-
-    private void UpdateFSM_Wandering(float delta)
-    {
-        switch (this.stateWandering)
-        {
-            case AIState_Wandering.None:
-            default:
-                this.stateWandering = AIState_Wandering.SelectingTarget;
-                break;
-            case AIState_Wandering.SelectingTarget:
-                float rngX = Random.Range(-20, 20);
-                float rngY = Random.Range(-20, 20);
-                Vector3 vec = new Vector3(rngX, 0, rngY);
-                this.npcController.NavTarget = this.transform.position + vec;
-                this.stateWandering = AIState_Wandering.MovingToTarget;
-                break;
-            case AIState_Wandering.MovingToTarget:
-                DebugManager.Instance?.DrawSphere(this.npcController.NavTarget, 2, Color.magenta);
-                this.wanderTime += delta;
-                float distance = Vector3.Distance(this.transform.position, this.npcController.NavTarget);
-                if (wanderTime > 5.0f || distance <= this.npcController.agent.stoppingDistance)
-                {
-                    this.stateWandering = AIState_Wandering.ArrivedToTarget;
-                    this.wanderTime = 0.0f;
-                }
-                break;
-            case AIState_Wandering.ArrivedToTarget:
-                this.stateWandering = AIState_Wandering.None;
-                this.stateMain = AIState_Main.Idle;
                 break;
         }
     }
