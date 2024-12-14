@@ -101,7 +101,11 @@ public class ConsoleUIController : UIController
             new Cmd("mkreq", "Make an HTTP request", "<type> <url> <message>", 3, CmdMkReq),
             new Cmd("triggermeelmo", "Enable or disable player trigger activation", "<enabled>", 1, CmdTriggerMeElmo, true),
             new Cmd("leavemealone", "Make all NPCs forget about the player", "", 0, CmdLeaveMeAlone, true),
-            new Cmd("musicvolume", "Set the music volume", "<volume>", 1, CmdMusicVolume),
+            new Cmd("volume", "Set the global volume of the application", "<volume>", 1, CmdVolumeGlobal),
+            new Cmd("volumesfx", "Set the SFX volume", "<volume>", 1, CmdVolumeSFX),
+            new Cmd("volumemusic", "Set the music volume", "<volume>", 1, CmdVolumeMusic),
+            new Cmd("volumevoice", "Set the voice volume", "<volume>", 1, CmdVolumeVoice),
+            new Cmd("volumeui", "Set the UI volume", "<volume>", 1, CmdVolumeUI),
             // TODO : Add commands to get the current map name and the current language or something...
         };
         // TODO : Make an alias system of sorts, or maybe make it so that we can have a dict / list system to have multiple overloads for the same command
@@ -541,11 +545,39 @@ public class ConsoleUIController : UIController
         }
     }
 
-    private void CmdMusicVolume(string[] args, int startIndex)
+    private void CmdVolumeGlobal(string[] args, int startIndex)
+    {
+        float volume = CmdParseFloat(args[startIndex + 1]);
+        SoundManager.Instance.VolumeGlobal = volume;
+        CmdPrintln($"Global Volume has been set to {SoundManager.Instance.VolumeGlobal}");
+    }
+
+    private void CmdVolumeSFX(string[] args, int startIndex)
+    {
+        float volume = CmdParseFloat(args[startIndex + 1]);
+        SoundManager.Instance.VolumeSFX = volume;
+        CmdPrintln($"Music Volume has been set to {SoundManager.Instance.VolumeSFX}");
+    }
+
+    private void CmdVolumeMusic(string[] args, int startIndex)
     {
         float volume = CmdParseFloat(args[startIndex + 1]);
         SoundManager.Instance.VolumeMusic = volume;
         CmdPrintln($"Music Volume has been set to {SoundManager.Instance.VolumeMusic}");
+    }
+
+    private void CmdVolumeVoice(string[] args, int startIndex)
+    {
+        float volume = CmdParseFloat(args[startIndex + 1]);
+        SoundManager.Instance.VolumeVoice = volume;
+        CmdPrintln($"Music Volume has been set to {SoundManager.Instance.VolumeVoice}");
+    }
+
+    private void CmdVolumeUI(string[] args, int startIndex)
+    {
+        float volume = CmdParseFloat(args[startIndex + 1]);
+        SoundManager.Instance.VolumeUI = volume;
+        CmdPrintln($"Music Volume has been set to {SoundManager.Instance.VolumeUI}");
     }
 
     #endregion
