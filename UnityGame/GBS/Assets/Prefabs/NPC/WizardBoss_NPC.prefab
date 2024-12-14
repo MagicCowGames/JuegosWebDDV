@@ -291,8 +291,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8575d31057e1e3b4892c0bc598a9b2d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1500
-  healthMax: 1500
+  health: 800
+  healthMax: 800
   healthMin: 0
 --- !u!114 &7289517046949347476
 MonoBehaviour:
@@ -315,6 +315,9 @@ MonoBehaviour:
   timeToDespawnOnDeath: 3
   score: 300
   spellCaster: {fileID: 4933429835869951161}
+  OnNPCDeath:
+    m_PersistentCalls:
+      m_Calls: []
   isFleeing: 0
   hasLineOfSight: 0
   isAttacking: 0
@@ -392,9 +395,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a550fdd2e3c64947a4020ebd75e0b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateMain: 0
-  stateWandering: 0
-  stateCombat: 0
 --- !u!1001 &250395179090558051
 PrefabInstance:
   m_ObjectHideFlags: 0
