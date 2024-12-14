@@ -13,6 +13,8 @@ public class DialogueUIController : UIController
     [SerializeField] private Image characterImage;
     [SerializeField] private TMP_Text characterName;
     [SerializeField] private TMP_Text dialogueText;
+    [SerializeField] private LocalizedTextController characterNameLocalization;
+    [SerializeField] private LocalizedTextController dialogueTextLocalization;
 
     private DialogueSequence dialogueSequence;
     private DialogueSequence fallbackSequence = new DialogueSequence(); // NOTE : This one exists in case that the input dialogue sequence is not valid
@@ -103,12 +105,14 @@ public class DialogueUIController : UIController
 
     private void SetDialogueText(string str)
     {
-        this.dialogueText.text = str;
+        // this.dialogueText.text = str;
+        this.dialogueTextLocalization.LocalizationString = str;
     }
 
     private void SetCharacterName(string str)
     {
-        this.characterName.text = str;
+        // this.characterName.text = str;
+        this.dialogueTextLocalization.LocalizationString = str;
     }
 
     private void SetCharacterSprite(Sprite sprite)
