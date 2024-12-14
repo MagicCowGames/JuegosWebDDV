@@ -112,7 +112,7 @@ public class DialogueUIController : UIController
     private void SetCharacterName(string str)
     {
         // this.characterName.text = str;
-        this.dialogueTextLocalization.LocalizationString = str;
+        this.characterNameLocalization.LocalizationString = str;
     }
 
     private void SetCharacterSprite(Sprite sprite)
