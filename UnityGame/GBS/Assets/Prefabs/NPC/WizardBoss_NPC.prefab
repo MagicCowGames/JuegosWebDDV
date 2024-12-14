@@ -119,7 +119,6 @@ MonoBehaviour:
   aiController: {fileID: 7289517046949347476}
   sensors:
   - {fileID: 8068877790510687024}
-  - {fileID: 0}
 --- !u!1 &6222192740617463515
 GameObject:
   m_ObjectHideFlags: 0
