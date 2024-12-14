@@ -73,11 +73,13 @@ public class DialogueUIController : UIController
         SetCharacterName(dialogue.name);
         SetDialogueText(dialogue.text);
         SetDialogueDisplayCharacters(0);
+        dialogue.onDialogueStart?.Invoke();
         this.timeAccumulator = 0.0f;
     }
 
     private void DisplayNextDialogue()
     {
+        this.dialogueSequence.dialogues[this.currentDialogue].onDialogueEnd?.Invoke();
         ++this.currentDialogue;
         if (this.currentDialogue >= this.numDialogues)
         {
@@ -91,10 +93,10 @@ public class DialogueUIController : UIController
 
     private void StartDialogueSequence()
     {
-        this.currentDialogue = -1; // Yet another fucking hack because we must rush all of the code for the deadlines!!! Rush rush to the yeyo!!!
+        this.currentDialogue = 0;
         this.numDialogues = this.dialogueSequence.dialogues.Length;
         EnterDialogue();
-        DisplayNextDialogue();
+        DisplayDialogue(0);
     }
 
     #endregion
