@@ -15927,7 +15927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueSequence:
     dialogues:
-    - characterSprite: {fileID: 0}
+    - characterSprite: {fileID: 21300000, guid: 1c3147345909d154aa8284fd9fda61b2, type: 3}
       name: loc_name_wizard
       text: loc_dialogue_1_0
       onDialogueStart:
@@ -32141,7 +32141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueSequence:
     dialogues:
-    - characterSprite: {fileID: 0}
+    - characterSprite: {fileID: 21300000, guid: 1c3147345909d154aa8284fd9fda61b2, type: 3}
       name: loc_name_wizard
       text: loc_dialogue_0_0
       onDialogueStart:
@@ -32150,7 +32150,7 @@ MonoBehaviour:
       onDialogueEnd:
         m_PersistentCalls:
           m_Calls: []
-    - characterSprite: {fileID: 0}
+    - characterSprite: {fileID: 21300000, guid: 6a0df501a70b0d84f82fd55cf8a8ddf0, type: 3}
       name: loc_name_wizard
       text: loc_dialogue_0_1
       onDialogueStart:
