@@ -78,4 +78,31 @@ public static class GameUtility
     }
 
     #endregion
+
+    #region Strings and Colors
+
+    public static string GetColorHexString(Color color)
+    {
+        var r = Mathf.Clamp01(color.r);
+        var g = Mathf.Clamp01(color.g);
+        var b = Mathf.Clamp01(color.b);
+
+        int ri = (int)(255 * r);
+        int gi = (int)(255 * g);
+        int bi = (int)(255 * b);
+
+        string rstr = $"{ri:X2}";
+        string gstr = $"{gi:X2}";
+        string bstr = $"{bi:X2}";
+
+        string ans = $"#{rstr}{gstr}{bstr}";
+        return ans;
+    }
+
+    public static string GetColorString(string message, Color color)
+    {
+        return $"<color={GetColorHexString(color)}>{message}</color>";
+    }
+
+    #endregion
 }
