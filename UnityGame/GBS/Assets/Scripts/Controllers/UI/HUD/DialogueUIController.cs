@@ -18,7 +18,7 @@ public class DialogueUIController : UIController
     private DialogueSequence fallbackSequence = new DialogueSequence(); // NOTE : This one exists in case that the input dialogue sequence is not valid
 
     private float timeAccumulator = 0.0f;
-    private float timePerCharacter = 0.1f;
+    private float timePerCharacter = 0.05f;
 
     private int currentDialogue = 0;
     private int numDialogues = 0;
