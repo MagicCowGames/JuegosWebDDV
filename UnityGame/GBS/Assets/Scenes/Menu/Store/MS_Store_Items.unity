@@ -293,6 +293,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2049583495}
+        m_TargetAssemblyTypeName: PlayButtonSoundController, Assembly-CSharp
+        m_MethodName: PlayClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &71433965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1481,6 +1493,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2049583495}
+        m_TargetAssemblyTypeName: PlayButtonSoundController, Assembly-CSharp
+        m_MethodName: PlayClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &669484235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1886,6 +1910,18 @@ MonoBehaviour:
       - m_Target: {fileID: 2049583494}
         m_TargetAssemblyTypeName: StoreItemsMenuController, Assembly-CSharp
         m_MethodName: Button_ReturnToStoreMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2049583495}
+        m_TargetAssemblyTypeName: PlayButtonSoundController, Assembly-CSharp
+        m_MethodName: PlayClickSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3416,6 +3452,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2049583493}
   - component: {fileID: 2049583494}
+  - component: {fileID: 2049583495}
   m_Layer: 0
   m_Name: StoreUI
   m_TagString: Untagged
@@ -3449,6 +3486,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bdd47fa7dc992d4b8f8cf4c50898c64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2049583495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049583492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a66ceaf826d16b429384f56e7088756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2124717924

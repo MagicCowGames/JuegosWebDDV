@@ -368,6 +368,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2049583495}
+        m_TargetAssemblyTypeName: PlayButtonSoundController, Assembly-CSharp
+        m_MethodName: PlayClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &342874227
 GameObject:
@@ -1204,6 +1216,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2049583495}
+        m_TargetAssemblyTypeName: PlayButtonSoundController, Assembly-CSharp
+        m_MethodName: PlayClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1299315534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1331,6 +1355,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: SettingsExtraMenuController, Assembly-CSharp
         m_MethodName: SetFpsEnabled
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 2049583495}
+        m_TargetAssemblyTypeName: PlayButtonSoundController, Assembly-CSharp
+        m_MethodName: PlayClickSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1577,6 +1613,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: SettingsExtraMenuController, Assembly-CSharp
         m_MethodName: SetConsoleEnabled
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2049583495}
+        m_TargetAssemblyTypeName: PlayButtonSoundController, Assembly-CSharp
+        m_MethodName: PlayClickSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2062,6 +2110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2049583493}
   - component: {fileID: 2049583494}
+  - component: {fileID: 2049583495}
   m_Layer: 0
   m_Name: SettingsExtraUI
   m_TagString: Untagged
@@ -2100,6 +2149,18 @@ MonoBehaviour:
   consoleEnabledToggle: {fileID: 1534130271}
   versionEnabledToggle: {fileID: 272648661}
   fpsEnabledToggle: {fileID: 1385256681}
+--- !u!114 &2049583495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049583492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a66ceaf826d16b429384f56e7088756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2124717924
 GameObject:
   m_ObjectHideFlags: 0
