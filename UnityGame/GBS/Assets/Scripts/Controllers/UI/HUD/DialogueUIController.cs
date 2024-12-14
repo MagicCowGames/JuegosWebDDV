@@ -89,7 +89,7 @@ public class DialogueUIController : UIController
 
     private void StartDialogueSequence()
     {
-        this.currentDialogue = 0;
+        this.currentDialogue = -1; // Yet another fucking hack because we must rush all of the code for the deadlines!!! Rush rush to the yeyo!!!
         this.numDialogues = this.dialogueSequence.dialogues.Length;
         EnterDialogue();
         DisplayNextDialogue();
