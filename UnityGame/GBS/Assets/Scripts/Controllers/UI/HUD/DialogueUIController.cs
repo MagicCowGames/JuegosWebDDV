@@ -59,6 +59,7 @@ public class DialogueUIController : UIController
 
     public void Skip() // This is the public function that will be called by the button when the player presses it on the UI.
     {
+        SoundManager.Instance?.PlaySoundUI("click");
         DisplayNextDialogue();
     }
 
