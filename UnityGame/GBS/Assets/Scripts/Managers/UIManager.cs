@@ -32,6 +32,7 @@ public class UIManager : Singleton<UIManager>, IManager
     [SerializeField] private PopUpUIController popUpUIController;
     [SerializeField] private FinishUIController finishUIController;
     [SerializeField] private FadeUIController fadeUIController;
+    [SerializeField] private DialogueUIController dialogueUIController;
 
     [Header("Generic UI Controllers")]
     [SerializeField] private List<UIControllerEntry> uiControllers;
@@ -92,6 +93,11 @@ public class UIManager : Singleton<UIManager>, IManager
     public FadeUIController GetFadeUIController()
     {
         return this.fadeUIController;
+    }
+
+    public DialogueUIController GetDialogueUIController()
+    {
+        return this.dialogueUIController;
     }
 
     #endregion
