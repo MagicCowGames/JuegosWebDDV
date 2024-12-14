@@ -1649,6 +1649,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 968548497}
+  - {fileID: 1570996838}
   m_Father: {fileID: 380940759}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &141279583
@@ -1704,6 +1705,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1090177824}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &147379608
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 147379609}
+  m_Layer: 0
+  m_Name: CameraTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &147379609
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 147379608}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.3538888, y: -0, z: -0, w: 0.9352875}
+  m_LocalPosition: {x: 3.18, y: 29.32, z: 50.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1570996838}
+  m_LocalEulerAnglesHint: {x: 41.451, y: 0, z: 0}
 --- !u!1001 &151428813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5395,31 +5427,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7289517046949347476, guid: b55ca217b0dad484cbecccca86c2744e, type: 3}
       propertyPath: OnNPCDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7289517046949347476, guid: b55ca217b0dad484cbecccca86c2744e, type: 3}
       propertyPath: OnNPCDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 860526734}
+      objectReference: {fileID: 1570996839}
     - target: {fileID: 7289517046949347476, guid: b55ca217b0dad484cbecccca86c2744e, type: 3}
       propertyPath: OnNPCDeath.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7289517046949347476, guid: b55ca217b0dad484cbecccca86c2744e, type: 3}
       propertyPath: OnNPCDeath.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetTargetTransform
+      value: StartDialogue
       objectReference: {fileID: 0}
     - target: {fileID: 7289517046949347476, guid: b55ca217b0dad484cbecccca86c2744e, type: 3}
       propertyPath: OnNPCDeath.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FollowController, Assembly-CSharp
+      value: DialogueController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7289517046949347476, guid: b55ca217b0dad484cbecccca86c2744e, type: 3}
       propertyPath: OnNPCDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 897230757}
+      objectReference: {fileID: 0}
     - target: {fileID: 7289517046949347476, guid: b55ca217b0dad484cbecccca86c2744e, type: 3}
       propertyPath: OnNPCDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Transform, UnityEngine
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11148,7 +11180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selfTransform: {fileID: 860526733}
   targetTransform: {fileID: 959835806}
-  speed: 2
+  speed: 0.5
   lerp: 1
 --- !u!1 &867739066
 GameObject:
@@ -16479,6 +16511,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d4fc6a444d2a6554a8c75cd6ae335c80, type: 3}
   m_PrefabInstance: {fileID: 1304992720}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1305040532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1305040533}
+  - component: {fileID: 1305040534}
+  m_Layer: 0
+  m_Name: SceneController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1305040533
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305040532}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1735408999}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1305040534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305040532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a725a0aec4312b43bc1b1009ef850b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1309051697
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19882,6 +19958,134 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 679994abe13e2f1438c44e282401af5d, type: 3}
   m_PrefabInstance: {fileID: 1564574629}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1570996837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1570996838}
+  - component: {fileID: 1570996839}
+  m_Layer: 0
+  m_Name: Dialogue (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1570996838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570996837}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 147379609}
+  m_Father: {fileID: 138196385}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1570996839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570996837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df9e68ab38576f8418a18cc4e13418f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSequence:
+    dialogues:
+    - characterSprite: {fileID: 0}
+      name: loc_name_wizard_unknown
+      text: loc_dialogue_3_0
+      onDialogueStart:
+        m_PersistentCalls:
+          m_Calls: []
+      onDialogueEnd:
+        m_PersistentCalls:
+          m_Calls: []
+    - characterSprite: {fileID: 0}
+      name: loc_name_wizard_unknown
+      text: loc_dialogue_3_1
+      onDialogueStart:
+        m_PersistentCalls:
+          m_Calls: []
+      onDialogueEnd:
+        m_PersistentCalls:
+          m_Calls: []
+    - characterSprite: {fileID: 0}
+      name: loc_name_wizard
+      text: loc_dialogue_3_2
+      onDialogueStart:
+        m_PersistentCalls:
+          m_Calls: []
+      onDialogueEnd:
+        m_PersistentCalls:
+          m_Calls: []
+    - characterSprite: {fileID: 0}
+      name: loc_name_wizard
+      text: loc_dialogue_3_3
+      onDialogueStart:
+        m_PersistentCalls:
+          m_Calls: []
+      onDialogueEnd:
+        m_PersistentCalls:
+          m_Calls: []
+    - characterSprite: {fileID: 0}
+      name: loc_name_wizard
+      text: loc_dialogue_3_4
+      onDialogueStart:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 860526734}
+            m_TargetAssemblyTypeName: FollowController, Assembly-CSharp
+            m_MethodName: SetTargetTransform
+            m_Mode: 2
+            m_Arguments:
+              m_ObjectArgument: {fileID: 897230757}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 1305040534}
+            m_TargetAssemblyTypeName: BossSceneController, Assembly-CSharp
+            m_MethodName: MoveCamera
+            m_Mode: 2
+            m_Arguments:
+              m_ObjectArgument: {fileID: 147379609}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      onDialogueEnd:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 1305040534}
+            m_TargetAssemblyTypeName: BossSceneController, Assembly-CSharp
+            m_MethodName: MoveCameraToPlayer
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
 --- !u!1 &1572886456
 GameObject:
   m_ObjectHideFlags: 0
@@ -22171,6 +22375,7 @@ Transform:
   - {fileID: 1425662954}
   - {fileID: 763831089}
   - {fileID: 356007488}
+  - {fileID: 1305040533}
   m_Father: {fileID: 380940759}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1765845982
