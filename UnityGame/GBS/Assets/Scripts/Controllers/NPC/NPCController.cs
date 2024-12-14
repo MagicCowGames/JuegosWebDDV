@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 // TODO : Move some of this logic to a base NPC class or something like that so that we can more easily implement NPCs. Either that or make an NPC component.
 // Or maybe just have a basic set of "Entity" related things on an Entity component (like the health bar and handling all of the life stuff and canDie stuff, wet / burning status, etc...)
@@ -27,7 +28,10 @@ public class NPCController : MonoBehaviour
 
     [Header("NPC Weapons Components")] // Weapons systems
     [SerializeField] public SpellCasterController spellCaster;
-    
+
+    [Header("NPC Events")]
+    [SerializeField] private UnityEvent OnNPCDeath;
+
     #endregion
 
     #region Variables - Properties and private variables
@@ -193,7 +197,9 @@ public class NPCController : MonoBehaviour
         if(this.spellCaster.GetIsCasting())
             this.spellCaster.StopCasting();
         this.spellCaster.RemoveElements();
-        
+
+        this.OnNPCDeath?.Invoke();
+
         Destroy(this.gameObject, this.timeToDespawnOnDeath);
     }
 
