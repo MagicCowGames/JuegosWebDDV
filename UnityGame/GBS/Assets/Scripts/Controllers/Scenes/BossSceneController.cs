@@ -33,6 +33,11 @@ public class BossSceneController : MonoBehaviour
         PlayerDataManager.Instance.GetPlayer().MoveCameraToPlayer();
     }
 
+    public void StartProceduralLevel()
+    {
+        SceneLoadingManager.Instance?.LoadSceneWithTransition("MapGenPrefabsScene");
+    }
+
     #endregion
 
     #region PrivateMethods
