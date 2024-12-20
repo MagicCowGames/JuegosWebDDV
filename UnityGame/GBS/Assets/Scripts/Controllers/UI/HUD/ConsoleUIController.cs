@@ -106,6 +106,7 @@ public class ConsoleUIController : UIController
             new Cmd("volumemusic", "Set the music volume", "<volume>", 1, CmdVolumeMusic),
             new Cmd("volumevoice", "Set the voice volume", "<volume>", 1, CmdVolumeVoice),
             new Cmd("volumeui", "Set the UI volume", "<volume>", 1, CmdVolumeUI),
+            new Cmd("playsound", "Play an SFX sound", "<name>", 1, CmdPlaySound),
             // TODO : Add commands to get the current map name and the current language or something...
         };
         // TODO : Make an alias system of sorts, or maybe make it so that we can have a dict / list system to have multiple overloads for the same command
@@ -578,6 +579,12 @@ public class ConsoleUIController : UIController
         float volume = CmdParseFloat(args[startIndex + 1]);
         SoundManager.Instance.VolumeUI = volume;
         CmdPrintln($"Music Volume has been set to {SoundManager.Instance.VolumeUI}");
+    }
+
+    private void CmdPlaySound(string[] args, int startIndex)
+    {
+        string soundName = args[startIndex + 1];
+        SoundManager.Instance.PlaySoundSFX(soundName);
     }
 
     #endregion
