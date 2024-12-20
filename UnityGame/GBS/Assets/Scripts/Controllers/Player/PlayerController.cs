@@ -264,6 +264,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!this.ControlsEnabled)
             return;
+        SoundManager.Instance?.PlaySoundElementSFX(element);
         this.spellCasterController.AddElement(element);
     }
 
