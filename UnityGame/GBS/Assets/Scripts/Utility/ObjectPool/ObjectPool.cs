@@ -45,6 +45,22 @@ public class ObjectPool : MonoBehaviour
 
     #region PublicMethods
 
+    public GameObject Get()
+    {
+        // If all objects in the pool are occupied, return null
+        if (this.activeCount >= this.maxCount)
+            return null;
+
+        // Pick the first inactive object, activate it and return it
+        var obj = this.objects[this.activeCount];
+        obj.gameObject.SetActive(true);
+
+        // Increase the active count
+        ++this.activeCount;
+
+        return obj;
+    }
+
     // NOTE : This system can be severily misused if the user returns an object with a pooleable component that does not belong to this pool...
     // To solve this problem, we could have each pooleable object contain a value that says from which pool is it that they are from... or never let the user handle that crap by hand themselves.
     public void Return(GameObject obj)
