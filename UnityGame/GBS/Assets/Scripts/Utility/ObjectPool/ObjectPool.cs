@@ -75,5 +75,13 @@ public class ObjectPool : MonoBehaviour
         return obj;
     }
 
+    // A simple method to swap 2 objects within the pooled objects list. Used when activating and reactivating objects. Weird, but makes things O(1) lolololo
+    private void Swap(int idx1, int idx2)
+    {
+        var temp = this.objects[idx1];
+        this.objects[idx1] = this.objects[idx2];
+        this.objects[idx2] = temp;
+    }
+
     #endregion
 }
