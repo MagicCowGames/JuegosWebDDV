@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // NOTE : This ObjectPool implementation uses dynamic reallocation with capcity growth up to a maximum limit.
+// TODO : Maybe make this a class that requires a template parameter T, so that we can have a Pool<T> which stores the components directly for faster access?
 public class ObjectPool : MonoBehaviour
 {
     #region Variables
@@ -44,7 +45,21 @@ public class ObjectPool : MonoBehaviour
 
     #region PublicMethods
 
-    
+    // NOTE : This system can be severily misused if the user returns an object with a pooleable component that does not belong to this pool...
+    // To solve this problem, we could have each pooleable object contain a value that says from which pool is it that they are from... or never let the user handle that crap by hand themselves.
+    public void Return(GameObject obj)
+    {
+        var pooleable = obj.GetComponent<PooleableObjectController>();
+
+        if (pooleable == null)
+            return; // Cannot return the obejct to the pool because it is not a pooleable object.
+
+        this.objects[pooleable.Index].gameObject.SetActive(false);
+
+        Swap(this.activeCount, pooleable.Index);
+
+        --this.activeCount;
+    }
 
     #endregion
 
