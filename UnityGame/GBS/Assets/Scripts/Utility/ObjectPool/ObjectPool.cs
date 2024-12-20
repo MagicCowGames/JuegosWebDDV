@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 // NOTE : This ObjectPool implementation uses dynamic reallocation with capcity growth up to a maximum limit.
@@ -12,7 +13,7 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] private int initialCount;
     [SerializeField] private int maxCount;
 
-    private int activeCount;
+    [SerializeField] private int activeCount;
 
     private List<GameObject> objects;
 
@@ -43,9 +44,11 @@ public class ObjectPool : MonoBehaviour
 
     #endregion
 
-    #region PublicMethods
+    // NOTE : This implementation has been discarded because Unity has a weird issue with timings for index based operations despite being single threaded.
+    // TODO : Figure out what the fuck is wrong and fix it...
+    #region PublicMethods - IdxBased
 
-    public GameObject Get()
+    public GameObject GetIdxBased()
     {
         // If all objects in the pool are occupied, return null
         if (this.activeCount >= this.maxCount)
@@ -67,17 +70,60 @@ public class ObjectPool : MonoBehaviour
 
     // NOTE : This system can be severily misused if the user returns an object with a pooleable component that does not belong to this pool...
     // To solve this problem, we could have each pooleable object contain a value that says from which pool is it that they are from... or never let the user handle that crap by hand themselves.
-    public void Return(GameObject obj)
+    public void ReturnIdxBased(GameObject obj)
     {
-        var pooleable = obj.GetComponent<PooleableObjectController>();
+        Debug.Log("Return() has been called");
 
+        var pooleable = obj.GetComponent<PooleableObjectController>();
         if (pooleable == null)
             return; // Cannot return the obejct to the pool because it is not a pooleable object.
+        int idx = pooleable.Index;
 
-        this.objects[pooleable.Index].gameObject.SetActive(false);
+        Debug.Log("Return() has been called and has taken effect");
+        this.objects[idx].gameObject.SetActive(false);
         --this.activeCount;
 
-        Swap(this.activeCount, pooleable.Index);
+        Swap(this.activeCount, idx);
+    }
+
+    #endregion
+
+    #region PublicMethods
+
+    public GameObject Get()
+    {
+        if (this.activeCount >= this.objects.Count && this.activeCount < this.maxCount)
+        {
+            var obj = SpawnObject();
+            obj.gameObject.SetActive(true);
+            ++this.activeCount;
+            return obj;
+        }
+
+        foreach (var x in this.objects)
+        {
+            if (!x.gameObject.activeSelf)
+            {
+                x.SetActive(true);
+                ++this.activeCount;
+                return x;
+            }
+        }
+
+        return null;
+    }
+
+    public void Return(GameObject obj)
+    {
+        foreach (var x in this.objects)
+        {
+            if (x == obj)
+            {
+                x.SetActive(false);
+                --this.activeCount;
+                return;
+            }
+        }
     }
 
     #endregion
@@ -92,7 +138,8 @@ public class ObjectPool : MonoBehaviour
             this.Objects[i] = SpawnObject();
     }
 
-    private GameObject SpawnObject()
+    // Discarded method that uses the pooleable object controller with index thing...
+    private GameObject SpawnObjectOld()
     {
         // Spawn the object
         var obj = ObjectSpawner.Spawn(this.prefab, this.transform);
@@ -112,9 +159,29 @@ public class ObjectPool : MonoBehaviour
         return obj;
     }
 
+    private GameObject SpawnObject()
+    {
+        // Spawn the object and attach it to this pool's gameobject's transform
+        var obj = ObjectSpawner.Spawn(this.prefab, this.transform);
+        obj.transform.parent = this.transform;
+
+        // Add object to list
+        this.objects.Add(obj); // NOTE : The total count value is increased when adding the object to the objects list.
+
+        // Deactivate the on spawn GameObject before returning
+        obj.gameObject.SetActive(false);
+
+        // Return the spawned object
+        return obj;
+    }
+
     // A simple method to swap 2 objects within the pooled objects list. Used when activating and reactivating objects. Weird, but makes things O(1) lolololo
     private void Swap(int idx1, int idx2)
     {
+        // If both indices are the same, we don't need to do anything
+        if (idx1 == idx2)
+            return;
+
         // Swap the objects within this list
         var temp = this.objects[idx1];
         this.objects[idx1] = this.objects[idx2];
