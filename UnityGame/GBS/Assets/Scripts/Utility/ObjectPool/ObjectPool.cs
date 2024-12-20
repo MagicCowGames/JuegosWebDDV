@@ -51,6 +51,10 @@ public class ObjectPool : MonoBehaviour
         if (this.activeCount >= this.maxCount)
             return null;
 
+        // Spawn a new object if the capacity is filled
+        if (this.activeCount >= this.objects.Count)
+            SpawnObject();
+
         // Pick the first inactive object, activate it and return it
         var obj = this.objects[this.activeCount];
         obj.gameObject.SetActive(true);
