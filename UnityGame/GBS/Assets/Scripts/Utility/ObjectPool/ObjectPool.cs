@@ -71,10 +71,9 @@ public class ObjectPool : MonoBehaviour
             return; // Cannot return the obejct to the pool because it is not a pooleable object.
 
         this.objects[pooleable.Index].gameObject.SetActive(false);
+        --this.activeCount;
 
         Swap(this.activeCount, pooleable.Index);
-
-        --this.activeCount;
     }
 
     #endregion
