@@ -2,28 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Object Pool implementation with dynamic reallocation / capcity growth
-public class ObjectPool
+public class ObjectPoolStatic_1
 {
     #region Variables
 
-    public GameObject Prefab { get; private set; }
-    public List<GameObject> Objects { get; private set; }
-    public int Capacity { get; private set; }
-    public int MaxCapacity { get; private set; }
-    public int Count { get; private set; }
+    public GameObject Prefab;
+    public GameObject[] Objects;
+    public int Capacity;
+    public int Count;
 
     #endregion
 
     #region Constructor
 
-    public ObjectPool(GameObject prefab, int initialCapacity, int maxCapacity)
+    public ObjectPoolStatic_1(GameObject prefab, int capacity)
     {
         this.Count = 0;
         this.Prefab = prefab;
-        this.Capacity = initialCapacity;
-        this.MaxCapacity = maxCapacity;
-        this.Objects = new List<GameObject>(this.Capacity);
+        this.Capacity = capacity;
+        this.Objects = new GameObject[this.Capacity];
         for (int i = 0; i < this.Capacity; ++i)
         {
             this.Objects[i] = ObjectSpawner.Spawn(this.Prefab);
@@ -42,14 +39,6 @@ public class ObjectPool
         {
             GameObject obj = this.Objects[this.Count];
             obj.SetActive(true);
-            ++this.Count;
-        }
-        else
-        if (this.Count < this.MaxCapacity)
-        {
-            var obj = ObjectSpawner.Spawn(this.Prefab);
-            obj.SetActive(true);
-            this.Objects.Add(obj);
             ++this.Count;
         }
         return ans;
