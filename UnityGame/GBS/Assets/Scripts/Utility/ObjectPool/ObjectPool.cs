@@ -30,7 +30,7 @@ public class ObjectPool : MonoBehaviour
     public int TotalCount { get { return this.objects.Count; } }
 
     // GameObjects list
-    public List<GameObject> Objects { get { return this.Objects; } }
+    public List<GameObject> Objects { get { return this.objects; } }
 
     #endregion
 
