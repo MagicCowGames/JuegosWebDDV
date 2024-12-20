@@ -77,7 +77,7 @@ public class ObjectPool : MonoBehaviour
     // NOTE : This implementation has been discarded because Unity has a weird issue with timings for index based operations despite being single threaded.
     // TODO : Figure out what the fuck is wrong and fix it...
     #region PublicMethods - IdxBased
-
+    /*
     public GameObject GetIdxBased()
     {
         // If all objects in the pool are occupied, return null
@@ -115,10 +115,11 @@ public class ObjectPool : MonoBehaviour
 
         Swap(this.activeCount, idx);
     }
+    */
 
-#endregion
+    #endregion
 
-#region PublicMethods
+    #region PublicMethods
 
     public GameObject Get()
     {
@@ -156,9 +157,9 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-#endregion
+    #endregion
 
-#region PrivateMethods
+    #region PrivateMethods
 
     private void Init()
     {
@@ -222,5 +223,5 @@ public class ObjectPool : MonoBehaviour
         this.objects[idx2].GetComponent<PooleableObjectController>().Index = idx1;
     }
 
-#endregion
+    #endregion
 }
