@@ -115,6 +115,37 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     #region PublicMethods - SFX / Effects
 
+    public void PlaySoundElementSFX(Element element)
+    {
+        switch (element)
+        {
+            default:
+                // Play nothing if the registered element is not supported.
+                break;
+            case Element.Water:
+                PlaySoundSFX("element_water");
+                break;
+            case Element.Heal:
+                PlaySoundSFX("element_heal");
+                break;
+            case Element.Cold:
+                PlaySoundSFX("element_cold");
+                break;
+            case Element.Electricity:
+                PlaySoundSFX("element_electricity");
+                break;
+            case Element.Death:
+                PlaySoundSFX("element_death");
+                break;
+            case Element.Earth:
+                PlaySoundSFX("element_rock");
+                break;
+            case Element.Fire:
+                PlaySoundSFX("element_fire");
+                break;
+        }
+    }
+
     public void PlaySoundSFX(string name)
     {
         var clip = GetAudioClip(this.audioClipsSFX, name);
@@ -125,6 +156,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
     public void PlaySoundSFX(AudioClip clip)
     {
         this.audioSourceSFX.PlayOneShot(clip);
+        this.audioSourceSFX.pitch = Random.Range(0.6f, 1.2f); // Very shitty solution, needs to be reworked so that the results don't suck...
     }
 
     public void SetVolumeSFX(float volume)
