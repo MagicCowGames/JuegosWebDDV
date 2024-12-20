@@ -121,12 +121,7 @@ public class CoinController : MonoBehaviour
             return;
         money.Money += this.valueTotal;
 
-        // NOTE : This is a patch because the audio listener is on the camera rather than the player...
-        var pos = CameraManager.Instance.GetActiveCamera().transform.position;
-        var dir = CameraManager.Instance.GetActiveCamera().transform.forward;
-        var targetPos = pos + dir * 5.0f;
-
-        AudioSource.PlayClipAtPoint(coinPickUpClip, targetPos/*this.transform.position*/);
+        SoundManager.Instance?.PlaySoundSFX("PickCoins");
         
         DisablePickup();
     }
