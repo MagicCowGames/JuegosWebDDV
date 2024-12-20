@@ -11,6 +11,7 @@ public class AudioSourcePoolController : MonoBehaviour
     [SerializeField] private int maxCount = 100;
 
     private List<AudioSource> audioSources;
+    private int activeCount;
 
     #endregion
 
@@ -23,6 +24,7 @@ public class AudioSourcePoolController : MonoBehaviour
         {
             SpawnAudioSource();
         }
+        this.activeCount = 0;
     }
 
     void Update()
@@ -57,6 +59,8 @@ public class AudioSourcePoolController : MonoBehaviour
     // TODO : Refactor to push the inactive audio sources to the end of the list so that we can just use an "activeCount" to instantly get the correct index.
     private AudioSource GetAudioSource()
     {
+        // var source = this.audioSources
+
         foreach (var source in this.audioSources)
         {
             if (!source.gameObject.activeSelf)
