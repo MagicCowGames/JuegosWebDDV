@@ -101,6 +101,9 @@ public class ObjectPool : MonoBehaviour
         // Add object to list
         this.objects.Add(obj); // NOTE : The total count value is increased when adding the object to the objects list.
 
+        // Deactivate the on spawn GameObject before returning
+        obj.gameObject.SetActive(false);
+
         // Return the spawned object
         return obj;
     }
