@@ -108,9 +108,14 @@ public class ObjectPool : MonoBehaviour
     // A simple method to swap 2 objects within the pooled objects list. Used when activating and reactivating objects. Weird, but makes things O(1) lolololo
     private void Swap(int idx1, int idx2)
     {
+        // Swap the objects within this list
         var temp = this.objects[idx1];
         this.objects[idx1] = this.objects[idx2];
         this.objects[idx2] = temp;
+
+        // Swap the indices within the pooleable object controllers
+        this.objects[idx1].GetComponent<PooleableObjectController>().Index = idx2;
+        this.objects[idx2].GetComponent<PooleableObjectController>().Index = idx1;
     }
 
     #endregion
