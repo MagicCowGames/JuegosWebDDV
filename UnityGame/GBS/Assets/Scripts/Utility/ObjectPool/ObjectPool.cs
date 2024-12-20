@@ -9,12 +9,20 @@ public class ObjectPool : MonoBehaviour
 {
     #region Variables
 
+    [Header("Object Pool Configuration")]
     [SerializeField] private GameObject prefab;
     [SerializeField] private int initialCount;
     [SerializeField] private int maxCount;
 
-    [SerializeField] private int activeCount;
+    #if UNITY_EDITOR
+    
+    [Header("Current Object Data")]
+    [SerializeField] private int activeObjectCount;
+    [SerializeField] private int totalObjectCount;
+    
+    #endif
 
+    private int activeCount;
     private List<GameObject> objects;
 
     #endregion
@@ -42,7 +50,29 @@ public class ObjectPool : MonoBehaviour
         Init();
     }
 
-    #endregion
+    #if UNITY_EDITOR
+
+    void Update()
+    {
+        // Update the display values on the inspector during runtime.
+        // A crappy and hacky way to make readonly parameters without making a custom Editor...
+        // NOTE : These hacky readonly fields are only displayed and present on editor builds. Final builds discard them with the #if macros.
+
+        if (this.objects != null)
+        {
+            this.activeObjectCount = this.activeCount;
+            this.totalObjectCount = this.TotalCount;
+        }
+        else
+        {
+            this.activeObjectCount = 0;
+            this.totalObjectCount = 0;
+        }
+    }
+
+    #endif
+
+#endregion
 
     // NOTE : This implementation has been discarded because Unity has a weird issue with timings for index based operations despite being single threaded.
     // TODO : Figure out what the fuck is wrong and fix it...
@@ -86,9 +116,9 @@ public class ObjectPool : MonoBehaviour
         Swap(this.activeCount, idx);
     }
 
-    #endregion
+#endregion
 
-    #region PublicMethods
+#region PublicMethods
 
     public GameObject Get()
     {
@@ -126,9 +156,9 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    #endregion
+#endregion
 
-    #region PrivateMethods
+#region PrivateMethods
 
     private void Init()
     {
@@ -166,7 +196,7 @@ public class ObjectPool : MonoBehaviour
         obj.transform.parent = this.transform;
 
         // Add object to list
-        this.objects.Add(obj); // NOTE : The total count value is increased when adding the object to the objects list.
+        this.objects.Add(obj); // NOTE : The total count value does not need to be increased when adding the object to the objects list, as the TotalCount property returns this.objects.Count
 
         // Deactivate the on spawn GameObject before returning
         obj.gameObject.SetActive(false);
@@ -192,5 +222,5 @@ public class ObjectPool : MonoBehaviour
         this.objects[idx2].GetComponent<PooleableObjectController>().Index = idx1;
     }
 
-    #endregion
+#endregion
 }
