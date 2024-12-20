@@ -2080,6 +2080,20 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: f33b1e50026526847bb3e67ad289b3af, type: 3}
   - name: PickCoins
     clip: {fileID: 8300000, guid: 653592f2ed008a242bc43c3a14b6b525, type: 3}
+  - name: element_water
+    clip: {fileID: 8300000, guid: 0b8f55250b83e294d8b1ca807b9912d4, type: 3}
+  - name: element_heal
+    clip: {fileID: 8300000, guid: 15649cbba940a9c479c43ed16d114e0a, type: 3}
+  - name: element_cold
+    clip: {fileID: 8300000, guid: 4f490a3e4bd70d841b6301bac0d67750, type: 3}
+  - name: element_electricity
+    clip: {fileID: 8300000, guid: 199cf2d6619945348a5c0ad2e59dc93e, type: 3}
+  - name: element_death
+    clip: {fileID: 8300000, guid: 3438d909a7c3ede4887108b9775e0ad7, type: 3}
+  - name: element_rock
+    clip: {fileID: 8300000, guid: cdf70dccb24c5ba4b848a45e82531b2a, type: 3}
+  - name: element_fire
+    clip: {fileID: 8300000, guid: 9352d52841df3f84aaf36559c8c864f3, type: 3}
   audioClipsMusic:
   - name: main
     clip: {fileID: 8300000, guid: c3c446042d9a47342ab05cf492f4cb81, type: 3}
