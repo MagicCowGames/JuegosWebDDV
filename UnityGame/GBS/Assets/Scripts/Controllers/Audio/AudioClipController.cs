@@ -13,12 +13,19 @@ using UnityEngine;
 // This controller script will make it easier to handle audio logic in the long run.
 // Unity's built in audio systems are quite barebones but pretty extensible, so at least that's a plus.
 
+// NOTE : The current implementation of the attachment logic using updates to set the transform position rather than truly attaching to a parent transform is
+// used because it allows the audio source to keep living even if its parent object is destroyed, which would break audio source pooling unless further (and slower)
+// logic was added to the pooling system.
+
 #endregion
 public class AudioClipController : MonoBehaviour
 {
     #region Variables
 
     [SerializeField] private AudioSource audioSource;
+
+    private bool isAttached;
+    private Transform target;
 
     #endregion
 
@@ -36,7 +43,7 @@ public class AudioClipController : MonoBehaviour
 
     #endregion
 
-    #region PublicMethods
+    #region PublicMethods - Sound
 
     public void SetSoundData(AudioClip clip, bool loop = false, float volumeScale = 1.0f, float pitch = 1.0f)
     {
@@ -58,10 +65,37 @@ public class AudioClipController : MonoBehaviour
 
     #endregion
 
+    #region PublicMethods - Attach
+
+    public void Attach(Transform target)
+    {
+        this.target = target;
+        this.isAttached = true;
+    }
+
+    public void Detach()
+    {
+        this.isAttached = false;
+    }
+
+    #endregion
+
     #region PrivateMethods
 
     private void UpdateController()
-    { }
+    {
+        if (this.isAttached)
+        {
+            if (this.target != null)
+            {
+                this.gameObject.transform.position = target.position;
+            }
+            else
+            {
+                this.isAttached = false;
+            }
+        }
+    }
 
     #endregion
 }
