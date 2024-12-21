@@ -18,8 +18,8 @@ public class AudioClipController : MonoBehaviour
 {
     #region Variables
 
-    // TODO : Implement logic
-    
+    [SerializeField] private AudioSource audioSource;
+
     #endregion
 
     #region MonoBehaviour
@@ -31,14 +31,37 @@ public class AudioClipController : MonoBehaviour
 
     void Update()
     {
-        
+        UpdateController();
     }
 
     #endregion
 
     #region PublicMethods
+
+    public void SetSoundData(AudioClip clip, bool loop = false, float volumeScale = 1.0f, float pitch = 1.0f)
+    {
+        this.audioSource.clip = clip;
+        this.audioSource.loop = loop;
+        this.audioSource.volume = volumeScale;
+        this.audioSource.pitch = pitch;
+    }
+
+    public void PlaySound()
+    {
+        audioSource.Play();
+    }
+
+    public void StopSound()
+    {
+        audioSource.Stop();
+    }
+
     #endregion
 
     #region PrivateMethods
+
+    private void UpdateController()
+    { }
+
     #endregion
 }
