@@ -18,7 +18,7 @@ using UnityEngine;
 // logic was added to the pooling system.
 
 #endregion
-public class AudioClipController : MonoBehaviour
+public class AudioSourceController : MonoBehaviour
 {
     #region Variables
 
