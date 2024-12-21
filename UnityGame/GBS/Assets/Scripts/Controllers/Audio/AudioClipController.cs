@@ -29,6 +29,21 @@ public class AudioClipController : MonoBehaviour
 
     #endregion
 
+    #region Properties
+
+    // Component variables
+    public AudioSource Source { get { return this.audioSource; } }
+    public bool IsAttached { get { return this.isAttached; } set { this.isAttached = value; } }
+    public Transform Target { get { return this.target; } set { this.target = value; } }
+
+    // Audio Source Data
+    public AudioClip Clip { get { return this.audioSource.clip; } set { this.audioSource.clip = value; } }
+    public float Volume { get { return this.audioSource.volume; } set { this.audioSource.volume = value; } } // NOTE : Do not confuse this volume scale with the global audio mixer's volume.
+    public float Pitch { get { return this.audioSource.pitch; } set { this.audioSource.pitch = value; } }
+    public bool Loop { get { return this.audioSource.loop; } set { this.audioSource.loop = value; } }
+
+    #endregion
+
     #region MonoBehaviour
 
     void Start()
