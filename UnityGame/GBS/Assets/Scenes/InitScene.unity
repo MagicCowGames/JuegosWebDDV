@@ -2267,8 +2267,8 @@ MonoBehaviour:
   audioSourceMusic: {fileID: 781728712}
   audioSourceVoice: {fileID: 1536487364}
   audioSourceUI: {fileID: 1996139397}
-  globalAudioSourcePoolSFX: {fileID: 0}
-  localAudioSourcePoolSFX: {fileID: 0}
+  globalAudioSourcePoolSFX: {fileID: 21581401}
+  localAudioSourcePoolSFX: {fileID: 1714066187}
   audioClipsSFX:
   - name: BeamStart
     clip: {fileID: 8300000, guid: 6df5436140624e74482ee95bd045572e, type: 3}
