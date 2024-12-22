@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
+// NOTE : Both the ObjectPool and the ObjectPool<T> classes are kinda like the Singleton<T> and SingletonPersistent<T> classes. We should inherit from it to make
+// custom pools rather than use it as a component, but it is still possible to do so if you wish...
+
 // NOTE : This ObjectPool implementation uses dynamic reallocation with capcity growth up to a maximum limit.
 // TODO : Maybe make this a class that requires a template parameter T, so that we can have a Pool<T> which stores the components directly for faster access?
 public class ObjectPool : MonoBehaviour
