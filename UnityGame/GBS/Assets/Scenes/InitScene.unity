@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5419165f815e6d478e87d60294f9c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 4913279906543091889, guid: 21b4c0b8f47327a48b98a1b922859a1f, type: 3}
+  prefab: {fileID: 4913279906543091889, guid: 53d35e584280d854ba201bd71b9251b0, type: 3}
   initialCount: 10
   maxCount: 100
   activeObjectCount: 0
@@ -2153,6 +2153,7 @@ MonoBehaviour:
   audioSourceMusic: {fileID: 781728712}
   audioSourceVoice: {fileID: 1536487364}
   audioSourceUI: {fileID: 1996139397}
+  audioSourcePoolSFX: {fileID: 21581401}
   audioClipsSFX:
   - name: BeamStart
     clip: {fileID: 8300000, guid: 6df5436140624e74482ee95bd045572e, type: 3}
