@@ -78,6 +78,12 @@ public class AudioSourceController : MonoBehaviour
         this.OnSoundPlay?.Invoke(this);
     }
 
+    public void PlaySoundAt(Vector3 point)
+    {
+        this.audioSource.gameObject.transform.position = point;
+        PlaySound();
+    }
+
     public void StopSound()
     {
         this.audioSource.Stop();
