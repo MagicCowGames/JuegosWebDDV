@@ -18,6 +18,9 @@ public class PlayButtonSoundController : MonoBehaviour
     public void PlayClickSound()
     {
         SoundManager.Instance?.PlaySoundUI("click");
+        #if UNITY_ANDROID
+        Handheld.Vibrate();
+        #endif
     }
 
     public void PlayClick2Sound()
