@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +29,11 @@ public class ObjectPool<T> : MonoBehaviour where T : Component
 
     private int activeCount;
     private List<T> objects;
+
+    // Events that will trigger when the object is spawned and when Get() and Return() are called.
+    public Action<T> OnObjectSpawn;
+    public Action<T> OnObjectGet;
+    public Action<T> OnObjectReturn;
 
     #endregion
 
@@ -82,38 +88,47 @@ public class ObjectPool<T> : MonoBehaviour where T : Component
 
     public T Get()
     {
+        T ans = null;
+
         if (this.activeCount >= this.objects.Count && this.activeCount < this.maxCount)
         {
             var obj = SpawnObject();
             obj.gameObject.SetActive(true);
             ++this.activeCount;
-            return obj;
+            ans = obj;
         }
-
-        foreach (var x in this.objects)
+        else
         {
-            if (!x.gameObject.activeSelf)
+            foreach (var x in this.objects)
             {
-                x.gameObject.SetActive(true);
-                ++this.activeCount;
-                return x;
+                if (!x.gameObject.activeSelf)
+                {
+                    x.gameObject.SetActive(true);
+                    ++this.activeCount;
+                    ans = x;
+                    break;
+                }
             }
         }
 
-        return null;
+        this.OnObjectGet?.Invoke(ans);
+        return ans;
     }
 
-    public void Return(GameObject obj)
+    public void Return(T obj)
     {
+        T returnedObject = null;
         foreach (var x in this.objects)
         {
             if (x == obj)
             {
                 x.gameObject.SetActive(false);
                 --this.activeCount;
-                return;
+                returnedObject = x;
+                break;
             }
         }
+        this.OnObjectReturn?.Invoke(returnedObject);
     }
 
     #endregion
@@ -143,6 +158,9 @@ public class ObjectPool<T> : MonoBehaviour where T : Component
 
         // Deactivate the on spawn GameObject before returning
         obj.gameObject.SetActive(false);
+
+        // OnSpawn event
+        this.OnObjectSpawn?.Invoke(component);
 
         // Return the spawned object by its component reference (we can access the GameObject with component.gameObject later on)
         return component;
