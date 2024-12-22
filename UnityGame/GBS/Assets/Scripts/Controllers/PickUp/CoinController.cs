@@ -121,7 +121,7 @@ public class CoinController : MonoBehaviour
             return;
         money.Money += this.valueTotal;
 
-        SoundManager.Instance?.PlaySoundSFX("PickCoins");
+        SoundManager.Instance?.PlaySoundSFX("PickCoins", false, 1.0f, 1.0f);
         
         DisablePickup();
     }

@@ -584,7 +584,7 @@ public class ConsoleUIController : UIController
     private void CmdPlaySound(string[] args, int startIndex)
     {
         string soundName = args[startIndex + 1];
-        SoundManager.Instance.PlaySoundSFX(soundName);
+        SoundManager.Instance.PlaySoundSFX(soundName, false, 1.0f, 1.0f);
     }
 
     #endregion
