@@ -55,7 +55,7 @@ public class ObjectPool<T> : MonoBehaviour where T : Component
 
     #region MonoBehaviour
 
-    void Awake()
+    void Start()
     {
         Init();
     }
