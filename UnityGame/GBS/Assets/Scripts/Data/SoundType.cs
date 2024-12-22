@@ -21,12 +21,14 @@ public struct SoundData
     public bool loop;
     public float volume;
     public float pitch;
+    public SoundType type;
 
-    public SoundData(AudioClip clip, bool loop = false, float volume = 1.0f, float pitch = 1.0f)
+    public SoundData(AudioClip clip, SoundType type = SoundType.SFX, bool loop = false, float volume = 1.0f, float pitch = 1.0f)
     {
         this.clip = clip;
         this.loop = loop;
         this.volume = volume;
         this.pitch = pitch;
+        this.type = type;
     }
 }
