@@ -38,6 +38,9 @@ public class SoundManager : SingletonPersistent<SoundManager>
     [SerializeField] private AudioSource audioSourceVoice;
     [SerializeField] private AudioSource audioSourceUI;
 
+    [Header("Audio Source Pools")]
+    [SerializeField] private AudioSourcePoolController audioSourcePoolSFX;
+
     [Header("Audio Clips SFX")]
     [SerializeField] private NamedAudioClip[] audioClipsSFX;
 
@@ -117,46 +120,59 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     public void PlaySoundElementSFX(Element element)
     {
+        float volume = Random.Range(0.02f, 0.1f);
+        float pitch = Random.Range(0.6f, 1.2f);
+        string str = "";
         switch (element)
         {
             default:
                 // Play nothing if the registered element is not supported.
                 break;
             case Element.Water:
-                PlaySoundSFX("element_water");
+                str = "element_water";
                 break;
             case Element.Heal:
-                PlaySoundSFX("element_heal");
+                str = "element_heal";
                 break;
             case Element.Cold:
-                PlaySoundSFX("element_cold");
+                str = "element_cold";
                 break;
             case Element.Electricity:
-                PlaySoundSFX("element_electricity");
+                str = "element_electricity";
                 break;
             case Element.Death:
-                PlaySoundSFX("element_death");
+                str = "element_death";
                 break;
             case Element.Earth:
-                PlaySoundSFX("element_rock");
+                str = "element_rock";
                 break;
             case Element.Fire:
-                PlaySoundSFX("element_fire");
+                str = "element_fire";
                 break;
         }
+        PlaySoundSFX(str, false, volume, pitch);
     }
 
-    public void PlaySoundSFX(string name)
+    public void PlaySoundSFX(string name, bool loop, float volumeScale, float pitch)
     {
         var clip = GetAudioClip(this.audioClipsSFX, name);
         if (clip != null)
-            PlaySoundSFX(clip);
+            PlaySoundSFX(clip, loop, volumeScale, pitch);
     }
 
-    public void PlaySoundSFX(AudioClip clip)
+    public void PlaySoundSFX(AudioClip clip, bool loop, float volumeScale, float pitch)
     {
+        var source = this.audioSourcePoolSFX.Get();
+        if (source == null)
+            return;
+        source.SetSoundData(clip, loop, volumeScale, pitch);
+        source.PlaySound();
+
+        // OLD CODE, disabled for now
+        /*
         this.audioSourceSFX.PlayOneShot(clip);
         this.audioSourceSFX.pitch = Random.Range(0.6f, 1.2f); // Very shitty solution, needs to be reworked so that the results don't suck...
+        */
     }
 
     public void SetVolumeSFX(float volume)
