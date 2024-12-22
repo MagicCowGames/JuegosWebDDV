@@ -77,51 +77,6 @@ public class ObjectPool : MonoBehaviour
 
 #endregion
 
-    // NOTE : This implementation has been discarded because Unity has a weird issue with timings for index based operations despite being single threaded.
-    // TODO : Figure out what the fuck is wrong and fix it...
-    #region PublicMethods - IdxBased
-    /*
-    public GameObject GetIdxBased()
-    {
-        // If all objects in the pool are occupied, return null
-        if (this.activeCount >= this.maxCount)
-            return null;
-
-        // Spawn a new object if the capacity is filled
-        if (this.activeCount >= this.objects.Count)
-            SpawnObject();
-
-        // Pick the first inactive object, activate it and return it
-        var obj = this.objects[this.activeCount];
-        obj.gameObject.SetActive(true);
-
-        // Increase the active count
-        ++this.activeCount;
-
-        return obj;
-    }
-
-    // NOTE : This system can be severily misused if the user returns an object with a pooleable component that does not belong to this pool...
-    // To solve this problem, we could have each pooleable object contain a value that says from which pool is it that they are from... or never let the user handle that crap by hand themselves.
-    public void ReturnIdxBased(GameObject obj)
-    {
-        Debug.Log("Return() has been called");
-
-        var pooleable = obj.GetComponent<PooleableObjectController>();
-        if (pooleable == null)
-            return; // Cannot return the obejct to the pool because it is not a pooleable object.
-        int idx = pooleable.Index;
-
-        Debug.Log("Return() has been called and has taken effect");
-        this.objects[idx].gameObject.SetActive(false);
-        --this.activeCount;
-
-        Swap(this.activeCount, idx);
-    }
-    */
-
-    #endregion
-
     #region PublicMethods
 
     public GameObject Get()
@@ -172,27 +127,6 @@ public class ObjectPool : MonoBehaviour
             this.Objects[i] = SpawnObject();
     }
 
-    // Discarded method that uses the pooleable object controller with index thing...
-    private GameObject SpawnObjectOld()
-    {
-        // Spawn the object
-        var obj = ObjectSpawner.Spawn(this.prefab, this.transform);
-        obj.transform.parent = this.transform;
-
-        // Add pooleable object controller component
-        var pooleable = obj.AddComponent<PooleableObjectController>();
-        pooleable.Index = this.objects.Count;
-
-        // Add object to list
-        this.objects.Add(obj); // NOTE : The total count value is increased when adding the object to the objects list.
-
-        // Deactivate the on spawn GameObject before returning
-        obj.gameObject.SetActive(false);
-
-        // Return the spawned object
-        return obj;
-    }
-
     private GameObject SpawnObject()
     {
         // Spawn the object and attach it to this pool's gameobject's transform
@@ -207,23 +141,6 @@ public class ObjectPool : MonoBehaviour
 
         // Return the spawned object
         return obj;
-    }
-
-    // A simple method to swap 2 objects within the pooled objects list. Used when activating and reactivating objects. Weird, but makes things O(1) lolololo
-    private void Swap(int idx1, int idx2)
-    {
-        // If both indices are the same, we don't need to do anything
-        if (idx1 == idx2)
-            return;
-
-        // Swap the objects within this list
-        var temp = this.objects[idx1];
-        this.objects[idx1] = this.objects[idx2];
-        this.objects[idx2] = temp;
-
-        // Swap the indices within the pooleable object controllers
-        this.objects[idx1].GetComponent<PooleableObjectController>().Index = idx2;
-        this.objects[idx2].GetComponent<PooleableObjectController>().Index = idx1;
     }
 
     #endregion
