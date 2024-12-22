@@ -38,8 +38,11 @@ public class SoundManager : SingletonPersistent<SoundManager>
     [SerializeField] private AudioSource audioSourceVoice;
     [SerializeField] private AudioSource audioSourceUI;
 
-    [Header("Audio Source Pools")]
-    [SerializeField] private AudioSourcePoolController audioSourcePoolSFX;
+    [Header("Audio Source Pools - Global")]
+    [SerializeField] private AudioSourcePoolController globalAudioSourcePoolSFX;
+
+    [Header("Audio Source Pools - Local")]
+    [SerializeField] private AudioSourcePoolController localAudioSourcePoolSFX;
 
     [Header("Audio Clips SFX")]
     [SerializeField] private NamedAudioClip[] audioClipsSFX;
@@ -162,7 +165,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     public void PlaySoundSFX(AudioClip clip, bool loop, float volumeScale, float pitch)
     {
-        var source = this.audioSourcePoolSFX.Get();
+        var source = this.globalAudioSourcePoolSFX.Get();
         if (source == null)
             return;
         source.SetSoundData(clip, loop, volumeScale, pitch);
