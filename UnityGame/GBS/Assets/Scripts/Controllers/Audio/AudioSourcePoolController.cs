@@ -9,37 +9,22 @@ public class AudioSourcePoolController : ObjectPool<AudioSourceController>
 
     #region MonoBehaviour
 
-    void Start()
+    void Awake()
     {
-
-    }
-
-    void Update()
-    {
-        
+        this.OnObjectSpawn += HandleOnObjectSpawned;
     }
 
     #endregion
 
     #region PublicMethods
-
-    public new AudioSourceController Get()
-    {
-        var ans = base.Get();
-        if (ans == null)
-            return null;
-
-        // And so the hack starts... fucking Unity I swear to God.
-        ans.OnSoundStop = null;
-        ans.OnSoundStop += (audioSource) => { Return(audioSource); };
-        
-        return ans;
-    }
-
     #endregion
 
     #region PrivateMethods
 
+    private void HandleOnObjectSpawned(AudioSourceController controller)
+    {
+        controller.OnSoundStop += Return;
+    }
 
     #endregion
 }
