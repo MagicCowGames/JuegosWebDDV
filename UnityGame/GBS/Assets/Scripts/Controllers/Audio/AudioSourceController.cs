@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +27,9 @@ public class AudioSourceController : MonoBehaviour
 
     private bool isAttached;
     private Transform target;
+
+    public Action<AudioSourceController> OnSoundPlay;
+    public Action<AudioSourceController> OnSoundStop;
 
     #endregion
 
@@ -70,12 +74,14 @@ public class AudioSourceController : MonoBehaviour
 
     public void PlaySound()
     {
-        audioSource.Play();
+        this.audioSource.Play();
+        this.OnSoundPlay?.Invoke(this);
     }
 
     public void StopSound()
     {
-        audioSource.Stop();
+        this.audioSource.Stop();
+        this.OnSoundStop?.Invoke(this);
     }
 
     #endregion
@@ -110,6 +116,9 @@ public class AudioSourceController : MonoBehaviour
                 this.isAttached = false;
             }
         }
+
+        if (this.gameObject.activeSelf && !this.audioSource.isPlaying)
+            StopSound();
     }
 
     #endregion
