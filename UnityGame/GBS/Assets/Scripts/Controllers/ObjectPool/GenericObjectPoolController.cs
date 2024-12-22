@@ -9,7 +9,7 @@ using UnityEngine;
 // TODO : Altough... a thing that could be done in the future would be always using this one and using some kind of Pooleable Object controller with references to all
 // needed components of the gameobject or something.
 
-public class GenericObjectPool<T> : MonoBehaviour where T : Component
+public class ObjectPool<T> : MonoBehaviour where T : Component
 {
     #region Variables
 

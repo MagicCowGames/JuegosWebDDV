@@ -5,7 +5,7 @@ using UnityEngine;
 
 // NOTE : This ObjectPool implementation uses dynamic reallocation with capcity growth up to a maximum limit.
 // TODO : Maybe make this a class that requires a template parameter T, so that we can have a Pool<T> which stores the components directly for faster access?
-public class ObjectPoolController : MonoBehaviour
+public class ObjectPool : MonoBehaviour
 {
     #region Variables
 

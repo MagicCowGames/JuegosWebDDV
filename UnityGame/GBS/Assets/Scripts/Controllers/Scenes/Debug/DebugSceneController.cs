@@ -6,7 +6,7 @@ public class DebugSceneController : MonoBehaviour
 {
     #region Variables
 
-    [SerializeField] private ObjectPoolController objectPool;
+    [SerializeField] private ObjectPool objectPool;
     [SerializeField] private float timeToDespawn = 2.0f;
 
     #endregion
